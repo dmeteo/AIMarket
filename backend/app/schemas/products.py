@@ -2,13 +2,7 @@ from decimal import Decimal
 
 from pydantic import BaseModel, Field
 
-
-class Review(BaseModel):
-    user_id: int
-    user_name: str
-    product_id: int
-    rate: int = Field(ge=1, le=5)
-    text: str | None = None
+from app.schemas.reviews import Review, ReviewsResponse
 
     
 class ProductPage(BaseModel):
@@ -61,7 +55,6 @@ class ProductCreateRequest(BaseModel):
     is_active: bool
 
     
-    
 class ProductCreateResponse(BaseModel):
     product: ProductPage
     
@@ -76,10 +69,6 @@ class ProductsResponse(BaseModel):
     page: int
     limit: int
     pages: int
-    
-
-class ReviewsResponse(BaseModel):
-    reviews: list[Review]
 
     
 class ProductUpdateRequest(BaseModel):
