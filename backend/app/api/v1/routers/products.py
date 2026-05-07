@@ -21,7 +21,7 @@ def create_product(payload: ProductCreateRequest) -> ProductCreateResponse:
 
 
 @router.patch("/{product_id}", response_model=ProductUpdateResponse)
-def update_product(payload: ProductUpdateRequest) -> ProductUpdateResponse:
+def update_product(product_id: int, payload: ProductUpdateRequest) -> ProductUpdateResponse:
     pass
 
 
