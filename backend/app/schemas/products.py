@@ -76,3 +76,17 @@ class ProductsResponse(BaseModel):
 
 class ReviewsResponse(BaseModel):
     reviews: list[Review]
+
+    
+class ProductUpdateRequest(BaseModel):
+    title: str | None = Field(default=None, max_length=30)
+    description: str | None = Field(default=None, max_length=300)
+    images: list[str] | None = None
+    price: Decimal | None = Field(default=None, gt=0, max_digits=10, decimal_places=2, examples=["100.99"])
+    categories: list[str] | None = None
+    discount_percent: Decimal | None = Field(default=None, ge=0, le=100, max_digits=5, decimal_places=2, examples=["10.5"])
+    quantity: int | None = Field(default=None, ge=0)
+    is_active: bool | None = None
+    
+class ProductUpdateResponse(BaseModel):
+    product: ProductPage

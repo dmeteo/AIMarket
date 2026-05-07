@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.schemas.products import ProductCreateRequest, ProductCreateResponse, ProductDeleteResponse, ProductPage, ProductsResponse, ReviewsResponse
+from app.schemas.products import ProductCreateRequest, ProductCreateResponse, ProductDeleteResponse, ProductPage, ProductUpdateRequest, ProductUpdateResponse, ProductsResponse, ReviewsResponse
 
 router = APIRouter(prefix="/products", tags=["products"])
 
@@ -17,6 +17,11 @@ def get_product(product_id: int) -> ProductPage:
 
 @router.post("/", response_model=ProductCreateResponse)
 def create_product(payload: ProductCreateRequest) -> ProductCreateResponse:
+    pass
+
+
+@router.patch("/{product_id}", response_model=ProductUpdateResponse)
+def update_product(payload: ProductUpdateRequest) -> ProductUpdateResponse:
     pass
 
 
