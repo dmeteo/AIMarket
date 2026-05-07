@@ -72,6 +72,10 @@ class ProductDeleteResponse(BaseModel):
 
 class ProductsResponse(BaseModel):
     products: list[ProductCard]
+    total: int
+    page: int
+    limit: int
+    pages: int
     
 
 class ReviewsResponse(BaseModel):

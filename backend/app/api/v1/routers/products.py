@@ -1,12 +1,23 @@
+from decimal import Decimal
+
 from fastapi import APIRouter
+from fastapi.params import Query
 
 from app.schemas.products import ProductCreateRequest, ProductCreateResponse, ProductDeleteResponse, ProductPage, ProductUpdateRequest, ProductUpdateResponse, ProductsResponse, ReviewsResponse
 
 router = APIRouter(prefix="/products", tags=["products"])
 
 
+# q - поиск по названию/описанию
 @router.get("/", response_model=ProductsResponse)
-def get_products() -> ProductsResponse:
+def get_products(
+    q: str | None = None,
+    category_id: int | None = None,
+    min_price: Decimal | None = Query(default=None, ge=0),
+    max_price: Decimal | None = Query(default=None, ge=0),
+    page: int = Query(default=1, ge=1),
+    limit: int = Query(default=1, ge=1, le=100),
+) -> ProductsResponse:
     pass
 
 
