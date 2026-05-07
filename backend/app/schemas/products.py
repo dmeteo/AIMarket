@@ -2,7 +2,7 @@ from decimal import Decimal
 
 from pydantic import BaseModel, Field
 
-from app.schemas.reviews import Review, ReviewsResponse
+from app.schemas.reviews import Review
 
     
 class ProductPage(BaseModel):
