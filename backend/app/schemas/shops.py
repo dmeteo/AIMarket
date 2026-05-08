@@ -12,6 +12,7 @@ class ShopProfile(BaseModel):
     reviews_count: int = Field(ge=0)
     rating: float
     products: list[ProductCard]
+    is_favourite: bool
 
 
 class ShopCreateRequest(BaseModel):
