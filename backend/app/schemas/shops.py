@@ -16,7 +16,7 @@ class ShopProfile(BaseModel):
 
 class ShopCreateRequest(BaseModel):
     title: str = Field(min_length=3, max_length=30)
-    logo: str
+    logo_url: str
     description: str | None = Field(default = None, max_length=300)
     
     
@@ -25,7 +25,7 @@ class ShopCreateResponse(BaseModel):
     
 
 class ShopDeleteResponse(BaseModel):
-    status_code: int
+    shop_id: int
     
     
 class ShopUpdateRequest(BaseModel):

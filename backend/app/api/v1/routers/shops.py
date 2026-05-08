@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from app.schemas.shops import ShopCreateRequest, ShopCreateResponse, ShopDeleteResponse, ShopProfile, ShopUpdateRequest, ShopUpdateResponse
 
 
-router = APIRouter(prefix="/shop", tags=["shop"])
+router = APIRouter(prefix="/shops", tags=["shops"])
 
 
 @router.post("/", response_model=ShopCreateResponse)
