@@ -34,3 +34,7 @@ class BrandDeleteResponse(BaseModel):
     
 class BrandsResponse(BaseModel):
     brands: list[Brand]
+    total: int
+    page: int
+    limit: int
+    pages: int
