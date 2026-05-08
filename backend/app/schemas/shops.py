@@ -5,11 +5,11 @@ from app.schemas.products import ProductCard
 
 class ShopProfile(BaseModel):
     id: int
-    logo: str
+    logo_url: str
     title: str
     description: str | None = None
-    favourites: int
-    reviews: int
+    favourites_count: int = Field(ge=0)
+    reviews_count: int = Field(ge=0)
     rating: float
     products: list[ProductCard]
 
@@ -17,7 +17,7 @@ class ShopProfile(BaseModel):
 class ShopCreateRequest(BaseModel):
     title: str = Field(min_length=3, max_length=30)
     logo: str
-    description: str = Field(max_length=300)
+    description: str | None = Field(default = None, max_length=300)
     
     
 class ShopCreateResponse(BaseModel):
