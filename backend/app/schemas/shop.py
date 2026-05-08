@@ -3,11 +3,15 @@ from pydantic import BaseModel, Field
 from app.schemas.products import ProductCard
 
 
-class ShopProfileResponse(BaseModel):
+class ShopProfile(BaseModel):
     id: int
     logo: str
     title: str
     description: str | None = None
+    favourites: int
+    reviews: int
+    rating: float
+    products: list[ProductCard]
 
 
 class ShopCreateRequest(BaseModel):
@@ -17,7 +21,7 @@ class ShopCreateRequest(BaseModel):
     
     
 class ShopCreateResponse(BaseModel):
-    shop: ShopProfileResponse
+    shop: ShopProfile
     
 
 class ShopDeleteResponse(BaseModel):
@@ -30,5 +34,5 @@ class ShopUpdateRequest(BaseModel):
     description: str | None = Field(default=None, max_length=300)
     
 
-class ShopProductsResponse(BaseModel):
-    products: list[ProductCard]
+class ShopUpdateResponse(BaseModel):
+    shop: ShopProfile
