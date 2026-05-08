@@ -1,0 +1,34 @@
+from pydantic import BaseModel, Field
+
+from app.schemas.products import ProductCard
+
+
+class ShopProfileResponse(BaseModel):
+    id: int
+    logo: str
+    title: str
+    description: str | None = None
+
+
+class ShopCreateRequest(BaseModel):
+    title: str = Field(min_length=3, max_length=30)
+    logo: str
+    description: str = Field(max_length=300)
+    
+    
+class ShopCreateResponse(BaseModel):
+    shop: ShopProfileResponse
+    
+
+class ShopDeleteResponse(BaseModel):
+    status_code: int
+    
+    
+class ShopUpdateRequest(BaseModel):
+    logo: str | None = None
+    title: str | None = Field(default=None, min_length=3, max_length=30)
+    description: str | None = Field(default=None, max_length=300)
+    
+
+class ShopProductsResponse(BaseModel):
+    products: list[ProductCard]
