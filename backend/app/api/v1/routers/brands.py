@@ -19,7 +19,7 @@ def get_brands(
 
 
 @router.get("/{brand_id}/products", response_model=ProductsResponse)
-def get_brand_products(
+def get_products_by_brand(
     brand_id: int, 
     q: str | None = None,
     category_id: int | None = None,
