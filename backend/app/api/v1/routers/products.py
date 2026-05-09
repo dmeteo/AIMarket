@@ -14,6 +14,7 @@ router = APIRouter(prefix="/products", tags=["products"])
 def get_products(
     q: str | None = None,
     category_id: int | None = None,
+    brand_id: int | None = None,
     min_price: Decimal | None = Query(default=None, ge=0),
     max_price: Decimal | None = Query(default=None, ge=0),
     page: int = Query(default=1, ge=1),
