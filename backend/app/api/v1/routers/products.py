@@ -18,6 +18,7 @@ def get_products(
     max_price: Decimal | None = Query(default=None, ge=0),
     page: int = Query(default=1, ge=1),
     limit: int = Query(default=20, ge=1, le=100),
+    brand_id: int | None = None,
 ) -> ProductsResponse:
     pass
 
