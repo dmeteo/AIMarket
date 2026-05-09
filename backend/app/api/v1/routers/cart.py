@@ -21,6 +21,6 @@ def update_cart_item(product_id, payload: UpdateCartItemRequest) -> CartResponse
     pass
 
 
-@router.delete("/items/{product_id}", response_model=DeleteFromCart)
-def delete_cart_item(product_id) -> DeleteFromCart:
+@router.delete("/items/{product_id}", response_model=CartResponse)
+def delete_cart_item(product_id) -> CartResponse:
     pass

@@ -31,9 +31,4 @@ class CartResponse(BaseModel):
 class UpdateCartItemRequest(BaseModel):
     product_id: int
     quantity: int
-    
-    
-class DeleteFromCart(BaseModel):
-    product_id: int
-    cart_id: int
 
