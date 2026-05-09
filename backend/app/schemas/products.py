@@ -3,6 +3,7 @@ from decimal import Decimal
 from pydantic import BaseModel, Field
 
 from app.schemas.reviews import Review
+from app.schemas.categories import Category
 
     
 class ProductPage(BaseModel):
@@ -22,7 +23,7 @@ class ProductPage(BaseModel):
     )
     reviews_count: int 
     quantity: int
-    categories: list[str]
+    categories: list[Category]
     reviews: list[Review]
     
     
@@ -49,7 +50,7 @@ class ProductCreateRequest(BaseModel):
     description: str = Field(max_length=300)
     images: list[str]
     price: Decimal = Field(gt=0, max_digits=10, decimal_places=2, examples=["100.99"])
-    categories: list[str]
+    category_ids: list[int]
     discount_percent: Decimal = Field(default=0, ge=0, le=100, max_digits=5, decimal_places=2, examples=["10.5"])
     quantity: int = Field(ge=0)
     is_active: bool
@@ -76,7 +77,7 @@ class ProductUpdateRequest(BaseModel):
     description: str | None = Field(default=None, max_length=300)
     images: list[str] | None = None
     price: Decimal | None = Field(default=None, gt=0, max_digits=10, decimal_places=2, examples=["100.99"])
-    categories: list[str] | None = None
+    category_ids: list[int] | None = None
     discount_percent: Decimal | None = Field(default=None, ge=0, le=100, max_digits=5, decimal_places=2, examples=["10.5"])
     quantity: int | None = Field(default=None, ge=0)
     is_active: bool | None = None
