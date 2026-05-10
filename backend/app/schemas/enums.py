@@ -1,0 +1,21 @@
+from enum import Enum
+
+
+class Role(Enum):
+    BUYER = "BUYER"
+    SELLER = "SELLER"
+    ADMIN = "ADMIN"
+    
+    
+class DeliveryType(Enum):
+    CDEK = "CDEK"
+    YANDEX = "YANDEX"
+    
+
+class OrderStatus(Enum):
+    IN_PROCESSING = "IN_PROCESSING"
+    CONFIRMED = "CONFIRMED"
+    AWAITING_DELIVERY = "AWAITING_DELIVERY"
+    DELIVERY = "DELIVERY"
+    AWAIT_RECEIPT = "AWAIT_RECEIPT"
+    RECEIVED = "RECEIVED"
