@@ -1,6 +1,6 @@
 from pydantic import BaseModel, EmailStr
 
-from app.schemas.base import Role
+from app.schemas.enums import Role
 
     
 class UserProfileResponse(BaseModel):
