@@ -19,7 +19,7 @@ class Order(BaseModel):
     delivery_cost: Decimal
     predicted_date: date
     status: OrderStatusInfo
-    items_total: int
+    items_total_price: Decimal
     final_price: Decimal
     
     
