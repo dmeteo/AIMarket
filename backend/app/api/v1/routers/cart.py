@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from backend.app.schemas.cart import AddProductToCartRequest, CartResponse, DeleteFromCart, UpdateCartItemRequest
+from app.schemas.cart import AddProductToCartRequest, CartResponse, DeleteFromCart, UpdateCartItemRequest
 
 
 router = APIRouter(prefix="/cart", tags=["cart"])
