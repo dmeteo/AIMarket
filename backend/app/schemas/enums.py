@@ -5,6 +5,7 @@ class Role(Enum):
     BUYER = "BUYER"
     SELLER = "SELLER"
     ADMIN = "ADMIN"
+    MODERATOR = "MODERATOR"
     
     
 class DeliveryType(Enum):
