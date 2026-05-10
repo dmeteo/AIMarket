@@ -1387,6 +1387,260 @@
         }
       }
     },
+    "/api/v1/cart/": {
+      "get": {
+        "tags": [
+          "cart"
+        ],
+        "summary": "Get Cart",
+        "operationId": "get_cart_api_v1_cart__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CartResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cart/items": {
+      "post": {
+        "tags": [
+          "cart"
+        ],
+        "summary": "Add Product To Cart",
+        "operationId": "add_product_to_cart_api_v1_cart_items_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddProductToCartRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CartResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cart/items/{product_id}": {
+      "patch": {
+        "tags": [
+          "cart"
+        ],
+        "summary": "Update Cart Item",
+        "operationId": "update_cart_item_api_v1_cart_items__product_id__patch",
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Product Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCartItemRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CartResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "cart"
+        ],
+        "summary": "Delete Cart Item",
+        "operationId": "delete_cart_item_api_v1_cart_items__product_id__delete",
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Product Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CartResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orders/": {
+      "get": {
+        "tags": [
+          "orders"
+        ],
+        "summary": "Get User Orders",
+        "operationId": "get_user_orders_api_v1_orders__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrdersResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "orders"
+        ],
+        "summary": "Create Order",
+        "operationId": "create_order_api_v1_orders__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orders/{order_id}": {
+      "get": {
+        "tags": [
+          "orders"
+        ],
+        "summary": "Get User Order",
+        "operationId": "get_user_order_api_v1_orders__order_id__get",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Order Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/health": {
       "get": {
         "summary": "Health Check",
@@ -1406,6 +1660,25 @@
   },
   "components": {
     "schemas": {
+      "AddProductToCartRequest": {
+        "properties": {
+          "product_id": {
+            "type": "integer",
+            "title": "Product Id"
+          },
+          "quantity": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Quantity"
+          }
+        },
+        "type": "object",
+        "required": [
+          "product_id",
+          "quantity"
+        ],
+        "title": "AddProductToCartRequest"
+      },
       "AuthResponse": {
         "properties": {
           "user": {
@@ -1615,6 +1888,80 @@
         ],
         "title": "BrandsResponse"
       },
+      "Cart": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "integer",
+            "title": "User Id"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CartItem"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total_price": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Total Price"
+          },
+          "total_discount": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Total Discount"
+          },
+          "final_price": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Final Price"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "items",
+          "total_price",
+          "total_discount",
+          "final_price"
+        ],
+        "title": "Cart"
+      },
+      "CartItem": {
+        "properties": {
+          "product": {
+            "$ref": "#/components/schemas/ProductCard"
+          },
+          "quantity": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Quantity"
+          }
+        },
+        "type": "object",
+        "required": [
+          "product",
+          "quantity"
+        ],
+        "title": "CartItem"
+      },
+      "CartResponse": {
+        "properties": {
+          "cart": {
+            "$ref": "#/components/schemas/Cart"
+          }
+        },
+        "type": "object",
+        "required": [
+          "cart"
+        ],
+        "title": "CartResponse"
+      },
       "CategoriesResponse": {
         "properties": {
           "categories": {
@@ -1689,6 +2036,14 @@
         ],
         "title": "CurrentUserResponse"
       },
+      "DeliveryType": {
+        "type": "string",
+        "enum": [
+          "CDEK",
+          "YANDEX"
+        ],
+        "title": "DeliveryType"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -1722,6 +2077,139 @@
           "password"
         ],
         "title": "LoginRequest"
+      },
+      "Order": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "integer",
+            "title": "User Id"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CartItem"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "address": {
+            "type": "string",
+            "title": "Address"
+          },
+          "delivery_cost": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Delivery Cost"
+          },
+          "predicted_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Predicted Date"
+          },
+          "status": {
+            "$ref": "#/components/schemas/OrderStatusInfo"
+          },
+          "items_total_price": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Items Total Price"
+          },
+          "final_price": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Final Price"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "items",
+          "address",
+          "delivery_cost",
+          "predicted_date",
+          "status",
+          "items_total_price",
+          "final_price"
+        ],
+        "title": "Order"
+      },
+      "OrderRequest": {
+        "properties": {
+          "address": {
+            "type": "string",
+            "title": "Address"
+          },
+          "delivery_type": {
+            "$ref": "#/components/schemas/DeliveryType"
+          }
+        },
+        "type": "object",
+        "required": [
+          "address",
+          "delivery_type"
+        ],
+        "title": "OrderRequest"
+      },
+      "OrderResponse": {
+        "properties": {
+          "order": {
+            "$ref": "#/components/schemas/Order"
+          }
+        },
+        "type": "object",
+        "required": [
+          "order"
+        ],
+        "title": "OrderResponse"
+      },
+      "OrderStatus": {
+        "type": "string",
+        "enum": [
+          "IN_PROCESSING",
+          "CONFIRMED",
+          "AWAITING_DELIVERY",
+          "DELIVERY",
+          "AWAIT_RECEIPT",
+          "RECEIVED"
+        ],
+        "title": "OrderStatus"
+      },
+      "OrderStatusInfo": {
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/OrderStatus"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "label"
+        ],
+        "title": "OrderStatusInfo"
+      },
+      "OrdersResponse": {
+        "properties": {
+          "orders": {
+            "items": {
+              "$ref": "#/components/schemas/Order"
+            },
+            "type": "array",
+            "title": "Orders"
+          }
+        },
+        "type": "object",
+        "required": [
+          "orders"
+        ],
+        "title": "OrdersResponse"
       },
       "ProductCard": {
         "properties": {
@@ -2384,7 +2872,8 @@
         "enum": [
           "BUYER",
           "SELLER",
-          "ADMIN"
+          "ADMIN",
+          "MODERATOR"
         ],
         "title": "Role"
       },
@@ -2580,6 +3069,24 @@
           "access_token"
         ],
         "title": "TokenResponse"
+      },
+      "UpdateCartItemRequest": {
+        "properties": {
+          "product_id": {
+            "type": "integer",
+            "title": "Product Id"
+          },
+          "quantity": {
+            "type": "integer",
+            "title": "Quantity"
+          }
+        },
+        "type": "object",
+        "required": [
+          "product_id",
+          "quantity"
+        ],
+        "title": "UpdateCartItemRequest"
       },
       "UserProfileResponse": {
         "properties": {
