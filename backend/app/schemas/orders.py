@@ -3,7 +3,7 @@ from decimal import Decimal
 
 from pydantic import BaseModel
 
-from app.schemas.enums import DeliveryType, OrderStatus
+from app.common.enums import DeliveryType, OrderStatus
 from app.schemas.cart import CartItem
 
 
