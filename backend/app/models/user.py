@@ -15,6 +15,7 @@ class User(BaseModelMixin):
     is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
     
     addresses: Mapped[list["Address"]] = relationship(back_populates="user")
+    shops: Mapped[list["Shop"]] = relationship(back_populates="owner")
     
     
 class Address(BaseModelMixin):
