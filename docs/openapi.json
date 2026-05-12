@@ -87,13 +87,13 @@
         }
       }
     },
-    "/api/v1/auth/me": {
+    "/api/v1/users/me": {
       "get": {
         "tags": [
-          "auth"
+          "users"
         ],
         "summary": "Me",
-        "operationId": "me_api_v1_auth_me_get",
+        "operationId": "me_api_v1_users_me_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -105,7 +105,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/v1/users/{user_id}": {
@@ -3149,6 +3154,17 @@
           "type"
         ],
         "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "OAuth2PasswordBearer": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "scopes": {},
+            "tokenUrl": "/api/v1/auth/login"
+          }
+        }
       }
     }
   }
