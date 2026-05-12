@@ -1,6 +1,6 @@
 from pydantic import BaseModel, EmailStr, Field
 
-from app.schemas.user import CurrentUserResponse, UserProfileResponse
+from app.schemas.user import CurrentUserResponse
 
 
 class TokenResponse(BaseModel):

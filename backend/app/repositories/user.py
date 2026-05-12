@@ -16,3 +16,9 @@ def get_user_by_email(db: Session, email: str) -> User | None:
     stmt = select(User).where(User.email == email)
     data = db.execute(stmt).scalar_one_or_none()
     return data
+
+
+def get_user_by_id(db: Session, user_id: int) -> User | None:
+    stmt = select(User).where(User.id == user_id)
+    data = db.execute(stmt).scalar_one_or_none()
+    return data
