@@ -1,4 +1,4 @@
-from app.schemas.enums import OrderStatus, Role
+from app.common.enums import OrderStatus, Role
 
 
 ROLE_LABELS = {
