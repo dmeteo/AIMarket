@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class Role(Enum):
+class Role(str, Enum):
     BUYER = "BUYER"
     SELLER = "SELLER"
     ADMIN = "ADMIN"
