@@ -8,8 +8,9 @@ from app.core.database import get_db
 from app.core.security import get_password_hash, create_access_token
 from app.repositories.user import create_user
 from app.models.user import User
-from app.services.auth import authenticate_user, check_unique_email
+from app.services.auth import authenticate_user
 from app.schemas.user import CurrentUserResponse
+from app.services.user import check_unique_email
 
 
 router = APIRouter(prefix="/auth", tags=["auth"])
