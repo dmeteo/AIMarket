@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from app.models.product import Product
 from app.models.category import Category
 
+
 def get_products_page(
     db: Session, 
     q=None,
@@ -45,4 +46,11 @@ def get_products_page(
     product_page = db.scalars(stmt.offset((page - 1) * limit).limit(limit)).all()
     
     return product_page, int(total), pages
+
+
+def get_product(db: Session, product_id):
+    stmt = select(Product).where(Product.id == product_id)
     
+    product = db.scalar(stmt)
+    
+    return product
