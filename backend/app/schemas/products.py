@@ -2,7 +2,6 @@ from decimal import Decimal
 
 from pydantic import BaseModel, Field
 
-from app.schemas.reviews import Review
 from app.schemas.categories import Category
 
     
@@ -24,7 +23,6 @@ class ProductPage(BaseModel):
     reviews_count: int 
     quantity: int
     categories: list[Category]
-    reviews: list[Review]
     
     
 class ProductCard(BaseModel):
