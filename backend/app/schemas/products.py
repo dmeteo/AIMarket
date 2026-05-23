@@ -29,6 +29,7 @@ class ProductPage(BaseModel):
     
 class ProductCard(BaseModel):
     id: int
+    shop_id: int
     title: str
     images: list[str]
     price: Decimal = Field(gt=0, examples=["199.99"])

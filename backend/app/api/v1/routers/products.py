@@ -1,26 +1,64 @@
 from decimal import Decimal
+from typing import Annotated
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from fastapi.params import Query
+from sqlalchemy.orm import Session
 
-from app.schemas.products import ProductCreateRequest, ProductCreateResponse, ProductDeleteResponse, ProductPage, ProductUpdateRequest, ProductUpdateResponse, ProductsResponse
+from app.core.database import get_db
+from app.schemas.products import ProductCard, ProductCreateRequest, ProductCreateResponse, ProductDeleteResponse, ProductPage, ProductUpdateRequest, ProductUpdateResponse, ProductsResponse
 from app.schemas.reviews import ReviewCreateRequest, ReviewCreateResponse, ReviewUpdateRequest, ReviewUpdateResponse, ReviewsResponse
+from app.repositories.products import get_products_page
+
+
 
 router = APIRouter(prefix="/products", tags=["products"])
 
 
-# q - поиск по названию/описанию
 @router.get("/", response_model=ProductsResponse)
 def get_products(
+    db: Annotated[Session, Depends(get_db)],
     q: str | None = None,
-    category_id: int | None = None,
-    brand_id: int | None = None,
+    category_ids: list[int] | None = None,
+    brand_ids: list[int] | None = None,
     min_price: Decimal | None = Query(default=None, ge=0),
     max_price: Decimal | None = Query(default=None, ge=0),
     page: int = Query(default=1, ge=1),
     limit: int = Query(default=20, ge=1, le=100),
 ) -> ProductsResponse:
-    pass
+    product_page, total, pages = get_products_page(
+        db=db,
+        q=q,
+        category_ids=category_ids,
+        brand_ids=brand_ids,
+        min_price=min_price,
+        max_price=max_price,
+        page=page,
+        limit=limit
+    )
+    product_cards = [
+        {
+            "id": product.id,
+            "shop_id": product.shop_id,
+            "title": product.title,
+            "price": product.price,
+            "discount_percent": product.discount_percent,
+            "final_price": round(product.price * (1 - product.discount_percent / 100), 2),
+            "rating": product.rating,
+            "reviews_count": product.reviews_count,
+            "quantity": product.quantity,
+            "images": [image.image_url for image in product.images]
+        }
+        for product in product_page
+    ]
+
+    return ProductsResponse(products=[ProductCard(**product) for product in product_cards],
+                            total=total, 
+                            page=page, 
+                            limit=limit, 
+                            pages=pages)
+    
+    
 
 
 @router.get("/{product_id}", response_model=ProductPage)
