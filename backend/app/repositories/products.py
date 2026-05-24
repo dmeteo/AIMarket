@@ -54,3 +54,18 @@ def get_product(db: Session, product_id):
     product = db.scalar(stmt)
     
     return product
+
+
+def create_product(db: Session, product: Product):
+    db.add(product)
+    db.commit()
+    db.refresh(product)
+    return product
+
+
+def get_categories_by_ids(db: Session, category_ids):
+    stmt = select(Category).where(Category.id.in_(category_ids))
+    
+    categories = db.scalars(stmt).all()
+    
+    return categories

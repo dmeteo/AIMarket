@@ -3,9 +3,9 @@ from typing import Sequence
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from app.repositories.products import get_product, get_products_page
+from app.repositories.products import create_product, get_categories_by_ids, get_product, get_products_page
 from app.models.product import Product
-from app.schemas.products import ProductCard, ProductPage
+from app.schemas.products import ProductCard, ProductCreateRequest, ProductPage
 from app.schemas.categories import Category
 
 
@@ -70,7 +70,7 @@ def get_products_page_service(
     return products_page_cards, total, pages
 
 
-def mapping_product_categories(categories) -> list[Category]:
+def mapping_product_categories(categories: list[dict]) -> list[Category]:
     categories = [Category(id=category.id, title=category.title) for category in categories]
     return categories
     
@@ -100,5 +100,31 @@ def get_product_service(db: Session, product_id) -> ProductPage:
 
     product_page = mapping_product_page(product)
     return product_page
+
+
+
+def get_product_categories_service(db: Session, category_ids):
+    categories = get_categories_by_ids(db, category_ids)
+    if len(categories) != len(set(category_ids)):
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Category not found")
+    return categories
+
+
+def create_product_service(db: Session, user, payload: ProductCreateRequest):
+    product_mapping = Product(
+        shop_id=payload.shop_id,
+        brand_id=payload.brand_id,
+        title=payload.title,
+        description=payload.description,
+        price=payload.price,
+        categories=get_product_categories_service(db, payload.category_ids),
+        discount_percent=payload.discount_percent,
+        quantity=payload.quantity,
+        is_active=payload.is_active
+    )
     
+    product = create_product(db, product=product_mapping)
+    product_page = mapping_product_page(product)
+    
+    return product_page
     

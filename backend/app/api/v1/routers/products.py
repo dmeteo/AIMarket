@@ -10,7 +10,7 @@ from app.schemas.products import ProductCreateRequest, ProductCreateResponse, Pr
 from app.schemas.reviews import ReviewCreateRequest, ReviewCreateResponse, ReviewUpdateRequest, ReviewUpdateResponse, ReviewsResponse
 from app.api.v1.deps import get_current_user
 from app.models.user import User
-from app.services.products import get_product_service, get_products_page_service
+from app.services.products import create_product_service, get_product_service, get_products_page_service
 
 
 
@@ -58,7 +58,8 @@ def create_product(
     current_user: Annotated[User, Depends(get_current_user)], 
     payload: ProductCreateRequest
 ) -> ProductCreateResponse:
-    pass
+    product_page = create_product_service(db, current_user, payload)
+    return ProductCreateResponse(product=product_page)
     
     
 @router.patch("/{product_id}", response_model=ProductUpdateResponse)
