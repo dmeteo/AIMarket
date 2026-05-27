@@ -37,6 +37,10 @@ class Product(BaseModelMixin):
         back_populates="product",
         cascade="all, delete-orphan",
     )
+    reviews: Mapped[list["Review"]] = relationship(
+        back_populates="product",
+        cascade="all, delete-orphan"
+    )
     
     @validates("rating")
     def validate_rating(self, key, rating):
