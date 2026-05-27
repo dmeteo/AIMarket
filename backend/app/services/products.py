@@ -3,9 +3,9 @@ from typing import Sequence
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from app.repositories.products import create_product, get_categories_by_ids, get_product, get_products_page
+from app.repositories.products import create_product, delete_product, get_categories_by_ids, get_product, get_product_reviews, get_products_page, update_product
 from app.models.product import Product
-from app.schemas.products import ProductCard, ProductCreateRequest, ProductPage
+from app.schemas.products import ProductCard, ProductCreateRequest, ProductPage, ProductUpdateRequest
 from app.schemas.categories import Category
 
 
@@ -15,6 +15,11 @@ def calculate_final_price(price, discount_percent):
 
 def get_product_images_service(images):
     return [image.image_url for image in images]
+
+
+def mapping_product_categories(categories: list[dict]) -> list[Category]:
+    categories = [Category(id=category.id, title=category.title) for category in categories]
+    return categories
 
 
 def mapping_product_card(product: Product) -> ProductCard: 
@@ -32,7 +37,6 @@ def mapping_product_card(product: Product) -> ProductCard:
     }
     
     return ProductCard(**product_card)
-    
 
 
 def mapping_products_cards(product_page: Sequence[Product]) -> Sequence[ProductCard]:
@@ -42,6 +46,24 @@ def mapping_products_cards(product_page: Sequence[Product]) -> Sequence[ProductC
     ]
 
     return products_cards
+
+
+def mapping_product_page(product: Product) -> ProductPage:
+    product_page = {
+        "id": product.id,
+        "shop_id": product.shop_id,
+        "title": product.title,
+        "price": product.price,
+        "description": product.description,
+        "discount_percent": product.discount_percent,
+        "final_price": calculate_final_price(product.price, product.discount_percent),
+        "rating": product.rating,
+        "reviews_count": product.reviews_count,
+        "quantity": product.quantity,
+        "images": get_product_images_service(product.images),
+        "categories": mapping_product_categories(product.categories),
+    }
+    return ProductPage(**product_page)
 
 
 def get_products_page_service(
@@ -68,29 +90,6 @@ def get_products_page_service(
     products_page_cards = mapping_products_cards(products_page)
     
     return products_page_cards, total, pages
-
-
-def mapping_product_categories(categories: list[dict]) -> list[Category]:
-    categories = [Category(id=category.id, title=category.title) for category in categories]
-    return categories
-    
-
-def mapping_product_page(product: Product) -> ProductPage:
-    product_page = {
-        "id": product.id,
-        "shop_id": product.shop_id,
-        "title": product.title,
-        "price": product.price,
-        "description": product.description,
-        "discount_percent": product.discount_percent,
-        "final_price": calculate_final_price(product.price, product.discount_percent),
-        "rating": product.rating,
-        "reviews_count": product.reviews_count,
-        "quantity": product.quantity,
-        "images": get_product_images_service(product.images),
-        "categories": mapping_product_categories(product.categories),
-    }
-    return ProductPage(**product_page)
 
         
 def get_product_service(db: Session, product_id) -> ProductPage:
@@ -127,4 +126,21 @@ def create_product_service(db: Session, user, payload: ProductCreateRequest):
     product_page = mapping_product_page(product)
     
     return product_page
+
+
+def update_product_service(db: Session, product_id, payload: ProductUpdateRequest):
+    data = payload.model_dump(exclude_unset=True)
+    product = update_product(db, product_id, data)
+    product_page = mapping_product_page(product)
     
+    return product_page
+
+
+def delete_product_service(db: Session, product_id):
+    id = delete_product(db, product_id)
+    
+    return id
+
+
+# def get_product_reviews_service(db: Session, product_id):
+#     reviews = get_product_reviews(db, product_id)

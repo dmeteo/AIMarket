@@ -10,7 +10,7 @@ from app.schemas.products import ProductCreateRequest, ProductCreateResponse, Pr
 from app.schemas.reviews import ReviewCreateRequest, ReviewCreateResponse, ReviewUpdateRequest, ReviewUpdateResponse, ReviewsResponse
 from app.api.v1.deps import get_current_user
 from app.models.user import User
-from app.services.products import create_product_service, get_product_service, get_products_page_service
+from app.services.products import create_product_service, delete_product_service, get_product_reviews_service, get_product_service, get_products_page_service, update_product_service
 
 
 
@@ -63,18 +63,32 @@ def create_product(
     
     
 @router.patch("/{product_id}", response_model=ProductUpdateResponse)
-def update_product(product_id: int, payload: ProductUpdateRequest) -> ProductUpdateResponse:
-    pass
+def update_product(
+    db: Annotated[Session, Depends(get_db)], 
+    product_id: int, 
+    payload: ProductUpdateRequest
+) -> ProductUpdateResponse:
+    updated_product = update_product_service(db, product_id, payload)
+    
+    return updated_product
 
 
 @router.delete("/{product_id}", response_model=ProductDeleteResponse)
-def delete_product(product_id: int) -> ProductDeleteResponse:
-    pass
+def delete_product(
+    db: Annotated[Session, Depends(get_db)],
+    product_id: int
+) -> ProductDeleteResponse:
+    id = delete_product_service(db, product_id)
+    
+    return ProductDeleteResponse(id=id)
 
 
-@router.get("/{product_id}/reviews", response_model=ReviewsResponse)
-def get_product_reviews(product_id: int) -> ReviewsResponse:
-    pass
+# @router.get("/{product_id}/reviews", response_model=ReviewsResponse)
+# def get_product_reviews(
+#     db: Annotated[Session, Depends(get_db)], 
+#     product_id: int
+# ) -> ReviewsResponse:
+#     product_reviews = get_product_reviews_service(db, product_id)
 
 
 @router.post("/{product_id}/reviews", response_model=ReviewCreateResponse)

@@ -1,10 +1,11 @@
 from math import ceil
 
-from sqlalchemy import select, or_, func
+from sqlalchemy import delete, select, or_, func, update
 from sqlalchemy.orm import Session
 
 from app.models.product import Product
 from app.models.category import Category
+from backend.app.schemas.products import ProductUpdateRequest
 
 
 def get_products_page(
@@ -69,3 +70,28 @@ def get_categories_by_ids(db: Session, category_ids):
     categories = db.scalars(stmt).all()
     
     return categories
+
+
+def update_product(db: Session, product_id, data) -> Product:
+    stmt = update(Product).where(Product.id==product_id).values(data).returning(Product)
+    
+    result = db.execute(stmt)
+    
+    product = result.scalar_one_or_none()
+    
+    db.commit()
+    
+    return product
+
+
+def delete_product(db: Session, product_id):
+    stmt = delete(Product).where(Product.id==product_id)
+    
+    db.execute(stmt)
+    db.commit()
+    
+    return product_id
+
+
+# def get_product_reviews(db: Session, product_id):
+#     stmt = select(Product).where(Product.id==product_id)
