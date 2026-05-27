@@ -3,7 +3,7 @@ from datetime import date
 from pydantic import BaseModel, Field
 
 
-class Review(BaseModel):
+class ReviewResponse(BaseModel):
     user_id: int
     user_name: str
     product_id: int
@@ -15,7 +15,7 @@ class Review(BaseModel):
 
 
 class ReviewsResponse(BaseModel):
-    reviews: list[Review]
+    reviews: list[ReviewResponse]
     
 
 class ReviewCreateRequest(BaseModel):
