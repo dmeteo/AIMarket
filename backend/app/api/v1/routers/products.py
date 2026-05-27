@@ -83,12 +83,13 @@ def delete_product(
     return ProductDeleteResponse(id=id)
 
 
-# @router.get("/{product_id}/reviews", response_model=ReviewsResponse)
-# def get_product_reviews(
-#     db: Annotated[Session, Depends(get_db)], 
-#     product_id: int
-# ) -> ReviewsResponse:
-#     product_reviews = get_product_reviews_service(db, product_id)
+@router.get("/{product_id}/reviews", response_model=ReviewsResponse)
+def get_product_reviews(
+    db: Annotated[Session, Depends(get_db)], 
+    product_id: int
+) -> ReviewsResponse:
+    product_reviews = get_product_reviews_service(db, product_id)
+    return product_reviews
 
 
 @router.post("/{product_id}/reviews", response_model=ReviewCreateResponse)

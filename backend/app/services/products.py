@@ -5,8 +5,10 @@ from sqlalchemy.orm import Session
 
 from app.repositories.products import create_product, delete_product, get_categories_by_ids, get_product, get_product_reviews, get_products_page, update_product
 from app.models.product import Product
+from app.models.review import Review
 from app.schemas.products import ProductCard, ProductCreateRequest, ProductPage, ProductUpdateRequest
 from app.schemas.categories import Category
+from app.schemas.reviews import ReviewResponse, ReviewsResponse
 
 
 def calculate_final_price(price, discount_percent):
@@ -131,6 +133,9 @@ def create_product_service(db: Session, user, payload: ProductCreateRequest):
 def update_product_service(db: Session, product_id, payload: ProductUpdateRequest):
     data = payload.model_dump(exclude_unset=True)
     product = update_product(db, product_id, data)
+    if not product:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
+    
     product_page = mapping_product_page(product)
     
     return product_page
@@ -138,9 +143,26 @@ def update_product_service(db: Session, product_id, payload: ProductUpdateReques
 
 def delete_product_service(db: Session, product_id):
     id = delete_product(db, product_id)
-    
     return id
 
 
-# def get_product_reviews_service(db: Session, product_id):
-#     reviews = get_product_reviews(db, product_id)
+def mapping_reviews(reviews: list[Review]):
+    mapped_reviews = [ReviewResponse(
+        user_id=review.user_id,
+        user_name=review.author.name,
+        product_id=review.product_id,
+        rate=review.rate,
+        text=review.text,
+        created_at=review.created_at,
+        edited=review.edited,
+        edited_at=review.updated_at,
+    ) for review in reviews]
+    
+    return mapped_reviews
+    
+
+def get_product_reviews_service(db: Session, product_id) -> ReviewsResponse:
+    reviews = get_product_reviews(db, product_id)
+    mapped_reviews = mapping_reviews(reviews)
+    
+    return ReviewsResponse(reviews=mapped_reviews)

@@ -1,11 +1,12 @@
 from math import ceil
 
+from fastapi import HTTPException
 from sqlalchemy import delete, select, or_, func, update
 from sqlalchemy.orm import Session
 
 from app.models.product import Product
 from app.models.category import Category
-from backend.app.schemas.products import ProductUpdateRequest
+from app.models import Review
 
 
 def get_products_page(
@@ -85,13 +86,22 @@ def update_product(db: Session, product_id, data) -> Product:
 
 
 def delete_product(db: Session, product_id):
-    stmt = delete(Product).where(Product.id==product_id)
+    stmt = delete(Product).where(Product.id==product_id).returning(Product.id)
     
-    db.execute(stmt)
+    result = db.execute(stmt)
+    deleted_id = result.scalar_one_or_none()
+    
+    if deleted_id is None:
+        raise HTTPException(status_code=404, detail="Product not found")
+
     db.commit()
     
     return product_id
 
 
-# def get_product_reviews(db: Session, product_id):
-#     stmt = select(Product).where(Product.id==product_id)
+def get_product_reviews(db: Session, product_id) -> list[Review]:
+    stmt = select(Review).where(Review.product_id==product_id)
+    
+    reviews = db.scalars(stmt).all()
+    
+    return reviews
