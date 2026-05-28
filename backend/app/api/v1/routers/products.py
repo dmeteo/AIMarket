@@ -1,7 +1,7 @@
 from decimal import Decimal
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends
 from fastapi.params import Query
 from sqlalchemy.orm import Session
 
@@ -10,7 +10,7 @@ from app.schemas.products import ProductCreateRequest, ProductCreateResponse, Pr
 from app.schemas.reviews import ReviewCreateRequest, ReviewCreateResponse, ReviewUpdateRequest, ReviewUpdateResponse, ReviewsResponse
 from app.api.v1.deps import get_current_user
 from app.models.user import User
-from app.services.products import create_product_service, delete_product_service, get_product_reviews_service, get_product_service, get_products_page_service, update_product_service
+from app.services.products import create_product_service, create_review_service, delete_product_service, get_product_reviews_service, get_product_service, get_products_page_service, update_product_service
 
 
 
@@ -89,12 +89,20 @@ def get_product_reviews(
     product_id: int
 ) -> ReviewsResponse:
     product_reviews = get_product_reviews_service(db, product_id)
+    
     return product_reviews
 
 
 @router.post("/{product_id}/reviews", response_model=ReviewCreateResponse)
-def create_review(product_id: int, payload: ReviewCreateRequest) -> ReviewCreateResponse:
-    pass
+def create_review(
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User, Depends(get_current_user)],
+    product_id: int, 
+    payload: ReviewCreateRequest
+) -> ReviewCreateResponse:
+    review = create_review_service(db, current_user, product_id, payload)
+    
+    return ReviewCreateResponse(review=review)
 
 
 @router.patch("/{product_id}/reviews/{review_id}", response_model=ReviewUpdateResponse)

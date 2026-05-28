@@ -1,6 +1,5 @@
 from math import ceil
 
-from fastapi import HTTPException
 from sqlalchemy import delete, select, or_, func, update
 from sqlalchemy.orm import Session
 
@@ -92,12 +91,11 @@ def delete_product(db: Session, product_id):
     deleted_id = result.scalar_one_or_none()
     
     if deleted_id is None:
-        raise HTTPException(status_code=404, detail="Product not found")
+        return None
 
     db.commit()
     
-    return product_id
-
+    return deleted_id
 
 def get_product_reviews(db: Session, product_id) -> list[Review]:
     stmt = select(Review).where(Review.product_id==product_id)
@@ -105,3 +103,18 @@ def get_product_reviews(db: Session, product_id) -> list[Review]:
     reviews = db.scalars(stmt).all()
     
     return reviews
+
+
+def create_review(db: Session, review) -> Review:
+    db.add(review)
+    db.commit()
+    db.refresh(review)
+    return review
+
+
+def get_review_by_user_and_product(db: Session, user_id, product_id):
+    stmt = select(Review).where(Review.product_id==product_id).where(Review.user_id==user_id)
+    
+    result = db.scalar(stmt)
+    
+    return result
