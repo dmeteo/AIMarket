@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 
 from pydantic import BaseModel, Field
 
@@ -9,9 +9,9 @@ class ReviewResponse(BaseModel):
     product_id: int
     rate: int = Field(ge=1, le=5)
     text: str | None = None
-    created_at: date
+    created_at: datetime
     edited: bool = Field(default=False)
-    edited_at: date | None = None
+    edited_at: datetime | None = None
 
 
 class ReviewsResponse(BaseModel):
@@ -24,7 +24,7 @@ class ReviewCreateRequest(BaseModel):
     
     
 class ReviewCreateResponse(BaseModel):
-    review_id: int
+    review: ReviewResponse
     
 
 class ReviewUpdateRequest(BaseModel):
