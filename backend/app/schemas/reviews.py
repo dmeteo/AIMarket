@@ -31,6 +31,4 @@ class ReviewUpdateRequest(BaseModel):
     rate: int | None = Field(default=None, ge=1, le=5)
     text: str | None = None
     
-class ReviewUpdateResponse(BaseModel):
-    review_id: int
     

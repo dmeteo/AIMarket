@@ -49,7 +49,7 @@ def get_products_page(
     return product_page, int(total), pages
 
 
-def get_product(db: Session, product_id):
+def get_product(db: Session, product_id) -> Product | None:
     stmt = select(Product).where(Product.id == product_id)
     
     product = db.scalar(stmt)
@@ -72,7 +72,7 @@ def get_categories_by_ids(db: Session, category_ids):
     return categories
 
 
-def update_product(db: Session, product_id, data) -> Product:
+def update_product(db: Session, product_id, data) -> Product | None:
     stmt = update(Product).where(Product.id==product_id).values(data).returning(Product)
     
     result = db.execute(stmt)
@@ -118,3 +118,15 @@ def get_review_by_user_and_product(db: Session, user_id, product_id):
     result = db.scalar(stmt)
     
     return result
+
+
+def update_review(db: Session, user_id, product_id, review_id, data):
+    stmt = update(Review).where(Review.product_id==product_id).where(Review.id==review_id).where(Review.user_id==user_id).values(data).returning(Review)
+    
+    
+    result = db.execute(stmt)
+    review = result.scalar_one_or_none()
+    
+    db.commit()
+    
+    return review
