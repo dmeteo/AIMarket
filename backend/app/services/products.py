@@ -3,7 +3,7 @@ from typing import Sequence
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from app.repositories.products import create_product, create_review, delete_product, get_categories_by_ids, get_product, get_product_reviews, get_products_page, get_review_by_user_and_product, update_product, update_review
+from app.repositories.products import create_product, create_review, delete_product, delete_review, get_categories_by_ids, get_old_review, get_product, get_product_reviews, get_products_page, get_review_by_user_and_product, update_product, update_review
 from app.models.product import Product
 from app.models.review import Review
 from app.schemas.products import ProductCard, ProductCreateRequest, ProductPage, ProductUpdateRequest
@@ -184,7 +184,7 @@ def get_product_reviews_service(db: Session, product_id) -> ReviewsResponse:
 
 
 def create_review_service(db: Session, user, product_id, payload: ReviewCreateRequest):
-    existence_product(db, product_id)
+    product = existence_product(db, product_id)
     
     user_review_for_product = get_review_by_user_and_product(db, user.id, product_id)
     
@@ -198,20 +198,57 @@ def create_review_service(db: Session, user, product_id, payload: ReviewCreateRe
         text=payload.text
     )
 
-    review = create_review(db, review_mapping)
+    review = create_review(db, product, review_mapping)
+    
+    product.rating_sum += review.rate
+    product.reviews_count += 1
+    product.rating = product.rating_sum / product.reviews_count
+    
+    db.commit()
+    db.refresh(review)
+    
     mapped_review = mapping_review(review)
     return mapped_review
 
 
 def update_review_service(db: Session, user, product_id, review_id, payload: ReviewUpdateRequest):
-    existence_product(db, product_id)
+    product = existence_product(db, product_id)
+    old_review = get_old_review(db, user.id, product_id, review_id)
+    if not old_review:
+        raise HTTPException(status_code=404, detail="Review Not Found")
+    
+    old_rate = old_review.rate
+    
     data = payload.model_dump(exclude_unset=True)
     data["edited"] = True
     updated_review = update_review(db, user.id, product_id, review_id, data)
     if not updated_review:
         raise HTTPException(status_code=404, detail="Review Not Found")
     
-    return updated_review
+    if "rate" in data.keys():
+        product.rating_sum += updated_review.rate - old_rate
+        product.rating = product.rating_sum / product.reviews_count
+    
+    db.commit()
+    
+    mapped_review = mapping_review(updated_review)
+    return mapped_review
     
     
+def delete_review_service(db: Session, user, product_id, review_id):
+    product = existence_product(db, product_id)
+    deleted_review = delete_review(db, user.id, product_id, review_id)
+    if deleted_review is None:
+        raise HTTPException(status_code=404, detail="Review Not Found")
+    
+    product.reviews_count -= 1
+    product.rating_sum -= deleted_review.rate
+    if product.reviews_count== 0:
+        product.rating = 0
+    else: 
+        product.rating = product.rating_sum / product.reviews_count
+    
+    db.commit()
+
+    return deleted_review.id
     

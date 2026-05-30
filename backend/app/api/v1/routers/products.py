@@ -7,10 +7,10 @@ from sqlalchemy.orm import Session
 
 from app.core.database import get_db
 from app.schemas.products import ProductCreateRequest, ProductCreateResponse, ProductDeleteResponse, ProductPage, ProductUpdateRequest, ProductUpdateResponse, ProductsResponse
-from app.schemas.reviews import ReviewCreateRequest, ReviewCreateResponse, ReviewResponse, ReviewUpdateRequest, ReviewUpdateResponse, ReviewsResponse
+from app.schemas.reviews import ReviewCreateRequest, ReviewCreateResponse, ReviewDeleteResponse, ReviewResponse, ReviewUpdateRequest, ReviewsResponse
 from app.api.v1.deps import get_current_user
 from app.models.user import User
-from app.services.products import create_product_service, create_review_service, delete_product_service, get_product_reviews_service, get_product_service, get_products_page_service, update_product_service, update_review_service
+from app.services.products import create_product_service, create_review_service, delete_product_service, delete_review_service, get_product_reviews_service, get_product_service, get_products_page_service, update_product_service, update_review_service
 
 
 
@@ -119,6 +119,14 @@ def update_review(
     
 
 
-@router.delete("/{product_id}/reviews/{review_id}", status_code=200)
-def delete_review(product_id: int, review_id: int):
-    pass
+@router.delete("/{product_id}/reviews/{review_id}", response_model=ReviewDeleteResponse, status_code=200)
+def delete_review(
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User, Depends(get_current_user)],
+    product_id: int, 
+    review_id: int
+) -> ReviewDeleteResponse:
+    review_id = delete_review_service(db, current_user, product_id, review_id)
+    
+    return ReviewDeleteResponse(review_id=review_id)
+    

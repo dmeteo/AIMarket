@@ -24,8 +24,9 @@ class Product(BaseModelMixin):
     discount_percent: Mapped[Decimal] = mapped_column(Numeric(5, 2), default=0, nullable=False)
     quantity: Mapped[int] = mapped_column(default=0, nullable=False)
     is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
-    rating: Mapped[float | None] = mapped_column(default=None, nullable=True)
+    rating: Mapped[float] = mapped_column(default=0, nullable=False)
     reviews_count: Mapped[int] = mapped_column(default=0, nullable=False)
+    rating_sum: Mapped[int] = mapped_column(default=0, nullable=False) 
 
     shop: Mapped["Shop"] = relationship(back_populates="products")
     brand: Mapped["Brand | None"] = relationship(back_populates="products")

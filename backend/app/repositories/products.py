@@ -105,10 +105,9 @@ def get_product_reviews(db: Session, product_id) -> list[Review]:
     return reviews
 
 
-def create_review(db: Session, review) -> Review:
-    db.add(review)
-    db.commit()
-    db.refresh(review)
+def create_review(db: Session, review: Review) -> Review:
+    db.add(review) 
+    
     return review
 
 
@@ -120,13 +119,30 @@ def get_review_by_user_and_product(db: Session, user_id, product_id):
     return result
 
 
-def update_review(db: Session, user_id, product_id, review_id, data):
-    stmt = update(Review).where(Review.product_id==product_id).where(Review.id==review_id).where(Review.user_id==user_id).values(data).returning(Review)
+def get_old_review(db: Session, user_id, product_id, review_id):
+    stmt = select(Review).where(Review.product_id==product_id).where(Review.id==review_id).where(Review.user_id==user_id)
     
+    result = db.scalar(stmt)
+    
+    return result
+    
+
+def update_review(db: Session, user_id, product_id, review_id, data):    
+    stmt = update(Review).where(Review.product_id==product_id).where(Review.id==review_id).where(Review.user_id==user_id).values(data).returning(Review)
     
     result = db.execute(stmt)
     review = result.scalar_one_or_none()
     
-    db.commit()
-    
     return review
+
+
+def delete_review(db: Session, user_id, product_id, review_id):
+    stmt = delete(Review).where(Review.product_id==product_id).where(Review.id==review_id).where(Review.user_id==user_id).returning(Review)
+    
+    result = db.execute(stmt)
+    deleted_review = result.scalar_one_or_none()
+    
+    if deleted_review is None:
+        return None
+    
+    return deleted_review
