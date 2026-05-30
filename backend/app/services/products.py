@@ -152,6 +152,10 @@ def create_product_service(db: Session, user, payload: ProductCreateRequest):
     )
     
     product = create_product(db, product=product_mapping)
+    
+    db.commit()
+    db.refresh(product)
+    
     product_page = mapping_product_page(product)
     
     return product_page
@@ -163,8 +167,9 @@ def update_product_service(db: Session, product_id, payload: ProductUpdateReques
     if not product:
         raise product_not_found()
     
-    product_page = mapping_product_page(product)
+    db.commit()
     
+    product_page = mapping_product_page(product)
     return product_page
 
 
@@ -173,10 +178,13 @@ def delete_product_service(db: Session, product_id):
     if id is None:
         raise product_not_found()
     
+    db.commit()
+    
     return id
     
 
 def get_product_reviews_service(db: Session, product_id) -> ReviewsResponse:
+    existence_product(db, product_id)
     reviews = get_product_reviews(db, product_id)
     mapped_reviews = mapping_reviews(reviews)
     
@@ -198,7 +206,7 @@ def create_review_service(db: Session, user, product_id, payload: ReviewCreateRe
         text=payload.text
     )
 
-    review = create_review(db, product, review_mapping)
+    review = create_review(db, review_mapping)
     
     product.rating_sum += review.rate
     product.reviews_count += 1
@@ -230,6 +238,7 @@ def update_review_service(db: Session, user, product_id, review_id, payload: Rev
         product.rating = product.rating_sum / product.reviews_count
     
     db.commit()
+    db.refresh(updated_review)
     
     mapped_review = mapping_review(updated_review)
     return mapped_review

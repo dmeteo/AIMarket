@@ -59,8 +59,7 @@ def get_product(db: Session, product_id) -> Product | None:
 
 def create_product(db: Session, product: Product):
     db.add(product)
-    db.commit()
-    db.refresh(product)
+    
     return product
 
 
@@ -79,8 +78,6 @@ def update_product(db: Session, product_id, data) -> Product | None:
     
     product = result.scalar_one_or_none()
     
-    db.commit()
-    
     return product
 
 
@@ -92,8 +89,6 @@ def delete_product(db: Session, product_id):
     
     if deleted_id is None:
         return None
-
-    db.commit()
     
     return deleted_id
 
