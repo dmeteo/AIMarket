@@ -17,7 +17,7 @@ def add_product_to_cart(payload: AddProductToCartRequest) -> CartResponse:
 
 
 @router.patch("/items/{product_id}", response_model=CartResponse)
-def update_cart_item(product_id, payload: UpdateCartItemRequest) -> CartResponse:
+def update_cart_item_count(product_id, payload: UpdateCartItemRequest) -> CartResponse:
     pass
 
 

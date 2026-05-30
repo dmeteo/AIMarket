@@ -15,8 +15,8 @@ from app.repositories.user import get_user_by_email
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
 
 def get_current_user(
-    token: Annotated[str, Depends(oauth2_scheme)], 
     db: Annotated[Session, Depends(get_db)],
+    token: Annotated[str, Depends(oauth2_scheme)]
 ):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,

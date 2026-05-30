@@ -16,6 +16,7 @@ class User(BaseModelMixin):
     
     addresses: Mapped[list["Address"]] = relationship(back_populates="user")
     shops: Mapped[list["Shop"]] = relationship(back_populates="owner")
+    reviews: Mapped[list["Review"]] = relationship(back_populates="author")
     
     
 class Address(BaseModelMixin):
