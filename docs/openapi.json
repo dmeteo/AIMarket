@@ -180,35 +180,41 @@
             }
           },
           {
-            "name": "category_id",
+            "name": "category_ids",
             "in": "query",
             "required": false,
             "schema": {
               "anyOf": [
                 {
-                  "type": "integer"
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
                 },
                 {
                   "type": "null"
                 }
               ],
-              "title": "Category Id"
+              "title": "Category Ids"
             }
           },
           {
-            "name": "brand_id",
+            "name": "brand_ids",
             "in": "query",
             "required": false,
             "schema": {
               "anyOf": [
                 {
-                  "type": "integer"
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
                 },
                 {
                   "type": "null"
                 }
               ],
-              "title": "Brand Id"
+              "title": "Brand Ids"
             }
           },
           {
@@ -306,6 +312,11 @@
         ],
         "summary": "Create Product",
         "operationId": "create_product_api_v1_products__post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -519,6 +530,11 @@
         ],
         "summary": "Create Review",
         "operationId": "create_review_api_v1_products__product_id__reviews_post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "product_id",
@@ -571,6 +587,11 @@
         ],
         "summary": "Update Review",
         "operationId": "update_review_api_v1_products__product_id__reviews__review_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "product_id",
@@ -607,7 +628,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReviewUpdateResponse"
+                  "$ref": "#/components/schemas/ReviewResponse"
                 }
               }
             }
@@ -630,6 +651,11 @@
         ],
         "summary": "Delete Review",
         "operationId": "delete_review_api_v1_products__product_id__reviews__review_id__delete",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "product_id",
@@ -655,7 +681,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewDeleteResponse"
+                }
               }
             }
           },
@@ -1459,8 +1487,8 @@
         "tags": [
           "cart"
         ],
-        "summary": "Update Cart Item",
-        "operationId": "update_cart_item_api_v1_cart_items__product_id__patch",
+        "summary": "Update Cart Item Count",
+        "operationId": "update_cart_item_count_api_v1_cart_items__product_id__patch",
         "parameters": [
           {
             "name": "product_id",
@@ -2024,10 +2052,6 @@
           "is_active": {
             "type": "boolean",
             "title": "Is Active"
-          },
-          "orders_count": {
-            "type": "integer",
-            "title": "Orders Count"
           }
         },
         "type": "object",
@@ -2036,8 +2060,7 @@
           "name",
           "email",
           "role",
-          "is_active",
-          "orders_count"
+          "is_active"
         ],
         "title": "CurrentUserResponse"
       },
@@ -2222,6 +2245,10 @@
             "type": "integer",
             "title": "Id"
           },
+          "shop_id": {
+            "type": "integer",
+            "title": "Shop Id"
+          },
           "title": {
             "type": "string",
             "title": "Title"
@@ -2287,6 +2314,7 @@
         "type": "object",
         "required": [
           "id",
+          "shop_id",
           "title",
           "images",
           "price",
@@ -2303,6 +2331,17 @@
             "type": "integer",
             "title": "Shop Id"
           },
+          "brand_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Brand Id"
+          },
           "title": {
             "type": "string",
             "maxLength": 30,
@@ -2312,13 +2351,6 @@
             "type": "string",
             "maxLength": 300,
             "title": "Description"
-          },
-          "images": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Images"
           },
           "price": {
             "anyOf": [
@@ -2368,7 +2400,8 @@
           },
           "is_active": {
             "type": "boolean",
-            "title": "Is Active"
+            "title": "Is Active",
+            "default": true
           }
         },
         "type": "object",
@@ -2376,11 +2409,9 @@
           "shop_id",
           "title",
           "description",
-          "images",
           "price",
           "category_ids",
-          "quantity",
-          "is_active"
+          "quantity"
         ],
         "title": "ProductCreateRequest"
       },
@@ -2488,13 +2519,6 @@
             },
             "type": "array",
             "title": "Categories"
-          },
-          "reviews": {
-            "items": {
-              "$ref": "#/components/schemas/Review"
-            },
-            "type": "array",
-            "title": "Reviews"
           }
         },
         "type": "object",
@@ -2509,8 +2533,7 @@
           "final_price",
           "reviews_count",
           "quantity",
-          "categories",
-          "reviews"
+          "categories"
         ],
         "title": "ProductPage"
       },
@@ -2710,7 +2733,58 @@
         ],
         "title": "RegisterRequest"
       },
-      "Review": {
+      "ReviewCreateRequest": {
+        "properties": {
+          "rate": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Rate"
+          },
+          "text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "rate"
+        ],
+        "title": "ReviewCreateRequest"
+      },
+      "ReviewCreateResponse": {
+        "properties": {
+          "review": {
+            "$ref": "#/components/schemas/ReviewResponse"
+          }
+        },
+        "type": "object",
+        "required": [
+          "review"
+        ],
+        "title": "ReviewCreateResponse"
+      },
+      "ReviewDeleteResponse": {
+        "properties": {
+          "review_id": {
+            "type": "integer",
+            "title": "Review Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "review_id"
+        ],
+        "title": "ReviewDeleteResponse"
+      },
+      "ReviewResponse": {
         "properties": {
           "user_id": {
             "type": "integer",
@@ -2743,7 +2817,7 @@
           },
           "created_at": {
             "type": "string",
-            "format": "date",
+            "format": "date-time",
             "title": "Created At"
           },
           "edited": {
@@ -2755,7 +2829,7 @@
             "anyOf": [
               {
                 "type": "string",
-                "format": "date"
+                "format": "date-time"
               },
               {
                 "type": "null"
@@ -2772,46 +2846,7 @@
           "rate",
           "created_at"
         ],
-        "title": "Review"
-      },
-      "ReviewCreateRequest": {
-        "properties": {
-          "rate": {
-            "type": "integer",
-            "maximum": 5.0,
-            "minimum": 1.0,
-            "title": "Rate"
-          },
-          "text": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Text"
-          }
-        },
-        "type": "object",
-        "required": [
-          "rate"
-        ],
-        "title": "ReviewCreateRequest"
-      },
-      "ReviewCreateResponse": {
-        "properties": {
-          "review_id": {
-            "type": "integer",
-            "title": "Review Id"
-          }
-        },
-        "type": "object",
-        "required": [
-          "review_id"
-        ],
-        "title": "ReviewCreateResponse"
+        "title": "ReviewResponse"
       },
       "ReviewUpdateRequest": {
         "properties": {
@@ -2843,24 +2878,11 @@
         "type": "object",
         "title": "ReviewUpdateRequest"
       },
-      "ReviewUpdateResponse": {
-        "properties": {
-          "review_id": {
-            "type": "integer",
-            "title": "Review Id"
-          }
-        },
-        "type": "object",
-        "required": [
-          "review_id"
-        ],
-        "title": "ReviewUpdateResponse"
-      },
       "ReviewsResponse": {
         "properties": {
           "reviews": {
             "items": {
-              "$ref": "#/components/schemas/Review"
+              "$ref": "#/components/schemas/ReviewResponse"
             },
             "type": "array",
             "title": "Reviews"
