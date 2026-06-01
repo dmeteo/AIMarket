@@ -10,6 +10,8 @@ from app.schemas.products import ProductCard, ProductCreateRequest, ProductPage,
 from app.schemas.categories import Category
 from app.schemas.reviews import ReviewCreateRequest, ReviewResponse, ReviewUpdateRequest, ReviewsResponse
 from app.common.exceptions import product_not_found
+from app.models.user import User
+from app.common.enums import Role
 
 
 def existence_product(db: Session, product_id) -> Product:
@@ -18,6 +20,14 @@ def existence_product(db: Session, product_id) -> Product:
         raise product_not_found()
     
     return product
+
+
+def check_seller_or_admin_and_get_seller_shops(user: User):
+    user_shops = None
+    if user.role == Role.SELLER.value:   
+        user_shops = [shop.id for shop in user.shops]
+        
+    return user_shops
 
 
 def calculate_final_price(price, discount_percent):
@@ -130,7 +140,6 @@ def get_product_service(db: Session, product_id) -> ProductPage:
     return product_page
 
 
-
 def get_product_categories_service(db: Session, category_ids):
     categories = get_categories_by_ids(db, category_ids)
     if len(categories) != len(set(category_ids)):
@@ -138,7 +147,14 @@ def get_product_categories_service(db: Session, category_ids):
     return categories
 
 
-def create_product_service(db: Session, user, payload: ProductCreateRequest):
+def create_product_service(db: Session, user: User, payload: ProductCreateRequest):
+    user_shops = check_seller_or_admin_and_get_seller_shops(user)
+    if user_shops is not None and payload.shop_id not in user_shops:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Access denied"
+        )
+    
     product_mapping = Product(
         shop_id=payload.shop_id,
         brand_id=payload.brand_id,
@@ -161,9 +177,11 @@ def create_product_service(db: Session, user, payload: ProductCreateRequest):
     return product_page
 
 
-def update_product_service(db: Session, product_id, payload: ProductUpdateRequest):
+def update_product_service(db: Session, user: User, product_id, payload: ProductUpdateRequest):
     data = payload.model_dump(exclude_unset=True)
-    product = update_product(db, product_id, data)
+    user_shops = check_seller_or_admin_and_get_seller_shops(user)
+    
+    product = update_product(db, user_shops, product_id, data)
     if not product:
         raise product_not_found()
     
@@ -173,8 +191,9 @@ def update_product_service(db: Session, product_id, payload: ProductUpdateReques
     return product_page
 
 
-def delete_product_service(db: Session, product_id):
-    id = delete_product(db, product_id)
+def delete_product_service(db: Session, user: User, product_id):
+    user_shops = check_seller_or_admin_and_get_seller_shops(user)
+    id = delete_product(db, user_shops, product_id)
     if id is None:
         raise product_not_found()
     
