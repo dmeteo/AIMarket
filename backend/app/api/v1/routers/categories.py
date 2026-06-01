@@ -5,11 +5,13 @@ from fastapi import APIRouter, Depends
 from fastapi.params import Query
 from sqlalchemy.orm import Session
 
-from app.schemas.categories import CategoriesResponse
+from app.schemas.categories import CategoriesResponse, Category, CategoryCreateRequest, CategoryCreateResponse, CategoryDeleteResponse, CategoryUpdateRequest, CategoryUpdateResponse
 from app.schemas.products import ProductsResponse
 from app.services.products import get_products_page_service
 from app.core.database import get_db
-from app.services.categories import get_categories_service
+from app.services.categories import create_category_service, delete_category_service, get_categories_service, get_category_service, update_category_service
+from app.models.user import User
+from app.api.v1.deps import require_admin
 
 
 router = APIRouter(prefix="/categories", tags=["categories"])
@@ -17,21 +19,49 @@ router = APIRouter(prefix="/categories", tags=["categories"])
 
 
 # FOR ADMIN
-# @router.get("/{category_id}", response_model=Category)
-# def get_category(category_id) -> Category:
-#     pass
+@router.get("/{category_id}", response_model=Category)
+def get_category(
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User, Depends(require_admin)],
+    category_id
+) -> Category:
+    category = get_category_service(db, category_id)
+    
+    return category
+    
 
-# @router.delete("/{category_id}", response_model=CategoryDeleteResponse)
-# def delete_category(category_id) -> CategoryDeleteResponse:
-#     pass
+@router.post("/", response_model=CategoryCreateResponse)
+def create_category(
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User, Depends(require_admin)],
+    payload: CategoryCreateRequest
+) -> CategoryCreateResponse:
+    category = create_category_service(db, payload)
+    
+    return CategoryCreateResponse(category=category)
 
-# @router.post("/", response_model=CategoryCreateResponse)
-# def create_category(payload: CategoryCreateRequest) -> CategoryCreateResponse:
-#     pass
 
-# @router.patch("/{category_id}", response_model=Category)
-# def update_category(category_id, payload: CategoryUpdate):
-#     pass
+@router.patch("/{category_id}", response_model=CategoryUpdateResponse)
+def update_category(
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User, Depends(require_admin)],
+    category_id, 
+    payload: CategoryUpdateRequest,
+) -> CategoryUpdateResponse:
+    category = update_category_service(db, category_id, payload)
+    
+    return CategoryUpdateResponse(category=category)
+
+
+@router.delete("/{category_id}", response_model=CategoryDeleteResponse)
+def delete_category(
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User, Depends(require_admin)],
+    category_id,
+) -> CategoryDeleteResponse:
+    category = delete_category_service(db, category_id)
+    
+    return CategoryDeleteResponse(category_id=category.id)
 
 
 @router.get("/", response_model=CategoriesResponse)
