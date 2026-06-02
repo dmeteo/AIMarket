@@ -43,3 +43,7 @@ next-env.d.ts
 instructions
 CLAUDE.md
 .vscode
+.qwen
+QWEN.md
+test-playwright.js
+playwright-mcp.js

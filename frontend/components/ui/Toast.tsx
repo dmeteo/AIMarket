@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { toast } from 'sonner';
 
 interface ToastProps {
   className?: string;
+  children?: React.ReactNode;
 }
 
 const ToastProvider = ({ children, className = '' }: ToastProps) => {
@@ -23,7 +24,6 @@ export const useToast = () => {
     promise: toast.promise,
     loading: toast.loading,
     dismiss: toast.dismiss,
-    destroy: toast.destroy,
   };
 };
 

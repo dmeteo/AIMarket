@@ -8,10 +8,11 @@ import Input from '../../components/ui/Input';
 import Button from '../../components/ui/Button';
 import { useAuth } from '../../hooks/useAuth';
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const router = useRouter();
-  const { login, isLoading, isAuthenticated } = useAuth();
+  const { register, isLoading, isAuthenticated } = useAuth();
 
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -32,11 +33,25 @@ export default function LoginPage() {
     e.preventDefault();
     setError(null);
 
-    const result = await login({ email, password });
+    // Client-side validation
+    if (name.length < 3) {
+      setError('Имя должно содержать минимум 3 символа');
+      return;
+    }
+    if (password.length < 6) {
+      setError('Пароль должен содержать минимум 6 символов');
+      return;
+    }
+    if (!email.includes('@')) {
+      setError('Введите корректный email');
+      return;
+    }
+
+    const result = await register({ name, email, password });
     if (result.success) {
       router.push('/');
     } else {
-      setError(result.error || 'Ошибка авторизации');
+      setError(result.error || 'Ошибка регистрации');
     }
   };
 
@@ -45,7 +60,9 @@ export default function LoginPage() {
       <Header />
       <main className="py-16">
         <div className="mx-auto max-w-md px-4 sm:px-6 lg:px-8">
-          <h1 className="text-2xl font-bold text-center text-zinc-900 mb-8">Вход</h1>
+          <h1 className="text-2xl font-bold text-center text-zinc-900 mb-8">
+            Регистрация
+          </h1>
 
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded text-sm mb-4">
@@ -54,6 +71,23 @@ export default function LoginPage() {
           )}
 
           <form className="space-y-4" onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-zinc-700 mb-1">
+                Имя
+              </label>
+              <Input
+                type="text"
+                id="name"
+                placeholder="Ваше имя"
+                required
+                minLength={3}
+                maxLength={30}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full"
+              />
+            </div>
+
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-zinc-700 mb-1">
                 Email
@@ -77,21 +111,26 @@ export default function LoginPage() {
                 type="password"
                 id="password"
                 required
+                minLength={6}
+                maxLength={50}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full"
               />
+              <p className="text-xs text-zinc-500 mt-1">
+                Минимум 6 символов
+              </p>
             </div>
 
             <div className="flex items-center justify-between pt-2">
               <Link
-                href="/register"
+                href="/login"
                 className="text-sm text-zinc-600 hover:text-zinc-900"
               >
-                Нет аккаунта? Регистрация
+                Уже есть аккаунт? Войти
               </Link>
               <Button type="submit" variant="primary" disabled={isLoading}>
-                {isLoading ? 'Вход...' : 'Войти'}
+                {isLoading ? 'Регистрация...' : 'Зарегистрироваться'}
               </Button>
             </div>
           </form>
