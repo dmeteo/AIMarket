@@ -47,7 +47,11 @@ const ProductList = () => {
   }
 
   if (status === 'error') {
-    return <div className="text-center text-red-500 py-8">Failed to load products: {error?.message}</div>;
+    return (
+      <div className="text-center text-red-500 py-8">
+        Не удалось загрузить товары: {error?.message}
+      </div>
+    );
   }
 
   const allItems: Product[] = data?.pages
@@ -57,8 +61,16 @@ const ProductList = () => {
   const filteredItems = allItems.filter((item: Product) => {
     if (!searchTerm) return true;
     const term = searchTerm.toLowerCase();
-    return item.name.toLowerCase().includes(term) || item.description.toLowerCase().includes(term);
+    return (
+      item.title.toLowerCase().includes(term) ||
+      item.description.toLowerCase().includes(term)
+    );
   });
+
+  // Deduplicate by id
+  const uniqueItems = filteredItems.filter(
+    (item, index, self) => self.findIndex((p) => p.id === item.id) === index
+  );
 
   return (
     <>
@@ -73,26 +85,33 @@ const ProductList = () => {
         />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredItems.map((product: Product) => (
-          <ProductCard
-            key={product.id}
-            id={product.id}
-            name={product.name}
-            description={product.description}
-            price={product.price}
-            imageUrl={product.imageUrl}
-            rating={product.rating}
-            isNew={product.isNew}
-            isBestSeller={product.isBestSeller}
-            discountPercentage={product.discountPercentage}
-          />
-        ))}
-      </div>
+      {uniqueItems.length === 0 ? (
+        <div className="text-center py-12">
+          <p className="text-gray-500">Товары не найдены</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {uniqueItems.map((product: Product) => (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              title={product.title}
+              description={product.description}
+              price={product.price}
+              final_price={product.final_price}
+              images={product.images}
+              rating={product.rating ?? 0}
+              isNew={product.isNew}
+              isBestSeller={product.isBestSeller}
+              discountPercent={product.discount_percent}
+            />
+          ))}
+        </div>
+      )}
 
       {hasNextPage && isFetchingNextPage && (
         <div className="flex justify-center py-6">
-          <Spinner size="md" className="h-5 w-5" />
+          <Spinner size="md" />
         </div>
       )}
       <div ref={loadMoreRef} />

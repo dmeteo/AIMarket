@@ -1,0 +1,133 @@
+{
+  "orders": [
+    {
+      "id": 1001,
+      "user_id": 1,
+      "items": [
+        {
+          "product": {
+            "id": 1, "title": "Наушники Bluetooth Pro", "images": ["/placeholder.svg"],
+            "price": "2690", "final_price": "2690", "discount_percent": 0,
+            "rating": 4.5, "quantity": 150, "category": "Электроника",
+            "is_new": true, "is_bestseller": false
+          },
+          "quantity": 2
+        },
+        {
+          "product": {
+            "id": 3, "title": "Чехол для смартфона", "images": ["/placeholder.svg"],
+            "price": "1790", "final_price": "1790", "discount_percent": 0,
+            "rating": 3.8, "quantity": 300, "category": "Аксессуары",
+            "is_new": false, "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Москва, ул. Тверская, д. 15, кв. 42",
+      "delivery_cost": "0",
+      "predicted_date": "2026-06-08",
+      "status": { "code": "IN_PROCESSING", "label": "В обработке" },
+      "items_total_price": "7170",
+      "final_price": "7170"
+    },
+    {
+      "id": 1002,
+      "user_id": 1,
+      "items": [
+        {
+          "product": {
+            "id": 4, "title": "Портативная зарядка 20000mAh", "images": ["/placeholder.svg"],
+            "price": "4490", "final_price": "3820", "discount_percent": 15,
+            "rating": 4.7, "quantity": 200, "category": "Электроника",
+            "is_new": true, "is_bestseller": false
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 7, "title": "Веб-камера 4K", "images": ["/placeholder.svg"],
+            "price": "3140", "final_price": "2990", "discount_percent": 5,
+            "rating": 4.6, "quantity": 120, "category": "Периферия",
+            "is_new": true, "is_bestseller": false
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 8, "title": "Подставка для ноутбука", "images": ["/placeholder.svg"],
+            "price": "4040", "final_price": "4040", "discount_percent": 0,
+            "rating": 4.1, "quantity": 180, "category": "Аксессуары",
+            "is_new": false, "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Санкт-Петербург, Невский пр., д. 25, кв. 10",
+      "delivery_cost": "270",
+      "predicted_date": "2026-06-05",
+      "status": { "code": "CONFIRMED", "label": "Подтверждён" },
+      "items_total_price": "10850",
+      "final_price": "11120"
+    },
+    {
+      "id": 1003,
+      "user_id": 1,
+      "items": [
+        {
+          "product": {
+            "id": 5, "title": "Механическая клавиатура", "images": ["/placeholder.svg"],
+            "price": "5390", "final_price": "4310", "discount_percent": 20,
+            "rating": 4.0, "quantity": 75, "category": "Периферия",
+            "is_new": false, "is_bestseller": true
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Казань, ул. Баумана, д. 5, кв. 33",
+      "delivery_cost": "450",
+      "predicted_date": "2026-06-10",
+      "status": { "code": "DELIVERY", "label": "В доставке" },
+      "items_total_price": "4310",
+      "final_price": "4760"
+    },
+    {
+      "id": 1004,
+      "user_id": 1,
+      "items": [
+        {
+          "product": {
+            "id": 2, "title": "Умная колонка HomePod", "images": ["/placeholder.svg"],
+            "price": "3590", "final_price": "3230", "discount_percent": 10,
+            "rating": 4.2, "quantity": 89, "category": "Электроника",
+            "is_new": false, "is_bestseller": true
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 11, "title": "Фитнес-трекер Band X", "images": ["/placeholder.svg"],
+            "price": "3140", "final_price": "3140", "discount_percent": 0,
+            "rating": 4.2, "quantity": 250, "category": "Гаджеты",
+            "is_new": false, "is_bestseller": false
+          },
+          "quantity": 2
+        },
+        {
+          "product": {
+            "id": 14, "title": "USB-хаб 7 в 1", "images": ["/placeholder.svg"],
+            "price": "2240", "final_price": "2240", "discount_percent": 0,
+            "rating": 4.4, "quantity": 220, "category": "Периферия",
+            "is_new": false, "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Новосибирск, ул. Ленина, д. 12, кв. 88",
+      "delivery_cost": "360",
+      "predicted_date": "2026-05-25",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "11750",
+      "final_price": "12110"
+    }
+  ]
+}

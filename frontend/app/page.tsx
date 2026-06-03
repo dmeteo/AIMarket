@@ -2,6 +2,7 @@
 
 import Header from '../components/Header';
 import ProductList from '../components/ProductList';
+import OrdersWidget from '../components/widgets/OrdersWidget';
 
 export default function Home() {
   return (
@@ -9,7 +10,7 @@ export default function Home() {
       <Header />
       <main className="py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* ProductList already contains the search input */}
+          <OrdersWidget />
           <ProductList />
         </div>
       </main>

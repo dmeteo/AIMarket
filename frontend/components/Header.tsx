@@ -1,12 +1,13 @@
 'use client';
 
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Search, ShoppingCart, LogOut, User } from 'lucide-react';
-import { useState } from 'react';
 import Input from './ui/Input';
 import { useProducts, type GetProductsResponse } from '../hooks/useProducts';
 import { useAuth } from '../hooks/useAuth';
+import { useCartStore } from '../store/cart.store';
 
 interface HeaderProps {
   className?: string;
@@ -15,9 +16,13 @@ interface HeaderProps {
 export default function Header({ className }: HeaderProps) {
   const router = useRouter();
   const { isAuthenticated, user, logout } = useAuth();
+  const cartItems = useCartStore((s) => s.items);
+  const cartCount = cartItems.reduce((sum, i) => sum + i.quantity, 0);
 
   const [searchTerm, setSearchTerm] = useState('');
+  const [showResults, setShowResults] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
 
   const { data } = useProducts(30);
 
@@ -27,16 +32,27 @@ export default function Header({ className }: HeaderProps) {
           .flatMap((p: GetProductsResponse) => p.items)
           .filter(
             (p) =>
-              p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
               (p.category && p.category.toLowerCase().includes(searchTerm.toLowerCase()))
           )
       : [];
 
-  const showResults = searchTerm.length >= 1 && filtered.length > 0;
+  const hasResults = searchTerm.length >= 1 && filtered.length > 0;
 
-  const handleSelect = (text: string) => {
+  // Close search dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+        setShowResults(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const closeSearch = () => {
     setSearchTerm('');
-    router.push(`/search?query=${encodeURIComponent(text)}`);
+    setShowResults(false);
   };
 
   const handleLogout = () => {
@@ -70,29 +86,36 @@ export default function Header({ className }: HeaderProps) {
           </div>
 
           {/* Search */}
-          <div className="relative w-64">
+          <div ref={searchRef} className="relative w-64">
             <Input
               type="search"
               placeholder="Поиск товаров..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setShowResults(true);
+              }}
+              onFocus={() => setShowResults(true)}
               variant="search"
               icon={<Search className="h-4 w-4" />}
             />
-            {showResults && (
-              <div className="absolute top-full mt-1 w-full bg-white border border-gray-200 rounded shadow-lg z-10 max-h-64 overflow-y-auto">
+            {showResults && hasResults && (
+              <div className="absolute top-full mt-1 w-full bg-white border border-gray-200 rounded shadow-lg z-20 max-h-64 overflow-y-auto">
                 {filtered.map((p) => (
-                  <div
+                  <Link
                     key={p.id}
-                    className="p-2 cursor-pointer hover:bg-gray-100 text-sm"
-                    onClick={() => handleSelect(p.name)}
+                    href={`/product/${p.id}`}
+                    className="block p-2 hover:bg-gray-100 text-sm text-gray-900"
+                    onClick={closeSearch}
                   >
-                    {p.name}
-                  </div>
+                    {p.title}
+                  </Link>
                 ))}
-                {filtered.length === 0 && (
-                  <div className="p-2 text-sm text-gray-500">Ничего не найдено</div>
-                )}
+              </div>
+            )}
+            {showResults && searchTerm.length >= 2 && filtered.length === 0 && (
+              <div className="absolute top-full mt-1 w-full bg-white border border-gray-200 rounded shadow-lg z-20 p-3">
+                <p className="text-sm text-gray-500">Ничего не найдено</p>
               </div>
             )}
           </div>
@@ -102,9 +125,11 @@ export default function Header({ className }: HeaderProps) {
             {/* Cart */}
             <Link href="/cart" className="relative">
               <ShoppingCart className="h-5 w-5 text-zinc-700 hover:text-zinc-900" />
-              <span className="absolute -top-1 -right-1 flex h-3 w-3 items-center justify-center bg-zinc-900 text-white rounded-full text-xs">
-                0
-              </span>
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center bg-red-600 text-white rounded-full text-xs font-medium min-w-[16px]">
+                  {cartCount > 99 ? '99+' : cartCount}
+                </span>
+              )}
             </Link>
 
             {/* Auth section */}

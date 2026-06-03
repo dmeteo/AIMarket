@@ -7,50 +7,38 @@ interface BadgeProps {
 }
 
 const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
-  (
-    {
-      variant = 'primary',
-      className = '',
-      children,
-    },
-    ref
-  ) => {
-    // Base classes
-    const baseClasses = 'inline-flex items-center justify-center rounded-text text-xs font-medium uppercase tracking-wider';
+  ({ variant = 'primary', className = '', children }, ref) => {
+    const baseClasses =
+      'inline-flex items-center justify-center rounded-full text-xs font-medium px-2.5 py-1';
 
-    // Variant classes
     let variantClasses = '';
     switch (variant) {
       case 'primary':
-        variantClasses = 'bg-primary-muted text-primary';
+        variantClasses = 'bg-blue-100 text-blue-700';
         break;
       case 'secondary':
-        variantClasses = 'bg-background-muted text-text-primary';
+        variantClasses = 'bg-gray-100 text-gray-700';
         break;
       case 'success':
-        variantClasses = 'bg-success-muted text-success';
+        variantClasses = 'bg-green-100 text-green-700';
         break;
       case 'warning':
-        variantClasses = 'bg-warning-muted text-warning';
+        variantClasses = 'bg-amber-100 text-amber-700';
         break;
       case 'destructive':
-        variantClasses = 'bg-destructive-muted text-destructive';
+        variantClasses = 'bg-red-100 text-red-700';
         break;
       case 'muted':
-        variantClasses = 'bg-background-muted text-muted';
+        variantClasses = 'bg-gray-100 text-gray-600';
         break;
       default:
-        variantClasses = 'bg-primary-muted text-primary';
+        variantClasses = 'bg-blue-100 text-blue-700';
     }
 
-    // Combine all classes
     const classes = `${baseClasses} ${variantClasses} ${className}`.trim();
 
     return (
-      <span
-        ref={ref}
-        className={classes}
-      >
+      <span ref={ref} className={classes}>
         {children}
       </span>
     );

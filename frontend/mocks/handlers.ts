@@ -1,10 +1,18 @@
 import { http, HttpResponse } from 'msw';
 import products from './data/products.json';
 import { authHandlers } from './handlers/auth';
+import { cartHandlers } from './handlers/cart';
+import { orderHandlers } from './handlers/orders';
 
 export const handlers = [
   // Auth handlers
   ...authHandlers,
+
+  // Cart handlers
+  ...cartHandlers,
+
+  // Order handlers
+  ...orderHandlers,
 
   // Root
   http.get('/', () => {
@@ -14,7 +22,7 @@ export const handlers = [
     );
   }),
 
-  // Products
+  // Products list
   http.get('/api/products', async ({ request }) => {
     const url = new URL(request.url);
     const page = parseInt(url.searchParams.get('page') || '1', 10);
@@ -26,5 +34,18 @@ export const handlers = [
       items: paginatedItems,
       hasNextPage: end < products.items.length,
     });
+  }),
+
+  // Single product by ID
+  http.get('/api/v1/products/:product_id', (req) => {
+    const id = parseInt(req.params.product_id as string, 10);
+    const product = products.items.find((p) => p.id === id);
+    if (!product) {
+      return HttpResponse.json(
+        { detail: 'Товар не найден' },
+        { status: 404 }
+      );
+    }
+    return HttpResponse.json(product);
   }),
 ];
