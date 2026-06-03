@@ -17,6 +17,8 @@ class User(BaseModelMixin):
     addresses: Mapped[list["Address"]] = relationship(back_populates="user")
     shops: Mapped[list["Shop"]] = relationship(back_populates="owner")
     reviews: Mapped[list["Review"]] = relationship(back_populates="author")
+    favourites: Mapped[list["Shop"]] = relationship(secondary="favourites_shops", back_populates="favourites")
+    
     
     
 class Address(BaseModelMixin):
@@ -27,4 +29,3 @@ class Address(BaseModelMixin):
     is_default: Mapped[bool] = mapped_column(default=False)
     
     user: Mapped["User"] = relationship(back_populates="addresses")
-    
