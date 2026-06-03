@@ -9,7 +9,14 @@ def product_not_found():
     
     
 def category_not_found():
-     return HTTPException(
+    return HTTPException(
         status_code=status.HTTP_404_NOT_FOUND,
         detail="Category not found",
+    )
+     
+     
+def brand_not_found():
+    return HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="Brand not found",
     )
