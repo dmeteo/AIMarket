@@ -3,15 +3,19 @@ from pydantic import BaseModel, Field
 from app.schemas.products import ProductCard
 
 
-class ShopProfile(BaseModel):
+class ShopResponse(BaseModel):
     id: int
     logo_url: str
     title: str
     description: str | None = None
     favourites_count: int = Field(ge=0)
     reviews_count: int = Field(ge=0)
-    rating: float
+    rating: float = Field(ge=0)
     products: list[ProductCard]
+    
+    
+class ShopForUserResponse(BaseModel):
+    shop: ShopResponse
     is_favourite: bool
 
 
@@ -22,7 +26,7 @@ class ShopCreateRequest(BaseModel):
     
     
 class ShopCreateResponse(BaseModel):
-    shop: ShopProfile
+    shop: ShopResponse
     
 
 class ShopDeleteResponse(BaseModel):
@@ -36,4 +40,4 @@ class ShopUpdateRequest(BaseModel):
     
 
 class ShopUpdateResponse(BaseModel):
-    shop: ShopProfile
+    shop: ShopResponse

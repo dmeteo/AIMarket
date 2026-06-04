@@ -231,6 +231,10 @@ def create_review_service(db: Session, user, product_id, payload: ReviewCreateRe
     product.reviews_count += 1
     product.rating = product.rating_sum / product.reviews_count
     
+    product.shop.rating_sum += review.rate
+    product.shop.reviews_count += 1
+    product.shop.rating = product.shop.rating_sum / product.shop.reviews_count
+    
     db.commit()
     db.refresh(review)
     
@@ -255,7 +259,10 @@ def update_review_service(db: Session, user, product_id, review_id, payload: Rev
     if "rate" in data.keys():
         product.rating_sum += updated_review.rate - old_rate
         product.rating = product.rating_sum / product.reviews_count
-    
+        
+        product.shop.rating_sum += updated_review.rate - old_rate
+        product.shop.rating = product.shop.rating_sum / product.shop.reviews_count
+        
     db.commit()
     db.refresh(updated_review)
     
@@ -271,10 +278,19 @@ def delete_review_service(db: Session, user, product_id, review_id):
     
     product.reviews_count -= 1
     product.rating_sum -= deleted_review.rate
-    if product.reviews_count== 0:
+    
+    if product.reviews_count == 0:
         product.rating = 0
     else: 
         product.rating = product.rating_sum / product.reviews_count
+        
+    product.shop.reviews_count -= 1
+    product.shop.rating_sum -= deleted_review.rate
+    
+    if product.shop.reviews_count == 0:
+        product.shop.rating = 0
+    else: 
+        product.shop.rating = product.shop.rating_sum / product.shop.reviews_count
     
     db.commit()
 
