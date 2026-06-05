@@ -1,14 +1,27 @@
-from fastapi import APIRouter
+from typing import Annotated
 
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+
+from app.models.user import User
 from app.schemas.shops import ShopCreateRequest, ShopCreateResponse, ShopDeleteResponse, ShopProfile, ShopUpdateRequest, ShopUpdateResponse
+from app.core.database import get_db
+from app.api.v1.deps import require_seller_or_admin
+from app.services.shops import create_shop_service
 
 
 router = APIRouter(prefix="/shops", tags=["shops"])
 
 
 @router.post("/", response_model=ShopCreateResponse)
-def create_shop(payload: ShopCreateRequest) -> ShopCreateResponse:
-    pass
+def create_shop(
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User, Depends(require_seller_or_admin)],
+    payload: ShopCreateRequest
+) -> ShopCreateResponse:
+    shop = create_shop_service(db, current_user, payload)
+    
+    return shop
 
 
 @router.patch("/{shop_id}", response_model=ShopUpdateResponse)
