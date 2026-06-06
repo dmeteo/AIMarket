@@ -15,11 +15,15 @@ class CategoryCreateRequest(BaseModel):
     
     
 class CategoryCreateResponse(BaseModel):
-    category_id: int
+    category: Category
     
-
-class CategoryUpdate(BaseModel):
+    
+class CategoryUpdateRequest(BaseModel):
     title: str = Field(min_length=2, max_length=20)
+
+
+class CategoryUpdateResponse(BaseModel):
+    category: Category
     
     
 class CategoryDeleteResponse(BaseModel):

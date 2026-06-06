@@ -57,12 +57,6 @@ def get_product(db: Session, product_id) -> Product | None:
     return product
 
 
-def create_product(db: Session, product: Product):
-    db.add(product)
-    
-    return product
-
-
 def get_categories_by_ids(db: Session, category_ids):
     stmt = select(Category).where(Category.id.in_(category_ids))
     
@@ -71,8 +65,17 @@ def get_categories_by_ids(db: Session, category_ids):
     return categories
 
 
-def update_product(db: Session, product_id, data) -> Product | None:
-    stmt = update(Product).where(Product.id==product_id).values(data).returning(Product)
+def create_product(db: Session, product: Product):
+    db.add(product)
+    
+    return product
+
+
+def update_product(db: Session, shops_ids, product_id, data) -> Product | None:
+    if shops_ids is None:
+        stmt = update(Product).where(Product.id==product_id).values(data).returning(Product)
+    else:
+        stmt = update(Product).where(Product.id==product_id).where(Product.shop_id.in_(shops_ids)).values(data).returning(Product)
     
     result = db.execute(stmt)
     
@@ -81,8 +84,11 @@ def update_product(db: Session, product_id, data) -> Product | None:
     return product
 
 
-def delete_product(db: Session, product_id):
-    stmt = delete(Product).where(Product.id==product_id).returning(Product.id)
+def delete_product(db: Session, shops_ids, product_id):
+    if shops_ids is None:
+        stmt = delete(Product).where(Product.id==product_id).returning(Product.id)
+    else: 
+        stmt = delete(Product).where(Product.id==product_id).where(Product.shop_id.in_(shops_ids)).returning(Product.id)
     
     result = db.execute(stmt)
     deleted_id = result.scalar_one_or_none()
@@ -91,6 +97,7 @@ def delete_product(db: Session, product_id):
         return None
     
     return deleted_id
+
 
 def get_product_reviews(db: Session, product_id) -> list[Review]:
     stmt = select(Review).where(Review.product_id==product_id)

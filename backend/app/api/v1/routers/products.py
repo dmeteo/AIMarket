@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.schemas.products import ProductCreateRequest, ProductCreateResponse, ProductDeleteResponse, ProductPage, ProductUpdateRequest, ProductUpdateResponse, ProductsResponse
 from app.schemas.reviews import ReviewCreateRequest, ReviewCreateResponse, ReviewDeleteResponse, ReviewResponse, ReviewUpdateRequest, ReviewsResponse
-from app.api.v1.deps import get_current_user
+from app.api.v1.deps import get_current_user, require_seller_or_admin
 from app.models.user import User
 from app.services.products import create_product_service, create_review_service, delete_product_service, delete_review_service, get_product_reviews_service, get_product_service, get_products_page_service, update_product_service, update_review_service
 
@@ -49,26 +49,29 @@ def get_products(
 @router.get("/{product_id}", response_model=ProductPage)
 def get_product(db: Annotated[Session, Depends(get_db)], product_id: int) -> ProductPage:
     product = get_product_service(db, product_id)
+    
     return product
 
 
 @router.post("/", response_model=ProductCreateResponse)
 def create_product(
     db: Annotated[Session, Depends(get_db)], 
-    current_user: Annotated[User, Depends(get_current_user)], 
+    current_user: Annotated[User, Depends(require_seller_or_admin)], 
     payload: ProductCreateRequest
 ) -> ProductCreateResponse:
     product_page = create_product_service(db, current_user, payload)
+    
     return ProductCreateResponse(product=product_page)
     
     
 @router.patch("/{product_id}", response_model=ProductUpdateResponse)
 def update_product(
-    db: Annotated[Session, Depends(get_db)], 
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User, Depends(require_seller_or_admin)],
     product_id: int, 
     payload: ProductUpdateRequest
 ) -> ProductUpdateResponse:
-    updated_product = update_product_service(db, product_id, payload)
+    updated_product = update_product_service(db, current_user, product_id, payload)
     
     return updated_product
 
@@ -76,9 +79,10 @@ def update_product(
 @router.delete("/{product_id}", response_model=ProductDeleteResponse)
 def delete_product(
     db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User, Depends(require_seller_or_admin)],
     product_id: int
 ) -> ProductDeleteResponse:
-    id = delete_product_service(db, product_id)
+    id = delete_product_service(db, current_user, product_id)
     
     return ProductDeleteResponse(id=id)
 
@@ -117,7 +121,6 @@ def update_review(
     
     return review
     
-
 
 @router.delete("/{product_id}/reviews/{review_id}", response_model=ReviewDeleteResponse, status_code=200)
 def delete_review(

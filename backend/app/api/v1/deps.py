@@ -10,6 +10,8 @@ from app.core.config import settings
 from app.core.database import get_db
 from app.schemas.auth import TokenData
 from app.repositories.user import get_user_by_email
+from app.models.user import User
+from app.common.enums import Role
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
@@ -36,3 +38,25 @@ def get_current_user(
     if user is None:
         raise credentials_exception
     return user
+
+
+def require_seller_or_admin(
+    current_user: Annotated[User, Depends(get_current_user)],          
+):
+    if current_user.role == Role.SELLER.value or current_user.role == Role.ADMIN.value:
+        return current_user
+    raise HTTPException(
+        status_code=status.HTTP_403_FORBIDDEN,
+        detail="Access denied"
+    )
+    
+
+def require_admin(
+    current_user: Annotated[User, Depends(get_current_user)],          
+):
+    if current_user.role == Role.ADMIN.value:
+        return current_user
+    raise HTTPException(
+        status_code=status.HTTP_403_FORBIDDEN,
+        detail="Access denied"
+    )
