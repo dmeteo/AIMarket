@@ -34,7 +34,7 @@ class ShopDeleteResponse(BaseModel):
     
     
 class ShopUpdateRequest(BaseModel):
-    logo: str | None = None
+    logo_url: str | None = None
     title: str | None = Field(default=None, min_length=3, max_length=30)
     description: str | None = Field(default=None, max_length=300)
     
