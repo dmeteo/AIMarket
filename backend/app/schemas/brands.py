@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 
 
-class Brand(BaseModel):
+class BrandResponse(BaseModel):
     id: int
     logo_url: str | None
     title: str
@@ -15,7 +15,7 @@ class BrandCreateRequest(BaseModel):
     
     
 class BrandCreateResponse(BaseModel):
-    brand: Brand
+    brand: BrandResponse
     
     
 class BrandUpdateRequest(BaseModel):
@@ -25,7 +25,7 @@ class BrandUpdateRequest(BaseModel):
     
     
 class BrandUpdateResponse(BaseModel):
-    brand: Brand
+    brand: BrandResponse
   
     
 class BrandDeleteResponse(BaseModel):
@@ -33,8 +33,4 @@ class BrandDeleteResponse(BaseModel):
     
     
 class BrandsResponse(BaseModel):
-    brands: list[Brand]
-    total: int
-    page: int
-    limit: int
-    pages: int
+    brands: list[BrandResponse]

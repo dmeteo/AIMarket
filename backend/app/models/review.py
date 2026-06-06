@@ -7,8 +7,8 @@ from app.models.base import BaseModelMixin
 class Review(BaseModelMixin):
     __tablename__ = "reviews"
     
-    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
-    product_id: Mapped[int] = mapped_column(ForeignKey("products.id"))
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
+    product_id: Mapped[int] = mapped_column(ForeignKey("products.id"), nullable=False)
     rate: Mapped[int] = mapped_column(nullable=False)
     text: Mapped[str | None] = mapped_column(default=None, nullable=True)
     edited: Mapped[bool] = mapped_column(default=False)
