@@ -20,6 +20,7 @@ class CartItem(Base):
     quantity: Mapped[int] = mapped_column(default=1, nullable=False)
     
     cart: Mapped["Cart"] = relationship(back_populates="items")
+    product: Mapped["Product"] = relationship(back_populates="cart_item")
     
     @validates("quantity")
     def validate_quantity(self, key, quantity):
