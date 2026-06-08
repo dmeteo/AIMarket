@@ -59,6 +59,12 @@ class Product(BaseModelMixin):
             raise ValueError("Reviews was ge 0")
         return reviews_count
     
+    @validates("quantity")
+    def validate_quantity(self, key, quantity):
+        if quantity == 0:
+            self.is_active = False
+        return quantity
+    
 
 class ProductImage(BaseModelMixin):
     __tablename__ = "product_images"

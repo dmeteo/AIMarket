@@ -39,8 +39,8 @@ def get_products_page(
             Product.description.ilike(search)
         ))
     
-    stmt = select(Product).where(*condition)
-    stmt_total = select(func.count(Product.id)).where(*condition)
+    stmt = select(Product).where(*condition).where(Product.is_active==True)
+    stmt_total = select(func.count(Product.id)).where(*condition).where(Product.is_active==True)
     total = db.scalar(stmt_total)
     pages = ceil(int(total) / limit)
     

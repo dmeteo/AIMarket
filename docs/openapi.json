@@ -1273,150 +1273,6 @@
         }
       }
     },
-    "/api/v1/categories/{category_id}": {
-      "get": {
-        "tags": [
-          "categories"
-        ],
-        "summary": "Get Category",
-        "operationId": "get_category_api_v1_categories__category_id__get",
-        "security": [
-          {
-            "OAuth2PasswordBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "category_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "title": "Category Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Category"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "categories"
-        ],
-        "summary": "Update Category",
-        "operationId": "update_category_api_v1_categories__category_id__patch",
-        "security": [
-          {
-            "OAuth2PasswordBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "category_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "title": "Category Id"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CategoryUpdateRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CategoryUpdateResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "categories"
-        ],
-        "summary": "Delete Category",
-        "operationId": "delete_category_api_v1_categories__category_id__delete",
-        "security": [
-          {
-            "OAuth2PasswordBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "category_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "title": "Category Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CategoryDeleteResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/categories/": {
       "get": {
         "tags": [
@@ -1480,6 +1336,153 @@
             "OAuth2PasswordBearer": []
           }
         ]
+      }
+    },
+    "/api/v1/categories/{category_id}": {
+      "get": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "Get Category",
+        "operationId": "get_category_api_v1_categories__category_id__get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "category_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Category Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Category"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "Update Category",
+        "operationId": "update_category_api_v1_categories__category_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "category_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Category Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoryUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryUpdateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "Delete Category",
+        "operationId": "delete_category_api_v1_categories__category_id__delete",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "category_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Category Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryDeleteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/v1/categories/{category_id}/products": {
@@ -1623,7 +1626,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/v1/cart/items": {
@@ -1649,7 +1657,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CartResponse"
+                  "$ref": "#/components/schemas/AddProductToCartResponse"
                 }
               }
             }
@@ -1664,7 +1672,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/v1/cart/items/{product_id}": {
@@ -1672,14 +1685,20 @@
         "tags": [
           "cart"
         ],
-        "summary": "Update Cart Item Count",
-        "operationId": "update_cart_item_count_api_v1_cart_items__product_id__patch",
+        "summary": "Update Cart Item Quantity",
+        "operationId": "update_cart_item_quantity_api_v1_cart_items__product_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "product_id",
             "in": "path",
             "required": true,
             "schema": {
+              "type": "integer",
               "title": "Product Id"
             }
           }
@@ -1700,7 +1719,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CartResponse"
+                  "$ref": "#/components/schemas/UpdateCartItemResponse"
                 }
               }
             }
@@ -1723,12 +1742,18 @@
         ],
         "summary": "Delete Cart Item",
         "operationId": "delete_cart_item_api_v1_cart_items__product_id__delete",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "product_id",
             "in": "path",
             "required": true,
             "schema": {
+              "type": "integer",
               "title": "Product Id"
             }
           }
@@ -1896,6 +1921,19 @@
           "quantity"
         ],
         "title": "AddProductToCartRequest"
+      },
+      "AddProductToCartResponse": {
+        "properties": {
+          "cart_id": {
+            "type": "integer",
+            "title": "Cart Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "cart_id"
+        ],
+        "title": "AddProductToCartResponse"
       },
       "AuthResponse": {
         "properties": {
@@ -2086,7 +2124,30 @@
         ],
         "title": "BrandsResponse"
       },
-      "Cart": {
+      "CartItemResponse": {
+        "properties": {
+          "product": {
+            "$ref": "#/components/schemas/ProductCard"
+          },
+          "quantity": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Quantity"
+          },
+          "available": {
+            "type": "boolean",
+            "title": "Available"
+          }
+        },
+        "type": "object",
+        "required": [
+          "product",
+          "quantity",
+          "available"
+        ],
+        "title": "CartItemResponse"
+      },
+      "CartResponse": {
         "properties": {
           "id": {
             "type": "integer",
@@ -2098,7 +2159,7 @@
           },
           "items": {
             "items": {
-              "$ref": "#/components/schemas/CartItem"
+              "$ref": "#/components/schemas/CartItemResponse"
             },
             "type": "array",
             "title": "Items"
@@ -2127,36 +2188,6 @@
           "total_price",
           "total_discount",
           "final_price"
-        ],
-        "title": "Cart"
-      },
-      "CartItem": {
-        "properties": {
-          "product": {
-            "$ref": "#/components/schemas/ProductCard"
-          },
-          "quantity": {
-            "type": "integer",
-            "minimum": 1.0,
-            "title": "Quantity"
-          }
-        },
-        "type": "object",
-        "required": [
-          "product",
-          "quantity"
-        ],
-        "title": "CartItem"
-      },
-      "CartResponse": {
-        "properties": {
-          "cart": {
-            "$ref": "#/components/schemas/Cart"
-          }
-        },
-        "type": "object",
-        "required": [
-          "cart"
         ],
         "title": "CartResponse"
       },
@@ -2350,7 +2381,7 @@
           },
           "items": {
             "items": {
-              "$ref": "#/components/schemas/CartItem"
+              "$ref": "#/components/schemas/CartItemResponse"
             },
             "type": "array",
             "title": "Items"
@@ -3327,6 +3358,19 @@
       },
       "UpdateCartItemRequest": {
         "properties": {
+          "quantity": {
+            "type": "integer",
+            "title": "Quantity"
+          }
+        },
+        "type": "object",
+        "required": [
+          "quantity"
+        ],
+        "title": "UpdateCartItemRequest"
+      },
+      "UpdateCartItemResponse": {
+        "properties": {
           "product_id": {
             "type": "integer",
             "title": "Product Id"
@@ -3341,7 +3385,7 @@
           "product_id",
           "quantity"
         ],
-        "title": "UpdateCartItemRequest"
+        "title": "UpdateCartItemResponse"
       },
       "UserProfileResponse": {
         "properties": {
