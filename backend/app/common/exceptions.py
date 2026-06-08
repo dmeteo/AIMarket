@@ -29,6 +29,13 @@ def shop_not_found():
     )
     
     
+def review_not_found():
+    return HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="Review not found",
+    )
+    
+    
 def access_denied():
     return HTTPException(
         status_code=status.HTTP_403_FORBIDDEN,
