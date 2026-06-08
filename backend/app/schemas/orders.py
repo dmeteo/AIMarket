@@ -4,7 +4,7 @@ from decimal import Decimal
 from pydantic import BaseModel
 
 from app.common.enums import DeliveryType, OrderStatus
-from app.schemas.cart import CartItem
+from app.schemas.cart import CartItemResponse
 
 
 class OrderStatusInfo(BaseModel):
@@ -14,7 +14,7 @@ class OrderStatusInfo(BaseModel):
 class Order(BaseModel):
     id: int
     user_id: int
-    items: list[CartItem]
+    items: list[CartItemResponse]
     address: str
     delivery_cost: Decimal
     predicted_date: date

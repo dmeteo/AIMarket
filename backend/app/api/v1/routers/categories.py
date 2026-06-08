@@ -18,12 +18,19 @@ router = APIRouter(prefix="/categories", tags=["categories"])
 
 
 
+@router.get("/", response_model=CategoriesResponse)
+def get_categories(db: Annotated[Session, Depends(get_db)]) -> CategoriesResponse:
+    categories = get_categories_service(db)
+    
+    return categories
+
+
 # FOR ADMIN
 @router.get("/{category_id}", response_model=Category)
 def get_category(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_admin)],
-    category_id
+    category_id: int,
 ) -> Category:
     category = get_category_service(db, category_id)
     
@@ -45,7 +52,7 @@ def create_category(
 def update_category(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_admin)],
-    category_id, 
+    category_id: int, 
     payload: CategoryUpdateRequest,
 ) -> CategoryUpdateResponse:
     category = update_category_service(db, category_id, payload)
@@ -57,18 +64,11 @@ def update_category(
 def delete_category(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_admin)],
-    category_id,
+    category_id: int,
 ) -> CategoryDeleteResponse:
     category = delete_category_service(db, category_id)
     
     return CategoryDeleteResponse(category_id=category.id)
-
-
-@router.get("/", response_model=CategoriesResponse)
-def get_categories(db: Annotated[Session, Depends(get_db)]) -> CategoriesResponse:
-    categories = get_categories_service(db)
-    
-    return categories
 
 
 @router.get("/{category_id}/products", response_model=ProductsResponse)

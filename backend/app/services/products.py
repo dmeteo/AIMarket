@@ -9,7 +9,7 @@ from app.models.review import Review
 from app.schemas.products import ProductCard, ProductCreateRequest, ProductPage, ProductUpdateRequest
 from app.schemas.categories import Category
 from app.schemas.reviews import ReviewCreateRequest, ReviewResponse, ReviewUpdateRequest, ReviewsResponse
-from app.common.exceptions import product_not_found
+from app.common.exceptions import access_denied, product_not_found, review_not_found
 from app.models.user import User
 from app.common.enums import Role
 
@@ -143,17 +143,14 @@ def get_product_service(db: Session, product_id) -> ProductPage:
 def get_product_categories_service(db: Session, category_ids):
     categories = get_categories_by_ids(db, category_ids)
     if len(categories) != len(set(category_ids)):
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Category not found")
+        raise product_not_found()
     return categories
 
 
 def create_product_service(db: Session, user: User, payload: ProductCreateRequest):
     user_shops = check_seller_or_admin_and_get_seller_shops(user)
     if user_shops is not None and payload.shop_id not in user_shops:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Access denied"
-        )
+        raise access_denied()
     
     product_mapping = Product(
         shop_id=payload.shop_id,
@@ -246,7 +243,7 @@ def update_review_service(db: Session, user, product_id, review_id, payload: Rev
     product = existence_product(db, product_id)
     old_review = get_old_review(db, user.id, product_id, review_id)
     if not old_review:
-        raise HTTPException(status_code=404, detail="Review Not Found")
+        raise review_not_found()
     
     old_rate = old_review.rate
     
@@ -254,7 +251,7 @@ def update_review_service(db: Session, user, product_id, review_id, payload: Rev
     data["edited"] = True
     updated_review = update_review(db, user.id, product_id, review_id, data)
     if not updated_review:
-        raise HTTPException(status_code=404, detail="Review Not Found")
+        raise review_not_found()
     
     if "rate" in data.keys():
         product.rating_sum += updated_review.rate - old_rate
@@ -274,7 +271,7 @@ def delete_review_service(db: Session, user, product_id, review_id):
     product = existence_product(db, product_id)
     deleted_review = delete_review(db, user.id, product_id, review_id)
     if deleted_review is None:
-        raise HTTPException(status_code=404, detail="Review Not Found")
+        raise review_not_found()
     
     product.reviews_count -= 1
     product.rating_sum -= deleted_review.rate

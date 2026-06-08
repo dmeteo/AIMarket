@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     
     model_config = SettingsConfigDict(
         case_sensitive=True,
-        env_file=".env",
+        env_file=(".env", "../.env", "../../.env"),
         extra="allow"
     )
 
