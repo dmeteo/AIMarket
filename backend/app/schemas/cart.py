@@ -8,6 +8,7 @@ from app.schemas.products import ProductCard
 class CartItemResponse(BaseModel):
     product: ProductCard
     quantity: int = Field(ge=1)
+    available: bool
 
 
 class CartResponse(BaseModel):
@@ -23,8 +24,11 @@ class AddProductToCartRequest(BaseModel):
     product_id: int
     quantity: int = Field(ge=1)
     
+    
+class AddProductToCartResponse(BaseModel):
+    cart_id: int
+    
 
 class UpdateCartItemRequest(BaseModel):
-    product_id: int
-    quantity: int
+    quantity: int = Field(ge=1)
 
