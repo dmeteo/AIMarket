@@ -30,5 +30,10 @@ class AddProductToCartResponse(BaseModel):
     
 
 class UpdateCartItemRequest(BaseModel):
-    quantity: int = Field(ge=1)
+    quantity: int
+    
+
+class UpdateCartItemResponse(BaseModel):
+    product_id: int
+    quantity: int
 

@@ -41,3 +41,10 @@ def access_denied():
         status_code=status.HTTP_403_FORBIDDEN,
         detail="Access denied",
     )
+    
+
+def invalid_quantity(available_quantity):
+    return HTTPException(
+        status_code=status.HTTP_409_CONFLICT, 
+        detail=f"Available {available_quantity} pieces"
+    )
