@@ -4,7 +4,7 @@ from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.models.user import User
-from app.repositories.cart import add_product_to_cart, create_cart, get_cart, get_cart_item
+from app.repositories.cart import add_product_to_cart, create_cart, delete_cart_item, get_cart, get_cart_item
 from app.schemas.cart import AddProductToCartRequest, AddProductToCartResponse, CartItemResponse, CartResponse, UpdateCartItemRequest, UpdateCartItemResponse
 from app.services.products import existence_product, mapping_product_card, calculate_final_price
 from app.models.cart import Cart, CartItem
@@ -102,3 +102,16 @@ def add_product_to_cart_service(db: Session, user: User, payload: AddProductToCa
     return AddProductToCartResponse(cart_id=cart.id)
         
         
+def delete_cart_item_service(db: Session, user: User, product_id):
+    cart = get_cart(db, user.id)
+    if not cart:
+        raise HTTPException(status_code=404, detail="Cart not found")
+    
+    product_id = delete_cart_item(db, cart.id, product_id)
+    if product_id is None:
+        raise HTTPException(status_code=404, detail="Cart item not found")
+    
+    db.commit()
+    cart = get_cart(db, user.id)
+    
+    return mapping_cart(cart, user.id)

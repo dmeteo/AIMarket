@@ -1,4 +1,4 @@
-from sqlalchemy import select
+from sqlalchemy import delete, select
 from sqlalchemy.orm import Session, selectinload
 
 
@@ -31,3 +31,13 @@ def add_product_to_cart(db: Session, cart_item):
     db.add(cart_item)
     
     return cart_item
+
+
+def delete_cart_item(db: Session, cart_id, product_id):
+    stmt = delete(CartItem).where(CartItem.cart_id==cart_id).where(CartItem.product_id==product_id).returning(CartItem.product_id)
+    
+    product_id = db.scalar(stmt)
+    
+    return product_id
+    
+    

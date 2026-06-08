@@ -7,7 +7,7 @@ from app.schemas.cart import AddProductToCartRequest, AddProductToCartResponse, 
 from app.api.v1.deps import get_current_user
 from app.core.database import get_db
 from app.models.user import User
-from app.services.cart import add_product_to_cart_service, get_cart_service, update_cart_item_quantity_service
+from app.services.cart import add_product_to_cart_service, delete_cart_item_service, get_cart_service, update_cart_item_quantity_service
 
 
 router = APIRouter(prefix="/cart", tags=["cart"])
@@ -47,5 +47,11 @@ def update_cart_item_quantity(
 
 
 @router.delete("/items/{product_id}", response_model=CartResponse)
-def delete_cart_item(product_id: int) -> CartResponse:
-    pass
+def delete_cart_item(
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User, Depends(get_current_user)],
+    product_id: int
+) -> CartResponse:
+    cart = delete_cart_item_service(db, current_user, product_id)
+    
+    return cart
