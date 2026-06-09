@@ -2,7 +2,7 @@ from pydantic import BaseModel, EmailStr
 
 from app.common.enums import Role
 
-    
+
 class UserProfileResponse(BaseModel):
     id: int
     name: str
@@ -15,4 +15,3 @@ class CurrentUserResponse(BaseModel):
     email: EmailStr
     role: Role
     is_active: bool
-    orders_count: int

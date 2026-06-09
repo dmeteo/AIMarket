@@ -1,7 +1,7 @@
 from decimal import Decimal
 
 from sqlalchemy import ForeignKey, Numeric, String, Text
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column, relationship, validates
 
 from app.models.base import Base, BaseModelMixin
 
@@ -24,6 +24,9 @@ class Product(BaseModelMixin):
     discount_percent: Mapped[Decimal] = mapped_column(Numeric(5, 2), default=0, nullable=False)
     quantity: Mapped[int] = mapped_column(default=0, nullable=False)
     is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
+    rating: Mapped[float] = mapped_column(default=0, nullable=False)
+    reviews_count: Mapped[int] = mapped_column(default=0, nullable=False)
+    rating_sum: Mapped[int] = mapped_column(default=0, nullable=False) 
 
     shop: Mapped["Shop"] = relationship(back_populates="products")
     brand: Mapped["Brand | None"] = relationship(back_populates="products")
@@ -35,7 +38,33 @@ class Product(BaseModelMixin):
         back_populates="product",
         cascade="all, delete-orphan",
     )
-
+    reviews: Mapped[list["Review"]] = relationship(
+        back_populates="product",
+        cascade="all, delete-orphan"
+    )
+    
+    @validates("rating")
+    def validate_rating(self, key, rating):
+        if rating is None: 
+            return rating
+        if rating < 0: 
+            raise ValueError("Rating was ge 0")
+        elif rating > 5:
+            raise ValueError("Rating was le 5")
+        return rating
+    
+    @validates("reviews_count")
+    def validate_reviews_count(self, key, reviews_count):
+        if reviews_count < 0:
+            raise ValueError("Reviews was ge 0")
+        return reviews_count
+    
+    @validates("quantity")
+    def validate_quantity(self, key, quantity):
+        if quantity == 0:
+            self.is_active = False
+        return quantity
+    
 
 class ProductImage(BaseModelMixin):
     __tablename__ = "product_images"

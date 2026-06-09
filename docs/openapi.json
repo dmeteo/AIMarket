@@ -180,35 +180,41 @@
             }
           },
           {
-            "name": "category_id",
+            "name": "category_ids",
             "in": "query",
             "required": false,
             "schema": {
               "anyOf": [
                 {
-                  "type": "integer"
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
                 },
                 {
                   "type": "null"
                 }
               ],
-              "title": "Category Id"
+              "title": "Category Ids"
             }
           },
           {
-            "name": "brand_id",
+            "name": "brand_ids",
             "in": "query",
             "required": false,
             "schema": {
               "anyOf": [
                 {
-                  "type": "integer"
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
                 },
                 {
                   "type": "null"
                 }
               ],
-              "title": "Brand Id"
+              "title": "Brand Ids"
             }
           },
           {
@@ -306,6 +312,11 @@
         ],
         "summary": "Create Product",
         "operationId": "create_product_api_v1_products__post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -387,6 +398,11 @@
         ],
         "summary": "Update Product",
         "operationId": "update_product_api_v1_products__product_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "product_id",
@@ -437,6 +453,11 @@
         ],
         "summary": "Delete Product",
         "operationId": "delete_product_api_v1_products__product_id__delete",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "product_id",
@@ -519,6 +540,11 @@
         ],
         "summary": "Create Review",
         "operationId": "create_review_api_v1_products__product_id__reviews_post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "product_id",
@@ -571,6 +597,11 @@
         ],
         "summary": "Update Review",
         "operationId": "update_review_api_v1_products__product_id__reviews__review_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "product_id",
@@ -607,7 +638,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReviewUpdateResponse"
+                  "$ref": "#/components/schemas/ReviewResponse"
                 }
               }
             }
@@ -630,6 +661,11 @@
         ],
         "summary": "Delete Review",
         "operationId": "delete_review_api_v1_products__product_id__reviews__review_id__delete",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "product_id",
@@ -655,7 +691,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewDeleteResponse"
+                }
               }
             }
           },
@@ -710,7 +748,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/v1/shops/{shop_id}": {
@@ -720,6 +763,11 @@
         ],
         "summary": "Update Shop",
         "operationId": "update_shop_api_v1_shops__shop_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "shop_id",
@@ -770,6 +818,11 @@
         ],
         "summary": "Delete Shop",
         "operationId": "delete_shop_api_v1_shops__shop_id__delete",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "shop_id",
@@ -827,7 +880,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ShopProfile"
+                  "$ref": "#/components/schemas/ShopResponse"
                 }
               }
             }
@@ -852,6 +905,11 @@
         ],
         "summary": "User Change Favourite Status Shop",
         "operationId": "user_change_favourite_status_shop_api_v1_shops__shop_id__favourite_post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "shop_id",
@@ -892,31 +950,6 @@
         ],
         "summary": "Get Brands",
         "operationId": "get_brands_api_v1_brands__get",
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "default": 1,
-              "title": "Page"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "default": 20,
-              "title": "Limit"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -924,16 +957,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BrandsResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
@@ -947,14 +970,14 @@
         "summary": "Create Brand",
         "operationId": "create_brand_api_v1_brands__post",
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/BrandCreateRequest"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -977,7 +1000,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/v1/brands/{brand_id}/products": {
@@ -1011,22 +1039,6 @@
                 }
               ],
               "title": "Q"
-            }
-          },
-          {
-            "name": "category_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "Category Id"
             }
           },
           {
@@ -1132,6 +1144,7 @@
             "in": "path",
             "required": true,
             "schema": {
+              "type": "integer",
               "title": "Brand Id"
             }
           }
@@ -1142,7 +1155,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Brand"
+                  "$ref": "#/components/schemas/BrandResponse"
                 }
               }
             }
@@ -1165,12 +1178,18 @@
         ],
         "summary": "Update Brand",
         "operationId": "update_brand_api_v1_brands__brand_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "brand_id",
             "in": "path",
             "required": true,
             "schema": {
+              "type": "integer",
               "title": "Brand Id"
             }
           }
@@ -1214,12 +1233,18 @@
         ],
         "summary": "Delete Brand",
         "operationId": "delete_brand_api_v1_brands__brand_id__delete",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "brand_id",
             "in": "path",
             "required": true,
             "schema": {
+              "type": "integer",
               "title": "Brand Id"
             }
           }
@@ -1267,6 +1292,197 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "Create Category",
+        "operationId": "create_category_api_v1_categories__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoryCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryCreateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/categories/{category_id}": {
+      "get": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "Get Category",
+        "operationId": "get_category_api_v1_categories__category_id__get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "category_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Category Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Category"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "Update Category",
+        "operationId": "update_category_api_v1_categories__category_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "category_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Category Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoryUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryUpdateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "Delete Category",
+        "operationId": "delete_category_api_v1_categories__category_id__delete",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "category_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Category Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryDeleteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/v1/categories/{category_id}/products": {
@@ -1274,8 +1490,8 @@
         "tags": [
           "categories"
         ],
-        "summary": "Get Products By Category",
-        "operationId": "get_products_by_category_api_v1_categories__category_id__products_get",
+        "summary": "Get Products By Categories",
+        "operationId": "get_products_by_categories_api_v1_categories__category_id__products_get",
         "parameters": [
           {
             "name": "category_id",
@@ -1410,7 +1626,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/v1/cart/items": {
@@ -1436,7 +1657,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CartResponse"
+                  "$ref": "#/components/schemas/AddProductToCartResponse"
                 }
               }
             }
@@ -1451,7 +1672,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/v1/cart/items/{product_id}": {
@@ -1459,14 +1685,20 @@
         "tags": [
           "cart"
         ],
-        "summary": "Update Cart Item",
-        "operationId": "update_cart_item_api_v1_cart_items__product_id__patch",
+        "summary": "Update Cart Item Quantity",
+        "operationId": "update_cart_item_quantity_api_v1_cart_items__product_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "product_id",
             "in": "path",
             "required": true,
             "schema": {
+              "type": "integer",
               "title": "Product Id"
             }
           }
@@ -1487,7 +1719,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CartResponse"
+                  "$ref": "#/components/schemas/UpdateCartItemResponse"
                 }
               }
             }
@@ -1510,12 +1742,18 @@
         ],
         "summary": "Delete Cart Item",
         "operationId": "delete_cart_item_api_v1_cart_items__product_id__delete",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "product_id",
             "in": "path",
             "required": true,
             "schema": {
+              "type": "integer",
               "title": "Product Id"
             }
           }
@@ -1684,6 +1922,19 @@
         ],
         "title": "AddProductToCartRequest"
       },
+      "AddProductToCartResponse": {
+        "properties": {
+          "cart_id": {
+            "type": "integer",
+            "title": "Cart Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "cart_id"
+        ],
+        "title": "AddProductToCartResponse"
+      },
       "AuthResponse": {
         "properties": {
           "user": {
@@ -1699,48 +1950,6 @@
           "token"
         ],
         "title": "AuthResponse"
-      },
-      "Brand": {
-        "properties": {
-          "id": {
-            "type": "integer",
-            "title": "Id"
-          },
-          "logo_url": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Logo Url"
-          },
-          "title": {
-            "type": "string",
-            "title": "Title"
-          },
-          "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Description"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "logo_url",
-          "title",
-          "description"
-        ],
-        "title": "Brand"
       },
       "BrandCreateRequest": {
         "properties": {
@@ -1782,7 +1991,7 @@
       "BrandCreateResponse": {
         "properties": {
           "brand": {
-            "$ref": "#/components/schemas/Brand"
+            "$ref": "#/components/schemas/BrandResponse"
           }
         },
         "type": "object",
@@ -1803,6 +2012,48 @@
           "brand_id"
         ],
         "title": "BrandDeleteResponse"
+      },
+      "BrandResponse": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "logo_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Logo Url"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "logo_url",
+          "title",
+          "description"
+        ],
+        "title": "BrandResponse"
       },
       "BrandUpdateRequest": {
         "properties": {
@@ -1848,7 +2099,7 @@
       "BrandUpdateResponse": {
         "properties": {
           "brand": {
-            "$ref": "#/components/schemas/Brand"
+            "$ref": "#/components/schemas/BrandResponse"
           }
         },
         "type": "object",
@@ -1861,39 +2112,42 @@
         "properties": {
           "brands": {
             "items": {
-              "$ref": "#/components/schemas/Brand"
+              "$ref": "#/components/schemas/BrandResponse"
             },
             "type": "array",
             "title": "Brands"
-          },
-          "total": {
-            "type": "integer",
-            "title": "Total"
-          },
-          "page": {
-            "type": "integer",
-            "title": "Page"
-          },
-          "limit": {
-            "type": "integer",
-            "title": "Limit"
-          },
-          "pages": {
-            "type": "integer",
-            "title": "Pages"
           }
         },
         "type": "object",
         "required": [
-          "brands",
-          "total",
-          "page",
-          "limit",
-          "pages"
+          "brands"
         ],
         "title": "BrandsResponse"
       },
-      "Cart": {
+      "CartItemResponse": {
+        "properties": {
+          "product": {
+            "$ref": "#/components/schemas/ProductCard"
+          },
+          "quantity": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Quantity"
+          },
+          "available": {
+            "type": "boolean",
+            "title": "Available"
+          }
+        },
+        "type": "object",
+        "required": [
+          "product",
+          "quantity",
+          "available"
+        ],
+        "title": "CartItemResponse"
+      },
+      "CartResponse": {
         "properties": {
           "id": {
             "type": "integer",
@@ -1905,7 +2159,7 @@
           },
           "items": {
             "items": {
-              "$ref": "#/components/schemas/CartItem"
+              "$ref": "#/components/schemas/CartItemResponse"
             },
             "type": "array",
             "title": "Items"
@@ -1934,36 +2188,6 @@
           "total_price",
           "total_discount",
           "final_price"
-        ],
-        "title": "Cart"
-      },
-      "CartItem": {
-        "properties": {
-          "product": {
-            "$ref": "#/components/schemas/ProductCard"
-          },
-          "quantity": {
-            "type": "integer",
-            "minimum": 1.0,
-            "title": "Quantity"
-          }
-        },
-        "type": "object",
-        "required": [
-          "product",
-          "quantity"
-        ],
-        "title": "CartItem"
-      },
-      "CartResponse": {
-        "properties": {
-          "cart": {
-            "$ref": "#/components/schemas/Cart"
-          }
-        },
-        "type": "object",
-        "required": [
-          "cart"
         ],
         "title": "CartResponse"
       },
@@ -2003,6 +2227,73 @@
         ],
         "title": "Category"
       },
+      "CategoryCreateRequest": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 20,
+            "minLength": 2,
+            "title": "Title"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "title": "CategoryCreateRequest"
+      },
+      "CategoryCreateResponse": {
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/Category"
+          }
+        },
+        "type": "object",
+        "required": [
+          "category"
+        ],
+        "title": "CategoryCreateResponse"
+      },
+      "CategoryDeleteResponse": {
+        "properties": {
+          "category_id": {
+            "type": "integer",
+            "title": "Category Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "category_id"
+        ],
+        "title": "CategoryDeleteResponse"
+      },
+      "CategoryUpdateRequest": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 20,
+            "minLength": 2,
+            "title": "Title"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "title": "CategoryUpdateRequest"
+      },
+      "CategoryUpdateResponse": {
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/Category"
+          }
+        },
+        "type": "object",
+        "required": [
+          "category"
+        ],
+        "title": "CategoryUpdateResponse"
+      },
       "CurrentUserResponse": {
         "properties": {
           "id": {
@@ -2024,10 +2315,6 @@
           "is_active": {
             "type": "boolean",
             "title": "Is Active"
-          },
-          "orders_count": {
-            "type": "integer",
-            "title": "Orders Count"
           }
         },
         "type": "object",
@@ -2036,8 +2323,7 @@
           "name",
           "email",
           "role",
-          "is_active",
-          "orders_count"
+          "is_active"
         ],
         "title": "CurrentUserResponse"
       },
@@ -2095,7 +2381,7 @@
           },
           "items": {
             "items": {
-              "$ref": "#/components/schemas/CartItem"
+              "$ref": "#/components/schemas/CartItemResponse"
             },
             "type": "array",
             "title": "Items"
@@ -2222,6 +2508,10 @@
             "type": "integer",
             "title": "Id"
           },
+          "shop_id": {
+            "type": "integer",
+            "title": "Shop Id"
+          },
           "title": {
             "type": "string",
             "title": "Title"
@@ -2287,6 +2577,7 @@
         "type": "object",
         "required": [
           "id",
+          "shop_id",
           "title",
           "images",
           "price",
@@ -2303,6 +2594,17 @@
             "type": "integer",
             "title": "Shop Id"
           },
+          "brand_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Brand Id"
+          },
           "title": {
             "type": "string",
             "maxLength": 30,
@@ -2312,13 +2614,6 @@
             "type": "string",
             "maxLength": 300,
             "title": "Description"
-          },
-          "images": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Images"
           },
           "price": {
             "anyOf": [
@@ -2368,7 +2663,8 @@
           },
           "is_active": {
             "type": "boolean",
-            "title": "Is Active"
+            "title": "Is Active",
+            "default": true
           }
         },
         "type": "object",
@@ -2376,11 +2672,9 @@
           "shop_id",
           "title",
           "description",
-          "images",
           "price",
           "category_ids",
-          "quantity",
-          "is_active"
+          "quantity"
         ],
         "title": "ProductCreateRequest"
       },
@@ -2488,13 +2782,6 @@
             },
             "type": "array",
             "title": "Categories"
-          },
-          "reviews": {
-            "items": {
-              "$ref": "#/components/schemas/Review"
-            },
-            "type": "array",
-            "title": "Reviews"
           }
         },
         "type": "object",
@@ -2509,8 +2796,7 @@
           "final_price",
           "reviews_count",
           "quantity",
-          "categories",
-          "reviews"
+          "categories"
         ],
         "title": "ProductPage"
       },
@@ -2710,7 +2996,58 @@
         ],
         "title": "RegisterRequest"
       },
-      "Review": {
+      "ReviewCreateRequest": {
+        "properties": {
+          "rate": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Rate"
+          },
+          "text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "rate"
+        ],
+        "title": "ReviewCreateRequest"
+      },
+      "ReviewCreateResponse": {
+        "properties": {
+          "review": {
+            "$ref": "#/components/schemas/ReviewResponse"
+          }
+        },
+        "type": "object",
+        "required": [
+          "review"
+        ],
+        "title": "ReviewCreateResponse"
+      },
+      "ReviewDeleteResponse": {
+        "properties": {
+          "review_id": {
+            "type": "integer",
+            "title": "Review Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "review_id"
+        ],
+        "title": "ReviewDeleteResponse"
+      },
+      "ReviewResponse": {
         "properties": {
           "user_id": {
             "type": "integer",
@@ -2743,7 +3080,7 @@
           },
           "created_at": {
             "type": "string",
-            "format": "date",
+            "format": "date-time",
             "title": "Created At"
           },
           "edited": {
@@ -2755,7 +3092,7 @@
             "anyOf": [
               {
                 "type": "string",
-                "format": "date"
+                "format": "date-time"
               },
               {
                 "type": "null"
@@ -2772,46 +3109,7 @@
           "rate",
           "created_at"
         ],
-        "title": "Review"
-      },
-      "ReviewCreateRequest": {
-        "properties": {
-          "rate": {
-            "type": "integer",
-            "maximum": 5.0,
-            "minimum": 1.0,
-            "title": "Rate"
-          },
-          "text": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Text"
-          }
-        },
-        "type": "object",
-        "required": [
-          "rate"
-        ],
-        "title": "ReviewCreateRequest"
-      },
-      "ReviewCreateResponse": {
-        "properties": {
-          "review_id": {
-            "type": "integer",
-            "title": "Review Id"
-          }
-        },
-        "type": "object",
-        "required": [
-          "review_id"
-        ],
-        "title": "ReviewCreateResponse"
+        "title": "ReviewResponse"
       },
       "ReviewUpdateRequest": {
         "properties": {
@@ -2843,24 +3141,11 @@
         "type": "object",
         "title": "ReviewUpdateRequest"
       },
-      "ReviewUpdateResponse": {
-        "properties": {
-          "review_id": {
-            "type": "integer",
-            "title": "Review Id"
-          }
-        },
-        "type": "object",
-        "required": [
-          "review_id"
-        ],
-        "title": "ReviewUpdateResponse"
-      },
       "ReviewsResponse": {
         "properties": {
           "reviews": {
             "items": {
-              "$ref": "#/components/schemas/Review"
+              "$ref": "#/components/schemas/ReviewResponse"
             },
             "type": "array",
             "title": "Reviews"
@@ -2917,7 +3202,7 @@
       "ShopCreateResponse": {
         "properties": {
           "shop": {
-            "$ref": "#/components/schemas/ShopProfile"
+            "$ref": "#/components/schemas/ShopResponse"
           }
         },
         "type": "object",
@@ -2939,7 +3224,7 @@
         ],
         "title": "ShopDeleteResponse"
       },
-      "ShopProfile": {
+      "ShopResponse": {
         "properties": {
           "id": {
             "type": "integer",
@@ -2976,6 +3261,7 @@
           },
           "rating": {
             "type": "number",
+            "minimum": 0.0,
             "title": "Rating"
           },
           "products": {
@@ -2984,10 +3270,6 @@
             },
             "type": "array",
             "title": "Products"
-          },
-          "is_favourite": {
-            "type": "boolean",
-            "title": "Is Favourite"
           }
         },
         "type": "object",
@@ -2998,14 +3280,13 @@
           "favourites_count",
           "reviews_count",
           "rating",
-          "products",
-          "is_favourite"
+          "products"
         ],
-        "title": "ShopProfile"
+        "title": "ShopResponse"
       },
       "ShopUpdateRequest": {
         "properties": {
-          "logo": {
+          "logo_url": {
             "anyOf": [
               {
                 "type": "string"
@@ -3014,7 +3295,7 @@
                 "type": "null"
               }
             ],
-            "title": "Logo"
+            "title": "Logo Url"
           },
           "title": {
             "anyOf": [
@@ -3048,7 +3329,7 @@
       "ShopUpdateResponse": {
         "properties": {
           "shop": {
-            "$ref": "#/components/schemas/ShopProfile"
+            "$ref": "#/components/schemas/ShopResponse"
           }
         },
         "type": "object",
@@ -3077,6 +3358,19 @@
       },
       "UpdateCartItemRequest": {
         "properties": {
+          "quantity": {
+            "type": "integer",
+            "title": "Quantity"
+          }
+        },
+        "type": "object",
+        "required": [
+          "quantity"
+        ],
+        "title": "UpdateCartItemRequest"
+      },
+      "UpdateCartItemResponse": {
+        "properties": {
           "product_id": {
             "type": "integer",
             "title": "Product Id"
@@ -3091,7 +3385,7 @@
           "product_id",
           "quantity"
         ],
-        "title": "UpdateCartItemRequest"
+        "title": "UpdateCartItemResponse"
       },
       "UserProfileResponse": {
         "properties": {
