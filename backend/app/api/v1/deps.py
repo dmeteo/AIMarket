@@ -60,3 +60,14 @@ def require_admin(
         status_code=status.HTTP_403_FORBIDDEN,
         detail="Access denied"
     )
+
+
+def require_moderator_or_higher(
+    current_user: Annotated[User, Depends(get_current_user)],          
+):
+    if current_user.role == Role.ADMIN.value or current_user.role == Role.MODERATOR.value:
+        return current_user
+    raise HTTPException(
+        status_code=status.HTTP_403_FORBIDDEN,
+        detail="Access denied"
+    )
