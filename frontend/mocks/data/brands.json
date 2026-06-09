@@ -1,0 +1,12 @@
+{
+  "brands": [
+    { "id": 1, "title": "SoundMax", "description": "Аудиотехника и наушники", "logo_url": null },
+    { "id": 2, "title": "TechPro", "description": "Электроника и гаджеты", "logo_url": null },
+    { "id": 3, "title": "KeyMaster", "description": "Клавиатуры и периферия", "logo_url": null },
+    { "id": 4, "title": "PowerCell", "description": "Аккумуляторы и зарядки", "logo_url": null },
+    { "id": 5, "title": "ViewPro", "description": "Мониторы и дисплеи", "logo_url": null },
+    { "id": 6, "title": "NetGear", "description": "Сетевое оборудование", "logo_url": null },
+    { "id": 7, "title": "DataStore", "description": "Накопители и SSD", "logo_url": null },
+    { "id": 8, "title": "SmartLife", "description": "Умный дом и IoT", "logo_url": null }
+  ]
+}

@@ -1,6 +1,93 @@
 {
   "orders": [
     {
+      "id": 2001,
+      "user_id": 100,
+      "items": [
+        {
+          "product": {
+            "id": 101, "title": "Смартфон Galaxy Pro Max", "images": ["/placeholder.svg"],
+            "price": "89990", "final_price": "85490", "discount_percent": 5,
+            "rating": 4.8, "quantity": 45, "category": "Электроника",
+            "is_new": true, "is_bestseller": true
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 104, "title": "Умные часы Watch Pro", "images": ["/placeholder.svg"],
+            "price": "18990", "final_price": "16140", "discount_percent": 15,
+            "rating": 4.4, "quantity": 120, "category": "Гаджеты",
+            "is_new": false, "is_bestseller": true
+          },
+          "quantity": 2
+        }
+      ],
+      "address": "г. Москва, ул. Пушкина, д. 10, кв. 5",
+      "delivery_cost": "0",
+      "predicted_date": "2026-06-12",
+      "status": { "code": "DELIVERY", "label": "В доставке" },
+      "items_total_price": "117770",
+      "final_price": "117770",
+      "created_at": "2026-06-05T10:00:00Z",
+      "updated_at": "2026-06-07T08:00:00Z"
+    },
+    {
+      "id": 2002,
+      "user_id": 100,
+      "items": [
+        {
+          "product": {
+            "id": 102, "title": "Ноутбук UltraBook 15\"", "images": ["/placeholder.svg"],
+            "price": "74990", "final_price": "67490", "discount_percent": 10,
+            "rating": 4.6, "quantity": 28, "category": "Электроника",
+            "is_new": false, "is_bestseller": true
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Санкт-Петербург, Невский пр., д. 25, кв. 10",
+      "delivery_cost": "360",
+      "predicted_date": "2026-06-10",
+      "status": { "code": "CONFIRMED", "label": "Подтверждён" },
+      "items_total_price": "67490",
+      "final_price": "67850",
+      "created_at": "2026-06-08T14:20:00Z",
+      "updated_at": "2026-06-08T16:00:00Z"
+    },
+    {
+      "id": 2003,
+      "user_id": 100,
+      "items": [
+        {
+          "product": {
+            "id": 105, "title": "Беспроводные наушники AirPods Pro", "images": ["/placeholder.svg"],
+            "price": "24990", "final_price": "24990", "discount_percent": 0,
+            "rating": 4.7, "quantity": 85, "category": "Электроника",
+            "is_new": false, "is_bestseller": true
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 103, "title": "Планшет Tab Pro 11\"", "images": ["/placeholder.svg"],
+            "price": "42990", "final_price": "42990", "discount_percent": 0,
+            "rating": 4.5, "quantity": 67, "category": "Электроника",
+            "is_new": true, "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Казань, ул. Баумана, д. 5, кв. 33",
+      "delivery_cost": "490",
+      "predicted_date": "2026-06-14",
+      "status": { "code": "IN_PROCESSING", "label": "В обработке" },
+      "items_total_price": "67980",
+      "final_price": "68470",
+      "created_at": "2026-06-09T09:15:00Z",
+      "updated_at": "2026-06-09T09:15:00Z"
+    },
+    {
       "id": 1001,
       "user_id": 1,
       "items": [

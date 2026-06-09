@@ -1,0 +1,48 @@
+{
+  "applications": [
+    {
+      "id": 1,
+      "userId": 1,
+      "status": "PENDING",
+      "sellerData": {
+        "name": "Иванов Иван",
+        "email": "ivanov@example.com",
+        "phone": "+7 (999) 123-45-67",
+        "about": "Продаю электронику и аксессуары с 2020 года"
+      },
+      "legalData": {
+        "entityType": "ИП",
+        "inn": "771234567890",
+        "ogrn": "321774600000000",
+        "legalAddress": "г. Москва, ул. Тверская, д. 1",
+        "bankBik": "044525225",
+        "bankAccount": "40702810100000000001"
+      },
+      "rejectionReason": null,
+      "createdAt": "2026-06-07T10:00:00Z",
+      "updatedAt": "2026-06-07T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "userId": 100,
+      "status": "APPROVED",
+      "sellerData": {
+        "name": "Петров Алексей",
+        "email": "seller@techpro.ru",
+        "phone": "+7 (916) 555-12-34",
+        "about": "Профессиональный продавец электроники с 2018 года. Работаем только с проверенными поставщиками."
+      },
+      "legalData": {
+        "entityType": "ООО",
+        "inn": "7701234567",
+        "ogrn": "1177746123456",
+        "legalAddress": "г. Москва, ул. Ленина, д. 42, офис 15",
+        "bankBik": "044525595",
+        "bankAccount": "40702810900000001234"
+      },
+      "rejectionReason": null,
+      "createdAt": "2026-05-15T10:00:00Z",
+      "updatedAt": "2026-05-16T14:30:00Z"
+    }
+  ]
+}

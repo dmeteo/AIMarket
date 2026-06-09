@@ -1,25 +1,1070 @@
 {
   "items": [
-    {"id": 1, "shop_id": 1, "title": "Наушники Bluetooth Pro", "description": "Беспроводные наушники с активным шумоподавлением. Время работы до 30 часов. Быстрая зарядка за 10 минут даёт 3 часа прослушивания.", "images": ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"], "price": "2690", "discount_percent": "0", "final_price": "2690", "rating": 4.5, "isNew": true, "isBestSeller": false, "discountPercentage": 0, "category": "Электроника", "quantity": 150},
-    {"id": 2, "shop_id": 1, "title": "Умная колонка HomePod", "description": "Умная колонка с голосовым ассистентом. Качественный звук 360°. Управление умным домом.", "images": ["/placeholder.svg", "/placeholder.svg"], "price": "3590", "discount_percent": "10", "final_price": "3230", "rating": 4.2, "isNew": false, "isBestSeller": true, "discountPercentage": 10, "category": "Электроника", "quantity": 89},
-    {"id": 3, "shop_id": 1, "title": "Чехол для смартфона", "description": "Защитный чехол из премиальной кожи. Совместим с последними моделями iPhone и Samsung.", "images": ["/placeholder.svg"], "price": "1790", "discount_percent": "0", "final_price": "1790", "rating": 3.8, "isNew": false, "isBestSeller": false, "discountPercentage": 0, "category": "Аксессуары", "quantity": 300},
-    {"id": 4, "shop_id": 2, "title": "Портативная зарядка 20000mAh", "description": "Повербанк с быстрой зарядкой Power Delivery. Два USB-C порта. ЖК-дисплей с уровнем заряда.", "images": ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"], "price": "4490", "discount_percent": "15", "final_price": "3820", "rating": 4.7, "isNew": true, "isBestSeller": false, "discountPercentage": 15, "category": "Электроника", "quantity": 200},
-    {"id": 5, "shop_id": 2, "title": "Механическая клавиатура", "description": "Механическая клавиатура с RGB подсветкой. Переключатели Cherry MX. Алюминиевый корпус.", "images": ["/placeholder.svg", "/placeholder.svg"], "price": "5390", "discount_percent": "20", "final_price": "4310", "rating": 4.0, "isNew": false, "isBestSeller": true, "discountPercentage": 20, "category": "Периферия", "quantity": 75},
-    {"id": 6, "shop_id": 2, "title": "Кабель USB-C 2м", "description": "Прочный кабель USB-C с нейлоновой оплёткой. Поддержка быстрой зарядки до 100W.", "images": ["/placeholder.svg"], "price": "2240", "discount_percent": "0", "final_price": "2240", "rating": 4.3, "isNew": false, "isBestSeller": false, "discountPercentage": 0, "category": "Аксессуары", "quantity": 500},
-    {"id": 7, "shop_id": 3, "title": "Веб-камера 4K", "description": "Веб-камера с разрешением 4K. Автофокус. Встроенный микрофон с шумоподавлением.", "images": ["/placeholder.svg", "/placeholder.svg"], "price": "3140", "discount_percent": "5", "final_price": "2990", "rating": 4.6, "isNew": true, "isBestSeller": false, "discountPercentage": 5, "category": "Периферия", "quantity": 120},
-    {"id": 8, "shop_id": 3, "title": "Подставка для ноутбука", "description": "Регулируемая подставка из алюминия. 6 уровней высоты. Совместима с ноутбуками до 17 дюймов.", "images": ["/placeholder.svg"], "price": "4040", "discount_percent": "0", "final_price": "4040", "rating": 4.1, "isNew": false, "isBestSeller": false, "discountPercentage": 0, "category": "Аксессуары", "quantity": 180},
-    {"id": 9, "shop_id": 3, "title": "Беспроводная мышь Ergo", "description": "Эргономичная беспроводная мышь. Сенсор 16000 DPI. До 60 дней работы от батареи.", "images": ["/placeholder.svg", "/placeholder.svg"], "price": "4940", "discount_percent": "12", "final_price": "4350", "rating": 3.9, "isNew": false, "isBestSeller": true, "discountPercentage": 12, "category": "Периферия", "quantity": 95},
-    {"id": 10, "shop_id": 4, "title": "LED лампа настольная", "description": "Настольная LED лампа с регулировкой яркости и цветовой температуры. Сенсорное управление.", "images": ["/placeholder.svg"], "price": "5840", "discount_percent": "0", "final_price": "5840", "rating": 4.8, "isNew": true, "isBestSeller": false, "discountPercentage": 0, "category": "Для дома", "quantity": 60},
-    {"id": 11, "shop_id": 4, "title": "Фитнес-трекер Band X", "description": "Фитнес-браслет с AMOLED экраном. Пульсоксиметр. Водозащита IP68. До 14 дней работы.", "images": ["/placeholder.svg", "/placeholder.svg"], "price": "3140", "discount_percent": "0", "final_price": "3140", "rating": 4.2, "isNew": false, "isBestSeller": false, "discountPercentage": 0, "category": "Гаджеты", "quantity": 250},
-    {"id": 12, "shop_id": 4, "title": "Робот-пылесос Mini", "description": "Компактный робот-пылесос с лидаром. Влажная и сухая уборка. Управление через приложение.", "images": ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"], "price": "4040", "discount_percent": "5", "final_price": "3840", "rating": 4.6, "isNew": true, "isBestSeller": false, "discountPercentage": 5, "category": "Для дома", "quantity": 40},
-    {"id": 13, "shop_id": 5, "title": "Электрочайник умный", "description": "Электрочайник с контролем температуры. Поддержание тепла до 12 часов. Объём 1.7 л.", "images": ["/placeholder.svg"], "price": "4940", "discount_percent": "10", "final_price": "4450", "rating": 3.9, "isNew": false, "isBestSeller": true, "discountPercentage": 10, "category": "Для дома", "quantity": 110},
-    {"id": 14, "shop_id": 5, "title": "USB-хаб 7 в 1", "description": "Многофункциональный USB-хаб с HDMI 4K, USB 3.0, SD картридером. Алюминиевый корпус.", "images": ["/placeholder.svg"], "price": "2240", "discount_percent": "0", "final_price": "2240", "rating": 4.4, "isNew": false, "isBestSeller": false, "discountPercentage": 0, "category": "Периферия", "quantity": 220},
-    {"id": 15, "shop_id": 5, "title": "Монитор 27\" 4K IPS", "description": "Профессиональный монитор с цветопередачей 99% sRGB. USB-C подключение. Встроенные колонки.", "images": ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"], "price": "6740", "discount_percent": "20", "final_price": "5390", "rating": 4.9, "isNew": true, "isBestSeller": true, "discountPercentage": 20, "category": "Мониторы", "quantity": 30},
-    {"id": 16, "shop_id": 6, "title": "Сумка для ноутбука 15\"", "description": "Водоотталкивающая сумка с отделениями для аксессуаров. Лёгкая и прочная.", "images": ["/placeholder.svg"], "price": "1790", "discount_percent": "0", "final_price": "1790", "rating": 3.5, "isNew": false, "isBestSeller": false, "discountPercentage": 0, "category": "Аксессуары", "quantity": 400},
-    {"id": 17, "shop_id": 6, "title": "Внешний SSD 1TB", "description": "Портативный SSD накопитель с скоростью чтения до 1050 МБ/с. Компактный размер.", "images": ["/placeholder.svg", "/placeholder.svg"], "price": "3590", "discount_percent": "8", "final_price": "3300", "rating": 4.1, "isNew": true, "isBestSeller": false, "discountPercentage": 8, "category": "Накопители", "quantity": 160},
-    {"id": 18, "shop_id": 6, "title": "Подставка для монитора", "description": "Регулируемая подставка с органайзером. Снижает нагрузку на шею и спину.", "images": ["/placeholder.svg"], "price": "4490", "discount_percent": "12", "final_price": "3950", "rating": 4.3, "isNew": false, "isBestSeller": true, "discountPercentage": 12, "category": "Аксессуары", "quantity": 85},
-    {"id": 19, "shop_id": 7, "title": "Настольная игра Стратегия", "description": "Настольная стратегическая игра для 2-4 игроков. Время партии 60-90 минут.", "images": ["/placeholder.svg"], "price": "5390", "discount_percent": "0", "final_price": "5390", "rating": 4.7, "isNew": false, "isBestSeller": false, "discountPercentage": 0, "category": "Развлечения", "quantity": 45},
-    {"id": 20, "shop_id": 7, "title": "Книга по TypeScript", "description": "Полное руководство по TypeScript для разработчиков. Практические примеры и паттерны.", "images": ["/placeholder.svg"], "price": "6290", "discount_percent": "5", "final_price": "5980", "rating": 4.0, "isNew": true, "isBestSeller": false, "discountPercentage": 5, "category": "Книги", "quantity": 70}
+    {
+      "id": 1,
+      "shop_id": 1,
+      "title": "Наушники Bluetooth Pro",
+      "description": "Беспроводные наушники с активным шумоподавлением. Время работы до 30 часов. Быстрая зарядка за 10 минут даёт 3 часа прослушивания.",
+      "images": [
+        "/placeholder.svg",
+        "/placeholder.svg",
+        "/placeholder.svg"
+      ],
+      "price": "2690",
+      "discount_percent": "0",
+      "final_price": "2690",
+      "rating": 4.5,
+      "category": "Электроника",
+      "quantity": 150,
+      "shop_ids": [
+        1,
+        2
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 29,
+      "created_at": "2026-05-01T16:00:00Z",
+      "updated_at": "2026-05-03T16:00:00Z"
+    },
+    {
+      "id": 2,
+      "shop_id": 1,
+      "title": "Умная колонка HomePod",
+      "description": "Умная колонка с голосовым ассистентом. Качественный звук 360°. Управление умным домом.",
+      "images": [
+        "/placeholder.svg",
+        "/placeholder.svg"
+      ],
+      "price": "3590",
+      "discount_percent": "10",
+      "final_price": "3230",
+      "rating": 4.2,
+      "category": "Электроника",
+      "quantity": 89,
+      "shop_ids": [
+        1,
+        3
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 16,
+      "created_at": "2026-05-03T18:00:00Z",
+      "updated_at": "2026-05-04T18:00:00Z"
+    },
+    {
+      "id": 3,
+      "shop_id": 1,
+      "title": "Чехол для смартфона",
+      "description": "Защитный чехол из премиальной кожи. Совместим с последними моделями iPhone и Samsung.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "1790",
+      "discount_percent": "0",
+      "final_price": "1790",
+      "rating": 3.8,
+      "category": "Аксессуары",
+      "quantity": 300,
+      "shop_ids": [
+        1
+      ],
+      "category_id": 2,
+      "is_active": true,
+      "reviews_count": 13,
+      "created_at": "2026-05-05T18:00:00Z",
+      "updated_at": "2026-05-09T18:00:00Z"
+    },
+    {
+      "id": 4,
+      "shop_id": 2,
+      "title": "Портативная зарядка 20000mAh",
+      "description": "Повербанк с быстрой зарядкой Power Delivery. Два USB-C порта. ЖК-дисплей с уровнем заряда.",
+      "images": [
+        "/placeholder.svg",
+        "/placeholder.svg",
+        "/placeholder.svg"
+      ],
+      "price": "4490",
+      "discount_percent": "15",
+      "final_price": "3820",
+      "rating": 4.7,
+      "category": "Электроника",
+      "quantity": 200,
+      "shop_ids": [
+        1,
+        3
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 17,
+      "created_at": "2026-05-07T18:00:00Z",
+      "updated_at": "2026-05-09T18:00:00Z"
+    },
+    {
+      "id": 5,
+      "shop_id": 2,
+      "title": "Механическая клавиатура",
+      "description": "Механическая клавиатура с RGB подсветкой. Переключатели Cherry MX. Алюминиевый корпус.",
+      "images": [
+        "/placeholder.svg",
+        "/placeholder.svg"
+      ],
+      "price": "5390",
+      "discount_percent": "20",
+      "final_price": "4310",
+      "rating": 4.0,
+      "category": "Периферия",
+      "quantity": 75,
+      "shop_ids": [
+        1,
+        2
+      ],
+      "category_id": 3,
+      "is_active": true,
+      "reviews_count": 32,
+      "created_at": "2026-05-09T12:00:00Z",
+      "updated_at": "2026-05-11T12:00:00Z"
+    },
+    {
+      "id": 6,
+      "shop_id": 2,
+      "title": "Кабель USB-C 2м",
+      "description": "Прочный кабель USB-C с нейлоновой оплёткой. Поддержка быстрой зарядки до 100W.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "2240",
+      "discount_percent": "0",
+      "final_price": "2240",
+      "rating": 4.3,
+      "category": "Аксессуары",
+      "quantity": 500,
+      "shop_ids": [
+        2
+      ],
+      "category_id": 2,
+      "is_active": true,
+      "reviews_count": 48,
+      "created_at": "2026-05-11T13:00:00Z",
+      "updated_at": "2026-05-13T13:00:00Z"
+    },
+    {
+      "id": 7,
+      "shop_id": 3,
+      "title": "Веб-камера 4K",
+      "description": "Веб-камера с разрешением 4K. Автофокус. Встроенный микрофон с шумоподавлением.",
+      "images": [
+        "/placeholder.svg",
+        "/placeholder.svg"
+      ],
+      "price": "3140",
+      "discount_percent": "5",
+      "final_price": "2990",
+      "rating": 4.6,
+      "category": "Периферия",
+      "quantity": 120,
+      "shop_ids": [
+        3
+      ],
+      "category_id": 3,
+      "is_active": true,
+      "reviews_count": 29,
+      "created_at": "2026-05-13T14:00:00Z",
+      "updated_at": "2026-05-13T14:00:00Z"
+    },
+    {
+      "id": 8,
+      "shop_id": 3,
+      "title": "Подставка для ноутбука",
+      "description": "Регулируемая подставка из алюминия. 6 уровней высоты. Совместима с ноутбуками до 17 дюймов.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "4040",
+      "discount_percent": "0",
+      "final_price": "4040",
+      "rating": 4.1,
+      "category": "Аксессуары",
+      "quantity": 180,
+      "shop_ids": [
+        3
+      ],
+      "category_id": 2,
+      "is_active": true,
+      "reviews_count": 31,
+      "created_at": "2026-05-15T16:00:00Z",
+      "updated_at": "2026-05-18T16:00:00Z"
+    },
+    {
+      "id": 9,
+      "shop_id": 3,
+      "title": "Беспроводная мышь Ergo",
+      "description": "Эргономичная беспроводная мышь. Сенсор 16000 DPI. До 60 дней работы от батареи.",
+      "images": [
+        "/placeholder.svg",
+        "/placeholder.svg"
+      ],
+      "price": "4940",
+      "discount_percent": "12",
+      "final_price": "4350",
+      "rating": 3.9,
+      "category": "Периферия",
+      "quantity": 95,
+      "shop_ids": [
+        3
+      ],
+      "category_id": 3,
+      "is_active": true,
+      "reviews_count": 3,
+      "created_at": "2026-05-17T08:00:00Z",
+      "updated_at": "2026-05-21T08:00:00Z"
+    },
+    {
+      "id": 10,
+      "shop_id": 4,
+      "title": "LED лампа настольная",
+      "description": "Настольная LED лампа с регулировкой яркости и цветовой температуры. Сенсорное управление.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "5840",
+      "discount_percent": "0",
+      "final_price": "5840",
+      "rating": 4.8,
+      "category": "Для дома",
+      "quantity": 60,
+      "shop_ids": [
+        4
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 21,
+      "created_at": "2026-05-19T16:00:00Z",
+      "updated_at": "2026-05-24T16:00:00Z"
+    },
+    {
+      "id": 11,
+      "shop_id": 4,
+      "title": "Фитнес-трекер Band X",
+      "description": "Фитнес-браслет с AMOLED экраном. Пульсоксиметр. Водозащита IP68. До 14 дней работы.",
+      "images": [
+        "/placeholder.svg",
+        "/placeholder.svg"
+      ],
+      "price": "3140",
+      "discount_percent": "0",
+      "final_price": "3140",
+      "rating": 4.2,
+      "category": "Гаджеты",
+      "quantity": 250,
+      "shop_ids": [
+        4
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 49,
+      "created_at": "2026-05-21T09:00:00Z",
+      "updated_at": "2026-05-26T09:00:00Z"
+    },
+    {
+      "id": 12,
+      "shop_id": 4,
+      "title": "Робот-пылесос Mini",
+      "description": "Компактный робот-пылесос с лидаром. Влажная и сухая уборка. Управление через приложение.",
+      "images": [
+        "/placeholder.svg",
+        "/placeholder.svg",
+        "/placeholder.svg"
+      ],
+      "price": "4040",
+      "discount_percent": "5",
+      "final_price": "3840",
+      "rating": 4.6,
+      "category": "Для дома",
+      "quantity": 40,
+      "shop_ids": [
+        4
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 33,
+      "created_at": "2026-05-23T09:00:00Z",
+      "updated_at": "2026-05-23T09:00:00Z"
+    },
+    {
+      "id": 13,
+      "shop_id": 5,
+      "title": "Электрочайник умный",
+      "description": "Электрочайник с контролем температуры. Поддержание тепла до 12 часов. Объём 1.7 л.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "4940",
+      "discount_percent": "10",
+      "final_price": "4450",
+      "rating": 3.9,
+      "category": "Для дома",
+      "quantity": 110,
+      "shop_ids": [
+        5
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 44,
+      "created_at": "2026-05-25T08:00:00Z",
+      "updated_at": "2026-05-29T08:00:00Z"
+    },
+    {
+      "id": 14,
+      "shop_id": 5,
+      "title": "USB-хаб 7 в 1",
+      "description": "Многофункциональный USB-хаб с HDMI 4K, USB 3.0, SD картридером. Алюминиевый корпус.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "2240",
+      "discount_percent": "0",
+      "final_price": "2240",
+      "rating": 4.4,
+      "category": "Периферия",
+      "quantity": 220,
+      "shop_ids": [
+        5
+      ],
+      "category_id": 3,
+      "is_active": true,
+      "reviews_count": 25,
+      "created_at": "2026-05-27T16:00:00Z",
+      "updated_at": "2026-05-29T16:00:00Z"
+    },
+    {
+      "id": 15,
+      "shop_id": 5,
+      "title": "Монитор 27\" 4K IPS",
+      "description": "Профессиональный монитор с цветопередачей 99% sRGB. USB-C подключение. Встроенные колонки.",
+      "images": [
+        "/placeholder.svg",
+        "/placeholder.svg",
+        "/placeholder.svg"
+      ],
+      "price": "6740",
+      "discount_percent": "20",
+      "final_price": "5390",
+      "rating": 4.9,
+      "category": "Мониторы",
+      "quantity": 30,
+      "shop_ids": [
+        5
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 44,
+      "created_at": "2026-05-29T10:00:00Z",
+      "updated_at": "2026-06-03T10:00:00Z"
+    },
+    {
+      "id": 16,
+      "shop_id": 6,
+      "title": "Сумка для ноутбука 15\"",
+      "description": "Водоотталкивающая сумка с отделениями для аксессуаров. Лёгкая и прочная.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "1790",
+      "discount_percent": "0",
+      "final_price": "1790",
+      "rating": 3.5,
+      "category": "Аксессуары",
+      "quantity": 400,
+      "shop_ids": [
+        6
+      ],
+      "category_id": 2,
+      "is_active": true,
+      "reviews_count": 34,
+      "created_at": "2026-05-31T10:00:00Z",
+      "updated_at": "2026-06-01T10:00:00Z"
+    },
+    {
+      "id": 17,
+      "shop_id": 6,
+      "title": "Внешний SSD 1TB",
+      "description": "Портативный SSD накопитель с скоростью чтения до 1050 МБ/с. Компактный размер.",
+      "images": [
+        "/placeholder.svg",
+        "/placeholder.svg"
+      ],
+      "price": "3590",
+      "discount_percent": "8",
+      "final_price": "3300",
+      "rating": 4.1,
+      "category": "Накопители",
+      "quantity": 160,
+      "shop_ids": [
+        6
+      ],
+      "category_id": 7,
+      "is_active": true,
+      "reviews_count": 14,
+      "created_at": "2026-06-02T14:00:00Z",
+      "updated_at": "2026-06-05T14:00:00Z"
+    },
+    {
+      "id": 18,
+      "shop_id": 6,
+      "title": "Подставка для монитора",
+      "description": "Регулируемая подставка с органайзером. Снижает нагрузку на шею и спину.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "4490",
+      "discount_percent": "12",
+      "final_price": "3950",
+      "rating": 4.3,
+      "category": "Аксессуары",
+      "quantity": 85,
+      "shop_ids": [
+        6
+      ],
+      "category_id": 2,
+      "is_active": true,
+      "reviews_count": 29,
+      "created_at": "2026-06-04T15:00:00Z",
+      "updated_at": "2026-06-06T15:00:00Z"
+    },
+    {
+      "id": 19,
+      "shop_id": 7,
+      "title": "Настольная игра Стратегия",
+      "description": "Настольная стратегическая игра для 2-4 игроков. Время партии 60-90 минут.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "5390",
+      "discount_percent": "0",
+      "final_price": "5390",
+      "rating": 4.7,
+      "category": "Развлечения",
+      "quantity": 45,
+      "shop_ids": [
+        7
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 38,
+      "created_at": "2026-06-06T16:00:00Z",
+      "updated_at": "2026-06-06T16:00:00Z"
+    },
+    {
+      "id": 20,
+      "shop_id": 7,
+      "title": "Книга по TypeScript",
+      "description": "Полное руководство по TypeScript для разработчиков. Практические примеры и паттерны.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "6290",
+      "discount_percent": "5",
+      "final_price": "5980",
+      "rating": 4.0,
+      "category": "Книги",
+      "quantity": 70,
+      "shop_ids": [
+        7
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 0,
+      "created_at": "2026-06-08T12:00:00Z",
+      "updated_at": "2026-06-12T12:00:00Z"
+    },
+    {
+      "id": 21,
+      "shop_id": 8,
+      "title": "Смарт-часы Pro",
+      "description": "Умные часы с AMOLED дисплеем. GPS, пульсоксиметр, водозащита 5ATM. До 14 дней работы.",
+      "images": [
+        "/placeholder.svg",
+        "/placeholder.svg"
+      ],
+      "price": "4290",
+      "discount_percent": "8",
+      "final_price": "3950",
+      "rating": 4.4,
+      "category": "Гаджеты",
+      "quantity": 180,
+      "shop_ids": [
+        8
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 21,
+      "created_at": "2026-06-10T16:00:00Z",
+      "updated_at": "2026-06-11T16:00:00Z"
+    },
+    {
+      "id": 22,
+      "shop_id": 8,
+      "title": "Беспроводные наушники TWS",
+      "description": "TWS наушники с активным шумоподавлением. До 24 часов работы с кейсом. Bluetooth 5.3.",
+      "images": [
+        "/placeholder.svg",
+        "/placeholder.svg"
+      ],
+      "price": "1890",
+      "discount_percent": "0",
+      "final_price": "1890",
+      "rating": 4.1,
+      "category": "Электроника",
+      "quantity": 350,
+      "shop_ids": [
+        8
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 44,
+      "created_at": "2026-06-12T08:00:00Z",
+      "updated_at": "2026-06-12T08:00:00Z"
+    },
+    {
+      "id": 23,
+      "shop_id": 8,
+      "title": "Портативная колонка Bass+",
+      "description": "Портативная Bluetooth колонка с глубоким басом. Водозащита IPX7. До 20 часов работы.",
+      "images": [
+        "/placeholder.svg",
+        "/placeholder.svg"
+      ],
+      "price": "2490",
+      "discount_percent": "10",
+      "final_price": "2240",
+      "rating": 4.3,
+      "category": "Электроника",
+      "quantity": 220,
+      "shop_ids": [
+        8
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 8,
+      "created_at": "2026-06-14T10:00:00Z",
+      "updated_at": "2026-06-16T10:00:00Z"
+    },
+    {
+      "id": 24,
+      "shop_id": 9,
+      "title": "Графический планшет",
+      "description": "Графический планшет для дизайнеров. 8192 уровней давления. Активная область 10x6 дюймов.",
+      "images": [
+        "/placeholder.svg",
+        "/placeholder.svg"
+      ],
+      "price": "3790",
+      "discount_percent": "5",
+      "final_price": "3600",
+      "rating": 4.5,
+      "category": "Периферия",
+      "quantity": 65,
+      "shop_ids": [
+        9
+      ],
+      "category_id": 3,
+      "is_active": true,
+      "reviews_count": 12,
+      "created_at": "2026-06-16T11:00:00Z",
+      "updated_at": "2026-06-16T11:00:00Z"
+    },
+    {
+      "id": 25,
+      "shop_id": 9,
+      "title": "Микрофон конденсаторный",
+      "description": "USB конденсаторный микрофон для стриминга и записи. Кардиоидная диаграмма. Кнопка мьют.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "2890",
+      "discount_percent": "0",
+      "final_price": "2890",
+      "rating": 4.2,
+      "category": "Периферия",
+      "quantity": 140,
+      "shop_ids": [
+        9
+      ],
+      "category_id": 3,
+      "is_active": true,
+      "reviews_count": 22,
+      "created_at": "2026-06-18T10:00:00Z",
+      "updated_at": "2026-06-22T10:00:00Z"
+    },
+    {
+      "id": 26,
+      "shop_id": 9,
+      "title": "Коврик для мыши XXL",
+      "description": "Большой игровой коврик 900x400мм. Ткань с водоотталкивающим покрытием. Прорезиненное основание.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "890",
+      "discount_percent": "0",
+      "final_price": "890",
+      "rating": 4.0,
+      "category": "Аксессуары",
+      "quantity": 500,
+      "shop_ids": [
+        9
+      ],
+      "category_id": 2,
+      "is_active": true,
+      "reviews_count": 4,
+      "created_at": "2026-06-20T18:00:00Z",
+      "updated_at": "2026-06-20T18:00:00Z"
+    },
+    {
+      "id": 27,
+      "shop_id": 10,
+      "title": "Внешний аккумулятор 10000mAh",
+      "description": "Компактный повербанк с быстрой зарядкой 22.5W. Два порта USB. Индикатор заряда.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "1290",
+      "discount_percent": "15",
+      "final_price": "1100",
+      "rating": 3.9,
+      "category": "Электроника",
+      "quantity": 400,
+      "shop_ids": [
+        10
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 24,
+      "created_at": "2026-06-22T15:00:00Z",
+      "updated_at": "2026-06-22T15:00:00Z"
+    },
+    {
+      "id": 28,
+      "shop_id": 10,
+      "title": "Хаб USB-C 5 в 1",
+      "description": "USB-C хаб с HDMI 4K, USB 3.0 x2, SD/TSD картридер. Алюминиевый корпус.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "1690",
+      "discount_percent": "0",
+      "final_price": "1690",
+      "rating": 4.1,
+      "category": "Периферия",
+      "quantity": 280,
+      "shop_ids": [
+        10
+      ],
+      "category_id": 3,
+      "is_active": true,
+      "reviews_count": 14,
+      "created_at": "2026-06-24T16:00:00Z",
+      "updated_at": "2026-06-25T16:00:00Z"
+    },
+    {
+      "id": 29,
+      "shop_id": 10,
+      "title": "Сетевой фильтр с USB",
+      "description": "Сетевой фильтр с 6 розетками и 3 USB портами. Защита от перенапряжения. Кабель 2м.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "1490",
+      "discount_percent": "10",
+      "final_price": "1340",
+      "rating": 3.7,
+      "category": "Аксессуары",
+      "quantity": 320,
+      "shop_ids": [
+        10
+      ],
+      "category_id": 2,
+      "is_active": true,
+      "reviews_count": 48,
+      "created_at": "2026-06-26T17:00:00Z",
+      "updated_at": "2026-06-27T17:00:00Z"
+    },
+    {
+      "id": 30,
+      "shop_id": 11,
+      "title": "Термокружка умная",
+      "description": "Термокружка с индикатором температуры. Держит тепло до 12 часов. Ёмкость 500мл.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "1190",
+      "discount_percent": "0",
+      "final_price": "1190",
+      "rating": 4.0,
+      "category": "Для дома",
+      "quantity": 200,
+      "shop_ids": [
+        11
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 32,
+      "created_at": "2026-06-28T08:00:00Z",
+      "updated_at": "2026-06-30T08:00:00Z"
+    },
+    {
+      "id": 31,
+      "shop_id": 11,
+      "title": "LED гирлянда 10м",
+      "description": "Светодиодная гирлянда 10 метров. 8 режимов свечения. Водозащита IP44. Пульт управления.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "690",
+      "discount_percent": "20",
+      "final_price": "550",
+      "rating": 3.8,
+      "category": "Для дома",
+      "quantity": 450,
+      "shop_ids": [
+        11
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 42,
+      "created_at": "2026-06-30T12:00:00Z",
+      "updated_at": "2026-07-04T12:00:00Z"
+    },
+    {
+      "id": 32,
+      "shop_id": 11,
+      "title": "Органайзер для проводов",
+      "description": "Настольный органайзер для кабелей и адаптеров. 5 отделений. Прорезиненное основание.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "590",
+      "discount_percent": "0",
+      "final_price": "590",
+      "rating": 3.6,
+      "category": "Аксессуары",
+      "quantity": 600,
+      "shop_ids": [
+        11
+      ],
+      "category_id": 2,
+      "is_active": true,
+      "reviews_count": 8,
+      "created_at": "2026-07-02T09:00:00Z",
+      "updated_at": "2026-07-02T09:00:00Z"
+    },
+    {
+      "id": 33,
+      "shop_id": 12,
+      "title": "Bluetooth адаптер USB",
+      "description": "USB Bluetooth 5.0 адаптер. Совместим с Windows, Mac, Linux. Дальность до 20м.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "490",
+      "discount_percent": "0",
+      "final_price": "490",
+      "rating": 3.5,
+      "category": "Периферия",
+      "quantity": 800,
+      "shop_ids": [
+        12
+      ],
+      "category_id": 3,
+      "is_active": true,
+      "reviews_count": 39,
+      "created_at": "2026-07-04T14:00:00Z",
+      "updated_at": "2026-07-09T14:00:00Z"
+    },
+    {
+      "id": 34,
+      "shop_id": 12,
+      "title": "Подставка для телефона",
+      "description": "Регулируемая подставка для смартфона и планшета. Алюминиевый сплав. Антискользящие ножки.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "790",
+      "discount_percent": "0",
+      "final_price": "790",
+      "rating": 4.2,
+      "category": "Аксессуары",
+      "quantity": 380,
+      "shop_ids": [
+        12
+      ],
+      "category_id": 2,
+      "is_active": true,
+      "reviews_count": 36,
+      "created_at": "2026-07-06T10:00:00Z",
+      "updated_at": "2026-07-09T10:00:00Z"
+    },
+    {
+      "id": 35,
+      "shop_id": 12,
+      "title": "Кабель Lightning 2м",
+      "description": "Сертифицированный кабель Lightning для iPhone. Поддержка быстрой зарядки. Нейлоновая оплётка.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "690",
+      "discount_percent": "10",
+      "final_price": "620",
+      "rating": 3.9,
+      "category": "Аксессуары",
+      "quantity": 550,
+      "shop_ids": [
+        12
+      ],
+      "category_id": 2,
+      "is_active": true,
+      "reviews_count": 29,
+      "created_at": "2026-07-08T09:00:00Z",
+      "updated_at": "2026-07-11T09:00:00Z"
+    },
+    {
+      "id": 36,
+      "shop_id": 13,
+      "title": "Веб-камера Full HD",
+      "description": "Веб-камера 1080p с автофокусом. Встроенный стерео микрофон. Крепление для монитора.",
+      "images": [
+        "/placeholder.svg",
+        "/placeholder.svg"
+      ],
+      "price": "1590",
+      "discount_percent": "5",
+      "final_price": "1510",
+      "rating": 4.0,
+      "category": "Периферия",
+      "quantity": 190,
+      "shop_ids": [
+        13
+      ],
+      "category_id": 3,
+      "is_active": true,
+      "reviews_count": 39,
+      "created_at": "2026-07-10T08:00:00Z",
+      "updated_at": "2026-07-14T08:00:00Z"
+    },
+    {
+      "id": 37,
+      "shop_id": 13,
+      "title": "Мембранная клавиатура",
+      "description": "Тихая мембранная клавиатура. 104 клавиши. Подсветка RGB. Антигхостинг.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "1990",
+      "discount_percent": "15",
+      "final_price": "1690",
+      "rating": 3.8,
+      "category": "Периферия",
+      "quantity": 150,
+      "shop_ids": [
+        13
+      ],
+      "category_id": 3,
+      "is_active": true,
+      "reviews_count": 21,
+      "created_at": "2026-07-12T09:00:00Z",
+      "updated_at": "2026-07-15T09:00:00Z"
+    },
+    {
+      "id": 38,
+      "shop_id": 13,
+      "title": "Картридер USB 3.0",
+      "description": "Универсальный картридер для SD, microSD, CF, MS карт. USB 3.0. Поддержка UHS-II.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "890",
+      "discount_percent": "0",
+      "final_price": "890",
+      "rating": 4.1,
+      "category": "Периферия",
+      "quantity": 260,
+      "shop_ids": [
+        13
+      ],
+      "category_id": 3,
+      "is_active": true,
+      "reviews_count": 16,
+      "created_at": "2026-07-14T18:00:00Z",
+      "updated_at": "2026-07-15T18:00:00Z"
+    },
+    {
+      "id": 39,
+      "shop_id": 14,
+      "title": "Точилка для ножей",
+      "description": "Электрическая точилка для ножей. 3 этапа заточки. Алмазные и керамические диски.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "2290",
+      "discount_percent": "10",
+      "final_price": "2060",
+      "rating": 4.3,
+      "category": "Для дома",
+      "quantity": 90,
+      "shop_ids": [
+        14
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 12,
+      "created_at": "2026-07-16T12:00:00Z",
+      "updated_at": "2026-07-16T12:00:00Z"
+    },
+    {
+      "id": 40,
+      "shop_id": 14,
+      "title": "Весы кухонные цифровые",
+      "description": "Цифровые кухонные весы до 5кг. Точность 1г. Дисплей LCD. Функция тары.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "990",
+      "discount_percent": "0",
+      "final_price": "990",
+      "rating": 4.0,
+      "category": "Для дома",
+      "quantity": 340,
+      "shop_ids": [
+        14
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 26,
+      "created_at": "2026-07-18T11:00:00Z",
+      "updated_at": "2026-07-21T11:00:00Z"
+    },
+    {
+      "id": 101,
+      "shop_id": 100,
+      "title": "Смартфон Galaxy Pro Max",
+      "description": "Флагманский смартфон с AMOLED экраном 6.8\", процессор Snapdragon 8 Gen 3, 12 ГБ ОЗУ, 256 ГБ памяти. Камера 200 Мп.",
+      "images": [
+        "/placeholder.svg",
+        "/placeholder.svg"
+      ],
+      "price": "89990",
+      "discount_percent": "5",
+      "final_price": "85490",
+      "rating": 4.8,
+      "category": "Электроника",
+      "quantity": 45,
+      "shop_ids": [
+        1,
+        2
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 16,
+      "created_at": "2026-07-20T11:00:00Z",
+      "updated_at": "2026-07-23T11:00:00Z"
+    },
+    {
+      "id": 102,
+      "shop_id": 100,
+      "title": "Ноутбук UltraBook 15\"",
+      "description": "Тонкий ноутбук с процессором Intel Core i7, 16 ГБ ОЗУ, SSD 512 ГБ, экран 15.6\" IPS. Вес всего 1.8 кг.",
+      "images": [
+        "/placeholder.svg",
+        "/placeholder.svg"
+      ],
+      "price": "74990",
+      "discount_percent": "10",
+      "final_price": "67490",
+      "rating": 4.6,
+      "category": "Электроника",
+      "quantity": 28,
+      "shop_ids": [
+        1,
+        3
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 41,
+      "created_at": "2026-07-22T13:00:00Z",
+      "updated_at": "2026-07-22T13:00:00Z"
+    },
+    {
+      "id": 103,
+      "shop_id": 100,
+      "title": "Планшет Tab Pro 11\"",
+      "description": "Планшет с AMOLED экраном 11\", 8 ГБ ОЗУ, 128 ГБ памяти. Поддержка стилуса. Идеален для работы и творчества.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "42990",
+      "discount_percent": "0",
+      "final_price": "42990",
+      "rating": 4.5,
+      "category": "Электроника",
+      "quantity": 67,
+      "shop_ids": [
+        1
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 13,
+      "created_at": "2026-07-24T10:00:00Z",
+      "updated_at": "2026-07-25T10:00:00Z"
+    },
+    {
+      "id": 104,
+      "shop_id": 100,
+      "title": "Умные часы Watch Pro",
+      "description": "Умные часы с AMOLED дисплеем, GPS, пульсоксиметром. Водозащита 5ATM. До 14 дней работы.",
+      "images": [
+        "/placeholder.svg",
+        "/placeholder.svg"
+      ],
+      "price": "18990",
+      "discount_percent": "15",
+      "final_price": "16140",
+      "rating": 4.4,
+      "category": "Гаджеты",
+      "quantity": 120,
+      "shop_ids": [
+        1,
+        3
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 34,
+      "created_at": "2026-07-26T08:00:00Z",
+      "updated_at": "2026-07-30T08:00:00Z"
+    },
+    {
+      "id": 105,
+      "shop_id": 100,
+      "title": "Беспроводные наушники AirPods Pro",
+      "description": "TWS наушники с активным шумоподавлением. Прозрачный режим. До 30 часов работы с кейсом.",
+      "images": [
+        "/placeholder.svg"
+      ],
+      "price": "24990",
+      "discount_percent": "0",
+      "final_price": "24990",
+      "rating": 4.7,
+      "category": "Электроника",
+      "quantity": 85,
+      "shop_ids": [
+        1,
+        2
+      ],
+      "category_id": 1,
+      "is_active": true,
+      "reviews_count": 9,
+      "created_at": "2026-07-28T08:00:00Z",
+      "updated_at": "2026-07-29T08:00:00Z"
+    }
   ],
   "hasNextPage": true
 }

@@ -41,8 +41,8 @@ function buildNewOrder(body: OrderRequest): OrderJson {
             rating: product.rating,
             quantity: product.quantity,
             category: product.category ?? null,
-            is_new: product.isNew,
-            is_bestseller: product.isBestSeller,
+            is_new: false,
+            is_bestseller: false,
           },
           quantity: cartItem.quantity,
         });

@@ -1,0 +1,16 @@
+{
+  "shop_products": [
+    { "shop_id": 1, "product_id": 101, "price_override": null, "stock": 50 },
+    { "shop_id": 1, "product_id": 102, "price_override": null, "stock": 30 },
+    { "shop_id": 1, "product_id": 103, "price_override": null, "stock": 20 },
+    { "shop_id": 1, "product_id": 104, "price_override": "18990", "stock": 100 },
+    { "shop_id": 1, "product_id": 105, "price_override": null, "stock": 80 },
+    { "shop_id": 2, "product_id": 101, "price_override": "2790", "stock": 30 },
+    { "shop_id": 2, "product_id": 105, "price_override": null, "stock": 40 },
+    { "shop_id": 2, "product_id": 106, "price_override": null, "stock": 25 },
+    { "shop_id": 3, "product_id": 102, "price_override": "66900", "stock": 15 },
+    { "shop_id": 3, "product_id": 104, "price_override": null, "stock": 60 },
+    { "shop_id": 3, "product_id": 107, "price_override": null, "stock": 200 },
+    { "shop_id": 3, "product_id": 108, "price_override": "3990", "stock": 45 }
+  ]
+}

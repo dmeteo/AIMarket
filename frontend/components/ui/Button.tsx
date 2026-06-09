@@ -21,8 +21,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
+    const gapClass = iconOnly ? '' : 'gap-2';
     const baseClasses =
-      'transition-colors duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 rounded-md hover:opacity-90 active:scale-95 font-medium cursor-pointer';
+      `inline-flex items-center justify-center ${gapClass} transition-colors duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 rounded-md hover:opacity-90 active:scale-95 font-medium cursor-pointer`;
 
     let variantClasses = '';
     switch (variant) {
@@ -62,9 +63,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         break;
     }
 
-    const iconOnlyClasses = iconOnly ? 'flex items-center justify-center' : '';
-
-    const classes = `${baseClasses} ${variantClasses} ${sizeClasses} ${iconOnlyClasses} ${className}`.trim();
+    const classes = `${baseClasses} ${variantClasses} ${sizeClasses} ${className}`.trim();
 
     return (
       <button

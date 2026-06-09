@@ -3,6 +3,10 @@ import products from './data/products.json';
 import { authHandlers } from './handlers/auth';
 import { cartHandlers } from './handlers/cart';
 import { orderHandlers } from './handlers/orders';
+import { sellerHandlers } from './handlers/seller';
+import { productHandlers } from './handlers/products';
+import { categoryHandlers } from './handlers/categories';
+import { brandHandlers } from './handlers/brands';
 
 export const handlers = [
   // Auth handlers
@@ -14,6 +18,18 @@ export const handlers = [
   // Order handlers
   ...orderHandlers,
 
+  // Seller handlers (shops CRUD, applications, orders)
+  ...sellerHandlers,
+
+  // Products CRUD + assign
+  ...productHandlers,
+
+  // Categories
+  ...categoryHandlers,
+
+  // Brands
+  ...brandHandlers,
+
   // Root
   http.get('/', () => {
     return HttpResponse.json(
@@ -22,7 +38,7 @@ export const handlers = [
     );
   }),
 
-  // Products list
+  // Products list (legacy path — kept for backward compat)
   http.get('/api/products', async ({ request }) => {
     const url = new URL(request.url);
     const page = parseInt(url.searchParams.get('page') || '1', 10);
@@ -36,7 +52,7 @@ export const handlers = [
     });
   }),
 
-  // Single product by ID
+  // Single product by ID (keep for storefront)
   http.get('/api/v1/products/:product_id', (req) => {
     const id = parseInt(req.params.product_id as string, 10);
     const product = products.items.find((p) => p.id === id);

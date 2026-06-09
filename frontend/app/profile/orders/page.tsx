@@ -34,10 +34,12 @@ export default function OrdersPage() {
   const { data, isLoading: ordersLoading } = useOrders();
 
   useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      router.replace('/login');
+    const token = localStorage.getItem('auth_token');
+    if (!token) {
+      console.log('[Orders] No token, redirecting to /login');
+      window.location.href = '/login';
     }
-  }, [isAuthenticated, authLoading, router]);
+  }, [isAuthenticated, router]);
 
   if (authLoading || !isAuthenticated) {
     return (

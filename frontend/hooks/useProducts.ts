@@ -12,14 +12,20 @@ export interface Product {
   discount_percent: string;
   final_price: string;
   rating: number | null;
-  isNew: boolean;
-  isBestSeller: boolean;
-  discountPercentage: number;
+  reviews_count: number;
+  isNew?: boolean;
+  isBestSeller?: boolean;
+  discountPercentage?: number;
   category?: string;
+  category_id?: number | null;
   quantity: number;
+  is_active?: boolean;
+  shop_ids?: number[];
+  created_at?: string;
+  updated_at?: string;
 }
 
-// Full product page (from /api/products/:id) — same as Product for our mock
+// Full product page (from /api/v1/products/:id)
 export type ProductPage = Product;
 
 export interface GetProductsResponse {

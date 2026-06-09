@@ -7,7 +7,10 @@ console.log('Browser: Setting up MSW worker with handlers:', handlers);
 export const worker = setupWorker(...handlers);
 
 // Start the worker when the module is imported
-worker.start().then(() => {
+// onUnhandledRequest: 'bypass' — silently pass through any unhandled requests (RSC, navigation, etc.)
+worker.start({
+  onUnhandledRequest: 'bypass',
+}).then(() => {
   console.log('Browser: MSW worker started successfully');
 }).catch((error) => {
   console.error('Browser: Failed to start MSW worker:', error);

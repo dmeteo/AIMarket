@@ -90,8 +90,8 @@ export default function ProductPage() {
                 discountPercent={product.discount_percent}
                 rating={product.rating}
                 category={product.category}
-                isNew={product.isNew}
-                isBestSeller={product.isBestSeller}
+                isNew={product.isNew ?? false}
+                isBestSeller={product.isBestSeller ?? false}
                 quantity={product.quantity}
               />
 

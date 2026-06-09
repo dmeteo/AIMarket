@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { Search, ShoppingCart, LogOut, User } from 'lucide-react';
 import Input from './ui/Input';
 import { useProducts, type GetProductsResponse } from '../hooks/useProducts';
@@ -15,9 +15,13 @@ interface HeaderProps {
 
 export default function Header({ className }: HeaderProps) {
   const router = useRouter();
+  const pathname = usePathname();
   const { isAuthenticated, user, logout } = useAuth();
   const cartItems = useCartStore((s) => s.items);
   const cartCount = cartItems.reduce((sum, i) => sum + i.quantity, 0);
+
+  // Hide search on home page
+  const isHomePage = pathname === '/';
 
   const [searchTerm, setSearchTerm] = useState('');
   const [showResults, setShowResults] = useState(false);
@@ -77,48 +81,48 @@ export default function Header({ className }: HeaderProps) {
             <Link href="/" className="text-zinc-700 hover:text-zinc-900 text-sm">
               Главная
             </Link>
-            <Link href="/market" className="text-zinc-700 hover:text-zinc-900 text-sm">
-              Каталог
-            </Link>
+            
             <Link href="/about" className="text-zinc-700 hover:text-zinc-900 text-sm">
               О нас
             </Link>
           </div>
 
-          {/* Search */}
-          <div ref={searchRef} className="relative w-64">
-            <Input
-              type="search"
-              placeholder="Поиск товаров..."
-              value={searchTerm}
-              onChange={(e) => {
-                setSearchTerm(e.target.value);
-                setShowResults(true);
-              }}
-              onFocus={() => setShowResults(true)}
-              variant="search"
-              icon={<Search className="h-4 w-4" />}
-            />
-            {showResults && hasResults && (
-              <div className="absolute top-full mt-1 w-full bg-white border border-gray-200 rounded shadow-lg z-20 max-h-64 overflow-y-auto">
-                {filtered.map((p) => (
-                  <Link
-                    key={p.id}
-                    href={`/product/${p.id}`}
-                    className="block p-2 hover:bg-gray-100 text-sm text-gray-900"
-                    onClick={closeSearch}
-                  >
-                    {p.title}
-                  </Link>
-                ))}
-              </div>
-            )}
-            {showResults && searchTerm.length >= 2 && filtered.length === 0 && (
-              <div className="absolute top-full mt-1 w-full bg-white border border-gray-200 rounded shadow-lg z-20 p-3">
-                <p className="text-sm text-gray-500">Ничего не найдено</p>
-              </div>
-            )}
-          </div>
+          {/* Search — hidden on home page */}
+          {!isHomePage && (
+            <div ref={searchRef} className="relative w-64">
+              <Input
+                type="search"
+                placeholder="Поиск товаров..."
+                value={searchTerm}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                  setShowResults(true);
+                }}
+                onFocus={() => setShowResults(true)}
+                variant="search"
+                icon={<Search className="h-4 w-4" />}
+              />
+              {showResults && hasResults && (
+                <div className="absolute top-full mt-1 w-full bg-white border border-gray-200 rounded shadow-lg z-20 max-h-64 overflow-y-auto">
+                  {filtered.map((p) => (
+                    <Link
+                      key={p.id}
+                      href={`/product/${p.id}`}
+                      className="block p-2 hover:bg-gray-100 text-sm text-gray-900"
+                      onClick={closeSearch}
+                    >
+                      {p.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+              {showResults && searchTerm.length >= 2 && filtered.length === 0 && (
+                <div className="absolute top-full mt-1 w-full bg-white border border-gray-200 rounded shadow-lg z-20 p-3">
+                  <p className="text-sm text-gray-500">Ничего не найдено</p>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Cart & Auth */}
           <div className="flex items-center space-x-4">

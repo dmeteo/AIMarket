@@ -99,3 +99,42 @@
 }
 
 /* marquee animations are generated dynamically per-component via <style> injection */
+
+@keyframes status-fade {
+	0%, 30% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	40%, 100% {
+		opacity: 0;
+		transform: translateY(-8px);
+	}
+}
+
+.animate-status-fade {
+	animation: status-fade 2.4s ease-in-out infinite;
+}
+
+@keyframes card-appear {
+	0% {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.animate-card-appear {
+	animation: card-appear 0.4s ease-out both;
+}
+
+@keyframes fade-in {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+.animate-fade-in {
+	animation: fade-in 0.2s ease-out both;
+}

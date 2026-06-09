@@ -6,6 +6,7 @@ interface ModalProps {
   onClose: () => void;
   children?: React.ReactNode;
   className?: string;
+  title?: string;
 }
 
 const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
@@ -15,6 +16,7 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
       onClose,
       children,
       className = '',
+      title,
     },
     ref
   ) => {
@@ -40,6 +42,9 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
           className="relative bg-white rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
+          {title && (
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
+          )}
           {children}
           <button
             className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"

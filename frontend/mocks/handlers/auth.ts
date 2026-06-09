@@ -22,6 +22,15 @@ const users: MockUser[] = [
     is_active: true,
     orders_count: 0,
   },
+  {
+    id: 100,
+    name: 'Петров Алексей',
+    email: 'seller@techpro.ru',
+    password: 'seller123',
+    role: 'SELLER',
+    is_active: true,
+    orders_count: 3,
+  },
 ];
 
 let nextId = 2;
