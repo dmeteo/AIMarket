@@ -53,7 +53,7 @@ def get_product(db: Annotated[Session, Depends(get_db)], product_id: int) -> Pro
     return product
 
 
-@router.post("/", response_model=ProductCreateResponse)
+@router.post("/", response_model=ProductCreateResponse, description="[Seller/Admin]",)
 def create_product(
     db: Annotated[Session, Depends(get_db)], 
     current_user: Annotated[User, Depends(require_seller_or_admin)], 
@@ -64,7 +64,7 @@ def create_product(
     return ProductCreateResponse(product=product_page)
     
     
-@router.patch("/{product_id}", response_model=ProductUpdateResponse)
+@router.patch("/{product_id}", response_model=ProductUpdateResponse, description="[Seller/Admin]")
 def update_product(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_seller_or_admin)],
@@ -76,7 +76,7 @@ def update_product(
     return updated_product
 
 
-@router.delete("/{product_id}", response_model=ProductDeleteResponse)
+@router.delete("/{product_id}", response_model=ProductDeleteResponse, description="[Seller/Admin]")
 def delete_product(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_seller_or_admin)],
@@ -97,7 +97,7 @@ def get_product_reviews(
     return product_reviews
 
 
-@router.post("/{product_id}/reviews", response_model=ReviewCreateResponse)
+@router.post("/{product_id}/reviews", response_model=ReviewCreateResponse, description="[Buyer User]",)
 def create_review(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(get_current_user)],
@@ -109,7 +109,7 @@ def create_review(
     return ReviewCreateResponse(review=review)
 
 
-@router.patch("/{product_id}/reviews/{review_id}", response_model=ReviewResponse)
+@router.patch("/{product_id}/reviews/{review_id}", response_model=ReviewResponse, description="[Buyer User]")
 def update_review(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(get_current_user)],
@@ -122,7 +122,7 @@ def update_review(
     return review
     
 
-@router.delete("/{product_id}/reviews/{review_id}", response_model=ReviewDeleteResponse, status_code=200)
+@router.delete("/{product_id}/reviews/{review_id}", response_model=ReviewDeleteResponse, status_code=200, description="[Buyer User]")
 def delete_review(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(get_current_user)],

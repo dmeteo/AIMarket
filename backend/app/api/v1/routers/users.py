@@ -13,7 +13,7 @@ from app.repositories.user import get_user_by_id
 router = APIRouter(prefix="/users", tags=["users"])
 
 
-@router.get("/me", response_model=CurrentUserResponse)
+@router.get("/me", response_model=CurrentUserResponse, description="[Buyer User]",)
 def me(current_user: Annotated[User, Depends(get_current_user)]) -> CurrentUserResponse:
     return CurrentUserResponse(id=current_user.id, name=current_user.name, email=current_user.email, role=current_user.role, is_active=current_user.is_active)
     
@@ -27,7 +27,7 @@ def get_user_profile(db: Annotated[Session, Depends(get_db)], user_id: int) -> U
     return UserProfileResponse(id=user.id, name=user.name, role=user.role)
 
 
-@router.post("/seller_application", response_model=ApplicationToBeSellerResponse)
+@router.post("/seller_application", response_model=ApplicationToBeSellerResponse, description="[Buyer User]",)
 def create_application_to_be_seller(
     db: Annotated[Session, Depends(get_db)], 
     current_user: Annotated[User, Depends(get_current_user)],
