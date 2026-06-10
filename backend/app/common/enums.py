@@ -22,7 +22,14 @@ class OrderStatus(Enum):
     RECEIVED = "RECEIVED"
     
     
-class PersonType(Enum):
+class PersonType(str, Enum):
     INDIVIDUAL_EMPLOYER = "INDIVIDUAL_EMPLOYER"
     SELF_EMPLOYED = "SELF_EMPLOYED"
     OOO = "OOO"
+    
+    
+class VerdictApplicationToBeSeller(str, Enum):
+    PENDING = "PENDING"
+    APPROVE = "APPROVE"
+    REJECT = "REJECT"
+    

@@ -31,4 +31,4 @@ class ApplicationToBeSellerRequest(BaseModel):
 
 
 class ApplicationToBeSellerResponse(BaseModel):
-    application_id: str
+    application_id: int
