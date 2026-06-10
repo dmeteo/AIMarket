@@ -1,6 +1,6 @@
 from pydantic import BaseModel, EmailStr
 
-from app.common.enums import Role
+from app.common.enums import PersonType, Role
 
 
 class UserProfileResponse(BaseModel):
@@ -15,3 +15,20 @@ class CurrentUserResponse(BaseModel):
     email: EmailStr
     role: Role
     is_active: bool
+    
+    
+class ApplicationToBeSellerRequest(BaseModel):
+    full_name: str
+    email: EmailStr
+    phone: str
+    description: str
+    person_type: PersonType
+    inn: str
+    ogrn: str
+    address: str
+    bic: str
+    checking_account: str
+
+
+class ApplicationToBeSellerResponse(BaseModel):
+    application_id: str

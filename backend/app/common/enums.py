@@ -20,3 +20,9 @@ class OrderStatus(Enum):
     DELIVERY = "DELIVERY"
     AWAIT_RECEIPT = "AWAIT_RECEIPT"
     RECEIVED = "RECEIVED"
+    
+    
+class PersonType(Enum):
+    INDIVIDUAL_EMPLOYER = "INDIVIDUAL_EMPLOYER"
+    SELF_EMPLOYED = "SELF_EMPLOYED"
+    OOO = "OOO"
