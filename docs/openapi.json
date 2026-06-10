@@ -5,6 +5,134 @@
     "version": "0.1.0"
   },
   "paths": {
+    "/api/v1/admin/applications_to_seller": {
+      "get": {
+        "tags": [
+          "admin [ADMIN only]"
+        ],
+        "summary": "Get Applications To Seller",
+        "operationId": "get_applications_to_seller_api_v1_admin_applications_to_seller_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationsToSellerResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/admin/applications_to_seller/{application_id}": {
+      "get": {
+        "tags": [
+          "admin [ADMIN only]"
+        ],
+        "summary": "Get Application To Seller",
+        "operationId": "get_application_to_seller_api_v1_admin_applications_to_seller__application_id__get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "application_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Application Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationToSellerResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "admin [ADMIN only]"
+        ],
+        "summary": "Verdict For Application To Seller",
+        "operationId": "verdict_for_application_to_seller_api_v1_admin_applications_to_seller__application_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "application_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Application Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerdictForApplicationToSellerRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerdictForApplicationToSellerResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/auth/register": {
       "post": {
         "tags": [
@@ -93,6 +221,7 @@
           "users"
         ],
         "summary": "Me",
+        "description": "[Buyer User]",
         "operationId": "me_api_v1_users_me_get",
         "responses": {
           "200": {
@@ -153,6 +282,53 @@
             }
           }
         }
+      }
+    },
+    "/api/v1/users/seller_application": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Create Application To Be Seller",
+        "description": "[Buyer User]",
+        "operationId": "create_application_to_be_seller_api_v1_users_seller_application_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplicationToBeSellerRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationToBeSellerResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/v1/products/": {
@@ -311,6 +487,7 @@
           "products"
         ],
         "summary": "Create Product",
+        "description": "[Seller/Admin]",
         "operationId": "create_product_api_v1_products__post",
         "security": [
           {
@@ -397,6 +574,7 @@
           "products"
         ],
         "summary": "Update Product",
+        "description": "[Seller/Admin]",
         "operationId": "update_product_api_v1_products__product_id__patch",
         "security": [
           {
@@ -452,6 +630,7 @@
           "products"
         ],
         "summary": "Delete Product",
+        "description": "[Seller/Admin]",
         "operationId": "delete_product_api_v1_products__product_id__delete",
         "security": [
           {
@@ -539,6 +718,7 @@
           "products"
         ],
         "summary": "Create Review",
+        "description": "[Buyer User]",
         "operationId": "create_review_api_v1_products__product_id__reviews_post",
         "security": [
           {
@@ -596,6 +776,7 @@
           "products"
         ],
         "summary": "Update Review",
+        "description": "[Buyer User]",
         "operationId": "update_review_api_v1_products__product_id__reviews__review_id__patch",
         "security": [
           {
@@ -660,6 +841,7 @@
           "products"
         ],
         "summary": "Delete Review",
+        "description": "[Buyer User]",
         "operationId": "delete_review_api_v1_products__product_id__reviews__review_id__delete",
         "security": [
           {
@@ -716,6 +898,7 @@
           "shops"
         ],
         "summary": "Create Shop",
+        "description": "[Seller/Admin]",
         "operationId": "create_shop_api_v1_shops__post",
         "requestBody": {
           "content": {
@@ -762,6 +945,7 @@
           "shops"
         ],
         "summary": "Update Shop",
+        "description": "[Seller/Admin]",
         "operationId": "update_shop_api_v1_shops__shop_id__patch",
         "security": [
           {
@@ -817,6 +1001,7 @@
           "shops"
         ],
         "summary": "Delete Shop",
+        "description": "[Seller/Admin]",
         "operationId": "delete_shop_api_v1_shops__shop_id__delete",
         "security": [
           {
@@ -904,6 +1089,7 @@
           "shops"
         ],
         "summary": "User Change Favourite Status Shop",
+        "description": "[Buyer User]",
         "operationId": "user_change_favourite_status_shop_api_v1_shops__shop_id__favourite_post",
         "security": [
           {
@@ -968,6 +1154,7 @@
           "brands"
         ],
         "summary": "Create Brand",
+        "description": "[ADMIN]",
         "operationId": "create_brand_api_v1_brands__post",
         "requestBody": {
           "content": {
@@ -1177,6 +1364,7 @@
           "brands"
         ],
         "summary": "Update Brand",
+        "description": "[ADMIN]",
         "operationId": "update_brand_api_v1_brands__brand_id__patch",
         "security": [
           {
@@ -1232,6 +1420,7 @@
           "brands"
         ],
         "summary": "Delete Brand",
+        "description": "[ADMIN]",
         "operationId": "delete_brand_api_v1_brands__brand_id__delete",
         "security": [
           {
@@ -1298,6 +1487,7 @@
           "categories"
         ],
         "summary": "Create Category",
+        "description": "[ADMIN]",
         "operationId": "create_category_api_v1_categories__post",
         "requestBody": {
           "content": {
@@ -1344,6 +1534,7 @@
           "categories"
         ],
         "summary": "Get Category",
+        "description": "[ADMIN]",
         "operationId": "get_category_api_v1_categories__category_id__get",
         "security": [
           {
@@ -1389,6 +1580,7 @@
           "categories"
         ],
         "summary": "Update Category",
+        "description": "[ADMIN]",
         "operationId": "update_category_api_v1_categories__category_id__patch",
         "security": [
           {
@@ -1444,6 +1636,7 @@
           "categories"
         ],
         "summary": "Delete Category",
+        "description": "[ADMIN]",
         "operationId": "delete_category_api_v1_categories__category_id__delete",
         "security": [
           {
@@ -1614,6 +1807,7 @@
           "cart"
         ],
         "summary": "Get Cart",
+        "description": "[Buyer User]",
         "operationId": "get_cart_api_v1_cart__get",
         "responses": {
           "200": {
@@ -1640,6 +1834,7 @@
           "cart"
         ],
         "summary": "Add Product To Cart",
+        "description": "[Buyer User]",
         "operationId": "add_product_to_cart_api_v1_cart_items_post",
         "requestBody": {
           "content": {
@@ -1686,6 +1881,7 @@
           "cart"
         ],
         "summary": "Update Cart Item Quantity",
+        "description": "[Buyer User]",
         "operationId": "update_cart_item_quantity_api_v1_cart_items__product_id__patch",
         "security": [
           {
@@ -1741,6 +1937,7 @@
           "cart"
         ],
         "summary": "Delete Cart Item",
+        "description": "[Buyer User]",
         "operationId": "delete_cart_item_api_v1_cart_items__product_id__delete",
         "security": [
           {
@@ -1934,6 +2131,190 @@
           "cart_id"
         ],
         "title": "AddProductToCartResponse"
+      },
+      "ApplicationToBeSellerRequest": {
+        "properties": {
+          "full_name": {
+            "type": "string",
+            "title": "Full Name"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "phone": {
+            "type": "string",
+            "title": "Phone"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "person_type": {
+            "$ref": "#/components/schemas/PersonType"
+          },
+          "inn": {
+            "type": "string",
+            "title": "Inn"
+          },
+          "ogrn": {
+            "type": "string",
+            "title": "Ogrn"
+          },
+          "address": {
+            "type": "string",
+            "title": "Address"
+          },
+          "bic": {
+            "type": "string",
+            "title": "Bic"
+          },
+          "checking_account": {
+            "type": "string",
+            "title": "Checking Account"
+          }
+        },
+        "type": "object",
+        "required": [
+          "full_name",
+          "email",
+          "phone",
+          "description",
+          "person_type",
+          "inn",
+          "ogrn",
+          "address",
+          "bic",
+          "checking_account"
+        ],
+        "title": "ApplicationToBeSellerRequest"
+      },
+      "ApplicationToBeSellerResponse": {
+        "properties": {
+          "application_id": {
+            "type": "integer",
+            "title": "Application Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "application_id"
+        ],
+        "title": "ApplicationToBeSellerResponse"
+      },
+      "ApplicationToSellerList": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "full_name": {
+            "type": "string",
+            "title": "Full Name"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "full_name",
+          "created_at"
+        ],
+        "title": "ApplicationToSellerList"
+      },
+      "ApplicationToSellerResponse": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "full_name": {
+            "type": "string",
+            "title": "Full Name"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "phone": {
+            "type": "string",
+            "title": "Phone"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "person_type": {
+            "$ref": "#/components/schemas/PersonType"
+          },
+          "inn": {
+            "type": "string",
+            "title": "Inn"
+          },
+          "ogrn": {
+            "type": "string",
+            "title": "Ogrn"
+          },
+          "address": {
+            "type": "string",
+            "title": "Address"
+          },
+          "bic": {
+            "type": "string",
+            "title": "Bic"
+          },
+          "checking_account": {
+            "type": "string",
+            "title": "Checking Account"
+          },
+          "verdict": {
+            "$ref": "#/components/schemas/VerdictApplicationToBeSeller"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "full_name",
+          "email",
+          "phone",
+          "description",
+          "person_type",
+          "inn",
+          "ogrn",
+          "address",
+          "bic",
+          "checking_account",
+          "verdict",
+          "created_at"
+        ],
+        "title": "ApplicationToSellerResponse"
+      },
+      "ApplicationsToSellerResponse": {
+        "properties": {
+          "applications": {
+            "items": {
+              "$ref": "#/components/schemas/ApplicationToSellerList"
+            },
+            "type": "array",
+            "title": "Applications"
+          }
+        },
+        "type": "object",
+        "required": [
+          "applications"
+        ],
+        "title": "ApplicationsToSellerResponse"
       },
       "AuthResponse": {
         "properties": {
@@ -2501,6 +2882,15 @@
           "orders"
         ],
         "title": "OrdersResponse"
+      },
+      "PersonType": {
+        "type": "string",
+        "enum": [
+          "INDIVIDUAL_EMPLOYER",
+          "SELF_EMPLOYED",
+          "OOO"
+        ],
+        "title": "PersonType"
       },
       "ProductCard": {
         "properties": {
@@ -3448,6 +3838,51 @@
           "type"
         ],
         "title": "ValidationError"
+      },
+      "VerdictApplicationToBeSeller": {
+        "type": "string",
+        "enum": [
+          "PENDING",
+          "APPROVE",
+          "REJECT"
+        ],
+        "title": "VerdictApplicationToBeSeller"
+      },
+      "VerdictForApplicationToSellerRequest": {
+        "properties": {
+          "verdict": {
+            "$ref": "#/components/schemas/VerdictApplicationToBeSeller"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          }
+        },
+        "type": "object",
+        "required": [
+          "verdict"
+        ],
+        "title": "VerdictForApplicationToSellerRequest"
+      },
+      "VerdictForApplicationToSellerResponse": {
+        "properties": {
+          "application_id": {
+            "type": "integer",
+            "title": "Application Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "application_id"
+        ],
+        "title": "VerdictForApplicationToSellerResponse"
       }
     },
     "securitySchemes": {
