@@ -19,6 +19,7 @@ class User(BaseModelMixin):
     reviews: Mapped[list["Review"]] = relationship(back_populates="author")
     favourites: Mapped[list["Shop"]] = relationship(secondary="favourites_shops", back_populates="favourites")
     seller: Mapped["Seller"] = relationship(back_populates="user")
+    application: Mapped[list["ApplicationToSeller"]] = relationship(back_populates="user")
     
     
     
@@ -35,12 +36,12 @@ class Address(BaseModelMixin):
 class Seller(BaseModelMixin):
     __tablename__ = "seller"
 
-    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
-    full_name: Mapped[int] = mapped_column(nullable=False)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False, unique=True)
+    full_name: Mapped[str] = mapped_column(nullable=False)
     email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
     phone: Mapped[str] = mapped_column(String(11), unique=True, nullable=False)
     person_type: Mapped[str] = mapped_column(nullable=False)
-    inn: Mapped[str] = mapped_column(String(10, 12), nullable=False)
+    inn: Mapped[str] = mapped_column(String(12), nullable=False)
     ogrn: Mapped[str] = mapped_column(nullable=False)
     address: Mapped[str] = mapped_column(nullable=False)
     bic: Mapped[str] = mapped_column(nullable=False)
@@ -54,12 +55,12 @@ class ApplicationToSeller(BaseModelMixin):
     __tablename__ = "application_to_seller"
 
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
-    full_name: Mapped[int] = mapped_column(nullable=False)
-    email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
-    phone: Mapped[str] = mapped_column(String(11), unique=True, nullable=False)
+    full_name: Mapped[str] = mapped_column(nullable=False)
+    email: Mapped[str] = mapped_column(String(255), nullable=False)
+    phone: Mapped[str] = mapped_column(String(11), nullable=False)
     description: Mapped[str] = mapped_column(nullable=True)
     person_type: Mapped[str] = mapped_column(nullable=False)
-    inn: Mapped[str] = mapped_column(String(10, 12), nullable=False)
+    inn: Mapped[str] = mapped_column(String(12), nullable=False)
     ogrn: Mapped[str] = mapped_column(nullable=False)
     address: Mapped[str] = mapped_column(nullable=False)
     bic: Mapped[str] = mapped_column(nullable=False)
@@ -67,5 +68,5 @@ class ApplicationToSeller(BaseModelMixin):
     verdict: Mapped[str] = mapped_column(default=VerdictApplicationToBeSeller.PENDING.value, nullable=False)
     rejection_reason: Mapped[str] = mapped_column(nullable=True)
 
-    user: Mapped["User"] = relationship(back_populates="seller")
+    user: Mapped["User"] = relationship(back_populates="application")
 
