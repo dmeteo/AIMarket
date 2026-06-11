@@ -2213,6 +2213,9 @@
             "type": "string",
             "title": "Full Name"
           },
+          "verdict": {
+            "$ref": "#/components/schemas/VerdictApplicationToBeSeller"
+          },
           "created_at": {
             "type": "string",
             "format": "date",
@@ -2223,6 +2226,7 @@
         "required": [
           "id",
           "full_name",
+          "verdict",
           "created_at"
         ],
         "title": "ApplicationToSellerList"
