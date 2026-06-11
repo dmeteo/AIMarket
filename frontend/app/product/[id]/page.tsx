@@ -1,21 +1,46 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
 import Header from '../../../components/Header';
 import ProductGallery from '../../../components/ProductGallery';
 import ProductInfo from '../../../components/ProductInfo';
 import ProductDescription from '../../../components/ProductDescription';
 import ProductActions from '../../../components/ProductActions';
+import ReviewsSection from '../../../components/ReviewsSection';
 import Skeleton from '../../../components/ui/Skeleton';
 import { useProduct } from '../../../hooks/useProducts';
+import { reviewService, type Review } from '../../../services/review.service';
+import ShopCard from '../../../components/ShopCard';
+import shopsData from '../../../mocks/data/seller-shops.json';
+import { ChevronRight } from 'lucide-react';
 
 export default function ProductPage() {
   const params = useParams();
   const id = parseInt(params.id as string, 10);
   const { data, status, error } = useProduct(id);
   const product = data;
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const reviewsRef = useRef<HTMLDivElement>(null);
+
+  // Find shop by product's shop_id
+  const shop = product
+    ? (shopsData as { shops: Array<{ id: number; seller_id: number; name: string; description: string; logo_url: string | null; products_count: number; orders_count: number; revenue: number; is_active: boolean; created_at: string }> }).shops.find((s) => s.id === product.shop_id) ?? null
+    : null;
+
+  useEffect(() => {
+    if (product) {
+      reviewService.getReviews(id).then(setReviews).catch(() => {});
+    }
+  }, [product, id]);
+
+  const handleRatingClick = () => {
+    reviewsRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // Build breadcrumbs from categories
+  const breadcrumbs = product?.categories ?? [];
 
   if (status === 'pending') {
     return (
@@ -51,7 +76,6 @@ export default function ProductPage() {
               href="/"
               className="inline-flex items-center text-zinc-900 hover:underline"
             >
-              <ArrowLeft className="h-4 w-4 mr-2" />
               Вернуться на главную
             </Link>
           </div>
@@ -65,15 +89,26 @@ export default function ProductPage() {
       <Header />
       <main className="py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Breadcrumb */}
-          <nav className="mb-6">
-            <Link
-              href="/"
-              className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700"
-            >
-              <ArrowLeft className="h-4 w-4 mr-1" />
-              Назад к каталогу
+          {/* Breadcrumbs */}
+          <nav className="flex items-center gap-1.5 text-sm mb-6">
+            <Link href="/" className="text-gray-500 hover:text-gray-700 transition-colors">
+              Главная
             </Link>
+            {breadcrumbs.map((cat, i) => (
+              <span key={cat.id} className="flex items-center gap-1.5">
+                <ChevronRight className="h-3.5 w-3.5 text-gray-400" />
+                {i === breadcrumbs.length - 1 ? (
+                  <span className="text-gray-900 font-medium">{cat.title}</span>
+                ) : (
+                  <Link
+                    href={`/category/${cat.id}`}
+                    className="text-gray-500 hover:text-gray-700 transition-colors"
+                  >
+                    {cat.title}
+                  </Link>
+                )}
+              </span>
+            ))}
           </nav>
 
           {/* Product grid */}
@@ -89,10 +124,12 @@ export default function ProductPage() {
                 finalPrice={product.final_price}
                 discountPercent={product.discount_percent}
                 rating={product.rating}
-                category={product.category}
+                reviewsCount={product.reviews_count}
+                category={product.categories?.[0]?.title}
                 isNew={product.isNew ?? false}
                 isBestSeller={product.isBestSeller ?? false}
                 quantity={product.quantity}
+                onRatingClick={handleRatingClick}
               />
 
               <ProductActions
@@ -102,12 +139,19 @@ export default function ProductPage() {
                 finalPrice={product.final_price}
                 stock={product.quantity}
               />
+
+              {shop && <ShopCard shop={shop} />}
             </div>
           </div>
 
           {/* Description — full width below */}
           <div className="mt-12 border-t border-gray-200 pt-8">
             <ProductDescription description={product.description} />
+          </div>
+
+          {/* Reviews */}
+          <div ref={reviewsRef}>
+            <ReviewsSection reviews={reviews} productId={product.id} />
           </div>
         </div>
       </main>

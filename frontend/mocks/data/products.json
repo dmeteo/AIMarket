@@ -14,17 +14,21 @@
       "discount_percent": "0",
       "final_price": "2690",
       "rating": 4.5,
-      "category": "Электроника",
       "quantity": 150,
       "shop_ids": [
         1,
         2
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 29,
       "created_at": "2026-05-01T16:00:00Z",
-      "updated_at": "2026-05-03T16:00:00Z"
+      "updated_at": "2026-05-03T16:00:00Z",
+      "categories": [
+        {
+          "id": 1,
+          "title": "Электроника"
+        }
+      ]
     },
     {
       "id": 2,
@@ -39,17 +43,21 @@
       "discount_percent": "10",
       "final_price": "3230",
       "rating": 4.2,
-      "category": "Электроника",
       "quantity": 89,
       "shop_ids": [
         1,
         3
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 16,
       "created_at": "2026-05-03T18:00:00Z",
-      "updated_at": "2026-05-04T18:00:00Z"
+      "updated_at": "2026-05-04T18:00:00Z",
+      "categories": [
+        {
+          "id": 1,
+          "title": "Электроника"
+        }
+      ]
     },
     {
       "id": 3,
@@ -63,16 +71,20 @@
       "discount_percent": "0",
       "final_price": "1790",
       "rating": 3.8,
-      "category": "Аксессуары",
       "quantity": 300,
       "shop_ids": [
         1
       ],
-      "category_id": 2,
       "is_active": true,
       "reviews_count": 13,
       "created_at": "2026-05-05T18:00:00Z",
-      "updated_at": "2026-05-09T18:00:00Z"
+      "updated_at": "2026-05-09T18:00:00Z",
+      "categories": [
+        {
+          "id": 7,
+          "title": "Аксессуары"
+        }
+      ]
     },
     {
       "id": 4,
@@ -88,17 +100,21 @@
       "discount_percent": "15",
       "final_price": "3820",
       "rating": 4.7,
-      "category": "Электроника",
       "quantity": 200,
       "shop_ids": [
         1,
         3
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 17,
       "created_at": "2026-05-07T18:00:00Z",
-      "updated_at": "2026-05-09T18:00:00Z"
+      "updated_at": "2026-05-09T18:00:00Z",
+      "categories": [
+        {
+          "id": 1,
+          "title": "Электроника"
+        }
+      ]
     },
     {
       "id": 5,
@@ -112,18 +128,26 @@
       "price": "5390",
       "discount_percent": "20",
       "final_price": "4310",
-      "rating": 4.0,
-      "category": "Периферия",
+      "rating": 4,
       "quantity": 75,
       "shop_ids": [
         1,
         2
       ],
-      "category_id": 3,
       "is_active": true,
       "reviews_count": 32,
       "created_at": "2026-05-09T12:00:00Z",
-      "updated_at": "2026-05-11T12:00:00Z"
+      "updated_at": "2026-05-11T12:00:00Z",
+      "categories": [
+        {
+          "id": 2,
+          "title": "Компьютеры"
+        },
+        {
+          "id": 23,
+          "title": "Периферия"
+        }
+      ]
     },
     {
       "id": 6,
@@ -137,16 +161,20 @@
       "discount_percent": "0",
       "final_price": "2240",
       "rating": 4.3,
-      "category": "Аксессуары",
       "quantity": 500,
       "shop_ids": [
         2
       ],
-      "category_id": 2,
       "is_active": true,
       "reviews_count": 48,
       "created_at": "2026-05-11T13:00:00Z",
-      "updated_at": "2026-05-13T13:00:00Z"
+      "updated_at": "2026-05-13T13:00:00Z",
+      "categories": [
+        {
+          "id": 7,
+          "title": "Аксессуары"
+        }
+      ]
     },
     {
       "id": 7,
@@ -161,16 +189,24 @@
       "discount_percent": "5",
       "final_price": "2990",
       "rating": 4.6,
-      "category": "Периферия",
       "quantity": 120,
       "shop_ids": [
         3
       ],
-      "category_id": 3,
       "is_active": true,
       "reviews_count": 29,
       "created_at": "2026-05-13T14:00:00Z",
-      "updated_at": "2026-05-13T14:00:00Z"
+      "updated_at": "2026-05-13T14:00:00Z",
+      "categories": [
+        {
+          "id": 2,
+          "title": "Компьютеры"
+        },
+        {
+          "id": 23,
+          "title": "Периферия"
+        }
+      ]
     },
     {
       "id": 8,
@@ -184,16 +220,20 @@
       "discount_percent": "0",
       "final_price": "4040",
       "rating": 4.1,
-      "category": "Аксессуары",
       "quantity": 180,
       "shop_ids": [
         3
       ],
-      "category_id": 2,
       "is_active": true,
       "reviews_count": 31,
       "created_at": "2026-05-15T16:00:00Z",
-      "updated_at": "2026-05-18T16:00:00Z"
+      "updated_at": "2026-05-18T16:00:00Z",
+      "categories": [
+        {
+          "id": 7,
+          "title": "Аксессуары"
+        }
+      ]
     },
     {
       "id": 9,
@@ -208,16 +248,24 @@
       "discount_percent": "12",
       "final_price": "4350",
       "rating": 3.9,
-      "category": "Периферия",
       "quantity": 95,
       "shop_ids": [
         3
       ],
-      "category_id": 3,
       "is_active": true,
       "reviews_count": 3,
       "created_at": "2026-05-17T08:00:00Z",
-      "updated_at": "2026-05-21T08:00:00Z"
+      "updated_at": "2026-05-21T08:00:00Z",
+      "categories": [
+        {
+          "id": 2,
+          "title": "Компьютеры"
+        },
+        {
+          "id": 23,
+          "title": "Периферия"
+        }
+      ]
     },
     {
       "id": 10,
@@ -231,16 +279,20 @@
       "discount_percent": "0",
       "final_price": "5840",
       "rating": 4.8,
-      "category": "Для дома",
       "quantity": 60,
       "shop_ids": [
         4
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 21,
       "created_at": "2026-05-19T16:00:00Z",
-      "updated_at": "2026-05-24T16:00:00Z"
+      "updated_at": "2026-05-24T16:00:00Z",
+      "categories": [
+        {
+          "id": 8,
+          "title": "Умный дом"
+        }
+      ]
     },
     {
       "id": 11,
@@ -255,16 +307,24 @@
       "discount_percent": "0",
       "final_price": "3140",
       "rating": 4.2,
-      "category": "Гаджеты",
       "quantity": 250,
       "shop_ids": [
         4
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 49,
       "created_at": "2026-05-21T09:00:00Z",
-      "updated_at": "2026-05-26T09:00:00Z"
+      "updated_at": "2026-05-26T09:00:00Z",
+      "categories": [
+        {
+          "id": 1,
+          "title": "Электроника"
+        },
+        {
+          "id": 14,
+          "title": "Умные часы"
+        }
+      ]
     },
     {
       "id": 12,
@@ -280,16 +340,20 @@
       "discount_percent": "5",
       "final_price": "3840",
       "rating": 4.6,
-      "category": "Для дома",
       "quantity": 40,
       "shop_ids": [
         4
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 33,
       "created_at": "2026-05-23T09:00:00Z",
-      "updated_at": "2026-05-23T09:00:00Z"
+      "updated_at": "2026-05-23T09:00:00Z",
+      "categories": [
+        {
+          "id": 8,
+          "title": "Умный дом"
+        }
+      ]
     },
     {
       "id": 13,
@@ -303,16 +367,20 @@
       "discount_percent": "10",
       "final_price": "4450",
       "rating": 3.9,
-      "category": "Для дома",
       "quantity": 110,
       "shop_ids": [
         5
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 44,
       "created_at": "2026-05-25T08:00:00Z",
-      "updated_at": "2026-05-29T08:00:00Z"
+      "updated_at": "2026-05-29T08:00:00Z",
+      "categories": [
+        {
+          "id": 8,
+          "title": "Умный дом"
+        }
+      ]
     },
     {
       "id": 14,
@@ -326,16 +394,24 @@
       "discount_percent": "0",
       "final_price": "2240",
       "rating": 4.4,
-      "category": "Периферия",
       "quantity": 220,
       "shop_ids": [
         5
       ],
-      "category_id": 3,
       "is_active": true,
       "reviews_count": 25,
       "created_at": "2026-05-27T16:00:00Z",
-      "updated_at": "2026-05-29T16:00:00Z"
+      "updated_at": "2026-05-29T16:00:00Z",
+      "categories": [
+        {
+          "id": 2,
+          "title": "Компьютеры"
+        },
+        {
+          "id": 23,
+          "title": "Периферия"
+        }
+      ]
     },
     {
       "id": 15,
@@ -351,16 +427,24 @@
       "discount_percent": "20",
       "final_price": "5390",
       "rating": 4.9,
-      "category": "Мониторы",
       "quantity": 30,
       "shop_ids": [
         5
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 44,
       "created_at": "2026-05-29T10:00:00Z",
-      "updated_at": "2026-06-03T10:00:00Z"
+      "updated_at": "2026-06-03T10:00:00Z",
+      "categories": [
+        {
+          "id": 2,
+          "title": "Компьютеры"
+        },
+        {
+          "id": 22,
+          "title": "Мониторы"
+        }
+      ]
     },
     {
       "id": 16,
@@ -374,16 +458,20 @@
       "discount_percent": "0",
       "final_price": "1790",
       "rating": 3.5,
-      "category": "Аксессуары",
       "quantity": 400,
       "shop_ids": [
         6
       ],
-      "category_id": 2,
       "is_active": true,
       "reviews_count": 34,
       "created_at": "2026-05-31T10:00:00Z",
-      "updated_at": "2026-06-01T10:00:00Z"
+      "updated_at": "2026-06-01T10:00:00Z",
+      "categories": [
+        {
+          "id": 7,
+          "title": "Аксессуары"
+        }
+      ]
     },
     {
       "id": 17,
@@ -398,16 +486,20 @@
       "discount_percent": "8",
       "final_price": "3300",
       "rating": 4.1,
-      "category": "Накопители",
       "quantity": 160,
       "shop_ids": [
         6
       ],
-      "category_id": 7,
       "is_active": true,
       "reviews_count": 14,
       "created_at": "2026-06-02T14:00:00Z",
-      "updated_at": "2026-06-05T14:00:00Z"
+      "updated_at": "2026-06-05T14:00:00Z",
+      "categories": [
+        {
+          "id": 6,
+          "title": "Накопители"
+        }
+      ]
     },
     {
       "id": 18,
@@ -421,16 +513,20 @@
       "discount_percent": "12",
       "final_price": "3950",
       "rating": 4.3,
-      "category": "Аксессуары",
       "quantity": 85,
       "shop_ids": [
         6
       ],
-      "category_id": 2,
       "is_active": true,
       "reviews_count": 29,
       "created_at": "2026-06-04T15:00:00Z",
-      "updated_at": "2026-06-06T15:00:00Z"
+      "updated_at": "2026-06-06T15:00:00Z",
+      "categories": [
+        {
+          "id": 7,
+          "title": "Аксессуары"
+        }
+      ]
     },
     {
       "id": 19,
@@ -444,16 +540,20 @@
       "discount_percent": "0",
       "final_price": "5390",
       "rating": 4.7,
-      "category": "Развлечения",
       "quantity": 45,
       "shop_ids": [
         7
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 38,
       "created_at": "2026-06-06T16:00:00Z",
-      "updated_at": "2026-06-06T16:00:00Z"
+      "updated_at": "2026-06-06T16:00:00Z",
+      "categories": [
+        {
+          "id": 11,
+          "title": "Развлечения"
+        }
+      ]
     },
     {
       "id": 20,
@@ -466,17 +566,21 @@
       "price": "6290",
       "discount_percent": "5",
       "final_price": "5980",
-      "rating": 4.0,
-      "category": "Книги",
+      "rating": 4,
       "quantity": 70,
       "shop_ids": [
         7
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 0,
       "created_at": "2026-06-08T12:00:00Z",
-      "updated_at": "2026-06-12T12:00:00Z"
+      "updated_at": "2026-06-12T12:00:00Z",
+      "categories": [
+        {
+          "id": 10,
+          "title": "Книги"
+        }
+      ]
     },
     {
       "id": 21,
@@ -491,16 +595,24 @@
       "discount_percent": "8",
       "final_price": "3950",
       "rating": 4.4,
-      "category": "Гаджеты",
       "quantity": 180,
       "shop_ids": [
         8
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 21,
       "created_at": "2026-06-10T16:00:00Z",
-      "updated_at": "2026-06-11T16:00:00Z"
+      "updated_at": "2026-06-11T16:00:00Z",
+      "categories": [
+        {
+          "id": 1,
+          "title": "Электроника"
+        },
+        {
+          "id": 14,
+          "title": "Умные часы"
+        }
+      ]
     },
     {
       "id": 22,
@@ -515,16 +627,20 @@
       "discount_percent": "0",
       "final_price": "1890",
       "rating": 4.1,
-      "category": "Электроника",
       "quantity": 350,
       "shop_ids": [
         8
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 44,
       "created_at": "2026-06-12T08:00:00Z",
-      "updated_at": "2026-06-12T08:00:00Z"
+      "updated_at": "2026-06-12T08:00:00Z",
+      "categories": [
+        {
+          "id": 1,
+          "title": "Электроника"
+        }
+      ]
     },
     {
       "id": 23,
@@ -539,16 +655,20 @@
       "discount_percent": "10",
       "final_price": "2240",
       "rating": 4.3,
-      "category": "Электроника",
       "quantity": 220,
       "shop_ids": [
         8
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 8,
       "created_at": "2026-06-14T10:00:00Z",
-      "updated_at": "2026-06-16T10:00:00Z"
+      "updated_at": "2026-06-16T10:00:00Z",
+      "categories": [
+        {
+          "id": 1,
+          "title": "Электроника"
+        }
+      ]
     },
     {
       "id": 24,
@@ -563,16 +683,24 @@
       "discount_percent": "5",
       "final_price": "3600",
       "rating": 4.5,
-      "category": "Периферия",
       "quantity": 65,
       "shop_ids": [
         9
       ],
-      "category_id": 3,
       "is_active": true,
       "reviews_count": 12,
       "created_at": "2026-06-16T11:00:00Z",
-      "updated_at": "2026-06-16T11:00:00Z"
+      "updated_at": "2026-06-16T11:00:00Z",
+      "categories": [
+        {
+          "id": 2,
+          "title": "Компьютеры"
+        },
+        {
+          "id": 23,
+          "title": "Периферия"
+        }
+      ]
     },
     {
       "id": 25,
@@ -586,16 +714,24 @@
       "discount_percent": "0",
       "final_price": "2890",
       "rating": 4.2,
-      "category": "Периферия",
       "quantity": 140,
       "shop_ids": [
         9
       ],
-      "category_id": 3,
       "is_active": true,
       "reviews_count": 22,
       "created_at": "2026-06-18T10:00:00Z",
-      "updated_at": "2026-06-22T10:00:00Z"
+      "updated_at": "2026-06-22T10:00:00Z",
+      "categories": [
+        {
+          "id": 2,
+          "title": "Компьютеры"
+        },
+        {
+          "id": 23,
+          "title": "Периферия"
+        }
+      ]
     },
     {
       "id": 26,
@@ -608,17 +744,21 @@
       "price": "890",
       "discount_percent": "0",
       "final_price": "890",
-      "rating": 4.0,
-      "category": "Аксессуары",
+      "rating": 4,
       "quantity": 500,
       "shop_ids": [
         9
       ],
-      "category_id": 2,
       "is_active": true,
       "reviews_count": 4,
       "created_at": "2026-06-20T18:00:00Z",
-      "updated_at": "2026-06-20T18:00:00Z"
+      "updated_at": "2026-06-20T18:00:00Z",
+      "categories": [
+        {
+          "id": 7,
+          "title": "Аксессуары"
+        }
+      ]
     },
     {
       "id": 27,
@@ -632,16 +772,20 @@
       "discount_percent": "15",
       "final_price": "1100",
       "rating": 3.9,
-      "category": "Электроника",
       "quantity": 400,
       "shop_ids": [
         10
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 24,
       "created_at": "2026-06-22T15:00:00Z",
-      "updated_at": "2026-06-22T15:00:00Z"
+      "updated_at": "2026-06-22T15:00:00Z",
+      "categories": [
+        {
+          "id": 1,
+          "title": "Электроника"
+        }
+      ]
     },
     {
       "id": 28,
@@ -655,16 +799,24 @@
       "discount_percent": "0",
       "final_price": "1690",
       "rating": 4.1,
-      "category": "Периферия",
       "quantity": 280,
       "shop_ids": [
         10
       ],
-      "category_id": 3,
       "is_active": true,
       "reviews_count": 14,
       "created_at": "2026-06-24T16:00:00Z",
-      "updated_at": "2026-06-25T16:00:00Z"
+      "updated_at": "2026-06-25T16:00:00Z",
+      "categories": [
+        {
+          "id": 2,
+          "title": "Компьютеры"
+        },
+        {
+          "id": 23,
+          "title": "Периферия"
+        }
+      ]
     },
     {
       "id": 29,
@@ -678,16 +830,20 @@
       "discount_percent": "10",
       "final_price": "1340",
       "rating": 3.7,
-      "category": "Аксессуары",
       "quantity": 320,
       "shop_ids": [
         10
       ],
-      "category_id": 2,
       "is_active": true,
       "reviews_count": 48,
       "created_at": "2026-06-26T17:00:00Z",
-      "updated_at": "2026-06-27T17:00:00Z"
+      "updated_at": "2026-06-27T17:00:00Z",
+      "categories": [
+        {
+          "id": 7,
+          "title": "Аксессуары"
+        }
+      ]
     },
     {
       "id": 30,
@@ -700,17 +856,21 @@
       "price": "1190",
       "discount_percent": "0",
       "final_price": "1190",
-      "rating": 4.0,
-      "category": "Для дома",
+      "rating": 4,
       "quantity": 200,
       "shop_ids": [
         11
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 32,
       "created_at": "2026-06-28T08:00:00Z",
-      "updated_at": "2026-06-30T08:00:00Z"
+      "updated_at": "2026-06-30T08:00:00Z",
+      "categories": [
+        {
+          "id": 8,
+          "title": "Умный дом"
+        }
+      ]
     },
     {
       "id": 31,
@@ -724,16 +884,20 @@
       "discount_percent": "20",
       "final_price": "550",
       "rating": 3.8,
-      "category": "Для дома",
       "quantity": 450,
       "shop_ids": [
         11
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 42,
       "created_at": "2026-06-30T12:00:00Z",
-      "updated_at": "2026-07-04T12:00:00Z"
+      "updated_at": "2026-07-04T12:00:00Z",
+      "categories": [
+        {
+          "id": 8,
+          "title": "Умный дом"
+        }
+      ]
     },
     {
       "id": 32,
@@ -747,16 +911,20 @@
       "discount_percent": "0",
       "final_price": "590",
       "rating": 3.6,
-      "category": "Аксессуары",
       "quantity": 600,
       "shop_ids": [
         11
       ],
-      "category_id": 2,
       "is_active": true,
       "reviews_count": 8,
       "created_at": "2026-07-02T09:00:00Z",
-      "updated_at": "2026-07-02T09:00:00Z"
+      "updated_at": "2026-07-02T09:00:00Z",
+      "categories": [
+        {
+          "id": 7,
+          "title": "Аксессуары"
+        }
+      ]
     },
     {
       "id": 33,
@@ -770,16 +938,24 @@
       "discount_percent": "0",
       "final_price": "490",
       "rating": 3.5,
-      "category": "Периферия",
       "quantity": 800,
       "shop_ids": [
         12
       ],
-      "category_id": 3,
       "is_active": true,
       "reviews_count": 39,
       "created_at": "2026-07-04T14:00:00Z",
-      "updated_at": "2026-07-09T14:00:00Z"
+      "updated_at": "2026-07-09T14:00:00Z",
+      "categories": [
+        {
+          "id": 2,
+          "title": "Компьютеры"
+        },
+        {
+          "id": 23,
+          "title": "Периферия"
+        }
+      ]
     },
     {
       "id": 34,
@@ -793,16 +969,20 @@
       "discount_percent": "0",
       "final_price": "790",
       "rating": 4.2,
-      "category": "Аксессуары",
       "quantity": 380,
       "shop_ids": [
         12
       ],
-      "category_id": 2,
       "is_active": true,
       "reviews_count": 36,
       "created_at": "2026-07-06T10:00:00Z",
-      "updated_at": "2026-07-09T10:00:00Z"
+      "updated_at": "2026-07-09T10:00:00Z",
+      "categories": [
+        {
+          "id": 7,
+          "title": "Аксессуары"
+        }
+      ]
     },
     {
       "id": 35,
@@ -816,16 +996,20 @@
       "discount_percent": "10",
       "final_price": "620",
       "rating": 3.9,
-      "category": "Аксессуары",
       "quantity": 550,
       "shop_ids": [
         12
       ],
-      "category_id": 2,
       "is_active": true,
       "reviews_count": 29,
       "created_at": "2026-07-08T09:00:00Z",
-      "updated_at": "2026-07-11T09:00:00Z"
+      "updated_at": "2026-07-11T09:00:00Z",
+      "categories": [
+        {
+          "id": 7,
+          "title": "Аксессуары"
+        }
+      ]
     },
     {
       "id": 36,
@@ -839,17 +1023,25 @@
       "price": "1590",
       "discount_percent": "5",
       "final_price": "1510",
-      "rating": 4.0,
-      "category": "Периферия",
+      "rating": 4,
       "quantity": 190,
       "shop_ids": [
         13
       ],
-      "category_id": 3,
       "is_active": true,
       "reviews_count": 39,
       "created_at": "2026-07-10T08:00:00Z",
-      "updated_at": "2026-07-14T08:00:00Z"
+      "updated_at": "2026-07-14T08:00:00Z",
+      "categories": [
+        {
+          "id": 2,
+          "title": "Компьютеры"
+        },
+        {
+          "id": 23,
+          "title": "Периферия"
+        }
+      ]
     },
     {
       "id": 37,
@@ -863,16 +1055,24 @@
       "discount_percent": "15",
       "final_price": "1690",
       "rating": 3.8,
-      "category": "Периферия",
       "quantity": 150,
       "shop_ids": [
         13
       ],
-      "category_id": 3,
       "is_active": true,
       "reviews_count": 21,
       "created_at": "2026-07-12T09:00:00Z",
-      "updated_at": "2026-07-15T09:00:00Z"
+      "updated_at": "2026-07-15T09:00:00Z",
+      "categories": [
+        {
+          "id": 2,
+          "title": "Компьютеры"
+        },
+        {
+          "id": 23,
+          "title": "Периферия"
+        }
+      ]
     },
     {
       "id": 38,
@@ -886,16 +1086,24 @@
       "discount_percent": "0",
       "final_price": "890",
       "rating": 4.1,
-      "category": "Периферия",
       "quantity": 260,
       "shop_ids": [
         13
       ],
-      "category_id": 3,
       "is_active": true,
       "reviews_count": 16,
       "created_at": "2026-07-14T18:00:00Z",
-      "updated_at": "2026-07-15T18:00:00Z"
+      "updated_at": "2026-07-15T18:00:00Z",
+      "categories": [
+        {
+          "id": 2,
+          "title": "Компьютеры"
+        },
+        {
+          "id": 23,
+          "title": "Периферия"
+        }
+      ]
     },
     {
       "id": 39,
@@ -909,16 +1117,20 @@
       "discount_percent": "10",
       "final_price": "2060",
       "rating": 4.3,
-      "category": "Для дома",
       "quantity": 90,
       "shop_ids": [
         14
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 12,
       "created_at": "2026-07-16T12:00:00Z",
-      "updated_at": "2026-07-16T12:00:00Z"
+      "updated_at": "2026-07-16T12:00:00Z",
+      "categories": [
+        {
+          "id": 8,
+          "title": "Умный дом"
+        }
+      ]
     },
     {
       "id": 40,
@@ -931,17 +1143,21 @@
       "price": "990",
       "discount_percent": "0",
       "final_price": "990",
-      "rating": 4.0,
-      "category": "Для дома",
+      "rating": 4,
       "quantity": 340,
       "shop_ids": [
         14
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 26,
       "created_at": "2026-07-18T11:00:00Z",
-      "updated_at": "2026-07-21T11:00:00Z"
+      "updated_at": "2026-07-21T11:00:00Z",
+      "categories": [
+        {
+          "id": 8,
+          "title": "Умный дом"
+        }
+      ]
     },
     {
       "id": 101,
@@ -956,17 +1172,21 @@
       "discount_percent": "5",
       "final_price": "85490",
       "rating": 4.8,
-      "category": "Электроника",
       "quantity": 45,
       "shop_ids": [
         1,
         2
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 16,
       "created_at": "2026-07-20T11:00:00Z",
-      "updated_at": "2026-07-23T11:00:00Z"
+      "updated_at": "2026-07-23T11:00:00Z",
+      "categories": [
+        {
+          "id": 1,
+          "title": "Электроника"
+        }
+      ]
     },
     {
       "id": 102,
@@ -981,17 +1201,21 @@
       "discount_percent": "10",
       "final_price": "67490",
       "rating": 4.6,
-      "category": "Электроника",
       "quantity": 28,
       "shop_ids": [
         1,
         3
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 41,
       "created_at": "2026-07-22T13:00:00Z",
-      "updated_at": "2026-07-22T13:00:00Z"
+      "updated_at": "2026-07-22T13:00:00Z",
+      "categories": [
+        {
+          "id": 1,
+          "title": "Электроника"
+        }
+      ]
     },
     {
       "id": 103,
@@ -1005,16 +1229,20 @@
       "discount_percent": "0",
       "final_price": "42990",
       "rating": 4.5,
-      "category": "Электроника",
       "quantity": 67,
       "shop_ids": [
         1
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 13,
       "created_at": "2026-07-24T10:00:00Z",
-      "updated_at": "2026-07-25T10:00:00Z"
+      "updated_at": "2026-07-25T10:00:00Z",
+      "categories": [
+        {
+          "id": 1,
+          "title": "Электроника"
+        }
+      ]
     },
     {
       "id": 104,
@@ -1029,17 +1257,25 @@
       "discount_percent": "15",
       "final_price": "16140",
       "rating": 4.4,
-      "category": "Гаджеты",
       "quantity": 120,
       "shop_ids": [
         1,
         3
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 34,
       "created_at": "2026-07-26T08:00:00Z",
-      "updated_at": "2026-07-30T08:00:00Z"
+      "updated_at": "2026-07-30T08:00:00Z",
+      "categories": [
+        {
+          "id": 1,
+          "title": "Электроника"
+        },
+        {
+          "id": 14,
+          "title": "Умные часы"
+        }
+      ]
     },
     {
       "id": 105,
@@ -1053,17 +1289,21 @@
       "discount_percent": "0",
       "final_price": "24990",
       "rating": 4.7,
-      "category": "Электроника",
       "quantity": 85,
       "shop_ids": [
         1,
         2
       ],
-      "category_id": 1,
       "is_active": true,
       "reviews_count": 9,
       "created_at": "2026-07-28T08:00:00Z",
-      "updated_at": "2026-07-29T08:00:00Z"
+      "updated_at": "2026-07-29T08:00:00Z",
+      "categories": [
+        {
+          "id": 1,
+          "title": "Электроника"
+        }
+      ]
     }
   ],
   "hasNextPage": true

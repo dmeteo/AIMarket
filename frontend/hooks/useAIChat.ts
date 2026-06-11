@@ -230,7 +230,7 @@ function findProducts(allProducts: Product[], ctx: ParsedContext): Product[] {
         'ssd': ['ssd', 'накопитель'],
       };
       const kws = catKeywords[ctx.category] || [ctx.category];
-      match = kws.some((kw) => text.includes(kw) || (p.category && p.category.toLowerCase().includes(kw)));
+      match = kws.some((kw) => text.includes(kw) || (p.categories?.[0]?.title && p.categories?.[0]?.title.toLowerCase().includes(kw)));
     }
 
     if (ctx.purpose === 'туризм' || ctx.purpose === 'кемпинг') {

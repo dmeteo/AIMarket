@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { usePathname } from 'next/navigation';
+import { useAuth } from '../hooks/useAuth';
 import AIFloatingButton from '../components/ai/AIFloatingButton';
 import AIChatDrawer from '../components/ai/AIChatDrawer';
 import AISearchResults from '../components/ai/AISearchResults';
@@ -9,8 +11,16 @@ import { useAISearch } from '../hooks/useAISearch';
 import { useProducts } from '../hooks/useProducts';
 
 export default function AIProvider({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const { user, isAuthenticated } = useAuth();
   const [chatOpen, setChatOpen] = useState(false);
   const [aiSearchQuery, setAiSearchQuery] = useState<string | null>(null);
+
+  // Only show AI button on home page and buyer profile pages
+  const isBuyer = isAuthenticated && user?.role === 'BUYER';
+  const isHomePage = pathname === '/';
+  const isProfilePage = pathname.startsWith('/profile') || pathname.startsWith('/checkout') || pathname.startsWith('/cart');
+  const showAIButton = isHomePage || (isBuyer && isProfilePage);
 
   // Get all products for AI search/chat
   const { data: productsData } = useProducts(100);
@@ -56,8 +66,8 @@ export default function AIProvider({ children }: { children: React.ReactNode }) 
         </div>
       )}
 
-      {/* AI Chat */}
-      <AIFloatingButton onClick={() => setChatOpen(true)} />
+      {/* AI Chat button — only on home and buyer pages */}
+      {showAIButton && <AIFloatingButton onClick={() => setChatOpen(true)} />}
       <AIChatDrawer
         isOpen={chatOpen}
         onClose={() => setChatOpen(false)}

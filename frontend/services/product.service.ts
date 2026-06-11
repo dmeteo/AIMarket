@@ -48,7 +48,7 @@ export interface CreateProductRequest {
   discount_percent?: number;
   final_price?: string;
   quantity?: number;
-  category_id?: number;
+  category_ids?: number[];
   is_active?: boolean;
   shop_ids?: number[];
 }
@@ -61,7 +61,7 @@ export interface UpdateProductRequest {
   discount_percent?: number;
   final_price?: string;
   quantity?: number;
-  category_id?: number;
+  category_ids?: number[];
   is_active?: boolean;
 }
 

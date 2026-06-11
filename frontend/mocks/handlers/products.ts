@@ -48,19 +48,15 @@ export const productHandlers = [
       rating: null,
       reviews_count: 0,
       quantity: Number(body.quantity ?? 0),
-      category_id: (body.category_id as number) || null,
-      category: null,
+      categories: (body.category_ids as number[])?.map((id: number) => {
+        const cat = findCategory(id);
+        return { id, title: cat?.title ?? 'Unknown' };
+      }) ?? [],
       is_active: (body.is_active as boolean) ?? true,
       shop_ids: [],
       created_at: now,
       updated_at: now,
     };
-
-    // Resolve category name
-    if (newProduct.category_id) {
-      const cat = findCategory(newProduct.category_id);
-      if (cat) newProduct.category = cat.title;
-    }
 
     (productsData as { items: ProductItem[] }).items.unshift(newProduct);
 
@@ -103,16 +99,15 @@ export const productHandlers = [
       ...(body.discount_percent !== undefined && { discount_percent: String(body.discount_percent) }),
       ...(body.final_price !== undefined && { final_price: String(body.final_price) }),
       ...(body.quantity !== undefined && { quantity: Number(body.quantity) }),
-      ...(body.category_id !== undefined && { category_id: body.category_id }),
+      ...(body.category_ids !== undefined && {
+        categories: (body.category_ids as number[])?.map((catId: number) => {
+          const cat = findCategory(catId);
+          return { id: catId, title: cat?.title ?? 'Unknown' };
+        }) ?? [],
+      }),
       ...(body.is_active !== undefined && { is_active: body.is_active }),
       updated_at: now,
     };
-
-    // Resolve category name
-    if (updated.category_id) {
-      const cat = findCategory(updated.category_id);
-      updated.category = cat ? cat.title : null;
-    }
 
     (productsData as { items: ProductItem[] }).items[index] = updated;
     console.log('[MSW] PATCH /api/v1/products/:product_id — updated product:', id);

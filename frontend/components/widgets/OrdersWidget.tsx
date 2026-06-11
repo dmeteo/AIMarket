@@ -5,7 +5,6 @@ import { Package, ChevronRight } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { useOrders } from '../../hooks/useOrders';
 import OrderCard from './OrderCard';
-import Skeleton from '../ui/Skeleton';
 
 const EXCLUDED_STATUSES = new Set(['RECEIVED']);
 
@@ -14,22 +13,20 @@ export default function OrdersWidget() {
   const { isAuthenticated } = useAuth();
   const { data, isLoading } = useOrders();
 
-  // Don't show if not authenticated
   if (!isAuthenticated) return null;
 
   const activeOrders = (data?.orders ?? []).filter(
     (order) => {
       const code = order.status?.code ?? 'IN_PROCESSING';
       return !EXCLUDED_STATUSES.has(code);
-    }
+    },
   );
 
-  // Don't show if no active orders
-  if (!isLoading && activeOrders.length === 0) return null;
+  if (isLoading) return null;
+  if (activeOrders.length === 0) return null;
 
   return (
-    <section className="mb-6">
-      {/* Header */}
+    <section className="mb-6 animate-slide-down">
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
           <Package className="h-5 w-5 text-gray-600" />
@@ -46,21 +43,11 @@ export default function OrdersWidget() {
         )}
       </div>
 
-      {/* Loading */}
-      {isLoading ? (
-        <div className="flex gap-4 overflow-hidden">
-          {[1, 2, 3].map((i) => (
-            <Skeleton key={i} className="flex-shrink-0 w-72 h-52 rounded-xl" />
-          ))}
-        </div>
-      ) : (
-        /* Horizontal scroll */
-        <div className="flex gap-4 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
-          {activeOrders.map((order) => (
-            <OrderCard key={order.id} order={order} />
-          ))}
-        </div>
-      )}
+      <div className="flex gap-4 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
+        {activeOrders.map((order) => (
+          <OrderCard key={order.id} order={order} />
+        ))}
+      </div>
     </section>
   );
 }

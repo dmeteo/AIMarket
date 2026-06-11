@@ -40,7 +40,7 @@ function buildNewOrder(body: OrderRequest): OrderJson {
             discount_percent: Number(product.discount_percent),
             rating: product.rating,
             quantity: product.quantity,
-            category: product.category ?? null,
+            categories: product.categories ?? [],
             is_new: false,
             is_bestseller: false,
           },

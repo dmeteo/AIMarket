@@ -33,6 +33,7 @@ function getUserFromRequest(request: NextRequest): { role: string } | null {
 
 export function middleware(request: NextRequest) {
   const pathname = new URL(request.url).pathname;
+
   const token = getTokenFromRequest(request);
   const user = getUserFromRequest(request);
   const isAuthenticated = !!token && !!user;
@@ -87,7 +88,6 @@ export const config = {
     '/checkout/:path*',
     '/cart/:path*',
     '/admin/:path*',
-    '/seller/:path*',
     '/login',
     '/register',
     '/about',

@@ -7,6 +7,7 @@ import { sellerHandlers } from './handlers/seller';
 import { productHandlers } from './handlers/products';
 import { categoryHandlers } from './handlers/categories';
 import { brandHandlers } from './handlers/brands';
+import { reviewHandlers } from './handlers/reviews';
 
 export const handlers = [
   // Auth handlers
@@ -29,6 +30,9 @@ export const handlers = [
 
   // Brands
   ...brandHandlers,
+
+  // Reviews
+  ...reviewHandlers,
 
   // Root
   http.get('/', () => {

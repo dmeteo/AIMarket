@@ -62,7 +62,7 @@ export default function SellerProductsPage() {
       setProducts((allProducts as Product[]).map((p) => ({
         ...p,
         is_active: p.is_active ?? true,
-        category_id: p.category_id ?? null,
+        categories: p.categories ?? [],
         shop_ids: p.shop_ids || [],
         images: p.images || ['/placeholder.svg'],
         description: p.description || '',
@@ -106,7 +106,7 @@ export default function SellerProductsPage() {
 
     // Category filter
     if (categoryFilter) {
-      result = result.filter((p) => p.category_id === categoryFilter);
+      result = result.filter((p) => p.categories?.[0]?.id === categoryFilter);
     }
 
     return result;
@@ -134,7 +134,7 @@ export default function SellerProductsPage() {
       discount_percent: parseFloat(data.discount_percent),
       final_price: finalPrice,
       quantity: data.quantity,
-      category_id: data.category_id ?? undefined,
+      category_ids: data.category_id ? [data.category_id] : [],
       is_active: data.is_active,
       shop_ids: data.shop_ids,
     });
@@ -168,7 +168,7 @@ export default function SellerProductsPage() {
       p.price,
       p.discount_percent || '0',
       String(p.quantity),
-      p.category || '',
+      p.categories?.[0]?.title || '',
       p.is_active ? 'active' : 'draft',
     ]);
     const csv = generateCSV(headers, rows);
@@ -235,7 +235,7 @@ export default function SellerProductsPage() {
           discount_percent: parseFloat(discount) || 0,
           final_price: finalPrice,
           quantity: parseInt(quantity, 10) || 0,
-          category_id: categoryId ?? undefined,
+          category_ids: categoryId ? [categoryId] : [],
           is_active: status !== 'draft',
           shop_ids: shops.length > 0 ? [shops[0].id] : [],
         });
@@ -373,7 +373,7 @@ export default function SellerProductsPage() {
                           </div>
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-500">{product.category || '—'}</td>
+                      <td className="px-4 py-3 text-sm text-gray-500">{product.categories?.[0]?.title || '—'}</td>
                       <td className="px-4 py-3 text-sm text-gray-900 font-medium">{product.final_price || product.price} ₽</td>
                       <td className="px-4 py-3 text-sm text-gray-500">{product.quantity}</td>
                       {activeTab === ALL_SHOPS_TAB && (

@@ -1,8 +1,7 @@
 import { useState, useCallback } from 'react';
 import type { Product } from './useProducts';
 
-const PAGE_SIZE = 4;
-const MAX_RESULTS = 12;
+const PAGE_SIZE = 9;
 
 interface AISearchState {
   results: Product[];
@@ -96,7 +95,7 @@ function scoreProduct(
   const desc = product.description.toLowerCase();
 
   // Category match is strong signal
-  if (category && product.category === category) {
+  if (category && product.categories?.some((c) => c.title === category)) {
     score += 10;
   }
 
@@ -205,7 +204,7 @@ export function useAISearch(allProducts: Product[]) {
         ...prev,
         results: nextPage,
         isLoading: false,
-        hasMore: nextPage.length < Math.min(allResults.length, MAX_RESULTS),
+        hasMore: nextPage.length < allResults.length,
       }));
     }, 800);
   }, [state, allProducts]);

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Heart, Check, ShoppingCart } from 'lucide-react';
+import { Heart, Check, ShoppingCart, Star, MessageCircle } from 'lucide-react';
 import { useCartStore } from '../../store/cart.store';
 
 interface ProductCardProps {
@@ -16,6 +16,7 @@ interface ProductCardProps {
   isNew?: boolean;
   isBestSeller?: boolean;
   discountPercent?: string;
+  reviewsCount?: number;
 }
 
 const ProductCard = ({
@@ -29,6 +30,7 @@ const ProductCard = ({
   isNew = false,
   isBestSeller = false,
   discountPercent = '0',
+  reviewsCount = 0,
 }: ProductCardProps) => {
   const router = useRouter();
   const hasDiscount = parseFloat(discountPercent) > 0;
@@ -43,12 +45,10 @@ const ProductCard = ({
     e.preventDefault();
 
     if (inCart) {
-      // Already in cart → go to cart page
       router.push('/cart');
       return;
     }
 
-    // Not in cart → add 1 unit, stay on page
     addItem({
       id,
       title,
@@ -57,7 +57,6 @@ const ProductCard = ({
       image: imageUrl,
     }, 1);
 
-    // Flash animation, then reset button state
     setJustAdded(true);
     setTimeout(() => setJustAdded(false), 600);
   };
@@ -98,56 +97,59 @@ const ProductCard = ({
               </span>
             )}
           </div>
-
-          {hasDiscount && (
-            <div className="absolute bottom-2 left-2 bg-red-100 text-red-800 text-xs px-2 py-0.5 rounded">
-              -{Math.round(parseFloat(discountPercent))}%
-            </div>
-          )}
         </div>
 
         {/* Info */}
-        <div className="p-4">
-          <h3 className="text-sm font-medium text-gray-900 mb-1 line-clamp-2 min-h-10">
-            {title}
-          </h3>
-          <p className="text-xs text-gray-500 mb-2 line-clamp-2">{description}</p>
-
-          {/* Price */}
-          <div className="flex items-baseline gap-2 mb-3">
-            {hasDiscount ? (
+        <div className="p-3">
+          {/* Price row */}
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-base font-semibold text-indigo-600">
+              {parseFloat(final_price).toFixed(0)} ₽
+            </span>
+            {hasDiscount && (
               <>
                 <span className="text-xs text-gray-400 line-through">
                   {parseFloat(price).toFixed(0)} ₽
                 </span>
-                <span className="text-base font-semibold text-gray-900">
-                  {parseFloat(final_price).toFixed(0)} ₽
+                <span className="text-xs font-medium text-indigo-600">
+                  -{Math.round(parseFloat(discountPercent))}%
                 </span>
               </>
-            ) : (
-              <span className="text-base font-semibold text-gray-900">
-                {parseFloat(price).toFixed(0)} ₽
-              </span>
             )}
           </div>
 
-          {/* Rating */}
-          {rating > 0 && (
-            <div className="flex items-center text-xs text-yellow-500 mb-3">
-              {'★'.repeat(Math.floor(rating))}
-              {'☆'.repeat(5 - Math.floor(rating))}
-              <span className="ml-1 text-gray-500">{rating.toFixed(1)}</span>
-            </div>
-          )}
+          {/* Title */}
+          <h3 className="text-sm font-medium text-gray-900 mt-1 line-clamp-2 leading-snug">
+            {title}
+          </h3>
+
+          {/* Description */}
+          <p className="text-xs text-gray-500 mt-1 line-clamp-2 leading-snug">{description}</p>
+
+          {/* Rating & Reviews */}
+          <div className="flex items-center gap-1.5 mt-1.5">
+            {rating > 0 && (
+              <>
+                <Star className="h-3.5 w-3.5 text-yellow-400 fill-yellow-400" />
+                <span className="text-xs font-medium text-gray-700">{rating.toFixed(1)}</span>
+              </>
+            )}
+            {reviewsCount > 0 && (
+              <>
+                <MessageCircle className="h-3.5 w-3.5 text-gray-400 ml-1" />
+                <span className="text-xs text-gray-400">{reviewsCount.toLocaleString('ru-RU')} отзыва</span>
+              </>
+            )}
+          </div>
 
           {/* Cart button */}
           <button
             onClick={handleButtonClick}
             className={`
-              w-full px-4 py-2 rounded-md text-sm font-medium
+              w-full px-3 py-1.5 mt-2 rounded-md text-xs font-medium
               transition-all duration-200 ease-out
               cursor-pointer select-none
-              active:scale-95 active:shadow-inner
+              active:scale-95
               ${inCart
                 ? 'bg-green-600 text-white hover:bg-green-700'
                 : 'bg-zinc-900 text-white hover:bg-zinc-800'
@@ -155,15 +157,15 @@ const ProductCard = ({
               ${justAdded ? 'scale-95' : ''}
             `}
           >
-            <span className="flex items-center justify-center gap-1.5">
+            <span className="flex items-center justify-center gap-1">
               {inCart ? (
                 <>
-                  <Check className="h-4 w-4" />
+                  <Check className="h-3.5 w-3.5" />
                   В корзине
                 </>
               ) : (
                 <>
-                  <ShoppingCart className="h-4 w-4" />
+                  <ShoppingCart className="h-3.5 w-3.5" />
                   В корзину
                 </>
               )}

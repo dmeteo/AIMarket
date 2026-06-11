@@ -1,4 +1,5 @@
 import Badge from './ui/Badge';
+import { Star } from 'lucide-react';
 
 interface ProductInfoProps {
   title: string;
@@ -6,10 +7,12 @@ interface ProductInfoProps {
   finalPrice: string;
   discountPercent: string;
   rating: number | null;
+  reviewsCount?: number;
   category?: string;
   isNew: boolean;
   isBestSeller: boolean;
   quantity: number;
+  onRatingClick?: () => void;
 }
 
 export default function ProductInfo({
@@ -18,10 +21,12 @@ export default function ProductInfo({
   finalPrice,
   discountPercent,
   rating,
+  reviewsCount = 0,
   category,
   isNew,
   isBestSeller,
   quantity,
+  onRatingClick,
 }: ProductInfoProps) {
   const hasDiscount = parseFloat(discountPercent) > 0;
 
@@ -37,15 +42,17 @@ export default function ProductInfo({
       {/* Title */}
       <h1 className="text-2xl font-bold text-gray-900">{title}</h1>
 
-      {/* Rating */}
+      {/* Rating — clickable */}
       {rating !== null && rating > 0 && (
-        <div className="flex items-center gap-2">
-          <div className="flex items-center text-yellow-500">
-            {'★'.repeat(Math.floor(rating))}
-            {'☆'.repeat(5 - Math.floor(rating))}
-          </div>
-          <span className="text-sm text-gray-600">{rating.toFixed(1)}</span>
-        </div>
+        <button
+          onClick={onRatingClick}
+          className="flex items-center gap-1.5 group cursor-pointer"
+        >
+          <Star className="h-5 w-5 text-yellow-400 fill-yellow-400" />
+          <span className="text-sm font-medium text-gray-900 group-hover:text-indigo-600 transition-colors">{rating}</span>
+          <span className="text-sm text-gray-400">•</span>
+          <span className="text-sm text-gray-500 group-hover:text-indigo-600 transition-colors">{reviewsCount.toLocaleString('ru-RU')} отзыва</span>
+        </button>
       )}
 
       {/* Price */}

@@ -8,6 +8,7 @@
       "logo_url": null,
       "products_count": 5,
       "orders_count": 3,
+      "reviews_count": 128,
       "revenue": 254090,
       "is_active": true,
       "created_at": "2026-05-15T10:00:00Z"
@@ -20,6 +21,7 @@
       "logo_url": null,
       "products_count": 3,
       "orders_count": 1,
+      "reviews_count": 45,
       "revenue": 89400,
       "is_active": true,
       "created_at": "2026-05-20T14:30:00Z"
@@ -32,6 +34,7 @@
       "logo_url": null,
       "products_count": 4,
       "orders_count": 2,
+      "reviews_count": 67,
       "revenue": 124600,
       "is_active": true,
       "created_at": "2026-06-01T09:00:00Z"

@@ -100,6 +100,21 @@
 
 /* marquee animations are generated dynamically per-component via <style> injection */
 
+@keyframes slide-down {
+	0% {
+		opacity: 0;
+		transform: translateY(-24px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.animate-slide-down {
+	animation: slide-down 0.4s ease-out both;
+}
+
 @keyframes status-fade {
 	0%, 30% {
 		opacity: 1;
@@ -138,3 +153,4 @@
 .animate-fade-in {
 	animation: fade-in 0.2s ease-out both;
 }
+

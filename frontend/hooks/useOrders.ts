@@ -5,6 +5,9 @@ export const useOrders = () => {
   return useQuery<OrdersResponse, Error>({
     queryKey: ['orders'],
     queryFn: () => orderService.getOrders(),
+    ...(typeof window === 'undefined' && process.env.NEXT_PUBLIC_ENABLE_MOCK_API === 'true'
+      ? { enabled: false }
+      : {}),
   });
 };
 

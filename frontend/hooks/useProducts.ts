@@ -1,7 +1,12 @@
 import { useInfiniteQuery, useQuery, type InfiniteData } from '@tanstack/react-query';
 import api from '../lib/api';
 
-// Product in list (from /api/products)
+export interface ProductCategory {
+  id: number;
+  title: string;
+}
+
+// Product in list (from /api/v1/products/)
 export interface Product {
   id: number;
   shop_id: number;
@@ -13,14 +18,12 @@ export interface Product {
   final_price: string;
   rating: number | null;
   reviews_count: number;
+  quantity: number;
+  categories: ProductCategory[];
   isNew?: boolean;
   isBestSeller?: boolean;
-  discountPercentage?: number;
-  category?: string;
-  category_id?: number | null;
-  quantity: number;
-  is_active?: boolean;
   shop_ids?: number[];
+  is_active?: boolean;
   created_at?: string;
   updated_at?: string;
 }
@@ -33,7 +36,15 @@ export interface GetProductsResponse {
   hasNextPage: boolean;
 }
 
-export const useProducts = (limit = 10) => {
+export interface ProductsParams {
+  category_id?: number;
+  min_price?: number;
+  max_price?: number;
+  shop_ids?: number[];
+  [key: string]: unknown;
+}
+
+export const useProducts = (limit = 10, params?: ProductsParams) => {
   return useInfiniteQuery<
     GetProductsResponse,
     Error,
@@ -41,13 +52,14 @@ export const useProducts = (limit = 10) => {
     readonly string[],
     number
   >({
-    queryKey: ['products'],
+    queryKey: ['products', JSON.stringify(params)],
     queryFn: async ({ pageParam = 0 }) => {
       const response = await api.get('/api/products', {
         params: {
           page: pageParam + 1,
           limit,
-        }
+          ...params,
+        },
       });
       return response.data;
     },
@@ -55,8 +67,47 @@ export const useProducts = (limit = 10) => {
       return lastPage.hasNextPage ? allPages.length : undefined;
     },
     initialPageParam: 0,
+    ...(typeof window === 'undefined' && process.env.NEXT_PUBLIC_ENABLE_MOCK_API === 'true'
+      ? { enabled: false }
+      : {}),
   });
 };
+
+// Client-side filtering helper
+export function filterProducts(
+  products: Product[],
+  filters: {
+    category_id?: number;
+    min_price?: number;
+    max_price?: number;
+    shop_ids?: number[];
+  },
+): Product[] {
+  let result = [...products];
+
+  if (filters.category_id !== undefined) {
+    result = result.filter((p) =>
+      p.categories?.some((c) => c.id === filters.category_id),
+    );
+  }
+
+  if (filters.min_price !== undefined) {
+    result = result.filter((p) => parseFloat(p.final_price) >= filters.min_price!);
+  }
+
+  if (filters.max_price !== undefined) {
+    result = result.filter((p) => parseFloat(p.final_price) <= filters.max_price!);
+  }
+
+  if (filters.shop_ids !== undefined && filters.shop_ids.length > 0) {
+    result = result.filter((p) => {
+      if (!p.shop_ids || p.shop_ids.length === 0) return false;
+      return filters.shop_ids!.some((sid) => p.shop_ids!.includes(sid));
+    });
+  }
+
+  return result;
+}
 
 // Single product by ID
 export const useProduct = (id: number) => {
@@ -67,5 +118,9 @@ export const useProduct = (id: number) => {
       return response.data;
     },
     enabled: !!id,
+    // Only fetch on client side when MSW is active
+    ...(typeof window === 'undefined' && process.env.NEXT_PUBLIC_ENABLE_MOCK_API === 'true'
+      ? { enabled: false }
+      : {}),
   });
 };

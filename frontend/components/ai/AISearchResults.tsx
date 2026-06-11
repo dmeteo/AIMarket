@@ -1,3 +1,4 @@
+import { useEffect, useRef, useCallback } from 'react';
 import { Sparkles } from 'lucide-react';
 import type { Product } from '../../hooks/useProducts';
 import AILoader from './AILoader';
@@ -22,6 +23,29 @@ export default function AISearchResults({
   onLoadMore,
   onBack,
 }: AISearchResultsProps) {
+  const sentinelRef = useRef<HTMLDivElement>(null);
+
+  const handleIntersect = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      if (entries[0].isIntersecting && hasMore && !isLoading) {
+        onLoadMore();
+      }
+    },
+    [hasMore, isLoading, onLoadMore],
+  );
+
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
+
+    const observer = new IntersectionObserver(handleIntersect, {
+      rootMargin: '200px',
+    });
+    observer.observe(sentinel);
+
+    return () => observer.disconnect();
+  }, [handleIntersect]);
+
   return (
     <div>
       {/* Header */}
@@ -51,36 +75,25 @@ export default function AISearchResults({
         <>
           <p className="text-sm text-gray-600 mb-4">{explanation}</p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {results.map((product, i) => (
               <AIProductCard key={product.id} product={product} index={i} />
             ))}
           </div>
 
-          {/* Load more */}
+          {/* Sentinel for infinite scroll */}
           {hasMore && (
-            <div className="flex justify-center mt-6">
-              <button
-                onClick={onLoadMore}
-                disabled={isLoading}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-50 text-indigo-600 rounded-lg hover:bg-indigo-100 transition-colors text-sm font-medium disabled:opacity-50"
-              >
-                {isLoading ? (
-                  <>
-                    <div className="flex gap-1">
-                      <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: '0ms' }} />
-                      <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: '150ms' }} />
-                      <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: '300ms' }} />
-                    </div>
-                    Ищу...
-                  </>
-                ) : (
-                  <>
-                    <Sparkles className="h-4 w-4" />
-                    Искать ещё
-                  </>
-                )}
-              </button>
+            <div ref={sentinelRef} className="flex justify-center mt-6">
+              {isLoading && (
+                <div className="flex items-center gap-2 text-sm text-gray-500">
+                  <div className="flex gap-1">
+                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: '300ms' }} />
+                  </div>
+                  Ищу ещё...
+                </div>
+              )}
             </div>
           )}
         </>

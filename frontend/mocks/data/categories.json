@@ -1,14 +1,277 @@
 {
   "categories": [
-    { "id": 1, "title": "Электроника" },
-    { "id": 2, "title": "Аксессуары" },
-    { "id": 3, "title": "Периферия" },
-    { "id": 4, "title": "Аудио" },
-    { "id": 5, "title": "Фото и видео" },
-    { "id": 6, "title": "Сетевое оборудование" },
-    { "id": 7, "title": "Накопители" },
-    { "id": 8, "title": "Комплектующие" },
-    { "id": 9, "title": "Офисная техника" },
-    { "id": 10, "title": "Умный дом" }
+    {
+      "id": 1,
+      "title": "Электроника",
+      "icon": "Smartphone",
+      "subcategories": [
+        {
+          "id": 11,
+          "title": "Смартфоны",
+          "parent_id": 1,
+          "subcategories": [
+            { "id": 111, "title": "Флагманы", "parent_id": 11 },
+            { "id": 112, "title": "Бюджетные", "parent_id": 11 },
+            { "id": 113, "title": "Средний сегмент", "parent_id": 11 }
+          ]
+        },
+        {
+          "id": 12,
+          "title": "Наушники",
+          "parent_id": 1,
+          "subcategories": [
+            { "id": 121, "title": "Беспроводные", "parent_id": 12 },
+            { "id": 122, "title": "Проводные", "parent_id": 12 },
+            { "id": 123, "title": "TWS", "parent_id": 12 },
+            { "id": 124, "title": "Накладные", "parent_id": 12 }
+          ]
+        },
+        {
+          "id": 13,
+          "title": "Планшеты",
+          "parent_id": 1,
+          "subcategories": [
+            { "id": 131, "title": "iPad", "parent_id": 13 },
+            { "id": 132, "title": "Android-планшеты", "parent_id": 13 },
+            { "id": 133, "title": "Электронные книги", "parent_id": 13 }
+          ]
+        },
+        {
+          "id": 14,
+          "title": "Умные часы",
+          "parent_id": 1,
+          "subcategories": [
+            { "id": 141, "title": "Apple Watch", "parent_id": 14 },
+            { "id": 142, "title": "Wear OS", "parent_id": 14 },
+            { "id": 143, "title": "Фитнес-браслеты", "parent_id": 14 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Компьютеры",
+      "icon": "Monitor",
+      "subcategories": [
+        {
+          "id": 21,
+          "title": "Ноутбуки",
+          "parent_id": 2,
+          "subcategories": [
+            { "id": 211, "title": "Игровые", "parent_id": 21 },
+            { "id": 212, "title": "Ультрабуки", "parent_id": 21 },
+            { "id": 213, "title": "Рабочие станции", "parent_id": 21 }
+          ]
+        },
+        {
+          "id": 22,
+          "title": "Мониторы",
+          "parent_id": 2,
+          "subcategories": [
+            { "id": 221, "title": "Игровые", "parent_id": 22 },
+            { "id": 222, "title": "Для дизайна", "parent_id": 22 },
+            { "id": 223, "title": "Офисные", "parent_id": 22 }
+          ]
+        },
+        {
+          "id": 23,
+          "title": "Периферия",
+          "parent_id": 2,
+          "subcategories": [
+            { "id": 231, "title": "Клавиатуры", "parent_id": 23 },
+            { "id": 232, "title": "Мыши", "parent_id": 23 },
+            { "id": 233, "title": "Веб-камеры", "parent_id": 23 },
+            { "id": 234, "title": "Микрофоны", "parent_id": 23 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Аудио",
+      "icon": "Headphones",
+      "subcategories": [
+        {
+          "id": 31,
+          "title": "Колонки",
+          "parent_id": 3,
+          "subcategories": [
+            { "id": 311, "title": "Портативные", "parent_id": 31 },
+            { "id": 312, "title": "Умные колонки", "parent_id": 31 },
+            { "id": 313, "title": "Саундбары", "parent_id": 31 }
+          ]
+        },
+        {
+          "id": 32,
+          "title": "Акустика",
+          "parent_id": 3,
+          "subcategories": [
+            { "id": 321, "title": "Напольная", "parent_id": 32 },
+            { "id": 322, "title": "Настольная", "parent_id": 32 },
+            { "id": 323, "title": "Сабвуферы", "parent_id": 32 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Фото и видео",
+      "icon": "Camera",
+      "subcategories": [
+        {
+          "id": 41,
+          "title": "Камеры",
+          "parent_id": 4,
+          "subcategories": [
+            { "id": 411, "title": "Зеркальные", "parent_id": 41 },
+            { "id": 412, "title": "Беззеркальные", "parent_id": 41 },
+            { "id": 413, "title": "Экшн-камеры", "parent_id": 41 }
+          ]
+        },
+        {
+          "id": 42,
+          "title": "Объективы",
+          "parent_id": 4,
+          "subcategories": [
+            { "id": 421, "title": "Широкоугольные", "parent_id": 42 },
+            { "id": 422, "title": "Телеобъективы", "parent_id": 42 },
+            { "id": 423, "title": "Макро", "parent_id": 42 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Сетевое оборудование",
+      "icon": "Wifi",
+      "subcategories": [
+        {
+          "id": 51,
+          "title": "Роутеры",
+          "parent_id": 5,
+          "subcategories": [
+            { "id": 511, "title": "Wi-Fi 6", "parent_id": 51 },
+            { "id": 512, "title": "Wi-Fi 6E", "parent_id": 51 },
+            { "id": 513, "title": "Mesh-системы", "parent_id": 51 }
+          ]
+        },
+        {
+          "id": 52,
+          "title": "Сетевые адаптеры",
+          "parent_id": 5,
+          "subcategories": [
+            { "id": 521, "title": "USB Wi-Fi", "parent_id": 52 },
+            { "id": 522, "title": "PCIe Wi-Fi", "parent_id": 52 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Накопители",
+      "icon": "HardDrive",
+      "subcategories": [
+        {
+          "id": 61,
+          "title": "SSD",
+          "parent_id": 6,
+          "subcategories": [
+            { "id": 611, "title": "NVMe", "parent_id": 61 },
+            { "id": 612, "title": "SATA", "parent_id": 61 },
+            { "id": 613, "title": "Внешние SSD", "parent_id": 61 }
+          ]
+        },
+        {
+          "id": 62,
+          "title": "HDD",
+          "parent_id": 6,
+          "subcategories": [
+            { "id": 621, "title": "Внутренние", "parent_id": 62 },
+            { "id": 622, "title": "Внешние", "parent_id": 62 }
+          ]
+        },
+        {
+          "id": 63,
+          "title": "USB-флешки",
+          "parent_id": 6,
+          "subcategories": [
+            { "id": 631, "title": "USB 3.0", "parent_id": 63 },
+            { "id": 632, "title": "USB-C", "parent_id": 63 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Аксессуары",
+      "icon": "Cable",
+      "subcategories": [
+        {
+          "id": 71,
+          "title": "Кабели",
+          "parent_id": 7,
+          "subcategories": [
+            { "id": 711, "title": "USB-C", "parent_id": 71 },
+            { "id": 712, "title": "HDMI", "parent_id": 71 },
+            { "id": 713, "title": "Аудиокабели", "parent_id": 71 }
+          ]
+        },
+        {
+          "id": 72,
+          "title": "Зарядки",
+          "parent_id": 7,
+          "subcategories": [
+            { "id": 721, "title": "Беспроводные", "parent_id": 72 },
+            { "id": 722, "title": "Быстрые зарядки", "parent_id": 72 },
+            { "id": 723, "title": "Портативные зарядки", "parent_id": 72 }
+          ]
+        },
+        {
+          "id": 73,
+          "title": "Чехлы",
+          "parent_id": 7,
+          "subcategories": [
+            { "id": 731, "title": "Для смартфонов", "parent_id": 73 },
+            { "id": 732, "title": "Для планшетов", "parent_id": 73 },
+            { "id": 733, "title": "Для ноутбуков", "parent_id": 73 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Умный дом",
+      "icon": "Home",
+      "subcategories": [
+        {
+          "id": 81,
+          "title": "Умные лампы",
+          "parent_id": 8,
+          "subcategories": [
+            { "id": 811, "title": "RGB", "parent_id": 81 },
+            { "id": 812, "title": "Тёплый свет", "parent_id": 81 }
+          ]
+        },
+        {
+          "id": 82,
+          "title": "Датчики",
+          "parent_id": 8,
+          "subcategories": [
+            { "id": 821, "title": "Движения", "parent_id": 82 },
+            { "id": 822, "title": "Температуры", "parent_id": 82 },
+            { "id": 823, "title": "Дым", "parent_id": 82 }
+          ]
+        },
+        {
+          "id": 83,
+          "title": "Розетки",
+          "parent_id": 8,
+          "subcategories": [
+            { "id": 831, "title": "Умные розетки", "parent_id": 83 },
+            { "id": 832, "title": "С измерением энергии", "parent_id": 83 }
+          ]
+        }
+      ]
+    }
   ]
 }
