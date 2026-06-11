@@ -10,3 +10,17 @@ def get_applications_to_seller(db):
     applications = db.scalars(stmt)
 
     return applications
+
+
+def get_application_to_seller(db, application_id):
+    stmt = select(ApplicationToSeller).where(ApplicationToSeller.id==application_id)
+
+    application = db.scalar(stmt)
+
+    return application
+
+
+def create_seller(db, seller):
+    db.add(seller)
+    
+    return seller

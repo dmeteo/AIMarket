@@ -48,3 +48,10 @@ def invalid_quantity(available_quantity):
         status_code=status.HTTP_409_CONFLICT, 
         detail=f"Available {available_quantity} pieces"
     )
+
+
+def application_not_found():
+    return HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="Application not found",
+    )
