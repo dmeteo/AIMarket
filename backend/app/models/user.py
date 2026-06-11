@@ -1,8 +1,8 @@
 from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.models.base import BaseModelMixin
-from app.common.enums import Role
+from app.models.base import Base, BaseModelMixin
+from app.common.enums import Role, PersonType
 
 
 class User(BaseModelMixin):
@@ -18,6 +18,7 @@ class User(BaseModelMixin):
     shops: Mapped[list["Shop"]] = relationship(back_populates="owner")
     reviews: Mapped[list["Review"]] = relationship(back_populates="author")
     favourites: Mapped[list["Shop"]] = relationship(secondary="favourites_shops", back_populates="favourites")
+    seller: Mapped["Seller"] = relationship(back_populates="user")
     
     
     
@@ -29,3 +30,24 @@ class Address(BaseModelMixin):
     is_default: Mapped[bool] = mapped_column(default=False)
     
     user: Mapped["User"] = relationship(back_populates="addresses")
+
+
+class Seller(Base):
+    __tablename__ = "seller"
+
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
+    full_name: Mapped[int] = mapped_column(nullable=False)
+    email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
+    phone: Mapped[str] = mapped_column(String(11), unique=True, nullable=False)
+    description: Mapped[str] = mapped_column(nullable=False)
+    person_type: Mapped[str] = mapped_column(nullable=False)
+    inn: Mapped[str] = mapped_column(String(10, 12), nullable=False)
+    ogrn: Mapped[str] = mapped_column(nullable=False)
+    address: Mapped[str] = mapped_column(nullable=False)
+    bic: Mapped[str] = mapped_column(nullable=False)
+    checking_account: Mapped[str] = mapped_column(nullabe=False)
+    is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
+
+    user: Mapped["User"] = relationship(back_populates="seller")
+    shop: Mapped[list["Shop"]] = relationship(back_populates="owner")
+
