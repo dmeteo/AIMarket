@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 
 from app.models.shop import FavouritesShop, Shop
 
+
 def get_shop_by_title(db: Session, title):
     stmt = select(Shop).where(Shop.title==title)
     
