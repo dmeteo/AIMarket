@@ -2,7 +2,7 @@ from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.models.base import Base, BaseModelMixin
-from app.common.enums import Role, PersonType
+from app.common.enums import Role, VerdictApplicationToBeSeller
 
 
 class User(BaseModelMixin):
@@ -66,7 +66,7 @@ class ApplicationToSeller(BaseModelMixin):
     address: Mapped[str] = mapped_column(nullable=False)
     bic: Mapped[str] = mapped_column(nullable=False)
     checking_account: Mapped[str] = mapped_column(nullabe=False)
-    is_active: Mapped[bool] = mapped_column(default=True, nullable=False)'
+    verdict: Mapped[str] = mapped_column(default=VerdictApplicationToBeSeller.PENDING.value, nullable=False)
 
     user: Mapped["User"] = relationship(back_populates="seller")
 

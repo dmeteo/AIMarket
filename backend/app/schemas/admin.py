@@ -8,6 +8,7 @@ from app.common.enums import PersonType, VerdictApplicationToBeSeller
 class ApplicationToSellerList(BaseModel):
     id: int
     full_name: str
+    verdict: VerdictApplicationToBeSeller
     created_at: date
 
 

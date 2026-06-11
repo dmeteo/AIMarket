@@ -3,6 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
+from app.services.admin import get_applications_to_seller_service
 from app.core.database import get_db
 from app.api.v1.deps import require_admin
 from app.models.user import User
@@ -16,7 +17,9 @@ def get_applications_to_seller(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_admin)]
 ) -> ApplicationsToSellerResponse:
-    pass
+    applications = get_applications_to_seller_service(db)
+
+    return applications
 
 
 @router.get("/applications_to_seller/{application_id}", response_model=ApplicationToSellerResponse)
