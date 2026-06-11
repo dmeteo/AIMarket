@@ -51,3 +51,22 @@ class Seller(Base):
     user: Mapped["User"] = relationship(back_populates="seller")
     shop: Mapped[list["Shop"]] = relationship(back_populates="owner")
 
+
+class ApplicationToSeller(BaseModelMixin):
+    __tablename__ = "application_to_seller"
+
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
+    full_name: Mapped[int] = mapped_column(nullable=False)
+    email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
+    phone: Mapped[str] = mapped_column(String(11), unique=True, nullable=False)
+    description: Mapped[str] = mapped_column(nullable=False)
+    person_type: Mapped[str] = mapped_column(nullable=False)
+    inn: Mapped[str] = mapped_column(String(10, 12), nullable=False)
+    ogrn: Mapped[str] = mapped_column(nullable=False)
+    address: Mapped[str] = mapped_column(nullable=False)
+    bic: Mapped[str] = mapped_column(nullable=False)
+    checking_account: Mapped[str] = mapped_column(nullabe=False)
+    is_active: Mapped[bool] = mapped_column(default=True, nullable=False)'
+
+    user: Mapped["User"] = relationship(back_populates="seller")
+

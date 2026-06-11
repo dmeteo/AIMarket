@@ -7,7 +7,7 @@ from app.schemas.user import ApplicationToBeSellerRequest, ApplicationToBeSeller
 from app.api.v1.deps import get_current_user
 from app.models.user import User
 from app.core.database import get_db
-from app.repositories.user import get_user_by_id
+from app.services.user import create_application_to_be_seller_service, get_user_profile_service
 
 
 router = APIRouter(prefix="/users", tags=["users"])
@@ -20,11 +20,9 @@ def me(current_user: Annotated[User, Depends(get_current_user)]) -> CurrentUserR
 
 @router.get("/{user_id}", response_model=UserProfileResponse)
 def get_user_profile(db: Annotated[Session, Depends(get_db)], user_id: int) -> UserProfileResponse:
-    user = get_user_by_id(db, user_id)
-    if not user:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail="User not found")
-    return UserProfileResponse(id=user.id, name=user.name, role=user.role)
+    user = get_user_profile_service(db, user_id)
+
+    return user                                  
 
 
 @router.post("/seller_application", response_model=ApplicationToBeSellerResponse, description="[Buyer User]",)
@@ -33,4 +31,6 @@ def create_application_to_be_seller(
     current_user: Annotated[User, Depends(get_current_user)],
     payload: ApplicationToBeSellerRequest
 ) -> ApplicationToBeSellerResponse:
-    pass
+    application_id = create_application_to_be_seller_service(db, current_user, payload)
+
+    return application_id
