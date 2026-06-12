@@ -25,6 +25,9 @@ import {
 import AdminLayout from '../../../components/admin/AdminLayout';
 import { adminNavItems } from '../../../components/admin/admin-nav';
 import { useAuth } from '../../../hooks/useAuth';
+import DateRangePicker from '../../../components/analytics/widgets/DateRangePicker';
+import MultiSelect from '../../../components/analytics/widgets/MultiSelect';
+import shopsData from '../../../mocks/data/seller-shops.json';
 
 const salesData = [
   { date: 'Пн', revenue: 12400, orders: 8 },
@@ -59,7 +62,17 @@ const topSellersData = [
 export default function AdminAnalyticsPage() {
   const router = useRouter();
   const { user, isAuthenticated, isLoading } = useAuth();
-  const [period, setPeriod] = useState('week');
+  const [dateRange, setDateRange] = useState(() => {
+    const to = new Date().toISOString().split('T')[0];
+    const from = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    return { from, to };
+  });
+  const [selectedShopIds, setSelectedShopIds] = useState<number[]>([]);
+
+  const shopOptions = (shopsData as { shops: Array<{ id: number; name: string }> }).shops.map((s) => ({
+    value: s.id,
+    label: s.name,
+  }));
 
   useEffect(() => {
     if (isLoading) return;
@@ -77,26 +90,17 @@ export default function AdminAnalyticsPage() {
   return (
     <AdminLayout navItems={adminNavItems} title="Аналитика">
       <div className="space-y-6">
-        {/* Period filter */}
-        <div className="flex gap-2">
-          {[
-            { value: 'day', label: 'День' },
-            { value: 'week', label: 'Неделя' },
-            { value: 'month', label: 'Месяц' },
-            { value: 'year', label: 'Год' },
-          ].map((p) => (
-            <button
-              key={p.value}
-              onClick={() => setPeriod(p.value)}
-              className={`px-4 py-2 text-sm font-medium rounded-lg border transition-colors ${
-                period === p.value
-                  ? 'bg-indigo-500 text-white border-indigo-500'
-                  : 'bg-white border-gray-200 hover:bg-gray-50'
-              }`}
-            >
-              {p.label}
-            </button>
-          ))}
+        {/* Filters */}
+        <div className="flex flex-wrap items-center gap-3">
+          <DateRangePicker value={dateRange} onChange={setDateRange} />
+          <div className="w-52">
+            <MultiSelect
+              options={shopOptions}
+              value={selectedShopIds}
+              onChange={setSelectedShopIds}
+              placeholder="Все магазины"
+            />
+          </div>
         </div>
 
         {/* Stats */}
