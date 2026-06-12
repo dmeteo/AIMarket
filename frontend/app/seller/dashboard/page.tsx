@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Package, ShoppingCart, TrendingUp, Clock, CheckCircle, Truck, Store, Plus } from 'lucide-react';
 import SellerLayout from '../../../components/seller/SellerLayout';
-import StatCard from '../../../components/admin/StatCard';
+import MetricCard from '../../../components/analytics/widgets/MetricCard';
 import { useAuth } from '../../../hooks/useAuth';
 import { sellerService } from '../../../services/seller.service';
 import Button from '../../../components/ui/Button';
@@ -128,10 +128,10 @@ export default function SellerDashboardPage() {
 
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatCard title="Магазины" value={shops.length} icon={Store} />
-          <StatCard title="Товары" value={totalProducts} icon={Package} />
-          <StatCard title="Заказы" value={orders.length} icon={ShoppingCart} trend={{ value: '+2 сегодня', positive: true }} />
-          <StatCard title="Выручка" value={`${totalRevenue.toLocaleString()} ₽`} icon={TrendingUp} trend={{ value: '+12%', positive: true }} />
+          <MetricCard title="Магазины" value={shops.length} icon={Store} />
+          <MetricCard title="Товары" value={totalProducts} icon={Package} />
+          <MetricCard title="Заказы" value={orders.length} icon={ShoppingCart} trend={{ value: '+2 сегодня', positive: true }} />
+          <MetricCard title="Выручка" value={`${totalRevenue.toLocaleString()} ₽`} icon={TrendingUp} trend={{ value: '+12%', positive: true }} />
         </div>
 
         {/* Recent orders */}

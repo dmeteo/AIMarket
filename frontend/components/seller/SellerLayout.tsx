@@ -1,6 +1,6 @@
 'use client';
 
-import { LayoutDashboard, Package, ShoppingCart, Settings, LogOut, Menu, Store } from 'lucide-react';
+import { LayoutDashboard, Package, ShoppingCart, Settings, LogOut, Menu, Store, BarChart3 } from 'lucide-react';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -13,6 +13,7 @@ interface SellerLayoutProps {
 
 const sellerNavItems = [
   { href: '/seller/dashboard', label: 'Дашборд', icon: <LayoutDashboard className="h-5 w-5" /> },
+  { href: '/seller/analytics', label: 'Аналитика', icon: <BarChart3 className="h-5 w-5" /> },
   { href: '/seller/shops', label: 'Магазины', icon: <Store className="h-5 w-5" /> },
   { href: '/seller/products', label: 'Товары', icon: <Package className="h-5 w-5" /> },
   { href: '/seller/orders', label: 'Заказы', icon: <ShoppingCart className="h-5 w-5" /> },

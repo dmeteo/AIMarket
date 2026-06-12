@@ -2,19 +2,11 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Users, Store, Package, ShoppingCart, Clock, CheckCircle } from 'lucide-react';
+import { Users, Store, Package, ShoppingCart } from 'lucide-react';
 import AdminLayout from '../../../components/admin/AdminLayout';
+import { adminNavItems } from '../../../components/admin/admin-nav';
 import StatCard from '../../../components/admin/StatCard';
 import { useAuth } from '../../../hooks/useAuth';
-
-const adminNavItems = [
-  { href: '/admin/dashboard', label: 'Дашборд', icon: <Clock className="h-5 w-5" /> },
-  { href: '/admin/applications', label: 'Заявки', icon: <CheckCircle className="h-5 w-5" /> },
-  { href: '/admin/sellers', label: 'Продавцы', icon: <Users className="h-5 w-5" /> },
-  { href: '/admin/shops', label: 'Магазины', icon: <Store className="h-5 w-5" /> },
-  { href: '/admin/users', label: 'Пользователи', icon: <Users className="h-5 w-5" /> },
-  { href: '/admin/analytics', label: 'Аналитика', icon: <Package className="h-5 w-5" /> },
-];
 
 const mockRecentApplications = [
   { id: 1, name: 'Иванов Иван', shop: 'TechStore', date: '2026-06-07' },
@@ -74,6 +66,22 @@ export default function AdminDashboardPage() {
           <StatCard title="Продавцы" value={3} icon={Store} />
           <StatCard title="Товары" value={40} icon={Package} trend={{ value: '+5 новых', positive: true }} />
           <StatCard title="Заказы" value={mockRecentOrders.length} icon={ShoppingCart} trend={{ value: '+2 сегодня', positive: true }} />
+        </div>
+
+        {/* Quick link to analytics */}
+        <div className="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl p-5 text-white">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-lg font-semibold mb-1">Подробная аналитика</h3>
+              <p className="text-sm text-indigo-100">Графики продаж, топ товаров, статистика по магазинам</p>
+            </div>
+            <button
+              onClick={() => router.push('/admin/analytics')}
+              className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-medium transition-colors"
+            >
+              Открыть →
+            </button>
+          </div>
         </div>
 
         {/* Recent applications */}

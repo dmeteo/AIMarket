@@ -2,23 +2,15 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { CheckCircle, XCircle, Clock, Eye, ChevronRight, Users, Store, Package } from 'lucide-react';
+import { CheckCircle, XCircle, Clock, Eye, ChevronRight, Search } from 'lucide-react';
 import AdminLayout from '../../../components/admin/AdminLayout';
+import { adminNavItems } from '../../../components/admin/admin-nav';
 import Button from '../../../components/ui/Button';
 import Modal from '../../../components/ui/Modal';
 import Textarea from '../../../components/ui/Textarea';
 import { useAuth } from '../../../hooks/useAuth';
 import { sellerService } from '../../../services/seller.service';
 import type { SellerApplication } from '../../../services/seller.service';
-
-const adminNavItems = [
-  { href: '/admin/dashboard', label: 'Дашборд', icon: <Clock className="h-5 w-5" /> },
-  { href: '/admin/applications', label: 'Заявки', icon: <CheckCircle className="h-5 w-5" /> },
-  { href: '/admin/sellers', label: 'Продавцы', icon: <Users className="h-5 w-5" /> },
-  { href: '/admin/shops', label: 'Магазины', icon: <Store className="h-5 w-5" /> },
-  { href: '/admin/users', label: 'Пользователи', icon: <Users className="h-5 w-5" /> },
-  { href: '/admin/analytics', label: 'Аналитика', icon: <Package className="h-5 w-5" /> },
-];
 
 const statusConfig = {
   PENDING: { label: 'На проверке', variant: 'warning' as const, icon: Clock },
@@ -34,6 +26,8 @@ export default function AdminApplicationsPage() {
   const [showRejectModal, setShowRejectModal] = useState(false);
   const [rejectReason, setRejectReason] = useState('');
   const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState('');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'PENDING' | 'APPROVED' | 'REJECTED'>('all');
 
   useEffect(() => {
     if (isLoading) return;
@@ -93,12 +87,64 @@ export default function AdminApplicationsPage() {
   return (
     <AdminLayout navItems={adminNavItems} title="Заявки на регистрацию">
       <div className="space-y-4">
-        {applications.length === 0 ? (
+        {/* Search + Filters */}
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="relative flex-1 min-w-[200px] max-w-md">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <input
+              type="search"
+              placeholder="Поиск по имени, email, магазину..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+          </div>
+          <div className="flex gap-1 bg-gray-100 rounded-lg p-1">
+            {[
+              { value: 'all' as const, label: 'Все' },
+              { value: 'PENDING' as const, label: 'На проверке' },
+              { value: 'APPROVED' as const, label: 'Одобренные' },
+              { value: 'REJECTED' as const, label: 'Отклонённые' },
+            ].map((tab) => (
+              <button
+                key={tab.value}
+                onClick={() => setStatusFilter(tab.value)}
+                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                  statusFilter === tab.value ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {applications.filter((app) => {
+          if (statusFilter !== 'all' && app.status !== statusFilter) return false;
+          if (search) {
+            const q = search.toLowerCase();
+            const matchName = app.sellerData?.name?.toLowerCase().includes(q);
+            const matchEmail = app.sellerData?.email?.toLowerCase().includes(q);
+            if (!matchName && !matchEmail) return false;
+          }
+          return true;
+        }).length === 0 ? (
           <div className="text-center py-12 bg-white rounded-xl border border-gray-200">
-            <p className="text-gray-500">Нет заявок на регистрацию</p>
+            <p className="text-gray-500">Ничего не найдено</p>
           </div>
         ) : (
-          applications.map((app) => {
+          applications
+            .filter((app) => {
+              if (statusFilter !== 'all' && app.status !== statusFilter) return false;
+              if (search) {
+                const q = search.toLowerCase();
+                const matchName = app.sellerData?.name?.toLowerCase().includes(q);
+                const matchEmail = app.sellerData?.email?.toLowerCase().includes(q);
+                if (!matchName && !matchEmail) return false;
+              }
+              return true;
+            })
+            .map((app) => {
             const status = statusConfig[app.status];
             const StatusIcon = status.icon;
             return (

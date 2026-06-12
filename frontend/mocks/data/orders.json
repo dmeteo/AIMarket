@@ -1,220 +1,1984 @@
 {
   "orders": [
     {
-      "id": 2001,
-      "user_id": 100,
-      "items": [
-        {
-          "product": {
-            "id": 101, "title": "Смартфон Galaxy Pro Max", "images": ["/placeholder.svg"],
-            "price": "89990", "final_price": "85490", "discount_percent": 5,
-            "rating": 4.8, "quantity": 45, "category": "Электроника",
-            "is_new": true, "is_bestseller": true
-          },
-          "quantity": 1
-        },
-        {
-          "product": {
-            "id": 104, "title": "Умные часы Watch Pro", "images": ["/placeholder.svg"],
-            "price": "18990", "final_price": "16140", "discount_percent": 15,
-            "rating": 4.4, "quantity": 120, "category": "Гаджеты",
-            "is_new": false, "is_bestseller": true
-          },
-          "quantity": 2
-        }
-      ],
-      "address": "г. Москва, ул. Пушкина, д. 10, кв. 5",
-      "delivery_cost": "0",
-      "predicted_date": "2026-06-12",
-      "status": { "code": "DELIVERY", "label": "В доставке" },
-      "items_total_price": "117770",
-      "final_price": "117770",
-      "created_at": "2026-06-05T10:00:00Z",
-      "updated_at": "2026-06-07T08:00:00Z"
-    },
-    {
-      "id": 2002,
-      "user_id": 100,
-      "items": [
-        {
-          "product": {
-            "id": 102, "title": "Ноутбук UltraBook 15\"", "images": ["/placeholder.svg"],
-            "price": "74990", "final_price": "67490", "discount_percent": 10,
-            "rating": 4.6, "quantity": 28, "category": "Электроника",
-            "is_new": false, "is_bestseller": true
-          },
-          "quantity": 1
-        }
-      ],
-      "address": "г. Санкт-Петербург, Невский пр., д. 25, кв. 10",
-      "delivery_cost": "360",
-      "predicted_date": "2026-06-10",
-      "status": { "code": "CONFIRMED", "label": "Подтверждён" },
-      "items_total_price": "67490",
-      "final_price": "67850",
-      "created_at": "2026-06-08T14:20:00Z",
-      "updated_at": "2026-06-08T16:00:00Z"
-    },
-    {
-      "id": 2003,
-      "user_id": 100,
-      "items": [
-        {
-          "product": {
-            "id": 105, "title": "Беспроводные наушники AirPods Pro", "images": ["/placeholder.svg"],
-            "price": "24990", "final_price": "24990", "discount_percent": 0,
-            "rating": 4.7, "quantity": 85, "category": "Электроника",
-            "is_new": false, "is_bestseller": true
-          },
-          "quantity": 1
-        },
-        {
-          "product": {
-            "id": 103, "title": "Планшет Tab Pro 11\"", "images": ["/placeholder.svg"],
-            "price": "42990", "final_price": "42990", "discount_percent": 0,
-            "rating": 4.5, "quantity": 67, "category": "Электроника",
-            "is_new": true, "is_bestseller": false
-          },
-          "quantity": 1
-        }
-      ],
-      "address": "г. Казань, ул. Баумана, д. 5, кв. 33",
-      "delivery_cost": "490",
-      "predicted_date": "2026-06-14",
-      "status": { "code": "IN_PROCESSING", "label": "В обработке" },
-      "items_total_price": "67980",
-      "final_price": "68470",
-      "created_at": "2026-06-09T09:15:00Z",
-      "updated_at": "2026-06-09T09:15:00Z"
-    },
-    {
       "id": 1001,
-      "user_id": 1,
+      "user_id": 7,
       "items": [
         {
           "product": {
-            "id": 1, "title": "Наушники Bluetooth Pro", "images": ["/placeholder.svg"],
-            "price": "2690", "final_price": "2690", "discount_percent": 0,
-            "rating": 4.5, "quantity": 150, "category": "Электроника",
-            "is_new": true, "is_bestseller": false
-          },
-          "quantity": 2
-        },
-        {
-          "product": {
-            "id": 3, "title": "Чехол для смартфона", "images": ["/placeholder.svg"],
-            "price": "1790", "final_price": "1790", "discount_percent": 0,
-            "rating": 3.8, "quantity": 300, "category": "Аксессуары",
-            "is_new": false, "is_bestseller": false
+            "id": 1,
+            "title": "Наушники Bluetooth Pro",
+            "images": ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+            "price": "2690",
+            "final_price": "2690",
+            "discount_percent": 0,
+            "rating": 4.5,
+            "quantity": 150,
+            "category": "Электроника",
+            "is_new": true,
+            "is_bestseller": false
           },
           "quantity": 1
         }
       ],
       "address": "г. Москва, ул. Тверская, д. 15, кв. 42",
-      "delivery_cost": "0",
-      "predicted_date": "2026-06-08",
+      "delivery_cost": "199",
+      "predicted_date": "2026-06-18",
       "status": { "code": "IN_PROCESSING", "label": "В обработке" },
-      "items_total_price": "7170",
-      "final_price": "7170"
+      "items_total_price": "2690",
+      "final_price": "2889",
+      "created_at": "2026-06-12T10:23:00Z",
+      "updated_at": "2026-06-12T10:23:00Z"
     },
     {
       "id": 1002,
-      "user_id": 1,
+      "user_id": 3,
       "items": [
         {
           "product": {
-            "id": 4, "title": "Портативная зарядка 20000mAh", "images": ["/placeholder.svg"],
-            "price": "4490", "final_price": "3820", "discount_percent": 15,
-            "rating": 4.7, "quantity": 200, "category": "Электроника",
-            "is_new": true, "is_bestseller": false
-          },
-          "quantity": 1
-        },
-        {
-          "product": {
-            "id": 7, "title": "Веб-камера 4K", "images": ["/placeholder.svg"],
-            "price": "3140", "final_price": "2990", "discount_percent": 5,
-            "rating": 4.6, "quantity": 120, "category": "Периферия",
-            "is_new": true, "is_bestseller": false
-          },
-          "quantity": 1
-        },
-        {
-          "product": {
-            "id": 8, "title": "Подставка для ноутбука", "images": ["/placeholder.svg"],
-            "price": "4040", "final_price": "4040", "discount_percent": 0,
-            "rating": 4.1, "quantity": 180, "category": "Аксессуары",
-            "is_new": false, "is_bestseller": false
-          },
-          "quantity": 1
-        }
-      ],
-      "address": "г. Санкт-Петербург, Невский пр., д. 25, кв. 10",
-      "delivery_cost": "270",
-      "predicted_date": "2026-06-05",
-      "status": { "code": "CONFIRMED", "label": "Подтверждён" },
-      "items_total_price": "10850",
-      "final_price": "11120"
-    },
-    {
-      "id": 1003,
-      "user_id": 1,
-      "items": [
-        {
-          "product": {
-            "id": 5, "title": "Механическая клавиатура", "images": ["/placeholder.svg"],
-            "price": "5390", "final_price": "4310", "discount_percent": 20,
-            "rating": 4.0, "quantity": 75, "category": "Периферия",
-            "is_new": false, "is_bestseller": true
-          },
-          "quantity": 1
-        }
-      ],
-      "address": "г. Казань, ул. Баумана, д. 5, кв. 33",
-      "delivery_cost": "450",
-      "predicted_date": "2026-06-10",
-      "status": { "code": "DELIVERY", "label": "В доставке" },
-      "items_total_price": "4310",
-      "final_price": "4760"
-    },
-    {
-      "id": 1004,
-      "user_id": 1,
-      "items": [
-        {
-          "product": {
-            "id": 2, "title": "Умная колонка HomePod", "images": ["/placeholder.svg"],
-            "price": "3590", "final_price": "3230", "discount_percent": 10,
-            "rating": 4.2, "quantity": 89, "category": "Электроника",
-            "is_new": false, "is_bestseller": true
-          },
-          "quantity": 1
-        },
-        {
-          "product": {
-            "id": 11, "title": "Фитнес-трекер Band X", "images": ["/placeholder.svg"],
-            "price": "3140", "final_price": "3140", "discount_percent": 0,
-            "rating": 4.2, "quantity": 250, "category": "Гаджеты",
-            "is_new": false, "is_bestseller": false
+            "id": 14,
+            "title": "USB-хаб 7 в 1",
+            "images": ["/placeholder.svg"],
+            "price": "2240",
+            "final_price": "2240",
+            "discount_percent": 0,
+            "rating": 4.4,
+            "quantity": 220,
+            "category": "Периферия",
+            "is_new": false,
+            "is_bestseller": false
           },
           "quantity": 2
         },
         {
           "product": {
-            "id": 14, "title": "USB-хаб 7 в 1", "images": ["/placeholder.svg"],
-            "price": "2240", "final_price": "2240", "discount_percent": 0,
-            "rating": 4.4, "quantity": 220, "category": "Периферия",
-            "is_new": false, "is_bestseller": false
+            "id": 6,
+            "title": "Кабель USB-C 2м",
+            "images": ["/placeholder.svg"],
+            "price": "2240",
+            "final_price": "2240",
+            "discount_percent": 0,
+            "rating": 4.3,
+            "quantity": 500,
+            "category": "Аксессуары",
+            "is_new": false,
+            "is_bestseller": false
           },
           "quantity": 1
         }
       ],
-      "address": "г. Новосибирск, ул. Ленина, д. 12, кв. 88",
-      "delivery_cost": "360",
+      "address": "г. Санкт-Петербург, Невский пр., д. 25, кв. 10",
+      "delivery_cost": "299",
+      "predicted_date": "2026-06-17",
+      "status": { "code": "IN_PROCESSING", "label": "В обработке" },
+      "items_total_price": "6720",
+      "final_price": "7019",
+      "created_at": "2026-06-11T14:45:00Z",
+      "updated_at": "2026-06-11T14:45:00Z"
+    },
+    {
+      "id": 1003,
+      "user_id": 12,
+      "items": [
+        {
+          "product": {
+            "id": 22,
+            "title": "Беспроводные наушники TWS",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "1890",
+            "final_price": "1890",
+            "discount_percent": 0,
+            "rating": 4.1,
+            "quantity": 350,
+            "category": "Электроника",
+            "is_new": true,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 26,
+            "title": "Коврик для мыши XXL",
+            "images": ["/placeholder.svg"],
+            "price": "890",
+            "final_price": "890",
+            "discount_percent": 0,
+            "rating": 4.0,
+            "quantity": 500,
+            "category": "Аксессуары",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Новосибирск, ул. Ленина, д. 8, кв. 15",
+      "delivery_cost": "199",
+      "predicted_date": "2026-06-19",
+      "status": { "code": "IN_PROCESSING", "label": "В обработке" },
+      "items_total_price": "2780",
+      "final_price": "2979",
+      "created_at": "2026-06-10T08:30:00Z",
+      "updated_at": "2026-06-10T08:30:00Z"
+    },
+    {
+      "id": 1004,
+      "user_id": 18,
+      "items": [
+        {
+          "product": {
+            "id": 9,
+            "title": "Беспроводная мышь Ergo",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "4940",
+            "final_price": "4350",
+            "discount_percent": 12,
+            "rating": 3.9,
+            "quantity": 95,
+            "category": "Периферия",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Екатеринбург, ул. Малышева, д. 44, кв. 7",
+      "delivery_cost": "299",
+      "predicted_date": "2026-06-20",
+      "status": { "code": "IN_PROCESSING", "label": "В обработке" },
+      "items_total_price": "4350",
+      "final_price": "4649",
+      "created_at": "2026-06-09T16:12:00Z",
+      "updated_at": "2026-06-09T16:12:00Z"
+    },
+    {
+      "id": 1005,
+      "user_id": 5,
+      "items": [
+        {
+          "product": {
+            "id": 30,
+            "title": "Термокружка умная",
+            "images": ["/placeholder.svg"],
+            "price": "1190",
+            "final_price": "1190",
+            "discount_percent": 0,
+            "rating": 4.0,
+            "quantity": 200,
+            "category": "Умный дом",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 3
+        },
+        {
+          "product": {
+            "id": 32,
+            "title": "Органайзер для проводов",
+            "images": ["/placeholder.svg"],
+            "price": "590",
+            "final_price": "590",
+            "discount_percent": 0,
+            "rating": 3.6,
+            "quantity": 600,
+            "category": "Аксессуары",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 2
+        }
+      ],
+      "address": "г. Казань, ул. Баумана, д. 50, кв. 21",
+      "delivery_cost": "199",
+      "predicted_date": "2026-06-16",
+      "status": { "code": "IN_PROCESSING", "label": "В обработке" },
+      "items_total_price": "4750",
+      "final_price": "4949",
+      "created_at": "2026-06-08T11:05:00Z",
+      "updated_at": "2026-06-08T11:05:00Z"
+    },
+    {
+      "id": 1006,
+      "user_id": 2,
+      "items": [
+        {
+          "product": {
+            "id": 12,
+            "title": "Робот-пылесос Mini",
+            "images": ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+            "price": "4040",
+            "final_price": "3840",
+            "discount_percent": 5,
+            "rating": 4.6,
+            "quantity": 40,
+            "category": "Умный дом",
+            "is_new": false,
+            "is_bestseller": true
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Москва, ул. Арбат, д. 3, кв. 18",
+      "delivery_cost": "299",
+      "predicted_date": "2026-06-15",
+      "status": { "code": "CONFIRMED", "label": "Подтверждён" },
+      "items_total_price": "3840",
+      "final_price": "4139",
+      "created_at": "2026-06-07T09:20:00Z",
+      "updated_at": "2026-06-08T07:45:00Z"
+    },
+    {
+      "id": 1007,
+      "user_id": 14,
+      "items": [
+        {
+          "product": {
+            "id": 7,
+            "title": "Веб-камера 4K",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "3140",
+            "final_price": "2990",
+            "discount_percent": 5,
+            "rating": 4.6,
+            "quantity": 120,
+            "category": "Периферия",
+            "is_new": true,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 8,
+            "title": "Подставка для ноутбука",
+            "images": ["/placeholder.svg"],
+            "price": "4040",
+            "final_price": "4040",
+            "discount_percent": 0,
+            "rating": 4.1,
+            "quantity": 180,
+            "category": "Аксессуары",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Нижний Новгород, ул. Большая Покровская, д. 12, кв. 6",
+      "delivery_cost": "199",
+      "predicted_date": "2026-06-14",
+      "status": { "code": "CONFIRMED", "label": "Подтверждён" },
+      "items_total_price": "7030",
+      "final_price": "7229",
+      "created_at": "2026-06-06T13:40:00Z",
+      "updated_at": "2026-06-07T09:10:00Z"
+    },
+    {
+      "id": 1008,
+      "user_id": 9,
+      "items": [
+        {
+          "product": {
+            "id": 2,
+            "title": "Умная колонка HomePod",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "3590",
+            "final_price": "3230",
+            "discount_percent": 10,
+            "rating": 4.2,
+            "quantity": 89,
+            "category": "Электроника",
+            "is_new": false,
+            "is_bestseller": true
+          },
+          "quantity": 2
+        }
+      ],
+      "address": "г. Самара, ул. Куйбышева, д. 70, кв. 33",
+      "delivery_cost": "299",
+      "predicted_date": "2026-06-13",
+      "status": { "code": "CONFIRMED", "label": "Подтверждён" },
+      "items_total_price": "6460",
+      "final_price": "6759",
+      "created_at": "2026-06-05T17:55:00Z",
+      "updated_at": "2026-06-06T10:30:00Z"
+    },
+    {
+      "id": 1009,
+      "user_id": 16,
+      "items": [
+        {
+          "product": {
+            "id": 19,
+            "title": "Настольная игра Стратегия",
+            "images": ["/placeholder.svg"],
+            "price": "5390",
+            "final_price": "5390",
+            "discount_percent": 0,
+            "rating": 4.7,
+            "quantity": 45,
+            "category": "Развлечения",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 20,
+            "title": "Книга по TypeScript",
+            "images": ["/placeholder.svg"],
+            "price": "6290",
+            "final_price": "5980",
+            "discount_percent": 5,
+            "rating": 4.0,
+            "quantity": 70,
+            "category": "Книги",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Ростов-на-Дону, ул. Большая Садовая, д. 55, кв. 9",
+      "delivery_cost": "199",
+      "predicted_date": "2026-06-14",
+      "status": { "code": "CONFIRMED", "label": "Подтверждён" },
+      "items_total_price": "11370",
+      "final_price": "11569",
+      "created_at": "2026-06-04T12:10:00Z",
+      "updated_at": "2026-06-05T08:20:00Z"
+    },
+    {
+      "id": 1010,
+      "user_id": 11,
+      "items": [
+        {
+          "product": {
+            "id": 10,
+            "title": "LED лампа настольная",
+            "images": ["/placeholder.svg"],
+            "price": "5840",
+            "final_price": "5840",
+            "discount_percent": 0,
+            "rating": 4.8,
+            "quantity": 60,
+            "category": "Умный дом",
+            "is_new": false,
+            "is_bestseller": true
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Воронеж, ул. Плехановская, д. 18, кв. 4",
+      "delivery_cost": "199",
+      "predicted_date": "2026-06-13",
+      "status": { "code": "CONFIRMED", "label": "Подтверждён" },
+      "items_total_price": "5840",
+      "final_price": "6039",
+      "created_at": "2026-06-03T15:30:00Z",
+      "updated_at": "2026-06-04T11:50:00Z"
+    },
+    {
+      "id": 1011,
+      "user_id": 6,
+      "items": [
+        {
+          "product": {
+            "id": 17,
+            "title": "Внешний SSD 1TB",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "3590",
+            "final_price": "3300",
+            "discount_percent": 8,
+            "rating": 4.1,
+            "quantity": 160,
+            "category": "Накопители",
+            "is_new": true,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 18,
+            "title": "Подставка для монитора",
+            "images": ["/placeholder.svg"],
+            "price": "4490",
+            "final_price": "3950",
+            "discount_percent": 12,
+            "rating": 4.3,
+            "quantity": 85,
+            "category": "Аксессуары",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Красноярск, ул. Мира, д. 22, кв. 11",
+      "delivery_cost": "299",
+      "predicted_date": "2026-06-12",
+      "status": { "code": "CONFIRMED", "label": "Подтверждён" },
+      "items_total_price": "7250",
+      "final_price": "7549",
+      "created_at": "2026-06-02T09:45:00Z",
+      "updated_at": "2026-06-03T14:20:00Z"
+    },
+    {
+      "id": 1012,
+      "user_id": 20,
+      "items": [
+        {
+          "product": {
+            "id": 29,
+            "title": "Сетевой фильтр с USB",
+            "images": ["/placeholder.svg"],
+            "price": "1490",
+            "final_price": "1340",
+            "discount_percent": 10,
+            "rating": 3.7,
+            "quantity": 320,
+            "category": "Аксессуары",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 2
+        }
+      ],
+      "address": "г. Тюмень, ул. Республики, д. 61, кв. 27",
+      "delivery_cost": "199",
+      "predicted_date": "2026-06-11",
+      "status": { "code": "CONFIRMED", "label": "Подтверждён" },
+      "items_total_price": "2680",
+      "final_price": "2879",
+      "created_at": "2026-06-01T18:00:00Z",
+      "updated_at": "2026-06-02T07:30:00Z"
+    },
+    {
+      "id": 1013,
+      "user_id": 4,
+      "items": [
+        {
+          "product": {
+            "id": 5,
+            "title": "Механическая клавиатура",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "5390",
+            "final_price": "4310",
+            "discount_percent": 20,
+            "rating": 4.0,
+            "quantity": 75,
+            "category": "Периферия",
+            "is_new": false,
+            "is_bestseller": true
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 24,
+            "title": "Графический планшет",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "3790",
+            "final_price": "3600",
+            "discount_percent": 5,
+            "rating": 4.5,
+            "quantity": 65,
+            "category": "Периферия",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Омск, ул. Ленина, д. 30, кв. 14",
+      "delivery_cost": "299",
+      "predicted_date": "2026-06-12",
+      "status": { "code": "CONFIRMED", "label": "Подтверждён" },
+      "items_total_price": "7910",
+      "final_price": "8209",
+      "created_at": "2026-05-31T11:25:00Z",
+      "updated_at": "2026-06-01T16:40:00Z"
+    },
+    {
+      "id": 1014,
+      "user_id": 13,
+      "items": [
+        {
+          "product": {
+            "id": 36,
+            "title": "Веб-камера Full HD",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "1590",
+            "final_price": "1510",
+            "discount_percent": 5,
+            "rating": 4.0,
+            "quantity": 190,
+            "category": "Периферия",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Саратов, ул. Чернышевского, д. 88, кв. 5",
+      "delivery_cost": "199",
+      "predicted_date": "2026-06-10",
+      "status": { "code": "CONFIRMED", "label": "Подтверждён" },
+      "items_total_price": "1510",
+      "final_price": "1709",
+      "created_at": "2026-05-30T14:15:00Z",
+      "updated_at": "2026-05-31T09:55:00Z"
+    },
+    {
+      "id": 1015,
+      "user_id": 8,
+      "items": [
+        {
+          "product": {
+            "id": 31,
+            "title": "LED гирлянда 10м",
+            "images": ["/placeholder.svg"],
+            "price": "690",
+            "final_price": "550",
+            "discount_percent": 20,
+            "rating": 3.8,
+            "quantity": 450,
+            "category": "Умный дом",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 3
+        },
+        {
+          "product": {
+            "id": 39,
+            "title": "Точилка для ножей",
+            "images": ["/placeholder.svg"],
+            "price": "2290",
+            "final_price": "2060",
+            "discount_percent": 10,
+            "rating": 4.3,
+            "quantity": 90,
+            "category": "Умный дом",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Ижевск, ул. Пушкинская, д. 210, кв. 42",
+      "delivery_cost": "199",
+      "predicted_date": "2026-06-09",
+      "status": { "code": "CONFIRMED", "label": "Подтверждён" },
+      "items_total_price": "3710",
+      "final_price": "3909",
+      "created_at": "2026-05-29T10:40:00Z",
+      "updated_at": "2026-05-30T15:10:00Z"
+    },
+    {
+      "id": 1016,
+      "user_id": 15,
+      "items": [
+        {
+          "product": {
+            "id": 4,
+            "title": "Портативная зарядка 20000mAh",
+            "images": ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+            "price": "4490",
+            "final_price": "3820",
+            "discount_percent": 15,
+            "rating": 4.7,
+            "quantity": 200,
+            "category": "Электроника",
+            "is_new": true,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Уфа, ул. Ленина, д. 47, кв. 19",
+      "delivery_cost": "299",
+      "predicted_date": "2026-06-08",
+      "status": { "code": "DELIVERY", "label": "В доставке" },
+      "items_total_price": "3820",
+      "final_price": "4119",
+      "created_at": "2026-05-28T08:20:00Z",
+      "updated_at": "2026-05-30T12:00:00Z"
+    },
+    {
+      "id": 1017,
+      "user_id": 1,
+      "items": [
+        {
+          "product": {
+            "id": 15,
+            "title": "Монитор 27\" 4K IPS",
+            "images": ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+            "price": "6740",
+            "final_price": "5390",
+            "discount_percent": 20,
+            "rating": 4.9,
+            "quantity": 30,
+            "category": "Мониторы",
+            "is_new": false,
+            "is_bestseller": true
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Волгоград, ул. Мира, д. 10, кв. 3",
+      "delivery_cost": "299",
+      "predicted_date": "2026-06-07",
+      "status": { "code": "DELIVERY", "label": "В доставке" },
+      "items_total_price": "5390",
+      "final_price": "5689",
+      "created_at": "2026-05-27T16:50:00Z",
+      "updated_at": "2026-05-29T08:15:00Z"
+    },
+    {
+      "id": 1018,
+      "user_id": 10,
+      "items": [
+        {
+          "product": {
+            "id": 11,
+            "title": "Фитнес-трекер Band X",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "3140",
+            "final_price": "3140",
+            "discount_percent": 0,
+            "rating": 4.2,
+            "quantity": 250,
+            "category": "Гаджеты",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 21,
+            "title": "Смарт-часы Pro",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "4290",
+            "final_price": "3950",
+            "discount_percent": 8,
+            "rating": 4.4,
+            "quantity": 180,
+            "category": "Умные часы",
+            "is_new": true,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Пермь, ул. Ленина, д. 58, кв. 22",
+      "delivery_cost": "199",
+      "predicted_date": "2026-06-09",
+      "status": { "code": "DELIVERY", "label": "В доставке" },
+      "items_total_price": "7090",
+      "final_price": "7289",
+      "created_at": "2026-05-26T12:35:00Z",
+      "updated_at": "2026-05-28T17:45:00Z"
+    },
+    {
+      "id": 1019,
+      "user_id": 19,
+      "items": [
+        {
+          "product": {
+            "id": 13,
+            "title": "Электрочайник умный",
+            "images": ["/placeholder.svg"],
+            "price": "4940",
+            "final_price": "4450",
+            "discount_percent": 10,
+            "rating": 3.9,
+            "quantity": 110,
+            "category": "Умный дом",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 40,
+            "title": "Весы кухонные цифровые",
+            "images": ["/placeholder.svg"],
+            "price": "990",
+            "final_price": "990",
+            "discount_percent": 0,
+            "rating": 4.0,
+            "quantity": 340,
+            "category": "Умный дом",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Тольятти, ул. Мира, д. 34, кв. 8",
+      "delivery_cost": "299",
+      "predicted_date": "2026-06-06",
+      "status": { "code": "DELIVERY", "label": "В доставке" },
+      "items_total_price": "5440",
+      "final_price": "5739",
+      "created_at": "2026-05-25T09:10:00Z",
+      "updated_at": "2026-05-27T14:30:00Z"
+    },
+    {
+      "id": 1020,
+      "user_id": 7,
+      "items": [
+        {
+          "product": {
+            "id": 27,
+            "title": "Внешний аккумулятор 10000mAh",
+            "images": ["/placeholder.svg"],
+            "price": "1290",
+            "final_price": "1100",
+            "discount_percent": 15,
+            "rating": 3.9,
+            "quantity": 400,
+            "category": "Электроника",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 2
+        },
+        {
+          "product": {
+            "id": 28,
+            "title": "Хаб USB-C 5 в 1",
+            "images": ["/placeholder.svg"],
+            "price": "1690",
+            "final_price": "1690",
+            "discount_percent": 0,
+            "rating": 4.1,
+            "quantity": 280,
+            "category": "Периферия",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Барнаул, ул. Ленина, д. 42, кв. 13",
+      "delivery_cost": "199",
+      "predicted_date": "2026-06-07",
+      "status": { "code": "DELIVERY", "label": "В доставке" },
+      "items_total_price": "3890",
+      "final_price": "4089",
+      "created_at": "2026-05-24T17:25:00Z",
+      "updated_at": "2026-05-26T11:40:00Z"
+    },
+    {
+      "id": 1021,
+      "user_id": 3,
+      "items": [
+        {
+          "product": {
+            "id": 25,
+            "title": "Микрофон конденсаторный",
+            "images": ["/placeholder.svg"],
+            "price": "2890",
+            "final_price": "2890",
+            "discount_percent": 0,
+            "rating": 4.2,
+            "quantity": 140,
+            "category": "Периферия",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Иркутск, ул. Карла Маркса, д. 28, кв. 6",
+      "delivery_cost": "299",
+      "predicted_date": "2026-06-05",
+      "status": { "code": "DELIVERY", "label": "В доставке" },
+      "items_total_price": "2890",
+      "final_price": "3189",
+      "created_at": "2026-05-23T11:55:00Z",
+      "updated_at": "2026-05-25T09:20:00Z"
+    },
+    {
+      "id": 1022,
+      "user_id": 17,
+      "items": [
+        {
+          "product": {
+            "id": 23,
+            "title": "Портативная колонка Bass+",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "2490",
+            "final_price": "2240",
+            "discount_percent": 10,
+            "rating": 4.3,
+            "quantity": 220,
+            "category": "Электроника",
+            "is_new": false,
+            "is_bestseller": true
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 34,
+            "title": "Подставка для телефона",
+            "images": ["/placeholder.svg"],
+            "price": "790",
+            "final_price": "790",
+            "discount_percent": 0,
+            "rating": 4.2,
+            "quantity": 380,
+            "category": "Аксессуары",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Хабаровск, ул. Муравьёва-Амурского, д. 15, кв. 9",
+      "delivery_cost": "199",
+      "predicted_date": "2026-06-06",
+      "status": { "code": "DELIVERY", "label": "В доставке" },
+      "items_total_price": "3030",
+      "final_price": "3229",
+      "created_at": "2026-05-22T14:40:00Z",
+      "updated_at": "2026-05-24T18:55:00Z"
+    },
+    {
+      "id": 1023,
+      "user_id": 12,
+      "items": [
+        {
+          "product": {
+            "id": 3,
+            "title": "Чехол для смартфона",
+            "images": ["/placeholder.svg"],
+            "price": "1790",
+            "final_price": "1790",
+            "discount_percent": 0,
+            "rating": 3.8,
+            "quantity": 300,
+            "category": "Аксессуары",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 2
+        },
+        {
+          "product": {
+            "id": 35,
+            "title": "Кабель Lightning 2м",
+            "images": ["/placeholder.svg"],
+            "price": "690",
+            "final_price": "620",
+            "discount_percent": 10,
+            "rating": 3.9,
+            "quantity": 550,
+            "category": "Аксессуары",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Владивосток, ул. Светланская, д. 72, кв. 11",
+      "delivery_cost": "299",
+      "predicted_date": "2026-06-05",
+      "status": { "code": "DELIVERY", "label": "В доставке" },
+      "items_total_price": "4200",
+      "final_price": "4499",
+      "created_at": "2026-05-21T10:15:00Z",
+      "updated_at": "2026-05-23T16:05:00Z"
+    },
+    {
+      "id": 1024,
+      "user_id": 6,
+      "items": [
+        {
+          "product": {
+            "id": 37,
+            "title": "Мембранная клавиатура",
+            "images": ["/placeholder.svg"],
+            "price": "1990",
+            "final_price": "1690",
+            "discount_percent": 15,
+            "rating": 3.8,
+            "quantity": 150,
+            "category": "Периферия",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 38,
+            "title": "Картридер USB 3.0",
+            "images": ["/placeholder.svg"],
+            "price": "890",
+            "final_price": "890",
+            "discount_percent": 0,
+            "rating": 4.1,
+            "quantity": 260,
+            "category": "Периферия",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Ярославль, ул. Свободы, д. 20, кв. 16",
+      "delivery_cost": "199",
+      "predicted_date": "2026-06-04",
+      "status": { "code": "DELIVERY", "label": "В доставке" },
+      "items_total_price": "2580",
+      "final_price": "2779",
+      "created_at": "2026-05-20T08:50:00Z",
+      "updated_at": "2026-05-22T13:25:00Z"
+    },
+    {
+      "id": 1025,
+      "user_id": 14,
+      "items": [
+        {
+          "product": {
+            "id": 16,
+            "title": "Сумка для ноутбука 15\"",
+            "images": ["/placeholder.svg"],
+            "price": "1790",
+            "final_price": "1790",
+            "discount_percent": 0,
+            "rating": 3.5,
+            "quantity": 400,
+            "category": "Аксессуары",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Кемерово, ул. Октябрьский пр., д. 5, кв. 7",
+      "delivery_cost": "199",
+      "predicted_date": "2026-06-03",
+      "status": { "code": "DELIVERY", "label": "В доставке" },
+      "items_total_price": "1790",
+      "final_price": "1989",
+      "created_at": "2026-05-19T13:30:00Z",
+      "updated_at": "2026-05-21T10:45:00Z"
+    },
+    {
+      "id": 1026,
+      "user_id": 2,
+      "items": [
+        {
+          "product": {
+            "id": 101,
+            "title": "Смартфон Galaxy Pro Max",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "89990",
+            "final_price": "85490",
+            "discount_percent": 5,
+            "rating": 4.8,
+            "quantity": 45,
+            "category": "Электроника",
+            "is_new": true,
+            "is_bestseller": true
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Краснодар, ул. Красная, д. 150, кв. 20",
+      "delivery_cost": "299",
+      "predicted_date": "2026-06-04",
+      "status": { "code": "DELIVERY", "label": "В доставке" },
+      "items_total_price": "85490",
+      "final_price": "85789",
+      "created_at": "2026-05-18T15:20:00Z",
+      "updated_at": "2026-05-20T07:50:00Z"
+    },
+    {
+      "id": 1027,
+      "user_id": 11,
+      "items": [
+        {
+          "product": {
+            "id": 104,
+            "title": "Умные часы Watch Pro",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "18990",
+            "final_price": "16140",
+            "discount_percent": 15,
+            "rating": 4.4,
+            "quantity": 120,
+            "category": "Гаджеты",
+            "is_new": false,
+            "is_bestseller": true
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 105,
+            "title": "Беспроводные наушники AirPods Pro",
+            "images": ["/placeholder.svg"],
+            "price": "24990",
+            "final_price": "24990",
+            "discount_percent": 0,
+            "rating": 4.7,
+            "quantity": 85,
+            "category": "Электроника",
+            "is_new": false,
+            "is_bestseller": true
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Ставрополь, ул. Ленина, д. 255, кв. 30",
+      "delivery_cost": "199",
+      "predicted_date": "2026-06-03",
+      "status": { "code": "DELIVERY", "label": "В доставке" },
+      "items_total_price": "41130",
+      "final_price": "41329",
+      "created_at": "2026-05-17T11:00:00Z",
+      "updated_at": "2026-05-19T16:30:00Z"
+    },
+    {
+      "id": 1028,
+      "user_id": 18,
+      "items": [
+        {
+          "product": {
+            "id": 33,
+            "title": "Bluetooth адаптер USB",
+            "images": ["/placeholder.svg"],
+            "price": "490",
+            "final_price": "490",
+            "discount_percent": 0,
+            "rating": 3.5,
+            "quantity": 800,
+            "category": "Периферия",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 3
+        }
+      ],
+      "address": "г. Белгород, ул. Победы, д. 75, кв. 2",
+      "delivery_cost": "199",
+      "predicted_date": "2026-06-02",
+      "status": { "code": "DELIVERY", "label": "В доставке" },
+      "items_total_price": "1470",
+      "final_price": "1669",
+      "created_at": "2026-05-16T09:40:00Z",
+      "updated_at": "2026-05-18T14:15:00Z"
+    },
+    {
+      "id": 1029,
+      "user_id": 9,
+      "items": [
+        {
+          "product": {
+            "id": 103,
+            "title": "Планшет Tab Pro 11\"",
+            "images": ["/placeholder.svg"],
+            "price": "42990",
+            "final_price": "42990",
+            "discount_percent": 0,
+            "rating": 4.5,
+            "quantity": 67,
+            "category": "Электроника",
+            "is_new": true,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Тула, ул. Советская, д. 45, кв. 12",
+      "delivery_cost": "299",
+      "predicted_date": "2026-06-01",
+      "status": { "code": "DELIVERY", "label": "В доставке" },
+      "items_total_price": "42990",
+      "final_price": "43289",
+      "created_at": "2026-05-15T12:20:00Z",
+      "updated_at": "2026-05-17T08:40:00Z"
+    },
+    {
+      "id": 1030,
+      "user_id": 1,
+      "items": [
+        {
+          "product": {
+            "id": 102,
+            "title": "Ноутбук UltraBook 15\"",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "74990",
+            "final_price": "67490",
+            "discount_percent": 10,
+            "rating": 4.6,
+            "quantity": 28,
+            "category": "Электроника",
+            "is_new": false,
+            "is_bestseller": true
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Калининград, ул. Черняховского, д. 15, кв. 1",
+      "delivery_cost": "299",
+      "predicted_date": "2026-05-31",
+      "status": { "code": "DELIVERY", "label": "В доставке" },
+      "items_total_price": "67490",
+      "final_price": "67789",
+      "created_at": "2026-05-14T18:05:00Z",
+      "updated_at": "2026-05-16T10:55:00Z"
+    },
+    {
+      "id": 1031,
+      "user_id": 5,
+      "items": [
+        {
+          "product": {
+            "id": 1,
+            "title": "Наушники Bluetooth Pro",
+            "images": ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+            "price": "2690",
+            "final_price": "2690",
+            "discount_percent": 0,
+            "rating": 4.5,
+            "quantity": 150,
+            "category": "Электроника",
+            "is_new": true,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 2,
+            "title": "Умная колонка HomePod",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "3590",
+            "final_price": "3230",
+            "discount_percent": 10,
+            "rating": 4.2,
+            "quantity": 89,
+            "category": "Электроника",
+            "is_new": false,
+            "is_bestseller": true
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Москва, ул. Профсоюзная, д. 104, кв. 31",
+      "delivery_cost": "199",
+      "predicted_date": "2026-05-28",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "5920",
+      "final_price": "6119",
+      "created_at": "2026-05-13T08:30:00Z",
+      "updated_at": "2026-05-17T14:00:00Z"
+    },
+    {
+      "id": 1032,
+      "user_id": 8,
+      "items": [
+        {
+          "product": {
+            "id": 4,
+            "title": "Портативная зарядка 20000mAh",
+            "images": ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+            "price": "4490",
+            "final_price": "3820",
+            "discount_percent": 15,
+            "rating": 4.7,
+            "quantity": 200,
+            "category": "Электроника",
+            "is_new": true,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 6,
+            "title": "Кабель USB-C 2м",
+            "images": ["/placeholder.svg"],
+            "price": "2240",
+            "final_price": "2240",
+            "discount_percent": 0,
+            "rating": 4.3,
+            "quantity": 500,
+            "category": "Аксессуары",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 2
+        },
+        {
+          "product": {
+            "id": 7,
+            "title": "Веб-камера 4K",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "3140",
+            "final_price": "2990",
+            "discount_percent": 5,
+            "rating": 4.6,
+            "quantity": 120,
+            "category": "Периферия",
+            "is_new": true,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Санкт-Петербург, Московский пр., д. 79, кв. 45",
+      "delivery_cost": "299",
       "predicted_date": "2026-05-25",
       "status": { "code": "RECEIVED", "label": "Получен" },
-      "items_total_price": "11750",
-      "final_price": "12110"
+      "items_total_price": "13290",
+      "final_price": "13589",
+      "created_at": "2026-05-12T16:10:00Z",
+      "updated_at": "2026-05-16T12:30:00Z"
+    },
+    {
+      "id": 1033,
+      "user_id": 16,
+      "items": [
+        {
+          "product": {
+            "id": 19,
+            "title": "Настольная игра Стратегия",
+            "images": ["/placeholder.svg"],
+            "price": "5390",
+            "final_price": "5390",
+            "discount_percent": 0,
+            "rating": 4.7,
+            "quantity": 45,
+            "category": "Развлечения",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 2
+        }
+      ],
+      "address": "г. Челябинск, ул. Кирова, д. 93, кв. 17",
+      "delivery_cost": "199",
+      "predicted_date": "2026-05-20",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "10780",
+      "final_price": "10979",
+      "created_at": "2026-05-11T10:45:00Z",
+      "updated_at": "2026-05-15T09:20:00Z"
+    },
+    {
+      "id": 1034,
+      "user_id": 3,
+      "items": [
+        {
+          "product": {
+            "id": 10,
+            "title": "LED лампа настольная",
+            "images": ["/placeholder.svg"],
+            "price": "5840",
+            "final_price": "5840",
+            "discount_percent": 0,
+            "rating": 4.8,
+            "quantity": 60,
+            "category": "Умный дом",
+            "is_new": false,
+            "is_bestseller": true
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 13,
+            "title": "Электрочайник умный",
+            "images": ["/placeholder.svg"],
+            "price": "4940",
+            "final_price": "4450",
+            "discount_percent": 10,
+            "rating": 3.9,
+            "quantity": 110,
+            "category": "Умный дом",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Ульяновск, ул. Гончарова, д. 12, кв. 6",
+      "delivery_cost": "299",
+      "predicted_date": "2026-05-22",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "10290",
+      "final_price": "10589",
+      "created_at": "2026-05-10T14:20:00Z",
+      "updated_at": "2026-05-14T18:10:00Z"
+    },
+    {
+      "id": 1035,
+      "user_id": 20,
+      "items": [
+        {
+          "product": {
+            "id": 20,
+            "title": "Книга по TypeScript",
+            "images": ["/placeholder.svg"],
+            "price": "6290",
+            "final_price": "5980",
+            "discount_percent": 5,
+            "rating": 4.0,
+            "quantity": 70,
+            "category": "Книги",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Пенза, ул. Кураева, д. 8, кв. 34",
+      "delivery_cost": "199",
+      "predicted_date": "2026-05-18",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "5980",
+      "final_price": "6179",
+      "created_at": "2026-05-09T11:55:00Z",
+      "updated_at": "2026-05-13T15:40:00Z"
+    },
+    {
+      "id": 1036,
+      "user_id": 7,
+      "items": [
+        {
+          "product": {
+            "id": 17,
+            "title": "Внешний SSD 1TB",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "3590",
+            "final_price": "3300",
+            "discount_percent": 8,
+            "rating": 4.1,
+            "quantity": 160,
+            "category": "Накопители",
+            "is_new": true,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 28,
+            "title": "Хаб USB-C 5 в 1",
+            "images": ["/placeholder.svg"],
+            "price": "1690",
+            "final_price": "1690",
+            "discount_percent": 0,
+            "rating": 4.1,
+            "quantity": 280,
+            "category": "Периферия",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Нижний Тагил, ул. Космонавтов, д. 25, кв. 10",
+      "delivery_cost": "199",
+      "predicted_date": "2026-05-19",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "4990",
+      "final_price": "5189",
+      "created_at": "2026-05-08T07:30:00Z",
+      "updated_at": "2026-05-12T11:25:00Z"
+    },
+    {
+      "id": 1037,
+      "user_id": 10,
+      "items": [
+        {
+          "product": {
+            "id": 5,
+            "title": "Механическая клавиатура",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "5390",
+            "final_price": "4310",
+            "discount_percent": 20,
+            "rating": 4.0,
+            "quantity": 75,
+            "category": "Периферия",
+            "is_new": false,
+            "is_bestseller": true
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 9,
+            "title": "Беспроводная мышь Ergo",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "4940",
+            "final_price": "4350",
+            "discount_percent": 12,
+            "rating": 3.9,
+            "quantity": 95,
+            "category": "Периферия",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Брянск, ул. Калинина, д. 31, кв. 50",
+      "delivery_cost": "299",
+      "predicted_date": "2026-05-17",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "8660",
+      "final_price": "8959",
+      "created_at": "2026-05-07T15:10:00Z",
+      "updated_at": "2026-05-11T08:45:00Z"
+    },
+    {
+      "id": 1038,
+      "user_id": 15,
+      "items": [
+        {
+          "product": {
+            "id": 22,
+            "title": "Беспроводные наушники TWS",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "1890",
+            "final_price": "1890",
+            "discount_percent": 0,
+            "rating": 4.1,
+            "quantity": 350,
+            "category": "Электроника",
+            "is_new": true,
+            "is_bestseller": false
+          },
+          "quantity": 2
+        }
+      ],
+      "address": "г. Курск, ул. Ленина, д. 36, кв. 14",
+      "delivery_cost": "199",
+      "predicted_date": "2026-05-15",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "3780",
+      "final_price": "3979",
+      "created_at": "2026-05-06T09:25:00Z",
+      "updated_at": "2026-05-10T16:55:00Z"
+    },
+    {
+      "id": 1039,
+      "user_id": 4,
+      "items": [
+        {
+          "product": {
+            "id": 12,
+            "title": "Робот-пылесос Mini",
+            "images": ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+            "price": "4040",
+            "final_price": "3840",
+            "discount_percent": 5,
+            "rating": 4.6,
+            "quantity": 40,
+            "category": "Умный дом",
+            "is_new": false,
+            "is_bestseller": true
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Мурманск, ул. Ленина, д. 51, кв. 8",
+      "delivery_cost": "299",
+      "predicted_date": "2026-05-14",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "3840",
+      "final_price": "4139",
+      "created_at": "2026-05-05T13:40:00Z",
+      "updated_at": "2026-05-09T17:30:00Z"
+    },
+    {
+      "id": 1040,
+      "user_id": 13,
+      "items": [
+        {
+          "product": {
+            "id": 24,
+            "title": "Графический планшет",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "3790",
+            "final_price": "3600",
+            "discount_percent": 5,
+            "rating": 4.5,
+            "quantity": 65,
+            "category": "Периферия",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 25,
+            "title": "Микрофон конденсаторный",
+            "images": ["/placeholder.svg"],
+            "price": "2890",
+            "final_price": "2890",
+            "discount_percent": 0,
+            "rating": 4.2,
+            "quantity": 140,
+            "category": "Периферия",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Архангельск, пр. Троицкий, д. 49, кв. 3",
+      "delivery_cost": "299",
+      "predicted_date": "2026-05-12",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "6490",
+      "final_price": "6789",
+      "created_at": "2026-05-04T18:15:00Z",
+      "updated_at": "2026-05-08T12:00:00Z"
+    },
+    {
+      "id": 1041,
+      "user_id": 19,
+      "items": [
+        {
+          "product": {
+            "id": 26,
+            "title": "Коврик для мыши XXL",
+            "images": ["/placeholder.svg"],
+            "price": "890",
+            "final_price": "890",
+            "discount_percent": 0,
+            "rating": 4.0,
+            "quantity": 500,
+            "category": "Аксессуары",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 29,
+            "title": "Сетевой фильтр с USB",
+            "images": ["/placeholder.svg"],
+            "price": "1490",
+            "final_price": "1340",
+            "discount_percent": 10,
+            "rating": 3.7,
+            "quantity": 320,
+            "category": "Аксессуары",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 2
+        }
+      ],
+      "address": "г. Сочи, ул. Воровского, д. 40, кв. 25",
+      "delivery_cost": "199",
+      "predicted_date": "2026-05-10",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "3570",
+      "final_price": "3769",
+      "created_at": "2026-05-03T10:50:00Z",
+      "updated_at": "2026-05-07T14:10:00Z"
+    },
+    {
+      "id": 1042,
+      "user_id": 11,
+      "items": [
+        {
+          "product": {
+            "id": 30,
+            "title": "Термокружка умная",
+            "images": ["/placeholder.svg"],
+            "price": "1190",
+            "final_price": "1190",
+            "discount_percent": 0,
+            "rating": 4.0,
+            "quantity": 200,
+            "category": "Умный дом",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 31,
+            "title": "LED гирлянда 10м",
+            "images": ["/placeholder.svg"],
+            "price": "690",
+            "final_price": "550",
+            "discount_percent": 20,
+            "rating": 3.8,
+            "quantity": 450,
+            "category": "Умный дом",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 2
+        }
+      ],
+      "address": "г. Астрахань, ул. Набережной Приволжского затона, д. 10, кв. 4",
+      "delivery_cost": "199",
+      "predicted_date": "2026-05-08",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "2290",
+      "final_price": "2489",
+      "created_at": "2026-05-02T08:20:00Z",
+      "updated_at": "2026-05-06T15:30:00Z"
+    },
+    {
+      "id": 1043,
+      "user_id": 17,
+      "items": [
+        {
+          "product": {
+            "id": 1,
+            "title": "Наушники Bluetooth Pro",
+            "images": ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+            "price": "2690",
+            "final_price": "2690",
+            "discount_percent": 0,
+            "rating": 4.5,
+            "quantity": 150,
+            "category": "Электроника",
+            "is_new": true,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 40,
+            "title": "Весы кухонные цифровые",
+            "images": ["/placeholder.svg"],
+            "price": "990",
+            "final_price": "990",
+            "discount_percent": 0,
+            "rating": 4.0,
+            "quantity": 340,
+            "category": "Умный дом",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Владимир, ул. Горького, д. 58, кв. 2",
+      "delivery_cost": "199",
+      "predicted_date": "2026-05-06",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "3680",
+      "final_price": "3879",
+      "created_at": "2026-05-01T12:35:00Z",
+      "updated_at": "2026-05-05T09:15:00Z"
+    },
+    {
+      "id": 1044,
+      "user_id": 6,
+      "items": [
+        {
+          "product": {
+            "id": 15,
+            "title": "Монитор 27\" 4K IPS",
+            "images": ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+            "price": "6740",
+            "final_price": "5390",
+            "discount_percent": 20,
+            "rating": 4.9,
+            "quantity": 30,
+            "category": "Мониторы",
+            "is_new": false,
+            "is_bestseller": true
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 21,
+            "title": "Смарт-часы Pro",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "4290",
+            "final_price": "3950",
+            "discount_percent": 8,
+            "rating": 4.4,
+            "quantity": 180,
+            "category": "Умные часы",
+            "is_new": true,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Иваново, ул. Советская, д. 22, кв. 19",
+      "delivery_cost": "299",
+      "predicted_date": "2026-05-04",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "9340",
+      "final_price": "9639",
+      "created_at": "2026-04-30T16:45:00Z",
+      "updated_at": "2026-05-04T11:20:00Z"
+    },
+    {
+      "id": 1045,
+      "user_id": 12,
+      "items": [
+        {
+          "product": {
+            "id": 36,
+            "title": "Веб-камера Full HD",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "1590",
+            "final_price": "1510",
+            "discount_percent": 5,
+            "rating": 4.0,
+            "quantity": 190,
+            "category": "Периферия",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 37,
+            "title": "Мембранная клавиатура",
+            "images": ["/placeholder.svg"],
+            "price": "1990",
+            "final_price": "1690",
+            "discount_percent": 15,
+            "rating": 3.8,
+            "quantity": 150,
+            "category": "Периферия",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Липецк, пл. Петра Великого, д. 5, кв. 8",
+      "delivery_cost": "199",
+      "predicted_date": "2026-05-02",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "3200",
+      "final_price": "3399",
+      "created_at": "2026-04-29T11:10:00Z",
+      "updated_at": "2026-05-03T14:40:00Z"
+    },
+    {
+      "id": 1046,
+      "user_id": 14,
+      "items": [
+        {
+          "product": {
+            "id": 11,
+            "title": "Фитнес-трекер Band X",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "3140",
+            "final_price": "3140",
+            "discount_percent": 0,
+            "rating": 4.2,
+            "quantity": 250,
+            "category": "Гаджеты",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Томск, ул. Герцена, д. 14, кв. 6",
+      "delivery_cost": "199",
+      "predicted_date": "2026-04-30",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "3140",
+      "final_price": "3339",
+      "created_at": "2026-04-28T09:00:00Z",
+      "updated_at": "2026-05-02T13:25:00Z"
+    },
+    {
+      "id": 1047,
+      "user_id": 2,
+      "items": [
+        {
+          "product": {
+            "id": 23,
+            "title": "Портативная колонка Bass+",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "2490",
+            "final_price": "2240",
+            "discount_percent": 10,
+            "rating": 4.3,
+            "quantity": 220,
+            "category": "Электроника",
+            "is_new": false,
+            "is_bestseller": true
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 33,
+            "title": "Bluetooth адаптер USB",
+            "images": ["/placeholder.svg"],
+            "price": "490",
+            "final_price": "490",
+            "discount_percent": 0,
+            "rating": 3.5,
+            "quantity": 800,
+            "category": "Периферия",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 2
+        }
+      ],
+      "address": "г. Оренбург, ул. Советская, д. 18, кв. 7",
+      "delivery_cost": "199",
+      "predicted_date": "2026-04-28",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "3220",
+      "final_price": "3419",
+      "created_at": "2026-04-27T14:30:00Z",
+      "updated_at": "2026-05-01T10:05:00Z"
+    },
+    {
+      "id": 1048,
+      "user_id": 16,
+      "items": [
+        {
+          "product": {
+            "id": 101,
+            "title": "Смартфон Galaxy Pro Max",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "89990",
+            "final_price": "85490",
+            "discount_percent": 5,
+            "rating": 4.8,
+            "quantity": 45,
+            "category": "Электроника",
+            "is_new": true,
+            "is_bestseller": true
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 3,
+            "title": "Чехол для смартфона",
+            "images": ["/placeholder.svg"],
+            "price": "1790",
+            "final_price": "1790",
+            "discount_percent": 0,
+            "rating": 3.8,
+            "quantity": 300,
+            "category": "Аксессуары",
+            "is_new": false,
+            "is_bestseller": false
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Махачкала, ул. Ярагского, д. 12, кв. 5",
+      "delivery_cost": "299",
+      "predicted_date": "2026-04-25",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "87280",
+      "final_price": "87579",
+      "created_at": "2026-04-24T10:15:00Z",
+      "updated_at": "2026-04-28T16:40:00Z"
+    },
+    {
+      "id": 1049,
+      "user_id": 8,
+      "items": [
+        {
+          "product": {
+            "id": 102,
+            "title": "Ноутбук UltraBook 15\"",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "74990",
+            "final_price": "67490",
+            "discount_percent": 10,
+            "rating": 4.6,
+            "quantity": 28,
+            "category": "Электроника",
+            "is_new": false,
+            "is_bestseller": true
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Тверь, ул. Трёхсвятская, д. 31, кв. 12",
+      "delivery_cost": "299",
+      "predicted_date": "2026-04-22",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "67490",
+      "final_price": "67789",
+      "created_at": "2026-04-21T08:50:00Z",
+      "updated_at": "2026-04-25T13:15:00Z"
+    },
+    {
+      "id": 1050,
+      "user_id": 15,
+      "items": [
+        {
+          "product": {
+            "id": 104,
+            "title": "Умные часы Watch Pro",
+            "images": ["/placeholder.svg", "/placeholder.svg"],
+            "price": "18990",
+            "final_price": "16140",
+            "discount_percent": 15,
+            "rating": 4.4,
+            "quantity": 120,
+            "category": "Гаджеты",
+            "is_new": false,
+            "is_bestseller": true
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 105,
+            "title": "Беспроводные наушники AirPods Pro",
+            "images": ["/placeholder.svg"],
+            "price": "24990",
+            "final_price": "24990",
+            "discount_percent": 0,
+            "rating": 4.7,
+            "quantity": 85,
+            "category": "Электроника",
+            "is_new": false,
+            "is_bestseller": true
+          },
+          "quantity": 1
+        }
+      ],
+      "address": "г. Смоленск, ул. Коммунистическая, д. 4, кв. 18",
+      "delivery_cost": "199",
+      "predicted_date": "2026-04-20",
+      "status": { "code": "RECEIVED", "label": "Получен" },
+      "items_total_price": "41130",
+      "final_price": "41329",
+      "created_at": "2026-04-18T12:00:00Z",
+      "updated_at": "2026-04-22T09:30:00Z"
     }
   ]
 }

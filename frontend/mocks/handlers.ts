@@ -8,6 +8,7 @@ import { productHandlers } from './handlers/products';
 import { categoryHandlers } from './handlers/categories';
 import { brandHandlers } from './handlers/brands';
 import { reviewHandlers } from './handlers/reviews';
+import { analyticsHandlers } from './handlers/analytics';
 
 export const handlers = [
   // Auth handlers
@@ -33,6 +34,9 @@ export const handlers = [
 
   // Reviews
   ...reviewHandlers,
+
+  // Analytics
+  ...analyticsHandlers,
 
   // Root
   http.get('/', () => {
