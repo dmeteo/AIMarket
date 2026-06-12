@@ -8,12 +8,12 @@ class Role(str, Enum):
     MODERATOR = "MODERATOR"
     
     
-class DeliveryType(Enum):
+class DeliveryType(str, Enum):
     CDEK = "CDEK"
     YANDEX = "YANDEX"
     
 
-class OrderStatus(Enum):
+class OrderStatus(str, Enum):
     IN_PROCESSING = "IN_PROCESSING"
     CONFIRMED = "CONFIRMED"
     AWAITING_DELIVERY = "AWAITING_DELIVERY"
@@ -32,4 +32,9 @@ class VerdictApplicationToBeSeller(str, Enum):
     PENDING = "PENDING"
     APPROVE = "APPROVE"
     REJECT = "REJECT"
+    
+    
+class MediaEntities(str, Enum):
+    PRODUCTS = "products"
+    AVATARS = "avatars"
     

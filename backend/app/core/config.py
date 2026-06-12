@@ -14,6 +14,12 @@ class Settings(BaseSettings):
     POSTGRES_DB: str = "db"
     DATABASE_URL: str = ""
     
+    S3_ACCESS_KEY_ID: str = ""
+    S3_SECRET_ACCESS_KEY: str = ""
+    S3_URL: str = ""
+    S3_PORT: str = ""
+    S3_BUCKETS: list[str] = [""]
+    
     @property
     def DB_URL(self) -> str:
         if self.DATABASE_URL:
