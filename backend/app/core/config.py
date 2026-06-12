@@ -3,8 +3,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     
-    SECRET_KEY: str = "6ea4e32d05b33f3f222c5b295eb6c69468f85aafbf70673feb0d1d418c1835c"
-    ALGORITHM: str = "HS256"
+    SECRET_KEY: str = ""
+    ALGORITHM: str = ""
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 120
     
     POSTGRES_HOST: str = "localhost"
@@ -19,6 +19,9 @@ class Settings(BaseSettings):
     S3_URL: str = ""
     S3_PORT: str = ""
     S3_BUCKETS: list[str] = [""]
+    
+    ADMIN_EMAIL: str = ""
+    ADMIN_PASSWORD: str = ""
     
     @property
     def DB_URL(self) -> str:
