@@ -5,9 +5,10 @@ from app.models.user import User
 from app.models.shop import FavouritesShop, Shop
 from app.schemas.shops import ShopCreateRequest, ShopCreateResponse, ShopDeleteResponse, ShopResponse, ShopUpdateRequest, ShopUpdateResponse
 from app.repositories.shops import add_to_favourite_shop, create_shop, delete_from_favourite_shop, delete_shop, get_shop, get_shop_by_title, update_shop
-from app.services.products import check_seller_or_admin_and_get_seller_shops, mapping_products_cards
+from app.services.products import mapping_products_cards
 from app.common.exceptions import access_denied, shop_not_found
 from app.common.enums import Role
+from app.common.utils import build_url
 
 
 def check_unique_shop_title(db: Session, title, shop_id=None):
@@ -35,7 +36,7 @@ def check_owner_shop_or_admin(db: Session, user: User, shop_id):
 def mapping_shop(shop: Shop):
     shop = {
         "id": shop.id,
-        "logo_url": shop.logo_url,
+        "logo_url": build_url(shop.logo_url),
         "title": shop.title,
         "description": shop.description,
         "favourites_count": shop.favourites_count,

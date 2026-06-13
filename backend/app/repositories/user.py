@@ -22,3 +22,11 @@ def get_user_by_id(db: Session, user_id: int) -> User | None:
     stmt = select(User).where(User.id == user_id)
     data = db.execute(stmt).scalar_one_or_none()
     return data
+
+
+def create_application_to_be_seller(db, application):
+    db.add(application)
+    db.commit()
+    db.refresh(application)
+
+    return application.id

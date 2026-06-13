@@ -5,6 +5,7 @@ from app.repositories.brands import create_brand, delete_brand, get_brand, get_b
 from app.common.exceptions import brand_not_found
 from app.schemas.brands import BrandCreateResponse, BrandDeleteResponse, BrandResponse, BrandUpdateResponse
 from app.models.brand import Brand
+from app.common.utils import build_url
 
 
 def check_unique_brand_title(db: Session, title, brand_id=None):
@@ -20,7 +21,7 @@ def check_unique_brand_title(db: Session, title, brand_id=None):
 def mapping_brand(brand: Brand):
     return BrandResponse(
         id=brand.id,
-        logo_url=brand.logo_url,
+        logo_url=build_url(brand.logo_url),
         title=brand.title,
         description=brand.description,
     )
