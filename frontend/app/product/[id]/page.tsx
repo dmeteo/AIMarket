@@ -14,6 +14,7 @@ import { useProduct } from '../../../hooks/useProducts';
 import { reviewService, type Review } from '../../../services/review.service';
 import ShopCard from '../../../components/ShopCard';
 import shopsData from '../../../mocks/data/seller-shops.json';
+import type { SellerShop } from '../../../services/seller.service';
 import { ChevronRight } from 'lucide-react';
 
 export default function ProductPage() {
@@ -26,7 +27,7 @@ export default function ProductPage() {
 
   // Find shop by product's shop_id
   const shop = product
-    ? (shopsData as { shops: Array<{ id: number; seller_id: number; name: string; description: string; logo_url: string | null; products_count: number; orders_count: number; revenue: number; is_active: boolean; created_at: string }> }).shops.find((s) => s.id === product.shop_id) ?? null
+    ? (shopsData as { shops: Array<{ id: number; seller_id: number; title: string; description: string; logo_url: string | null; products_count: number; orders_count: number; reviews_count: number; revenue: number; is_active: boolean; created_at: string }> }).shops.find((s) => s.id === product.shop_id) ?? null
     : null;
 
   useEffect(() => {
@@ -140,7 +141,7 @@ export default function ProductPage() {
                 stock={product.quantity}
               />
 
-              {shop && <ShopCard shop={shop} />}
+              {shop && <ShopCard shop={shop as SellerShop} />}
             </div>
           </div>
 

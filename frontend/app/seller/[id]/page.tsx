@@ -26,7 +26,7 @@ const SORT_OPTIONS: { value: SortOption; label: string }[] = [
 interface ShopItem {
   id: number;
   seller_id: number;
-  name: string;
+  title: string;       // было name → title
   description: string;
   logo_url: string | null;
   products_count: number;
@@ -109,7 +109,7 @@ export default function SellerPage() {
     'bg-cyan-100 text-cyan-600',
     'bg-violet-100 text-violet-600',
   ];
-  const colorIndex = shop ? shop.name.charCodeAt(0) % colors.length : 0;
+  const colorIndex = shop ? shop.title.charCodeAt(0) % colors.length : 0;
 
   if (!shop && !isLoading) {
     return (
@@ -142,15 +142,15 @@ export default function SellerPage() {
                 {/* Avatar */}
                 <div className={`w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 ${colors[colorIndex]}`}>
                   {shop.logo_url ? (
-                    <Image src={shop.logo_url} alt={shop.name} width={64} height={64} className="w-full h-full object-cover rounded-xl" />
+                    <Image src={shop.logo_url} alt={shop.title} width={64} height={64} className="w-full h-full object-cover rounded-xl" />
                   ) : (
-                    <span className="text-2xl font-bold">{shop.name.charAt(0)}</span>
+                    <span className="text-2xl font-bold">{shop.title.charAt(0)}</span>
                   )}
                 </div>
 
                 {/* Info */}
                 <div className="flex-1 min-w-0">
-                  <h1 className="text-xl font-bold text-gray-900">{shop.name}</h1>
+                  <h1 className="text-xl font-bold text-gray-900">{shop.title}</h1>
 
                   {/* Stats row */}
                   <div className="flex items-center gap-4 mt-2">
@@ -284,9 +284,9 @@ export default function SellerPage() {
           <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 animate-fade-in">
             <div className="flex items-center gap-3 mb-4">
               <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${colors[colorIndex]}`}>
-                <span className="text-xl font-bold">{shop.name.charAt(0)}</span>
+                <span className="text-xl font-bold">{shop.title.charAt(0)}</span>
               </div>
-              <h2 className="text-lg font-bold text-gray-900">{shop.name}</h2>
+              <h2 className="text-lg font-bold text-gray-900">{shop.title}</h2>
             </div>
 
             {shop.description && (

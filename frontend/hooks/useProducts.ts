@@ -19,7 +19,7 @@ export interface Product {
   rating: number | null;
   reviews_count: number;
   quantity: number;
-  categories: ProductCategory[];
+  categories?: ProductCategory[];  // может отсутствовать в моках
   isNew?: boolean;
   isBestSeller?: boolean;
   shop_ids?: number[];
@@ -34,6 +34,15 @@ export type ProductPage = Product;
 export interface GetProductsResponse {
   items: Product[];
   hasNextPage: boolean;
+}
+
+// Backend response format
+interface BackendProductsResponse {
+  products: Product[];
+  total: number;
+  page: number;
+  limit: number;
+  pages: number;
 }
 
 export interface ProductsParams {
@@ -54,14 +63,18 @@ export const useProducts = (limit = 10, params?: ProductsParams) => {
   >({
     queryKey: ['products', JSON.stringify(params)],
     queryFn: async ({ pageParam = 0 }) => {
-      const response = await api.get('/api/products', {
+      const response = await api.get<BackendProductsResponse>('/api/v1/products/', {
         params: {
           page: pageParam + 1,
           limit,
           ...params,
         },
       });
-      return response.data;
+      // Map backend response to frontend format
+      return {
+        items: response.data.products,
+        hasNextPage: response.data.page < response.data.pages,
+      };
     },
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNextPage ? allPages.length : undefined;

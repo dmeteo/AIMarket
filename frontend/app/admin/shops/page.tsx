@@ -10,7 +10,7 @@ import shopsData from '../../../mocks/data/seller-shops.json';
 import applicationsData from '../../../mocks/data/seller-applications.json';
 import type { SellerShop } from '../../../services/seller.service';
 
-type SortField = 'name' | 'seller' | 'products_count' | 'orders_count' | 'revenue';
+type SortField = 'title' | 'seller' | 'products_count' | 'orders_count' | 'revenue';
 type SortDir = 'asc' | 'desc';
 
 export default function AdminShopsPage() {
@@ -19,7 +19,7 @@ export default function AdminShopsPage() {
   const [shops] = useState<SellerShop[]>((shopsData as { shops: SellerShop[] }).shops);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'suspended'>('all');
-  const [sortField, setSortField] = useState<SortField>('name');
+  const [sortField, setSortField] = useState<SortField>('title');
   const [sortDir, setSortDir] = useState<SortDir>('asc');
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function AdminShopsPage() {
     if (token && userStr) {
       try { isAdmin = JSON.parse(userStr).role === 'ADMIN'; } catch { /* ignore */ }
     }
-    if (!isAdmin) window.location.href = '/admin/login';
+    if (!isAdmin) window.location.href = '/login';
   }, [isAuthenticated, user, router, isLoading]);
 
   const getSellerName = (sellerId: number): string => {
@@ -55,7 +55,7 @@ export default function AdminShopsPage() {
     if (search) {
       const q = search.toLowerCase();
       result = result.filter(
-        (s) => s.name.toLowerCase().includes(q) || s.description?.toLowerCase().includes(q)
+        (s) => s.title.toLowerCase().includes(q) || s.description?.toLowerCase().includes(q)
       );
     }
 
@@ -66,7 +66,7 @@ export default function AdminShopsPage() {
     result.sort((a, b) => {
       let cmp = 0;
       switch (sortField) {
-        case 'name': cmp = a.name.localeCompare(b.name); break;
+        case 'title': cmp = a.title.localeCompare(b.title); break;
         case 'seller': cmp = getSellerName(a.seller_id).localeCompare(getSellerName(b.seller_id)); break;
         case 'products_count': cmp = a.products_count - b.products_count; break;
         case 'orders_count': cmp = a.orders_count - b.orders_count; break;
@@ -154,7 +154,7 @@ export default function AdminShopsPage() {
                           <Store className="h-4 w-4 text-green-600" />
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-gray-900">{shop.name}</p>
+                          <p className="text-sm font-medium text-gray-900">{shop.title}</p>
                           <p className="text-xs text-gray-400">#{shop.id}</p>
                         </div>
                       </div>

@@ -69,9 +69,9 @@ export default function AdminAnalyticsPage() {
   });
   const [selectedShopIds, setSelectedShopIds] = useState<number[]>([]);
 
-  const shopOptions = (shopsData as { shops: Array<{ id: number; name: string }> }).shops.map((s) => ({
+  const shopOptions = (shopsData as { shops: Array<{ id: number; title: string }> }).shops.map((s) => ({
     value: s.id,
-    label: s.name,
+    label: s.title,
   }));
 
   useEffect(() => {
@@ -82,7 +82,7 @@ export default function AdminAnalyticsPage() {
     if (token && userStr) {
       try { isAdmin = JSON.parse(userStr).role === 'ADMIN'; } catch { /* ignore */ }
     }
-    if (!isAdmin) window.location.href = '/admin/login';
+    if (!isAdmin) window.location.href = '/login';
   }, [isAuthenticated, user, router, isLoading]);
 
   if (isLoading || !isAuthenticated || user?.role !== 'ADMIN') return null;

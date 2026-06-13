@@ -123,20 +123,15 @@ export default function SellerProductsPage() {
     shop_ids: number[];
     price_overrides: Record<number, string>;
   }) => {
-    const finalPrice = data.discount_percent && parseFloat(data.discount_percent) > 0
-      ? (parseFloat(data.price) * (1 - parseFloat(data.discount_percent) / 100)).toFixed(2)
-      : data.price;
-
     await productService.createProduct({
+      shop_id: data.shop_ids?.[0] ?? 0,
       title: data.title,
       description: data.description,
       price: data.price,
       discount_percent: parseFloat(data.discount_percent),
-      final_price: finalPrice,
       quantity: data.quantity,
       category_ids: data.category_id ? [data.category_id] : [],
       is_active: data.is_active,
-      shop_ids: data.shop_ids,
     });
 
     // Apply price overrides if any
@@ -223,21 +218,16 @@ export default function SellerProductsPage() {
         if (cat) categoryId = cat.id;
       }
 
-      const finalPrice = discount && parseFloat(discount) > 0
-        ? (parseFloat(price) * (1 - parseFloat(discount) / 100)).toFixed(2)
-        : price;
-
       try {
         await productService.createProduct({
+          shop_id: shops.length > 0 ? shops[0].id : 0,
           title,
           description,
           price,
           discount_percent: parseFloat(discount) || 0,
-          final_price: finalPrice,
           quantity: parseInt(quantity, 10) || 0,
           category_ids: categoryId ? [categoryId] : [],
           is_active: status !== 'draft',
-          shop_ids: shops.length > 0 ? [shops[0].id] : [],
         });
         success++;
       } catch (err) {
@@ -264,7 +254,7 @@ export default function SellerProductsPage() {
     { id: ALL_SHOPS_TAB, label: 'Все товары', count: products.length },
     ...shops.map((s) => ({
       id: String(s.id),
-      label: s.name,
+      label: s.title,
       count: products.filter((p) => p.shop_ids?.includes(s.id)).length,
     })),
   ];
@@ -383,7 +373,7 @@ export default function SellerProductsPage() {
                               const shop = shops.find((s) => s.id === shopId);
                               return shop ? (
                                 <span key={shopId} className="inline-flex px-1.5 py-0.5 text-xs bg-gray-100 text-gray-600 rounded">
-                                  {shop.name}
+                                  {shop.title}
                                 </span>
                               ) : null;
                             })}

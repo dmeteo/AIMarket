@@ -40,7 +40,7 @@ export default function AdminDashboardPage() {
 
     if (!isAdmin) {
       console.log('[AdminDashboard] Redirecting to /admin/login...');
-      window.location.href = '/admin/login';
+      window.location.href = '/login';
     } else {
       console.log('[AdminDashboard] Admin confirmed, staying on dashboard');
     }

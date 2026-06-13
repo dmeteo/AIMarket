@@ -26,7 +26,6 @@ export interface CurrentUserResponse {
   email: string;
   role: Role;
   is_active: boolean;
-  orders_count: number;
 }
 
 export interface AuthResponse {

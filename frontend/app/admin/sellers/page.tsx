@@ -37,7 +37,7 @@ export default function AdminSellersPage() {
     if (token && userStr) {
       try { isAdmin = JSON.parse(userStr).role === 'ADMIN'; } catch { /* ignore */ }
     }
-    if (!isAdmin) window.location.href = '/admin/login';
+    if (!isAdmin) window.location.href = '/login';
   }, [isAuthenticated, user, router, isLoading]);
 
   const handleSort = (field: SortField) => {

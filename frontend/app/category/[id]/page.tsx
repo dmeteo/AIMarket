@@ -26,7 +26,8 @@ const SORT_OPTIONS: { value: SortOption; label: string }[] = [
 
 interface ShopItem {
   id: number;
-  name: string;
+  title: string;       // основное поле из API
+  name?: string;       // для обратной совместимости
   description: string;
   logo_url: string | null;
   seller_id: number;

@@ -176,7 +176,7 @@ export default function CategoryFilters({
                 />
                 <Store className="h-3.5 w-3.5 text-gray-400" />
                 <span className="text-sm text-gray-600 group-hover:text-gray-900">
-                  {shop.name}
+                  {shop.title}
                 </span>
               </label>
             ))}

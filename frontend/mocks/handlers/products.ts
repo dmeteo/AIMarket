@@ -19,6 +19,34 @@ function findCategory(id: number) {
 let nextProductId = Math.max(...(productsData as { items: ProductItem[] }).items.map((p) => p.id), 0) + 1;
 
 export const productHandlers = [
+  // GET /api/v1/products/ — list products with pagination
+  http.get('/api/v1/products/', ({ request }) => {
+    const url = new URL(request.url);
+    const page = parseInt(url.searchParams.get('page') || '1', 10);
+    const limit = parseInt(url.searchParams.get('limit') || '20', 10);
+    const start = (page - 1) * limit;
+    const end = start + limit;
+    const allProducts = (productsData as { items: ProductItem[] }).items;
+    const paginated = allProducts.slice(start, end);
+    return HttpResponse.json({
+      products: paginated,
+      total: allProducts.length,
+      page,
+      limit,
+      pages: Math.ceil(allProducts.length / limit),
+    });
+  }),
+
+  // GET /api/v1/products/:product_id — single product
+  http.get('/api/v1/products/:product_id', ({ params }) => {
+    const id = parseInt(params.product_id as string, 10);
+    const product = (productsData as { items: ProductItem[] }).items.find((p) => p.id === id);
+    if (!product) {
+      return HttpResponse.json({ detail: 'Товар не найден' }, { status: 404 });
+    }
+    return HttpResponse.json(product);
+  }),
+
   // POST /api/v1/products/ — create product
   http.post('/api/v1/products/', async ({ request }) => {
     const body = await request.json() as Record<string, unknown>;

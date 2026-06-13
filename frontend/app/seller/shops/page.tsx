@@ -32,13 +32,13 @@ export default function SellerShopsPage() {
     setLoading(false);
   };
 
-  const handleCreate = async (data: { name: string; description: string; logo_url?: string }) => {
+  const handleCreate = async (data: { title: string; description: string; logo_url?: string }) => {
     await sellerService.createShop(data);
     setShowForm(false);
     loadShops();
   };
 
-  const handleUpdate = async (data: { name: string; description: string; logo_url?: string }) => {
+  const handleUpdate = async (data: { title: string; description: string; logo_url?: string }) => {
     if (!editingShop) return;
     await sellerService.updateShop(editingShop.id, data);
     setEditingShop(undefined);
@@ -132,7 +132,7 @@ export default function SellerShopsPage() {
                     <Store className="h-6 w-6 text-green-600" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-gray-900 truncate">{shop.name}</h3>
+                    <h3 className="font-semibold text-gray-900 truncate">{shop.title}</h3>
                     <p className="text-xs text-gray-500 mt-0.5">
                       {shop.is_active ? (
                         <span className="text-green-600">● Активен</span>

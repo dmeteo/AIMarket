@@ -3,7 +3,7 @@
     {
       "id": 1,
       "seller_id": 100,
-      "name": "TechPro",
+      "title": "TechPro",
       "description": "Крупный магазин электроники и гаджетов. Оригинальная продукция с гарантией.",
       "logo_url": null,
       "products_count": 5,
@@ -16,7 +16,7 @@
     {
       "id": 2,
       "seller_id": 100,
-      "name": "AudioHub",
+      "title": "AudioHub",
       "description": "Специализированный магазин аудиотехники и аксессуаров для музыки.",
       "logo_url": null,
       "products_count": 3,
@@ -29,7 +29,7 @@
     {
       "id": 3,
       "seller_id": 100,
-      "name": "GadgetZone",
+      "title": "GadgetZone",
       "description": "Магазин аксессуаров и комплектующих для ваших устройств.",
       "logo_url": null,
       "products_count": 4,

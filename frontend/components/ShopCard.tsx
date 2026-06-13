@@ -29,7 +29,7 @@ export default function ShopCard({ shop }: ShopCardProps) {
     'bg-cyan-100 text-cyan-600',
     'bg-violet-100 text-violet-600',
   ];
-  const colorIndex = shop.name.charCodeAt(0) % colors.length;
+  const colorIndex = shop.title.charCodeAt(0) % colors.length;
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-4">
@@ -41,16 +41,16 @@ export default function ShopCard({ shop }: ShopCardProps) {
         {/* Avatar */}
         <div className={`w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 ${colors[colorIndex]}`}>
           {shop.logo_url ? (
-            <Image src={shop.logo_url} alt={shop.name} width={48} height={48} className="w-full h-full object-cover rounded-lg" />
+            <Image src={shop.logo_url} alt={shop.title} width={48} height={48} className="w-full h-full object-cover rounded-lg" />
           ) : (
-            <span className="text-lg font-bold">{shop.name.charAt(0)}</span>
+            <span className="text-lg font-bold">{shop.title.charAt(0)}</span>
           )}
         </div>
 
         {/* Name + "Перейти" */}
         <div className="flex-1 min-w-0">
           <p className="text-base font-bold text-gray-900 group-hover:text-indigo-600 transition-colors truncate">
-            {shop.name}
+            {shop.title}
           </p>
           <p className="text-xs text-gray-400 group-hover:text-indigo-500 transition-colors flex items-center gap-1 mt-0.5">
             <ExternalLink className="h-3 w-3" />

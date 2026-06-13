@@ -37,7 +37,7 @@ export async function OPTIONS(request: NextRequest) {
 }
 
 async function proxyRequest(request: NextRequest, method: string) {
-  const pathname = new URL(request.url).pathname;
+  const pathname = new URL(request.url).pathname.replace(/\/+$/, ''); // remove trailing slashes
   const apiPath = pathname.replace(/^\/api/, '');
   const targetUrl = `${BACKEND_URL}/api${apiPath}${request.nextUrl.search}`;
 

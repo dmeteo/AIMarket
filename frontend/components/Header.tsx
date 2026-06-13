@@ -36,7 +36,7 @@ export default function Header({ className }: HeaderProps) {
   const { data } = useProducts(30);
 
   const allProducts = data?.pages?.flatMap((p: GetProductsResponse) => p.items) ?? [];
-  const { data: ordersData } = useOrders();
+  const { data: ordersData } = useOrders(isAuthenticated);
 
   const activeOrders = (ordersData?.orders ?? []).filter(
     (order) => order.status?.code !== 'RECEIVED',
@@ -271,7 +271,18 @@ export default function Header({ className }: HeaderProps) {
                           <Store className="h-4 w-4 mr-2" />
                           Личный кабинет продавца
                         </Link>
-                      ) : user.role === 'BUYER' ? (
+                      ) : null}
+                      {user.role === 'ADMIN' ? (
+                        <Link
+                          href="/admin/dashboard"
+                          className="flex items-center px-4 py-2 text-sm text-purple-700 hover:bg-purple-50"
+                          onClick={() => setShowUserMenu(false)}
+                        >
+                          <Grid2X2 className="h-4 w-4 mr-2" />
+                          Личный кабинет админа
+                        </Link>
+                      ) : null}
+                      {user.role === 'BUYER' ? (
                         <Link
                           href="/profile/become-seller"
                           className="flex items-center px-4 py-2 text-sm text-indigo-700 hover:bg-indigo-50"

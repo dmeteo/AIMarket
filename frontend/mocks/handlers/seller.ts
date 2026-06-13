@@ -27,12 +27,12 @@ export const sellerHandlers = [
   // ── Applications ──
 
   // Get all applications (admin)
-  http.get('/api/v1/admin/seller-applications', () => {
+  http.get('/api/v1/admin/applications_to_seller', () => {
     return HttpResponse.json((applications as AppStore).applications);
   }),
 
   // Get single application
-  http.get('/api/v1/admin/seller-applications/:id', ({ params }) => {
+  http.get('/api/v1/admin/applications_to_seller/:id', ({ params }) => {
     const id = parseInt(params.id as string, 10);
     const app = (applications as AppStore).applications.find((a: { id: number }) => a.id === id);
     if (!app) {
@@ -51,8 +51,8 @@ export const sellerHandlers = [
     return HttpResponse.json(userApps);
   }),
 
-  // Create application (no shopData — shop created separately after approval)
-  http.post('/api/v1/seller-applications/create', async ({ request }) => {
+  // Create application — POST /api/v1/users/seller_application
+  http.post('/api/v1/users/seller_application', async ({ request }) => {
     const body = await request.json() as Record<string, unknown>;
 
     let userId = 1;
@@ -72,8 +72,18 @@ export const sellerHandlers = [
       id: newId,
       userId,
       status: 'PENDING',
-      sellerData: body.sellerData,
-      legalData: body.legalData,
+      full_name: body.full_name || '',
+      email: body.email || '',
+      phone: body.phone || '',
+      description: body.description || '',
+      person_type: body.person_type || 'INDIVIDUAL_EMPLOYER',
+      inn: body.inn || '',
+      ogrn: body.ogrn || '',
+      address: body.address || '',
+      bic: body.bic || '',
+      // Backward compatibility
+      sellerData: { name: body.full_name || '', email: body.email || '', phone: body.phone || '', about: body.description || '' },
+      legalData: { entityType: body.person_type || 'INDIVIDUAL_EMPLOYER', inn: body.inn || '', ogrn: body.ogrn || '', legalAddress: body.address || '', bankBik: body.bic || '', bankAccount: body.checking_account || '' },
       rejectionReason: null,
       createdAt: now,
       updatedAt: now,
@@ -84,7 +94,7 @@ export const sellerHandlers = [
   }),
 
   // Approve application
-  http.patch('/api/v1/admin/seller-applications/:id/approve', ({ params }) => {
+  http.patch('/api/v1/admin/applications_to_seller/:id/approve', ({ params }) => {
     const id = parseInt(params.id as string, 10);
     const index = findAppIndex(id);
     if (index === -1) {
@@ -102,7 +112,7 @@ export const sellerHandlers = [
   }),
 
   // Reject application
-  http.patch('/api/v1/admin/seller-applications/:id/reject', async ({ request, params }) => {
+  http.patch('/api/v1/admin/applications_to_seller/:id/reject', async ({ request, params }) => {
     const id = parseInt(params.id as string, 10);
     const index = findAppIndex(id);
     if (index === -1) {

@@ -107,7 +107,7 @@ export default function SellerDashboardPage() {
                     <Store className="h-5 w-5 text-green-600" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-gray-900 truncate">{shop.name}</p>
+                    <p className="text-sm font-semibold text-gray-900 truncate">{shop.title}</p>
                     <p className="text-xs text-gray-500">{shop.products_count} товаров</p>
                   </div>
                 </div>

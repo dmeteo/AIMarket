@@ -29,9 +29,9 @@ export default function SellerAnalyticsPage() {
   const [period, setPeriod] = useState('month');
   const [selectedShopIds, setSelectedShopIds] = useState<number[]>([]);
 
-  const shopOptions = (shopsData as { shops: Array<{ id: number; name: string }> }).shops.map((s) => ({
+  const shopOptions = (shopsData as { shops: Array<{ id: number; title: string }> }).shops.map((s) => ({
     value: s.id,
-    label: s.name,
+    label: s.title,
   }));
 
   const { data: analytics, isLoading } = useQuery({

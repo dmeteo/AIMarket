@@ -53,7 +53,7 @@ export default function ShopDetailPage() {
     setLoading(false);
   };
 
-  const handleUpdate = async (data: { name: string; description: string; logo_url?: string }) => {
+  const handleUpdate = async (data: { title: string; description: string; logo_url?: string }) => {
     if (!shop) return;
     await sellerService.updateShop(shop.id, data);
     setShowEdit(false);
@@ -105,7 +105,7 @@ export default function ShopDetailPage() {
   }
 
   return (
-    <SellerLayout title={shop.name}>
+    <SellerLayout title={shop.title}>
       <div className="space-y-6">
         {/* Back button */}
         <button
@@ -124,7 +124,7 @@ export default function ShopDetailPage() {
                 <Store className="h-8 w-8" />
               </div>
               <div>
-                <h1 className="text-xl font-bold">{shop.name}</h1>
+                <h1 className="text-xl font-bold">{shop.title}</h1>
                 {shop.description && <p className="text-sm text-green-100 mt-1">{shop.description}</p>}
                 <p className="text-xs text-green-200 mt-2">
                   Создан: {new Date(shop.created_at).toLocaleDateString('ru-RU')}
@@ -246,7 +246,7 @@ export default function ShopDetailPage() {
       {/* Edit modal */}
       <Modal isOpen={showEdit} onClose={() => setShowEdit(false)} title="Редактировать магазин">
         <ShopForm
-          shop={{ id: shop.id, name: shop.name, description: shop.description, logo_url: shop.logo_url }}
+          shop={{ id: shop.id, title: shop.title, description: shop.description, logo_url: shop.logo_url }}
           onSave={handleUpdate}
           onCancel={() => setShowEdit(false)}
         />
@@ -256,7 +256,7 @@ export default function ShopDetailPage() {
       <Modal isOpen={showDelete} onClose={() => setShowDelete(false)} title="Удалить магазин?">
         <div className="space-y-4">
           <p className="text-sm text-gray-600">
-            Магазин <strong>{shop.name}</strong> и все его товары будут удалены. Это действие нельзя отменить.
+            Магазин <strong>{shop.title}</strong> и все его товары будут удалены. Это действие нельзя отменить.
           </p>
           <div className="flex gap-3">
             <Button variant="secondary" className="flex-1" onClick={() => setShowDelete(false)}>

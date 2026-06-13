@@ -38,8 +38,8 @@ export default function AdminApplicationsPage() {
       try { isAdmin = JSON.parse(userStr).role === 'ADMIN'; } catch { /* ignore */ }
     }
     if (!isAdmin) {
-      console.log('[AdminApps] Redirecting to /admin/login...');
-      window.location.href = '/admin/login';
+      console.log('[AdminApps] Redirecting to /login...');
+      window.location.href = '/login';
     }
   }, [isAuthenticated, user, router, isLoading]);
 
@@ -123,8 +123,8 @@ export default function AdminApplicationsPage() {
           if (statusFilter !== 'all' && app.status !== statusFilter) return false;
           if (search) {
             const q = search.toLowerCase();
-            const matchName = app.sellerData?.name?.toLowerCase().includes(q);
-            const matchEmail = app.sellerData?.email?.toLowerCase().includes(q);
+            const matchName = app.full_name?.toLowerCase().includes(q);
+            const matchEmail = app.email?.toLowerCase().includes(q);
             if (!matchName && !matchEmail) return false;
           }
           return true;
@@ -138,8 +138,8 @@ export default function AdminApplicationsPage() {
               if (statusFilter !== 'all' && app.status !== statusFilter) return false;
               if (search) {
                 const q = search.toLowerCase();
-                const matchName = app.sellerData?.name?.toLowerCase().includes(q);
-                const matchEmail = app.sellerData?.email?.toLowerCase().includes(q);
+                const matchName = app.full_name?.toLowerCase().includes(q);
+                const matchEmail = app.email?.toLowerCase().includes(q);
                 if (!matchName && !matchEmail) return false;
               }
               return true;
@@ -155,7 +155,7 @@ export default function AdminApplicationsPage() {
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <h3 className="text-base font-semibold text-gray-900">{app.sellerData.name}</h3>
+                      <h3 className="text-base font-semibold text-gray-900">{app.full_name}</h3>
                       <span className={`inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-full ${
                         app.status === 'PENDING' ? 'bg-amber-100 text-amber-700' :
                         app.status === 'APPROVED' ? 'bg-green-100 text-green-700' :
@@ -204,10 +204,10 @@ export default function AdminApplicationsPage() {
             <div>
               <h4 className="text-sm font-medium text-gray-700 mb-2">Данные продавца</h4>
               <div className="bg-gray-50 rounded-lg p-3 space-y-1 text-sm">
-                <p><span className="text-gray-500">Имя:</span> {selectedApp.sellerData.name}</p>
-                <p><span className="text-gray-500">Email:</span> {selectedApp.sellerData.email}</p>
-                <p><span className="text-gray-500">Телефон:</span> {selectedApp.sellerData.phone}</p>
-                <p><span className="text-gray-500">О себе:</span> {selectedApp.sellerData.about}</p>
+                <p><span className="text-gray-500">Имя:</span> {selectedApp.full_name}</p>
+                <p><span className="text-gray-500">Email:</span> {selectedApp.email}</p>
+                <p><span className="text-gray-500">Телефон:</span> {selectedApp.phone}</p>
+                <p><span className="text-gray-500">О себе:</span> {selectedApp.description}</p>
               </div>
             </div>
 
@@ -215,10 +215,10 @@ export default function AdminApplicationsPage() {
             <div>
               <h4 className="text-sm font-medium text-gray-700 mb-2">Юридические данные</h4>
               <div className="bg-gray-50 rounded-lg p-3 space-y-1 text-sm">
-                <p><span className="text-gray-500">Тип:</span> {selectedApp.legalData.entityType}</p>
-                <p><span className="text-gray-500">ИНН:</span> {selectedApp.legalData.inn}</p>
-                <p><span className="text-gray-500">ОГРН:</span> {selectedApp.legalData.ogrn}</p>
-                <p><span className="text-gray-500">Адрес:</span> {selectedApp.legalData.legalAddress}</p>
+                <p><span className="text-gray-500">Тип:</span> {selectedApp.person_type}</p>
+                <p><span className="text-gray-500">ИНН:</span> {selectedApp.inn}</p>
+                <p><span className="text-gray-500">ОГРН:</span> {selectedApp.ogrn}</p>
+                <p><span className="text-gray-500">Адрес:</span> {selectedApp.address}</p>
               </div>
             </div>
 

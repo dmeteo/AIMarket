@@ -219,7 +219,7 @@ export default function ProductForm({
                     className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
                   />
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900">{shop.name}</p>
+                    <p className="text-sm font-medium text-gray-900">{shop.title}</p>
                     <p className="text-xs text-gray-500">{shop.products_count} товаров</p>
                   </div>
                 </label>
