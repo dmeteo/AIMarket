@@ -2,7 +2,7 @@ run:
 	docker compose up --build
 
 down:
-	docker compose down
+	docker compose down -v
 
 alembic-migrate:
 	cd backend && alembic revision --autogenerate -m "$(m)"
@@ -13,7 +13,13 @@ alembic-upgrade:
 alembic-migrate-and-upgrade: alembic-migrate alembic-upgrade
 
 alembic-downgrade:
-	alembic downgrade -1
+	cd backend && alembic downgrade -1
 
 export_openapi:
 	cd backend && python -m scripts.export_openapi
+
+run-detached:
+	docker compose up --build -d
+
+seed:
+	cd seed_data && python seed.py

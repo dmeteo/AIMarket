@@ -2,7 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 
-from app.models.user import User
+from app.models.user import ApplicationToSeller, User
 
 
 def create_user(db: Session, user: User):
@@ -30,3 +30,10 @@ def create_application_to_be_seller(db, application):
     db.refresh(application)
 
     return application.id
+
+def get_application_to_be_seller(db: Session, user_id):
+    stmt = select(ApplicationToSeller).where(ApplicationToSeller.user_id==user_id)
+    
+    application = db.scalar(stmt)
+    
+    return application
