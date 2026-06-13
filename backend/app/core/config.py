@@ -19,6 +19,7 @@ class Settings(BaseSettings):
     S3_URL: str = ""
     S3_PORT: str = ""
     S3_BUCKETS: list[str] = [""]
+    S3_PUBLIC_URL: str = ""
     
     ADMIN_EMAIL: str = ""
     ADMIN_PASSWORD: str = ""
