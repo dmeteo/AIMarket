@@ -2081,6 +2081,57 @@
         }
       }
     },
+    "/api/v1/media/upload": {
+      "post": {
+        "tags": [
+          "media"
+        ],
+        "summary": "Upload Media",
+        "operationId": "upload_media_api_v1_media_upload_post",
+        "parameters": [
+          {
+            "name": "entity",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/MediaEntities"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_media_api_v1_media_upload_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadMediaResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/health": {
       "get": {
         "summary": "Health Check",
@@ -2335,6 +2386,23 @@
           "token"
         ],
         "title": "AuthResponse"
+      },
+      "Body_upload_media_api_v1_media_upload_post": {
+        "properties": {
+          "files": {
+            "items": {
+              "type": "string",
+              "contentMediaType": "application/octet-stream"
+            },
+            "type": "array",
+            "title": "Files"
+          }
+        },
+        "type": "object",
+        "required": [
+          "files"
+        ],
+        "title": "Body_upload_media_api_v1_media_upload_post"
       },
       "BrandCreateRequest": {
         "properties": {
@@ -2753,6 +2821,14 @@
           "password"
         ],
         "title": "LoginRequest"
+      },
+      "MediaEntities": {
+        "type": "string",
+        "enum": [
+          "products",
+          "avatars"
+        ],
+        "title": "MediaEntities"
       },
       "Order": {
         "properties": {
@@ -3780,6 +3856,30 @@
           "quantity"
         ],
         "title": "UpdateCartItemResponse"
+      },
+      "UploadMediaResponse": {
+        "properties": {
+          "full_urls": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Full Urls"
+          },
+          "keys": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Keys"
+          }
+        },
+        "type": "object",
+        "required": [
+          "full_urls",
+          "keys"
+        ],
+        "title": "UploadMediaResponse"
       },
       "UserProfileResponse": {
         "properties": {
