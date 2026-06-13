@@ -13,7 +13,7 @@ from app.services.shops import create_shop_service, delete_shop_service, get_sho
 router = APIRouter(prefix="/shops", tags=["shops"])
 
 
-@router.post("/", response_model=ShopCreateResponse)
+@router.post("/", response_model=ShopCreateResponse, description="[Seller/Admin]")
 def create_shop(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_seller_or_admin)],
@@ -24,7 +24,7 @@ def create_shop(
     return shop
 
 
-@router.patch("/{shop_id}", response_model=ShopUpdateResponse)
+@router.patch("/{shop_id}", response_model=ShopUpdateResponse, description="[Seller/Admin]")
 def update_shop(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_seller_or_admin)],
@@ -36,7 +36,7 @@ def update_shop(
     return shop
 
 
-@router.delete("/{shop_id}", response_model=ShopDeleteResponse)
+@router.delete("/{shop_id}", response_model=ShopDeleteResponse, description="[Seller/Admin]")
 def delete_shop(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_seller_or_admin)],
@@ -57,7 +57,7 @@ def get_shop(
     return shop
 
 
-@router.post("/{shop_id}/favourite")
+@router.post("/{shop_id}/favourite", description="[Buyer User]",)
 def user_change_favourite_status_shop(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(get_current_user)],

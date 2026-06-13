@@ -13,7 +13,7 @@ from app.services.cart import add_product_to_cart_service, delete_cart_item_serv
 router = APIRouter(prefix="/cart", tags=["cart"])
 
 
-@router.get("/", response_model=CartResponse)
+@router.get("/", response_model=CartResponse, description="[Buyer User]",)
 def get_cart(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(get_current_user)]
@@ -23,7 +23,7 @@ def get_cart(
     return cart
 
 
-@router.post("/items", response_model=AddProductToCartResponse)
+@router.post("/items", response_model=AddProductToCartResponse, description="[Buyer User]",)
 def add_product_to_cart(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(get_current_user)],
@@ -34,7 +34,7 @@ def add_product_to_cart(
     return cart_id
     
     
-@router.patch("/items/{product_id}", response_model=UpdateCartItemResponse)
+@router.patch("/items/{product_id}", response_model=UpdateCartItemResponse, description="[Buyer User]",)
 def update_cart_item_quantity(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(get_current_user)],
@@ -46,7 +46,7 @@ def update_cart_item_quantity(
     return cart_item
 
 
-@router.delete("/items/{product_id}", response_model=CartResponse)
+@router.delete("/items/{product_id}", response_model=CartResponse, description="[Buyer User]",)
 def delete_cart_item(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(get_current_user)],
