@@ -1,0 +1,28 @@
+{
+  "categories": ["Электроника", "Смартфоны", "Одежда", "Обувь", "Спорт"],
+  "brands": [
+    {"title": "Apple", "logo_url": "brands/apple.jpg"},
+    {"title": "Nike", "logo_url": "brands/nike.jpg"},
+    {"title": "Samsung", "logo_url": "brands/samsung.jpg"}
+  ],
+  "shops": [
+    {"title": "TechStore", "description": "Магазин электроники", "logo_url": "shops/techstore.jpg"},
+    {"title": "FashionHub", "description": "Одежда и обувь", "logo_url": "shops/fashionhub.jpg"},
+    {"title": "SportLife", "description": "Спортивные товары", "logo_url": "shops/sportlife.jpg"}
+  ],
+  "products": [
+    {
+      "title": "iPhone 15",
+      "description": "Смартфон Apple 256GB",
+      "discount_percent": 10,
+      "price": 90000,
+      "quantity": 20,
+      "discount": 5,
+      "is_active": true,
+      "shop": "TechStore",
+      "brand": "Apple",
+      "categories": ["Электроника", "Смартфоны"],
+      "images": ["products/iphone15_1.jpg", "products/iphone15_2.jpg"]
+    }
+  ]
+}
