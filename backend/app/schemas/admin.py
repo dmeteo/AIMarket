@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import datetime
 
 from pydantic import BaseModel, EmailStr, Field
 
@@ -9,8 +9,8 @@ class ApplicationToSellerList(BaseModel):
     id: int
     full_name: str
     verdict: VerdictApplicationToBeSeller
-    created_at: date
-
+    created_at: datetime
+    
 
 class ApplicationsToSellerResponse(BaseModel):
     applications: list[ApplicationToSellerList]
@@ -29,7 +29,7 @@ class ApplicationToSellerResponse(BaseModel):
     bic: str
     checking_account: str
     verdict: VerdictApplicationToBeSeller
-    created_at: date
+    created_at: datetime
     
 
 class VerdictForApplicationToSellerRequest(BaseModel):
