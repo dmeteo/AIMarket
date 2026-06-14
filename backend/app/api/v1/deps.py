@@ -1,10 +1,12 @@
 from typing import Annotated
+import ipaddress
 
 import jwt
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import OAuth2PasswordBearer
 from jwt import InvalidTokenError
 from sqlalchemy.orm import Session
+from yookassa.domain.common import SecurityHelper
 
 from app.core.config import settings
 from app.core.database import get_db
@@ -82,3 +84,11 @@ def require_moderator_or_higher(
         status_code=status.HTTP_403_FORBIDDEN,
         detail="Access denied"
     )
+    
+    
+def verify_yookassa_ip(request: Request):
+    if not SecurityHelper().is_ip_trusted(request.client.host):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Access denied"
+        )

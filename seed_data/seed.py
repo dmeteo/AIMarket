@@ -1,11 +1,14 @@
 import json
 from pathlib import Path
 import os
+import sys
+
+sys.path.append("..")
 
 import requests
 from dotenv import load_dotenv
 
-from client import APIClient
+from shared.client import APIClient
 from seeders.categories import create_categories
 from seeders.brands import create_brands
 from seeders.shops import create_shops

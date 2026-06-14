@@ -296,7 +296,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ApplicationToBeSellerRequest"
+                "$ref": "#/components/schemas/ApplicationToBeSellerCreateRequest"
               }
             }
           },
@@ -308,7 +308,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApplicationToBeSellerResponse"
+                  "$ref": "#/components/schemas/ApplicationToBeSellerCreateResponse"
                 }
               }
             }
@@ -319,6 +319,33 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/me/seller_application": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get Application To Be Seller",
+        "description": "[Buyer User]",
+        "operationId": "get_application_to_be_seller_api_v1_users_me_seller_application_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationToBeSellerResponse"
                 }
               }
             }
@@ -2183,7 +2210,7 @@
         ],
         "title": "AddProductToCartResponse"
       },
-      "ApplicationToBeSellerRequest": {
+      "ApplicationToBeSellerCreateRequest": {
         "properties": {
           "full_name": {
             "type": "string",
@@ -2239,9 +2266,9 @@
           "bic",
           "checking_account"
         ],
-        "title": "ApplicationToBeSellerRequest"
+        "title": "ApplicationToBeSellerCreateRequest"
       },
-      "ApplicationToBeSellerResponse": {
+      "ApplicationToBeSellerCreateResponse": {
         "properties": {
           "application_id": {
             "type": "integer",
@@ -2251,6 +2278,86 @@
         "type": "object",
         "required": [
           "application_id"
+        ],
+        "title": "ApplicationToBeSellerCreateResponse"
+      },
+      "ApplicationToBeSellerResponse": {
+        "properties": {
+          "full_name": {
+            "type": "string",
+            "title": "Full Name"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "phone": {
+            "type": "string",
+            "title": "Phone"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "person_type": {
+            "$ref": "#/components/schemas/PersonType"
+          },
+          "inn": {
+            "type": "string",
+            "title": "Inn"
+          },
+          "ogrn": {
+            "type": "string",
+            "title": "Ogrn"
+          },
+          "address": {
+            "type": "string",
+            "title": "Address"
+          },
+          "bic": {
+            "type": "string",
+            "title": "Bic"
+          },
+          "checking_account": {
+            "type": "string",
+            "title": "Checking Account"
+          },
+          "verdict": {
+            "$ref": "#/components/schemas/VerdictApplicationToBeSeller"
+          },
+          "rejection_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rejection Reason"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "full_name",
+          "email",
+          "phone",
+          "description",
+          "person_type",
+          "inn",
+          "ogrn",
+          "address",
+          "bic",
+          "checking_account",
+          "verdict",
+          "rejection_reason",
+          "created_at"
         ],
         "title": "ApplicationToBeSellerResponse"
       },
@@ -2269,7 +2376,7 @@
           },
           "created_at": {
             "type": "string",
-            "format": "date",
+            "format": "date-time",
             "title": "Created At"
           }
         },
@@ -2333,7 +2440,7 @@
           },
           "created_at": {
             "type": "string",
-            "format": "date",
+            "format": "date-time",
             "title": "Created At"
           }
         },
@@ -3646,7 +3753,14 @@
             "title": "Title"
           },
           "logo_url": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Logo Url"
           },
           "description": {
@@ -3664,8 +3778,7 @@
         },
         "type": "object",
         "required": [
-          "title",
-          "logo_url"
+          "title"
         ],
         "title": "ShopCreateRequest"
       },
@@ -3701,7 +3814,14 @@
             "title": "Id"
           },
           "logo_url": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Logo Url"
           },
           "title": {
@@ -3745,7 +3865,6 @@
         "type": "object",
         "required": [
           "id",
-          "logo_url",
           "title",
           "favourites_count",
           "reviews_count",

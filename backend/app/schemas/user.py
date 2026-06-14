@@ -1,8 +1,9 @@
 import re
+from datetime import datetime
 
 from pydantic import BaseModel, EmailStr, field_validator
 
-from app.common.enums import PersonType, Role
+from app.common.enums import PersonType, Role, VerdictApplicationToBeSeller
 
 
 class UserProfileResponse(BaseModel):
@@ -19,7 +20,7 @@ class CurrentUserResponse(BaseModel):
     is_active: bool
     
     
-class ApplicationToBeSellerRequest(BaseModel):
+class ApplicationToBeSellerCreateRequest(BaseModel):
     full_name: str
     email: EmailStr
     phone: str
@@ -44,5 +45,21 @@ class ApplicationToBeSellerRequest(BaseModel):
             return new_value
 
 
-class ApplicationToBeSellerResponse(BaseModel):
+class ApplicationToBeSellerCreateResponse(BaseModel):
     application_id: int
+    
+    
+class ApplicationToBeSellerResponse(BaseModel):
+    full_name: str
+    email: EmailStr
+    phone: str
+    description: str
+    person_type: PersonType
+    inn: str
+    ogrn: str
+    address: str
+    bic: str
+    checking_account: str
+    verdict: VerdictApplicationToBeSeller
+    rejection_reason: str | None
+    created_at: datetime

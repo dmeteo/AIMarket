@@ -1,3 +1,5 @@
+from yookassa import Configuration
+
 from app.core.database import SessionLocal
 from app.models.user import User
 from app.core.config import settings
@@ -20,3 +22,8 @@ def create_admin():
         db.commit()
     finally:
         db.close()
+        
+
+def init_yookassa():
+    Configuration.configure(settings.YOOKASSA_SHOP_ID, settings.YOOKASSA_SECRET_KEY)
+    

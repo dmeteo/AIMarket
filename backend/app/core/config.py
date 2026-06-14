@@ -24,6 +24,9 @@ class Settings(BaseSettings):
     ADMIN_EMAIL: str = ""
     ADMIN_PASSWORD: str = ""
     
+    YOOKASSA_SHOP_ID: str = ""
+    YOOKASSA_SECRET_KEY: str = ""
+    
     @property
     def DB_URL(self) -> str:
         if self.DATABASE_URL:
