@@ -1,10 +1,12 @@
 'use client';
 
-import { useState } from 'react';
-import { AlertCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { AlertCircle, ChevronDown, ChevronUp, Upload, X, Loader2 } from 'lucide-react';
+import Image from 'next/image';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import Textarea from '../ui/Textarea';
+import { uploadFiles } from '../../services/upload.service';
 import type { Category } from '../../services/category.service';
 import type { Brand } from '../../services/brand.service';
 import type { SellerShop } from '../../services/seller.service';
@@ -35,8 +37,17 @@ interface ProductFormProps {
     is_active: boolean;
     shop_ids: number[];
     price_overrides: Record<number, string>;
+    images: string[];
   }) => Promise<void>;
   onCancel: () => void;
+}
+
+interface ImageItem {
+  file?: File;
+  preview: string;
+  url?: string;
+  key?: string;
+  uploading: boolean;
 }
 
 export default function ProductForm({
@@ -57,8 +68,19 @@ export default function ProductForm({
   const [selectedShops, setSelectedShops] = useState<number[]>(product?.shop_ids || []);
   const [priceOverrides, setPriceOverrides] = useState<Record<number, string>>({});
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Images state
+  const [images, setImages] = useState<ImageItem[]>(
+    (product?.images || []).map((url) => ({
+      preview: url,
+      url,
+      uploading: false,
+    })),
+  );
 
   const isEditing = !!product;
 
@@ -72,14 +94,78 @@ export default function ProductForm({
     setPriceOverrides((prev) => ({ ...prev, [shopId]: value }));
   };
 
+  const handleImagesChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    const fileArray = Array.from(files);
+    const totalCount = images.length + fileArray.length;
+    if (totalCount > 10) {
+      setError('Максимум 10 изображений');
+      return;
+    }
+
+    // Создаём локальные превью
+    const newItems: ImageItem[] = fileArray.map((file) => ({
+      file,
+      preview: URL.createObjectURL(file),
+      uploading: true,
+    }));
+    setImages((prev) => [...prev, ...newItems]);
+
+    // Загружаем на сервер
+    setUploading(true);
+    setError('');
+    try {
+      const result = await uploadFiles(fileArray, 'products');
+      // Обновляем items с URL и ключами
+      setImages((prev) => {
+        let urlIdx = 0;
+        return prev.map((item) => {
+          if (item.uploading && item.file) {
+            const url = result.full_urls?.[urlIdx];
+            const key = result.keys?.[urlIdx];
+            urlIdx++;
+            return { ...item, url, key, uploading: false, file: undefined };
+          }
+          return item;
+        });
+      });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Ошибка загрузки изображений');
+      // Удаляем неудачные items
+      setImages((prev) => prev.filter((item) => !item.file));
+    }
+    setUploading(false);
+
+    // Сброс input
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  };
+
+  const removeImage = (index: number) => {
+    setImages((prev) => {
+      const item = prev[index];
+      if (item.preview && item.preview.startsWith('blob:')) {
+        URL.revokeObjectURL(item.preview);
+      }
+      return prev.filter((_, i) => i !== index);
+    });
+  };
+
   const handleSubmit = async () => {
     if (!title.trim()) { setError('Введите название товара'); return; }
     if (!price || parseFloat(price) <= 0) { setError('Укажите корректную цену'); return; }
     if (selectedShops.length === 0) { setError('Выберите хотя бы один магазин'); return; }
+    if (images.some((img) => img.uploading)) { setError('Дождитесь загрузки изображений'); return; }
 
     setSaving(true);
     setError('');
     try {
+      // Отправляем keys в поле images
+      const imageKeys = images
+        .filter((img) => img.key)
+        .map((img) => img.key!);
+
       await onSave({
         title: title.trim(),
         description: description.trim(),
@@ -90,6 +176,7 @@ export default function ProductForm({
         is_active: isActive,
         shop_ids: selectedShops,
         price_overrides: priceOverrides,
+        images: imageKeys,
       });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Ошибка сохранения');
@@ -129,6 +216,71 @@ export default function ProductForm({
           rows={3}
           maxLength={300}
         />
+      </div>
+
+      {/* Images */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Изображения
+          <span className="text-gray-400 font-normal ml-1">
+            ({images.length}/10)
+          </span>
+        </label>
+        <div className="flex flex-wrap gap-3">
+          {images.map((img, idx) => (
+            <div
+              key={idx}
+              className="relative w-20 h-20 rounded-lg overflow-hidden bg-gray-100 border border-gray-200 flex-shrink-0"
+            >
+              <Image
+                src={img.preview}
+                alt={`Image ${idx + 1}`}
+                width={80}
+                height={80}
+                className="w-full h-full object-cover"
+              />
+              {img.uploading && (
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                  <Loader2 className="h-5 w-5 text-white animate-spin" />
+                </div>
+              )}
+              {!img.uploading && (
+                <button
+                  type="button"
+                  onClick={() => removeImage(idx)}
+                  className="absolute top-0.5 right-0.5 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600"
+                >
+                  <X className="h-3 w-3" />
+                </button>
+              )}
+            </div>
+          ))}
+
+          {images.length < 10 && (
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={uploading}
+              className="w-20 h-20 rounded-lg border-2 border-dashed border-gray-300 flex flex-col items-center justify-center gap-1 text-gray-400 hover:border-green-400 hover:text-green-500 transition-colors flex-shrink-0 disabled:opacity-50"
+            >
+              {uploading ? (
+                <Loader2 className="h-5 w-5 animate-spin" />
+              ) : (
+                <Upload className="h-5 w-5" />
+              )}
+              <span className="text-[10px]">Добавить</span>
+            </button>
+          )}
+        </div>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/jpeg,image/png,image/gif,image/webp"
+          multiple
+          onChange={handleImagesChange}
+          className="hidden"
+        />
+        <p className="text-xs text-gray-400 mt-1">JPG, PNG, GIF, WebP. Максимум 10 файлов по 5 МБ.</p>
       </div>
 
       {/* Price & Discount */}

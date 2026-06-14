@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { CheckCircle, XCircle, Clock, Eye, ChevronRight, Search } from 'lucide-react';
 import AdminLayout from '../../../components/admin/AdminLayout';
@@ -8,14 +8,17 @@ import { adminNavItems } from '../../../components/admin/admin-nav';
 import Button from '../../../components/ui/Button';
 import Modal from '../../../components/ui/Modal';
 import Textarea from '../../../components/ui/Textarea';
+import Spinner from '../../../components/ui/Spinner';
 import { useAuth } from '../../../hooks/useAuth';
 import { sellerService } from '../../../services/seller.service';
 import type { SellerApplication } from '../../../services/seller.service';
 
-const statusConfig = {
-  PENDING: { label: 'На проверке', variant: 'warning' as const, icon: Clock },
-  APPROVED: { label: 'Одобрена', variant: 'success' as const, icon: CheckCircle },
-  REJECTED: { label: 'Отклонена', variant: 'destructive' as const, icon: XCircle },
+const statusConfig: Record<string, { label: string; variant: 'warning' | 'success' | 'destructive'; icon: typeof Clock }> = {
+  PENDING: { label: 'На проверке', variant: 'warning', icon: Clock },
+  APPROVE: { label: 'Одобрена', variant: 'success', icon: CheckCircle },
+  APPROVED: { label: 'Одобрена', variant: 'success', icon: CheckCircle },
+  REJECT: { label: 'Отклонена', variant: 'destructive', icon: XCircle },
+  REJECTED: { label: 'Отклонена', variant: 'destructive', icon: XCircle },
 };
 
 export default function AdminApplicationsPage() {
@@ -23,9 +26,10 @@ export default function AdminApplicationsPage() {
   const { user, isAuthenticated, isLoading } = useAuth();
   const [applications, setApplications] = useState<SellerApplication[]>([]);
   const [selectedApp, setSelectedApp] = useState<SellerApplication | null>(null);
+  const [detailLoading, setDetailLoading] = useState(false);
   const [showRejectModal, setShowRejectModal] = useState(false);
   const [rejectReason, setRejectReason] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [actionLoading, setActionLoading] = useState(false);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'PENDING' | 'APPROVED' | 'REJECTED'>('all');
 
@@ -38,7 +42,6 @@ export default function AdminApplicationsPage() {
       try { isAdmin = JSON.parse(userStr).role === 'ADMIN'; } catch { /* ignore */ }
     }
     if (!isAdmin) {
-      console.log('[AdminApps] Redirecting to /login...');
       window.location.href = '/login';
     }
   }, [isAuthenticated, user, router, isLoading]);
@@ -47,12 +50,23 @@ export default function AdminApplicationsPage() {
     sellerService.getApplications().then(setApplications).catch(() => {});
   }, []);
 
+  const handleOpenDetail = useCallback(async (id: number) => {
+    setDetailLoading(true);
+    try {
+      const app = await sellerService.getApplication(id);
+      setSelectedApp(app);
+    } catch {
+      // ignore
+    }
+    setDetailLoading(false);
+  }, []);
+
   if (!isAuthenticated || user?.role !== 'ADMIN') return null;
 
   const handleApprove = async (id: number) => {
-    setLoading(true);
+    setActionLoading(true);
     try {
-      await sellerService.approveApplication(id);
+      await sellerService.updateApplication(id, { verdict: 'APPROVE' });
       setApplications((prev) =>
         prev.map((a) => (a.id === id ? { ...a, status: 'APPROVED' as const } : a)),
       );
@@ -60,14 +74,17 @@ export default function AdminApplicationsPage() {
     } catch {
       // ignore
     }
-    setLoading(false);
+    setActionLoading(false);
   };
 
   const handleReject = async () => {
     if (!selectedApp) return;
-    setLoading(true);
+    setActionLoading(true);
     try {
-      await sellerService.rejectApplication(selectedApp.id, rejectReason);
+      await sellerService.updateApplication(selectedApp.id, {
+        verdict: 'REJECT',
+        description: rejectReason,
+      });
       setApplications((prev) =>
         prev.map((a) =>
           a.id === selectedApp.id
@@ -81,8 +98,19 @@ export default function AdminApplicationsPage() {
     } catch {
       // ignore
     }
-    setLoading(false);
+    setActionLoading(false);
   };
+
+  const filteredApps = (Array.isArray(applications) ? applications : []).filter((app) => {
+    if (statusFilter !== 'all' && app.status !== statusFilter) return false;
+    if (search) {
+      const q = search.toLowerCase();
+      const matchName = app.full_name?.toLowerCase().includes(q);
+      const matchEmail = app.email?.toLowerCase().includes(q);
+      if (!matchName && !matchEmail) return false;
+    }
+    return true;
+  });
 
   return (
     <AdminLayout navItems={adminNavItems} title="Заявки на регистрацию">
@@ -93,7 +121,7 @@ export default function AdminApplicationsPage() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
             <input
               type="search"
-              placeholder="Поиск по имени, email, магазину..."
+              placeholder="Поиск по имени, email..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -119,34 +147,14 @@ export default function AdminApplicationsPage() {
           </div>
         </div>
 
-        {applications.filter((app) => {
-          if (statusFilter !== 'all' && app.status !== statusFilter) return false;
-          if (search) {
-            const q = search.toLowerCase();
-            const matchName = app.full_name?.toLowerCase().includes(q);
-            const matchEmail = app.email?.toLowerCase().includes(q);
-            if (!matchName && !matchEmail) return false;
-          }
-          return true;
-        }).length === 0 ? (
+        {filteredApps.length === 0 ? (
           <div className="text-center py-12 bg-white rounded-xl border border-gray-200">
             <p className="text-gray-500">Ничего не найдено</p>
           </div>
         ) : (
-          applications
-            .filter((app) => {
-              if (statusFilter !== 'all' && app.status !== statusFilter) return false;
-              if (search) {
-                const q = search.toLowerCase();
-                const matchName = app.full_name?.toLowerCase().includes(q);
-                const matchEmail = app.email?.toLowerCase().includes(q);
-                if (!matchName && !matchEmail) return false;
-              }
-              return true;
-            })
-            .map((app) => {
+          filteredApps.map((app) => {
             const status = statusConfig[app.status];
-            const StatusIcon = status.icon;
+            const StatusIcon = status?.icon ?? Clock;
             return (
               <div
                 key={app.id}
@@ -162,16 +170,16 @@ export default function AdminApplicationsPage() {
                         'bg-red-100 text-red-700'
                       }`}>
                         <StatusIcon className="h-3 w-3" />
-                        {status.label}
+                        {status?.label ?? app.status}
                       </span>
                     </div>
                     <p className="text-sm text-gray-500">Заявка на регистрацию продавца</p>
                     <p className="text-xs text-gray-400 mt-1">
-                      Подана: {new Date(app.createdAt).toLocaleDateString('ru-RU')}
+                      Подана: {app.createdAt ? new Date(app.createdAt).toLocaleDateString('ru-RU') : '—'}
                     </p>
                   </div>
                   <button
-                    onClick={() => setSelectedApp(app)}
+                    onClick={() => handleOpenDetail(app.id)}
                     className="flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-700 flex-shrink-0"
                   >
                     <Eye className="h-4 w-4" />
@@ -187,7 +195,11 @@ export default function AdminApplicationsPage() {
 
       {/* Detail modal */}
       <Modal isOpen={!!selectedApp} onClose={() => setSelectedApp(null)}>
-        {selectedApp && selectedApp.id !== 0 && (
+        {detailLoading ? (
+          <div className="flex items-center justify-center py-12">
+            <Spinner size="lg" />
+          </div>
+        ) : selectedApp ? (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold text-gray-900">Заявка #{selectedApp.id}</h3>
@@ -196,18 +208,23 @@ export default function AdminApplicationsPage() {
                 selectedApp.status === 'APPROVED' ? 'bg-green-100 text-green-700' :
                 'bg-red-100 text-red-700'
               }`}>
-                {statusConfig[selectedApp.status].label}
+                {statusConfig[selectedApp.status]?.label ?? selectedApp.status}
               </span>
+            </div>
+
+            {/* Date */}
+            <div className="text-sm text-gray-500">
+              Подана: {selectedApp.createdAt ? new Date(selectedApp.createdAt).toLocaleDateString('ru-RU') : '—'}
             </div>
 
             {/* Seller data */}
             <div>
               <h4 className="text-sm font-medium text-gray-700 mb-2">Данные продавца</h4>
               <div className="bg-gray-50 rounded-lg p-3 space-y-1 text-sm">
-                <p><span className="text-gray-500">Имя:</span> {selectedApp.full_name}</p>
-                <p><span className="text-gray-500">Email:</span> {selectedApp.email}</p>
-                <p><span className="text-gray-500">Телефон:</span> {selectedApp.phone}</p>
-                <p><span className="text-gray-500">О себе:</span> {selectedApp.description}</p>
+                <p><span className="text-gray-500">Имя:</span> {selectedApp.full_name || '—'}</p>
+                <p><span className="text-gray-500">Email:</span> {selectedApp.email || '—'}</p>
+                <p><span className="text-gray-500">Телефон:</span> {selectedApp.phone || '—'}</p>
+                <p><span className="text-gray-500">О себе:</span> {selectedApp.description || '—'}</p>
               </div>
             </div>
 
@@ -215,10 +232,12 @@ export default function AdminApplicationsPage() {
             <div>
               <h4 className="text-sm font-medium text-gray-700 mb-2">Юридические данные</h4>
               <div className="bg-gray-50 rounded-lg p-3 space-y-1 text-sm">
-                <p><span className="text-gray-500">Тип:</span> {selectedApp.person_type}</p>
-                <p><span className="text-gray-500">ИНН:</span> {selectedApp.inn}</p>
-                <p><span className="text-gray-500">ОГРН:</span> {selectedApp.ogrn}</p>
-                <p><span className="text-gray-500">Адрес:</span> {selectedApp.address}</p>
+                <p><span className="text-gray-500">Тип:</span> {selectedApp.person_type || '—'}</p>
+                <p><span className="text-gray-500">ИНН:</span> {selectedApp.inn || '—'}</p>
+                <p><span className="text-gray-500">ОГРН:</span> {selectedApp.ogrn || '—'}</p>
+                <p><span className="text-gray-500">Адрес:</span> {selectedApp.address || '—'}</p>
+                <p><span className="text-gray-500">БИК:</span> {selectedApp.bic || '—'}</p>
+                <p><span className="text-gray-500">Расчётный счёт:</span> {selectedApp.checking_account || '—'}</p>
               </div>
             </div>
 
@@ -228,7 +247,7 @@ export default function AdminApplicationsPage() {
             </div>
 
             {/* Rejection reason */}
-            {selectedApp.status === 'REJECTED' && selectedApp.rejectionReason && (
+            {(selectedApp.status === 'REJECTED' || selectedApp.status === 'REJECT') && selectedApp.rejectionReason && (
               <div>
                 <h4 className="text-sm font-medium text-red-700 mb-2">Причина отклонения</h4>
                 <div className="bg-red-50 rounded-lg p-3 text-sm text-red-800">
@@ -244,7 +263,7 @@ export default function AdminApplicationsPage() {
                   variant="primary"
                   className="flex-1 flex items-center justify-center gap-2"
                   onClick={() => handleApprove(selectedApp.id)}
-                  disabled={loading}
+                  disabled={actionLoading}
                 >
                   <CheckCircle className="h-4 w-4" />
                   Одобрить
@@ -253,7 +272,7 @@ export default function AdminApplicationsPage() {
                   variant="destructive"
                   className="flex-1 flex items-center justify-center gap-2"
                   onClick={() => setShowRejectModal(true)}
-                  disabled={loading}
+                  disabled={actionLoading}
                 >
                   <XCircle className="h-4 w-4" />
                   Отклонить
@@ -261,7 +280,7 @@ export default function AdminApplicationsPage() {
               </div>
             )}
           </div>
-        )}
+        ) : null}
       </Modal>
 
       {/* Reject modal */}
@@ -283,7 +302,7 @@ export default function AdminApplicationsPage() {
               variant="destructive"
               className="flex-1"
               onClick={handleReject}
-              disabled={!rejectReason.trim() || loading}
+              disabled={!rejectReason.trim() || actionLoading}
             >
               Отклонить
             </Button>

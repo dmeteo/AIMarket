@@ -9,6 +9,7 @@ import { categoryHandlers } from './handlers/categories';
 import { brandHandlers } from './handlers/brands';
 import { reviewHandlers } from './handlers/reviews';
 import { analyticsHandlers } from './handlers/analytics';
+import { uploadHandlers } from './handlers/upload';
 
 export const handlers = [
   // Auth handlers
@@ -37,6 +38,9 @@ export const handlers = [
 
   // Analytics
   ...analyticsHandlers,
+
+  // Upload
+  ...uploadHandlers,
 
   // Root
   http.get('/', () => {

@@ -5,11 +5,13 @@ import {
   Store,
   UserCircle,
   BarChart3,
+  FolderTree,
 } from 'lucide-react';
 
 export const adminNavItems = [
   { href: '/admin/dashboard', label: 'Дашборд', icon: <LayoutDashboard className="h-5 w-5" /> },
   { href: '/admin/applications', label: 'Заявки', icon: <FileText className="h-5 w-5" /> },
+  { href: '/admin/categories', label: 'Категории', icon: <FolderTree className="h-5 w-5" /> },
   { href: '/admin/sellers', label: 'Продавцы', icon: <Users className="h-5 w-5" /> },
   { href: '/admin/shops', label: 'Магазины', icon: <Store className="h-5 w-5" /> },
   { href: '/admin/users', label: 'Пользователи', icon: <UserCircle className="h-5 w-5" /> },

@@ -48,6 +48,7 @@ async function proxyRequest(request: NextRequest, method: string) {
     }
   });
   headers.set('host', new URL(BACKEND_URL).host);
+  headers.set('ngrok-skip-browser-warning', 'true');
 
   let body: BodyInit | undefined;
   if (method !== 'GET' && method !== 'HEAD') {

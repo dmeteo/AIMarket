@@ -38,11 +38,12 @@ export interface GetProductsResponse {
 
 // Backend response format
 interface BackendProductsResponse {
-  products: Product[];
-  total: number;
-  page: number;
-  limit: number;
-  pages: number;
+  products?: Product[];
+  items?: Product[];
+  total?: number;
+  page?: number;
+  limit?: number;
+  pages?: number;
 }
 
 export interface ProductsParams {
@@ -71,9 +72,13 @@ export const useProducts = (limit = 10, params?: ProductsParams) => {
         },
       });
       // Map backend response to frontend format
+      const products = response.data?.products ?? response.data?.items ?? []
+      const total = response.data?.total ?? products.length
+      const page = response.data?.page ?? pageParam + 1
+      const pages = response.data?.pages ?? 1
       return {
-        items: response.data.products,
-        hasNextPage: response.data.page < response.data.pages,
+        items: products.filter((p: Product) => p.id != null),
+        hasNextPage: page < pages,
       };
     },
     getNextPageParam: (lastPage, allPages) => {

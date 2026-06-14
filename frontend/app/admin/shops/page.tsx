@@ -34,10 +34,10 @@ export default function AdminShopsPage() {
   }, [isAuthenticated, user, router, isLoading]);
 
   const getSellerName = (sellerId: number): string => {
-    const app = (applicationsData as { applications: Array<{ userId: number; sellerData: { name: string } }> }).applications.find(
+    const app = (applicationsData as { applications: Array<{ userId: number; full_name: string }> }).applications.find(
       (a) => a.userId === sellerId,
     );
-    return app?.sellerData?.name || `ID: ${sellerId}`;
+    return app?.full_name || `ID: ${sellerId}`;
   };
 
   const handleSort = (field: SortField) => {

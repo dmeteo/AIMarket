@@ -15,7 +15,22 @@ export interface Breadcrumb {
 
 export const categoryService = {
   async getCategories(): Promise<Category[]> {
-    const response = await api.get<Category[]>('/api/v1/categories/');
+    const response = await api.get<{ categories: Category[] }>('/api/v1/categories/');
+    return response.data.categories ?? [];
+  },
+
+  async createCategory(data: { title: string; parent_id?: number | null }): Promise<Category> {
+    const response = await api.post<{ category: Category }>('/api/v1/categories/', data);
+    return response.data.category;
+  },
+
+  async updateCategory(id: number, data: { title: string; parent_id?: number | null }): Promise<Category> {
+    const response = await api.patch<{ category: Category }>(`/api/v1/categories/${id}`, data);
+    return response.data.category;
+  },
+
+  async deleteCategory(id: number): Promise<{ category_id: number }> {
+    const response = await api.delete<{ category_id: number }>(`/api/v1/categories/${id}`);
     return response.data;
   },
 

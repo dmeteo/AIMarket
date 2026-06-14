@@ -1,13 +1,17 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  // Rewrites disabled — MSW handles all API routes
-  // To enable backend proxy:
-  // async rewrites() {
-  //   return [
-  //     { source: "/api/:path*", destination: "http://localhost:8000/api/:path*" },
-  //   ];
-  // },
-};
+const useMockApi = process.env.NEXT_PUBLIC_ENABLE_MOCK_API === 'true'
 
-export default nextConfig;
+const nextConfig: NextConfig = {
+	// When mock API is disabled, proxy requests to backend to avoid CORS
+	rewrites: useMockApi
+		? undefined
+		: async () => [
+			{
+				source: '/api/:path*',
+				destination: `${process.env.BACKEND_API_URL || 'http://localhost:8000'}/api/:path*`,
+			},
+		],
+}
+
+export default nextConfig

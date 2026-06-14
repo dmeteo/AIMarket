@@ -28,7 +28,11 @@ export const sellerHandlers = [
 
   // Get all applications (admin)
   http.get('/api/v1/admin/applications_to_seller', () => {
-    return HttpResponse.json((applications as AppStore).applications);
+    const apps = (applications as AppStore).applications.map((a: Record<string, unknown>) => {
+      const { status, rejectionReason, ...rest } = a as Record<string, unknown> & { status: string; rejectionReason: string | null }
+      return { ...rest, verdict: status, rejection_reason: rejectionReason }
+    })
+    return HttpResponse.json({ applications: apps })
   }),
 
   // Get single application
@@ -38,7 +42,8 @@ export const sellerHandlers = [
     if (!app) {
       return HttpResponse.json({ detail: 'Заявка не найдена' }, { status: 404 });
     }
-    return HttpResponse.json(app);
+    const { status: _s, rejectionReason: _r, sellerData: _sd, legalData: _ld, ...rest } = app as Record<string, unknown>;
+    return HttpResponse.json(rest);
   }),
 
   // Get my application (user) — filter by userId query param
@@ -71,7 +76,7 @@ export const sellerHandlers = [
     const newApp = {
       id: newId,
       userId,
-      status: 'PENDING',
+      verdict: 'PENDING',
       full_name: body.full_name || '',
       email: body.email || '',
       phone: body.phone || '',
@@ -81,10 +86,8 @@ export const sellerHandlers = [
       ogrn: body.ogrn || '',
       address: body.address || '',
       bic: body.bic || '',
-      // Backward compatibility
-      sellerData: { name: body.full_name || '', email: body.email || '', phone: body.phone || '', about: body.description || '' },
-      legalData: { entityType: body.person_type || 'INDIVIDUAL_EMPLOYER', inn: body.inn || '', ogrn: body.ogrn || '', legalAddress: body.address || '', bankBik: body.bic || '', bankAccount: body.checking_account || '' },
-      rejectionReason: null,
+      checking_account: body.checking_account || '',
+      rejection_reason: null,
       createdAt: now,
       updatedAt: now,
     };
@@ -93,43 +96,27 @@ export const sellerHandlers = [
     return HttpResponse.json(newApp, { status: 201 });
   }),
 
-  // Approve application
-  http.patch('/api/v1/admin/applications_to_seller/:id/approve', ({ params }) => {
+  // PATCH /api/v1/admin/applications_to_seller/:application_id — approve or reject
+  http.patch('/api/v1/admin/applications_to_seller/:id', async ({ request, params }) => {
     const id = parseInt(params.id as string, 10);
     const index = findAppIndex(id);
     if (index === -1) {
       return HttpResponse.json({ detail: 'Заявка не найдена' }, { status: 404 });
     }
 
+    const body = await request.json() as { verdict?: string; description?: string };
     const now = new Date().toISOString();
+
+    const app = (applications as AppStore).applications[index];
+    const verdict = body.verdict || 'APPROVE';
     (applications as AppStore).applications[index] = {
-      ...(applications as AppStore).applications[index],
-      status: 'APPROVED',
+      ...app,
+      verdict,
+      rejection_reason: verdict === 'REJECT' ? (body.description || null) : null,
       updatedAt: now,
     };
 
-    return HttpResponse.json((applications as AppStore).applications[index]);
-  }),
-
-  // Reject application
-  http.patch('/api/v1/admin/applications_to_seller/:id/reject', async ({ request, params }) => {
-    const id = parseInt(params.id as string, 10);
-    const index = findAppIndex(id);
-    if (index === -1) {
-      return HttpResponse.json({ detail: 'Заявка не найдена' }, { status: 404 });
-    }
-
-    const body = await request.json() as { reason: string };
-    const now = new Date().toISOString();
-
-    (applications as AppStore).applications[index] = {
-      ...(applications as AppStore).applications[index],
-      status: 'REJECTED',
-      rejectionReason: body.reason,
-      updatedAt: now,
-    };
-
-    return HttpResponse.json((applications as AppStore).applications[index]);
+    return HttpResponse.json({ application_id: id });
   }),
 
   // ── Shops CRUD ──
@@ -187,7 +174,7 @@ export const sellerHandlers = [
     const newShop: ShopItem = {
       id: newId,
       seller_id: sellerId,
-      name: title,
+      title,
       description: (body.description as string) || '',
       logo_url: (body.logo_url as string) || null,
       products_count: 0,
@@ -215,7 +202,7 @@ export const sellerHandlers = [
 
     const updated = {
       ...shop,
-      ...(body.name !== undefined && { name: body.name }),
+      ...(body.title !== undefined && { title: body.title }),
       ...(body.description !== undefined && { description: body.description }),
       ...(body.logo_url !== undefined && { logo_url: body.logo_url }),
       ...(body.is_active !== undefined && { is_active: body.is_active }),

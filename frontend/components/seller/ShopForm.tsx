@@ -1,16 +1,17 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { X, Upload, AlertCircle } from 'lucide-react'
+import { X, Upload, AlertCircle, Loader2 } from 'lucide-react'
 import Image from 'next/image'
 import Button from '../ui/Button'
 import Input from '../ui/Input'
 import Textarea from '../ui/Textarea'
+import { uploadFile } from '../../services/upload.service'
 
 interface ShopFormProps {
 	shop?: {
 		id: number
-		title: string // было name
+		title: string
 		description: string
 		logo_url: string | null
 	}
@@ -31,35 +32,55 @@ export default function ShopForm({
 	maxShops = 10,
 	currentCount = 0,
 }: ShopFormProps) {
-	const [title, setTitle] = useState(shop?.title || '') // было name
+	const [title, setTitle] = useState(shop?.title || '')
 	const [description, setDescription] = useState(shop?.description || '')
 	const [logoPreview, setLogoPreview] = useState<string | null>(
 		shop?.logo_url || null,
 	)
+	const [logoUrl, setLogoUrl] = useState<string | undefined>(
+		shop?.logo_url || undefined,
+	)
 	const [saving, setSaving] = useState(false)
+	const [uploading, setUploading] = useState(false)
 	const [error, setError] = useState('')
 	const fileInputRef = useRef<HTMLInputElement>(null)
 
 	const isEditing = !!shop
 	const canCreate = isEditing || currentCount < maxShops
 
-	const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleLogoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0]
 		if (!file) return
 		if (file.size > 5 * 1024 * 1024) {
 			setError('Файл слишком большой. Максимум 5 МБ.')
 			return
 		}
+
+		// Показываем локальный превью сразу
 		const reader = new FileReader()
 		reader.onload = ev => {
 			setLogoPreview(ev.target?.result as string)
-			setError('')
 		}
 		reader.readAsDataURL(file)
+
+		// Загружаем на сервер
+		setUploading(true)
+		setError('')
+		try {
+			const result = await uploadFile(file, 'avatars')
+			if (result.full_urls?.[0]) {
+				setLogoUrl(result.full_urls[0])
+			}
+		} catch (err) {
+			setError(err instanceof Error ? err.message : 'Ошибка загрузки изображения')
+			setLogoPreview(null)
+		}
+		setUploading(false)
 	}
 
 	const removeLogo = () => {
 		setLogoPreview(null)
+		setLogoUrl(undefined)
 		if (fileInputRef.current) fileInputRef.current.value = ''
 	}
 
@@ -72,9 +93,9 @@ export default function ShopForm({
 		setError('')
 		try {
 			await onSave({
-				title: title.trim(), // отправляем title, не name
+				title: title.trim(),
 				description: description.trim(),
-				logo_url: logoPreview || undefined,
+				logo_url: logoUrl || '',
 			})
 		} catch (err) {
 			setError(err instanceof Error ? err.message : 'Ошибка сохранения')
@@ -144,6 +165,11 @@ export default function ShopForm({
 								height={80}
 								className='w-full h-full object-cover'
 							/>
+							{uploading && (
+								<div className='absolute inset-0 bg-black/40 flex items-center justify-center'>
+									<Loader2 className='h-5 w-5 text-white animate-spin' />
+								</div>
+							)}
 							<button
 								onClick={removeLogo}
 								className='absolute top-0.5 right-0.5 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600'
@@ -157,7 +183,11 @@ export default function ShopForm({
 							onClick={() => fileInputRef.current?.click()}
 							className='w-20 h-20 rounded-lg border-2 border-dashed border-gray-300 flex flex-col items-center justify-center gap-1 text-gray-400 hover:border-green-400 hover:text-green-500 transition-colors flex-shrink-0'
 						>
-							<Upload className='h-5 w-5' />
+							{uploading ? (
+								<Loader2 className='h-5 w-5 animate-spin' />
+							) : (
+								<Upload className='h-5 w-5' />
+							)}
 							<span className='text-[10px]'>Логотип</span>
 						</button>
 					)}

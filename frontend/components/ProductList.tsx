@@ -35,10 +35,12 @@ const ProductList = () => {
     ? data.pages.flatMap((page: GetProductsResponse) => page.items)
     : [];
 
-  // Deduplicate by id
-  const uniqueItems = allItems.filter(
-    (item, index, self) => self.findIndex((p) => p.id === item.id) === index
-  );
+  // Deduplicate by id, skip items without id
+  const uniqueItems = allItems
+    .filter((item): item is Product & { id: number } => item.id != null)
+    .filter(
+      (item, index, self) => self.findIndex((p) => p.id === item.id) === index
+    );
 
   if (status === 'pending') {
     return (

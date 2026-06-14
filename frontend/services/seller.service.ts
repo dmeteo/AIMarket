@@ -1,6 +1,13 @@
 import api from '../lib/api'
 
-export type ApplicationStatus = 'PENDING' | 'APPROVED' | 'REJECTED'
+export type ApplicationStatus = 'PENDING' | 'APPROVE' | 'APPROVED' | 'REJECT' | 'REJECTED'
+
+/** Нормализация verdict из API к единому формату */
+function normalizeVerdict(v: string): ApplicationStatus {
+  if (v === 'APPROVE') return 'APPROVED'
+  if (v === 'REJECT') return 'REJECTED'
+  return v as ApplicationStatus
+}
 
 export interface SellerData {
 	name: string
@@ -86,17 +93,28 @@ export interface SellerOrder {
 export const sellerService = {
 	// Applications
 	async getApplications(): Promise<SellerApplication[]> {
-		const response = await api.get<SellerApplication[]>(
+		const response = await api.get<{ applications: Record<string, unknown>[] }>(
 			'/api/v1/admin/applications_to_seller',
 		)
-		return response.data
+		return (response.data.applications ?? []).map((a) => ({
+			...a,
+			status: normalizeVerdict(a.verdict as string),
+			rejectionReason: a.rejection_reason as string | null,
+			createdAt: (a.created_at as string) || a.createdAt,
+		})) as SellerApplication[]
 	},
 
 	async getApplication(id: number): Promise<SellerApplication> {
-		const response = await api.get<SellerApplication>(
+		const response = await api.get<Record<string, unknown>>(
 			`/api/v1/admin/applications_to_seller/${id}`,
 		)
-		return response.data
+		const a = response.data
+		return {
+			...a,
+			status: normalizeVerdict(a.verdict as string),
+			rejectionReason: a.rejection_reason as string | null,
+			createdAt: (a.created_at as string) || a.createdAt,
+		} as SellerApplication
 	},
 
 	async createApplication(
@@ -109,20 +127,13 @@ export const sellerService = {
 		return response.data
 	},
 
-	async approveApplication(id: number): Promise<SellerApplication> {
-		const response = await api.patch<SellerApplication>(
-			`/api/v1/admin/applications_to_seller/${id}/approve`,
-		)
-		return response.data
-	},
-
-	async rejectApplication(
+	async updateApplication(
 		id: number,
-		reason: string,
-	): Promise<SellerApplication> {
-		const response = await api.patch<SellerApplication>(
-			`/api/v1/admin/applications_to_seller/${id}/reject`,
-			{ reason },
+		data: { verdict: 'APPROVE' | 'REJECT'; description?: string },
+	): Promise<{ application_id: number }> {
+		const response = await api.patch<{ application_id: number }>(
+			`/api/v1/admin/applications_to_seller/${id}`,
+			data,
 		)
 		return response.data
 	},

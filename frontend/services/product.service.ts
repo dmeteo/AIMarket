@@ -42,13 +42,14 @@ export interface ProductsResponse {
 }
 
 export interface CreateProductRequest {
-	shop_id: number // ← ОБЯЗАТЕЛЬНОЕ поле по OpenAPI
+	shop_id: number
+	brand_id?: number | null
 	title: string
 	description?: string
 	images?: string[]
 	price: string | number
 	category_ids?: number[]
-	discount_percent?: number
+	discount_percent?: string | number
 	quantity?: number
 	is_active?: boolean
 }

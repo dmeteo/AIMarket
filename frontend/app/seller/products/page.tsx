@@ -122,6 +122,7 @@ export default function SellerProductsPage() {
     is_active: boolean;
     shop_ids: number[];
     price_overrides: Record<number, string>;
+    images: string[];
   }) => {
     await productService.createProduct({
       shop_id: data.shop_ids?.[0] ?? 0,
@@ -132,6 +133,7 @@ export default function SellerProductsPage() {
       quantity: data.quantity,
       category_ids: data.category_id ? [data.category_id] : [],
       is_active: data.is_active,
+      images: data.images.length > 0 ? data.images : undefined,
     });
 
     // Apply price overrides if any
