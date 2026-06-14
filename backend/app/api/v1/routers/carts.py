@@ -13,7 +13,7 @@ from app.services.cart import add_product_to_cart_service, delete_cart_item_serv
 router = APIRouter(prefix="/cart", tags=["cart"])
 
 
-@router.get("/", response_model=CartResponse, description="[Buyer User]",)
+@router.get("", response_model=CartResponse, description="[Buyer User]",)
 def get_cart(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(get_current_user)]

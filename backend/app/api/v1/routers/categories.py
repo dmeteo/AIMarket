@@ -18,7 +18,7 @@ router = APIRouter(prefix="/categories", tags=["categories"])
 
 
 
-@router.get("/", response_model=CategoriesResponse)
+@router.get("", response_model=CategoriesResponse)
 def get_categories(db: Annotated[Session, Depends(get_db)]) -> CategoriesResponse:
     categories = get_categories_service(db)
     
@@ -37,7 +37,7 @@ def get_category(
     return category
     
 
-@router.post("/", response_model=CategoryCreateResponse, description="[ADMIN]",)
+@router.post("", response_model=CategoryCreateResponse, description="[ADMIN]",)
 def create_category(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_admin)],

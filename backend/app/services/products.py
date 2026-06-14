@@ -4,7 +4,7 @@ from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
 from app.repositories.products import create_product, create_review, delete_product, delete_review, get_categories_by_ids, get_old_review, get_product, get_product_reviews, get_products_page, get_review_by_user_and_product, update_product, update_review
-from app.models.product import Product
+from app.models.product import Product, ProductImage
 from app.models.review import Review
 from app.schemas.products import ProductCard, ProductCreateRequest, ProductPage, ProductUpdateRequest
 from app.schemas.categories import Category
@@ -12,7 +12,7 @@ from app.schemas.reviews import ReviewCreateRequest, ReviewResponse, ReviewUpdat
 from app.common.exceptions import access_denied, product_not_found, review_not_found
 from app.models.user import User
 from app.common.enums import Role
-from app.common.utils import build_url
+
 
 
 def existence_product(db: Session, product_id) -> Product:
@@ -36,7 +36,7 @@ def calculate_final_price(price, discount_percent):
 
 
 def get_product_images_service(images):
-    return [build_url(image.image_url) for image in images]
+    return [image.image_url for image in images]
 
 
 def mapping_product_categories(categories: list[dict]) -> list[Category]:
@@ -166,7 +166,11 @@ def create_product_service(db: Session, user: User, payload: ProductCreateReques
     )
     
     product = create_product(db, product=product_mapping)
-    
+    db.flush()
+
+    for i, url in enumerate(payload.image_urls):
+        db.add(ProductImage(product_id=product.id, image_url=url, sort_order=i))
+
     db.commit()
     db.refresh(product)
     

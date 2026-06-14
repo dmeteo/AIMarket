@@ -27,7 +27,9 @@ session.headers.update({"Authorization": f"Bearer {token}"})
 
 data = json.load(open("data.json", encoding="utf-8"))
 
+images_dir = Path(__file__).resolve().parent / "images"
+
 categories_map = create_categories(client, data["categories"])
-brands_map = create_brands(client, data["brands"])
-shops_map = create_shops(client, data["shops"])
-create_products(client, data["products"], categories_map, brands_map, shops_map)
+brands_map = create_brands(client, data["brands"], images_dir)
+shops_map = create_shops(client, data["shops"], images_dir)
+create_products(client, data["products"], categories_map, brands_map, shops_map, images_dir)
