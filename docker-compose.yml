@@ -1,4 +1,13 @@
 services:
+  ngrok:
+    image: ngrok/ngrok:latest
+    environment:
+      NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
+    command: http app:8000
+    ports:
+      - "4040:4040"
+
+
   db:
     image: postgres:16
     healthcheck:
@@ -36,6 +45,8 @@ services:
         condition: service_healthy
       minio:
         condition: service_healthy
+      ngrok:
+        condition: service_started
     env_file:
       - ./.env
     environment:
