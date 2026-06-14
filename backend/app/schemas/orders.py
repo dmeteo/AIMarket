@@ -11,7 +11,7 @@ class OrderStatusInfo(BaseModel):
     code: OrderStatus
     label: str
 
-class Order(BaseModel):
+class OrderResponse(BaseModel):
     id: int
     user_id: int
     items: list[CartItemResponse]
@@ -20,17 +20,39 @@ class Order(BaseModel):
     predicted_date: date
     status: OrderStatusInfo
     items_total_price: Decimal
+    items_total_discount: Decimal
     final_price: Decimal
     
     
-class OrderRequest(BaseModel):
+class OrderCreateResponse(BaseModel):
+    order_id: int
+    payment_url: str
+    
+    
+class OrderCreateRequest(BaseModel):
     address: str
     delivery_type: DeliveryType
     
     
-class OrderResponse(BaseModel):
-    order: Order
+# class OrderResponse(BaseModel):
+#     order: OrderResponse
     
     
 class OrdersResponse(BaseModel):
-    orders: list[Order]
+    orders: list[OrderResponse]
+    
+
+class OrderPreviewRequest(BaseModel):
+    address: str
+    delivery_type: DeliveryType
+
+
+class OrderPreviewResponse(BaseModel):
+    items: list[CartItemResponse]
+    address: str
+    delivery_type: DeliveryType
+    delivery_cost: Decimal
+    predicted_date: date
+    items_total_price: Decimal
+    items_total_discount: Decimal
+    final_price: Decimal

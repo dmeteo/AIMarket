@@ -1,7 +1,8 @@
 from typing import Annotated
+import ipaddress
 
 import jwt
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import OAuth2PasswordBearer
 from jwt import InvalidTokenError
 from sqlalchemy.orm import Session
@@ -78,6 +79,17 @@ def require_moderator_or_higher(
 ):
     if current_user.role == Role.ADMIN.value or current_user.role == Role.MODERATOR.value:
         return current_user
+    raise HTTPException(
+        status_code=status.HTTP_403_FORBIDDEN,
+        detail="Access denied"
+    )
+    
+    
+def verify_yookassa_ip(request: Request):
+    ip = ipaddress.ip_address(request.client.host)
+    for network in settings.YOOKASSA_IPS:
+        if ip in ipaddress.ip_network(network):
+            return request.client.host
     raise HTTPException(
         status_code=status.HTTP_403_FORBIDDEN,
         detail="Access denied"
