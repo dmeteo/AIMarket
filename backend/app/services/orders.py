@@ -8,7 +8,7 @@ from app.services.cart import get_cart_service
 from app.common.enums import DeliveryType, OrderStatus
 from app.models.orders import Order, OrderItem
 from app.repositories.orders import create_order, create_order_items
-from app.services import payment_service
+from backend.app.services import payment
 
 
 
@@ -62,7 +62,7 @@ def create_order_service(db: Session, user: User, payload: OrderCreateRequest):
                             predicted_date=predicted_date,
                             items_total_price=cart.total_price,
                             final_price=cart.final_price + delivery_cost,
-                            status=OrderStatus.IN_PROCESSING,
+                            status=OrderStatus.AWAITING_PAYMENT,
                             ))
     
     db.flush()
@@ -75,7 +75,7 @@ def create_order_service(db: Session, user: User, payload: OrderCreateRequest):
     
     order_items = create_order_items(db, order_items)
     
-    payment_id, confirmation_url = payment_service.create_payment(order_id=order.id, full_price=order.final_price)
+    payment_id, confirmation_url = payment.create_payment(order_id=order.id, full_price=order.final_price)
     
     order.payment_id = payment_id
     

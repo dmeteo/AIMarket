@@ -9,6 +9,7 @@ from app.schemas.cart import AddProductToCartRequest, AddProductToCartResponse, 
 from app.services.products import existence_product, mapping_product_card, calculate_final_price
 from app.models.cart import Cart, CartItem
 from app.common.exceptions import invalid_quantity
+from app.repositories.cart import delete_cart_items
 
 
 def existence_cart(db: Session, user_id) -> Cart:
@@ -115,3 +116,13 @@ def delete_cart_item_service(db: Session, user: User, product_id):
     cart = get_cart(db, user.id)
     
     return mapping_cart(cart, user.id)
+
+
+def delete_cart_items_service(db: Session, user_id):
+    cart = get_cart(db, user_id)
+    if not cart:
+        raise HTTPException(status_code=404, detail="Cart not found")
+    
+    delete_cart_items(db, cart.id)
+    
+    return cart.id

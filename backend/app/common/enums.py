@@ -14,12 +14,14 @@ class DeliveryType(str, Enum):
     
 
 class OrderStatus(str, Enum):
-    IN_PROCESSING = "IN_PROCESSING"
+    AWAITING_PAYMENT = "AWAITING_PAYMENT"
     CONFIRMED = "CONFIRMED"
+    IN_PROCESSING = "IN_PROCESSING"
     AWAITING_DELIVERY = "AWAITING_DELIVERY"
     DELIVERY = "DELIVERY"
     AWAIT_RECEIPT = "AWAIT_RECEIPT"
     RECEIVED = "RECEIVED"
+    CANCELED = "CANCELED"
     
     
 class PersonType(str, Enum):

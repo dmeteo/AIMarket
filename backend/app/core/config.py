@@ -26,7 +26,6 @@ class Settings(BaseSettings):
     
     YOOKASSA_SHOP_ID: str = ""
     YOOKASSA_SECRET_KEY: str = ""
-    YOOKASSA_IPS: list[str] = ["185.71.76.0/27","185.71.77.0/27","77.75.153.0/25","77.75.156.11","77.75.156.35","77.75.154.128/25","2a02:5180::/32"]
     
     @property
     def DB_URL(self) -> str:
