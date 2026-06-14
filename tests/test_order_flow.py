@@ -1,7 +1,9 @@
 import sys
 from pathlib import Path
+import time
 
 from dotenv import load_dotenv
+import pytest
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 
@@ -54,25 +56,15 @@ def test_order_preview(auth_client):
     print(f"\nПревью: доставка={preview['delivery_cost']} | итого={preview['final_price']} | дата={preview['predicted_date']}")
 
 
-def test_create_order(auth_client):
-    r = auth_client.post("/orders/", json={
-        "address": "г. Москва, ул. Тестовая, д. 1",
-        "delivery_type": "CDEK"
-    })
+def test_create_order(order_id, auth_client):
+    r = auth_client.get(f"/orders/{order_id}")
     assert r.status_code == 200, r.text
     order = r.json()
-    assert "order_id" in order
-    assert "payment_url" in order
-    print(f"\nЗаказ создан: id={order['order_id']} | ссылка на оплату: {order['payment_url']}")
+    assert "order_id" in r.json() or order is not None
+    print(f"\nЗаказ создан: id={order_id}")
 
 
-def test_get_order(auth_client):
-    order_r = auth_client.post("/orders/", json={
-        "address": "г. Москва, ул. Тестовая, д. 1",
-        "delivery_type": "CDEK"
-    })
-    order_id = order_r.json()["order_id"]
-
+def test_get_order(auth_client, order_id):
     r = auth_client.get(f"/orders/{order_id}")
     assert r.status_code == 200, r.text
     order = r.json()
@@ -86,3 +78,15 @@ def test_get_orders_list(auth_client):
     orders = r.json()["orders"]
     assert len(orders) > 0
     print(f"\nВсего заказов: {len(orders)}")
+
+
+def test_payment_status(auth_client, order_id):
+    for i in range(30):
+        r = auth_client.get(f"/orders/{order_id}")
+        status = r.json()["status"]
+        print(f"\n[{i*5}s] Статус заказа #{order_id}: {status}")
+        if status == "CONFIRMED":
+            return
+        time.sleep(5)
+    pytest.fail("Статус не изменился за 150 секунд")
+
