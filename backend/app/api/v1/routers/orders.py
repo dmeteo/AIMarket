@@ -24,7 +24,6 @@ def preview_order(
     return order_preview
 
 
-
 @router.post("/", response_model=OrderCreateResponse)
 def create_order(
     db: Annotated[Session, Depends(get_db)], 

@@ -30,4 +30,4 @@ requirements:
 ngrok:
 	ngrok http 8000
 
-dev: run-detached ngrok
+dev: ngrok run-detached
