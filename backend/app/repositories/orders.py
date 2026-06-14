@@ -22,3 +22,19 @@ def get_order_by_payment_id(db: Session, payment_id):
     order = db.scalar(stmt)
     
     return order
+
+
+def get_user_orders(db: Session, user_id):
+    stmt = select(Order).where(Order.user_id==user_id).options(selectinload(Order.items))
+    
+    orders = db.scalars(stmt).all()
+    
+    return orders
+
+
+def get_order_by_id(db: Session, user_id, order_id):
+    stmt = select(Order).where(Order.user_id==user_id).where(Order.id==order_id)
+    
+    order = db.scalar(stmt)
+    
+    return order
