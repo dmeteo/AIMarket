@@ -37,7 +37,8 @@ def mapping_payment_structure(order_id, full_price):
             "type": "redirect",
             "return_url": f"{get_ngrok_url()}/orders/{order_id}"
         },
-        "description": f"Заказ №{order_id}"
+        "description": f"Заказ №{order_id}",
+        "capture": True
     }
     
     return payment
@@ -89,8 +90,10 @@ def payment_webhook_service(db: Session, body):
             payment_id = response_object.id
             
             order = get_order_by_payment_id(db, payment_id)
+            order = get_order_by_payment_id(db, payment_id)
+            print(f"[WEBHOOK] payment_id={payment_id} order={order.id if order else None} status={order.status if order else None}", flush=True)
             order.status = OrderStatus.CONFIRMED.value
-            
+
             delete_cart_items_service(db, order.user_id)
             
             db.commit()

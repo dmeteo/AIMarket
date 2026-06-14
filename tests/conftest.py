@@ -26,3 +26,14 @@ def auth_client(client):
     token = r.json()["token"]["access_token"]
     client.session.headers.update({"Authorization": f"Bearer {token}"})
     return client
+
+
+@pytest.fixture(scope="session")
+def order_id(auth_client):
+    r = auth_client.post("/orders/", json={
+        "address": "г. Москва, ул. Тестовая, д. 1",
+        "delivery_type": "CDEK"
+    })
+    data = r.json()
+    print(f"\n[ORDER] id={data['order_id']} | оплатить: {data['payment_url']}")
+    return data["order_id"]
