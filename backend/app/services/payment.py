@@ -87,7 +87,7 @@ def payment_webhook_service(db: Session, body):
             payment_id = response_object.id
             
             order = get_order_by_payment_id(db, payment_id)
-            order.status = OrderStatus.CONFIRMED
+            order.status = OrderStatus.CONFIRMED.value
             
             delete_cart_items_service(db, order.user_id)
             
@@ -98,7 +98,7 @@ def payment_webhook_service(db: Session, body):
             payment_id = response_object.id
 
             order = get_order_by_payment_id(db, payment_id)
-            order.status = OrderStatus.CANCELED    
+            order.status = OrderStatus.CANCELED.value 
             db.commit()
             db.refresh(order)
         
