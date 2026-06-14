@@ -19,7 +19,7 @@ class Order(BaseModelMixin):
     predicted_date: Mapped[date | None] = mapped_column(nullable=True)
     items_total_price: Mapped[Decimal] = mapped_column(nullable=False)
     final_price: Mapped[Decimal] = mapped_column(nullable=False)
-    status: Mapped[OrderStatus] = mapped_column(default=OrderStatus.IN_PROCESSING, nullable=False)
+    status: Mapped[OrderStatus] = mapped_column(default=OrderStatus.AWAITING_PAYMENT, nullable=False)
     
     items: Mapped[list["OrderItem"]] = relationship(back_populates="order")
     
