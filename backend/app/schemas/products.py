@@ -50,9 +50,11 @@ class ProductCreateRequest(BaseModel):
     description: str = Field(max_length=300)
     price: Decimal = Field(gt=0, max_digits=10, decimal_places=2, examples=["100.99"])
     category_ids: list[int]
+    image_urls: list[str] = []
     discount_percent: Decimal = Field(default=0, ge=0, le=100, max_digits=5, decimal_places=2, examples=["10.5"])
     quantity: int = Field(ge=0)
     is_active: bool = True
+    
 
     
 class ProductCreateResponse(BaseModel):

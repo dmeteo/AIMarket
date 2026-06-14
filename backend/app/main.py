@@ -11,7 +11,7 @@ from app.services.payment import get_ngrok_url
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    create_buckets()
+    # create_buckets()
     create_admin()
     init_yookassa()
     print(get_ngrok_url(), flush=True)
