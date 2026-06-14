@@ -1,5 +1,6 @@
 import json
 import uuid
+from tenacity import retry, stop_after_attempt, wait_fixed
 
 import requests
 from fastapi import HTTPException, status
@@ -14,7 +15,7 @@ from app.services.cart import delete_cart_items_service
 
 
 def get_ngrok_url():
-    tunnels = requests.get("http://127.0.0.1:4040/api/tunnels").json()["tunnels"]
+    tunnels = requests.get("http://ngrok:4040/api/tunnels").json()["tunnels"]
     https_tunnel = next(t for t in tunnels if t["public_url"].startswith("https"))
     return https_tunnel["public_url"]
 
@@ -50,7 +51,8 @@ def create_payment(order_id, full_price):
     confirmation_url = payment.confirmation.confirmation_url
     return payment_id, confirmation_url
     
-
+    
+@retry(stop=stop_after_attempt(30), wait=wait_fixed(3))
 def register_webhook_service():
     whUrl = create_webhook_url()
     needWebhookList = [
