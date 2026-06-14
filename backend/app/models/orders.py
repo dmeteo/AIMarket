@@ -14,12 +14,12 @@ class Order(BaseModelMixin):
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
     payment_id: Mapped[str | None] = mapped_column(nullable=True)
     address: Mapped[str] = mapped_column(nullable=False)
-    delivery_type: Mapped[DeliveryType] = mapped_column(nullable=False)
+    delivery_type: Mapped[str] = mapped_column(nullable=False)
     delivery_cost: Mapped[Decimal] = mapped_column(nullable=False)
     predicted_date: Mapped[date | None] = mapped_column(nullable=True)
     items_total_price: Mapped[Decimal] = mapped_column(nullable=False)
     final_price: Mapped[Decimal] = mapped_column(nullable=False)
-    status: Mapped[OrderStatus] = mapped_column(default=OrderStatus.AWAITING_PAYMENT, nullable=False)
+    status: Mapped[str] = mapped_column(default=OrderStatus.AWAITING_PAYMENT.value, nullable=False)
     
     items: Mapped[list["OrderItem"]] = relationship(back_populates="order")
     
