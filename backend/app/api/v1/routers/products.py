@@ -17,7 +17,7 @@ from app.services.products import create_product_service, create_review_service,
 router = APIRouter(prefix="/products", tags=["products"])
 
 
-@router.get("/", response_model=ProductsResponse)
+@router.get("", response_model=ProductsResponse)
 def get_products(
     db: Annotated[Session, Depends(get_db)],
     q: str | None = None,
@@ -53,7 +53,7 @@ def get_product(db: Annotated[Session, Depends(get_db)], product_id: int) -> Pro
     return product
 
 
-@router.post("/", response_model=ProductCreateResponse, description="[Seller/Admin]",)
+@router.post("", response_model=ProductCreateResponse, description="[Seller/Admin]",)
 def create_product(
     db: Annotated[Session, Depends(get_db)], 
     current_user: Annotated[User, Depends(require_seller_or_admin)], 

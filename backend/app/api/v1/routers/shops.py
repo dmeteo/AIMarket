@@ -13,7 +13,7 @@ from app.services.shops import create_shop_service, delete_shop_service, get_sho
 router = APIRouter(prefix="/shops", tags=["shops"])
 
 
-@router.post("/", response_model=ShopCreateResponse, description="[Seller/Admin]")
+@router.post("", response_model=ShopCreateResponse, description="[Seller/Admin]")
 def create_shop(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_seller_or_admin)],

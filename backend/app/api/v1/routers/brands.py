@@ -17,7 +17,7 @@ from app.models.user import User
 router = APIRouter(prefix="/brands", tags=["brands"])
 
 
-@router.get("/", response_model=BrandsResponse)
+@router.get("", response_model=BrandsResponse)
 def get_brands(db: Annotated[Session, Depends(get_db)]) -> BrandsResponse:
     brands = get_brands_service(db)
     
@@ -61,7 +61,7 @@ def get_brand(
     return brand
 
 
-@router.post("/", description="[ADMIN]", response_model=BrandCreateResponse)
+@router.post("", description="[ADMIN]", response_model=BrandCreateResponse)
 def create_brand(
 db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_admin)],

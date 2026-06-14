@@ -24,7 +24,7 @@ def preview_order(
     return order_preview
 
 
-@router.post("/", response_model=OrderCreateResponse)
+@router.post("", response_model=OrderCreateResponse)
 def create_order(
     db: Annotated[Session, Depends(get_db)], 
     current_user: Annotated[User, Depends(get_current_user)],
@@ -35,7 +35,7 @@ def create_order(
     return order
 
 
-@router.get("/", response_model=OrdersResponse)
+@router.get("", response_model=OrdersResponse)
 def get_user_orders(
     db: Annotated[Session, Depends(get_db)], 
     current_user: Annotated[User, Depends(get_current_user)]

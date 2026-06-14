@@ -26,6 +26,10 @@ class Settings(BaseSettings):
     
     YOOKASSA_SHOP_ID: str = ""
     YOOKASSA_SECRET_KEY: str = ""
+
+    IMAGEKIT_PUBLIC_KEY: str = ""
+    IMAGEKIT_PRIVATE_KEY: str = ""
+    IMAGEKIT_URL_ENDPOINT: str = ""
     
     @property
     def DB_URL(self) -> str:
