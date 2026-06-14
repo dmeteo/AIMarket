@@ -87,7 +87,8 @@ def require_moderator_or_higher(
     
     
 def verify_yookassa_ip(request: Request):
-    if not SecurityHelper().is_ip_trusted(request.client.host):
+    ip = request.headers.get("X-Forwarded-For", request.client.host).split(",")[0].strip()
+    if not SecurityHelper().is_ip_trusted(ip):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Access denied"
