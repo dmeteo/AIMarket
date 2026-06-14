@@ -23,3 +23,11 @@ run-detached:
 
 seed:
 	cd seed_data && python seed.py
+
+requirements:
+	cd backend && pip freeze > requirements.txt
+
+ngrok:
+	ngrok http 8000
+
+dev: run-detached ngrok
