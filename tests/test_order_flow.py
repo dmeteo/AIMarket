@@ -15,6 +15,7 @@ TEST_EMAIL = "flow_test@gmail.com"
 TEST_PASSWORD = "123123"
 
 
+
 def test_register(client):
     r = client.post("/auth/register", json={
         "email": TEST_EMAIL,
@@ -37,7 +38,7 @@ def test_add_to_cart(auth_client):
 
 
 def test_get_cart(auth_client):
-    r = auth_client.get("/cart/")
+    r = auth_client.get("/cart")
     assert r.status_code == 200
     cart = r.json()
     assert len(cart["items"]) > 0
@@ -73,7 +74,7 @@ def test_get_order(auth_client, order_id):
 
 
 def test_get_orders_list(auth_client):
-    r = auth_client.get("/orders/")
+    r = auth_client.get("/orders")
     assert r.status_code == 200, r.text
     orders = r.json()["orders"]
     assert len(orders) > 0

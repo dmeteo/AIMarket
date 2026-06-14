@@ -30,7 +30,7 @@ def auth_client(client):
 
 @pytest.fixture(scope="session")
 def order_id(auth_client):
-    r = auth_client.post("/orders/", json={
+    r = auth_client.post("/orders", json={
         "address": "г. Москва, ул. Тестовая, д. 1",
         "delivery_type": "CDEK"
     })
