@@ -31,8 +31,17 @@ def create_application_to_be_seller(db, application):
 
     return application.id
 
-def get_application_to_be_seller(db: Session, user_id):
+
+def get_applications_to_be_seller(db: Session, user_id):
     stmt = select(ApplicationToSeller).where(ApplicationToSeller.user_id==user_id)
+    
+    applications = db.scalars(stmt).all()
+    
+    return applications
+
+
+def get_application_to_be_seller(db: Session, user_id, application_id) -> ApplicationToSeller:
+    stmt = select(ApplicationToSeller).where(ApplicationToSeller.user_id==user_id).where(ApplicationToSeller.id==application_id)
     
     application = db.scalar(stmt)
     
