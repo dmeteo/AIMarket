@@ -26,15 +26,17 @@ def create_products(client, products, categories_map, brands_map, shops_map, ima
     for product in products:
         image_urls = upload_images(client, product.get("images", []), images_dir)
 
+        if product["shop"] not in shops_map:
+            continue
         client.post(BASE_URL, json={
             "title": product["title"],
             "description": product["description"],
             "price": product["price"],
             "quantity": product["quantity"],
-            "discount_percent": product["discount_percent"],
+            "discount_percent": product["discount"],
             "is_active": product["is_active"],
             "shop_id": shops_map[product["shop"]],
             "brand_id": brands_map.get(product["brand"]),
-            "category_ids": [categories_map[c] for c in product["categories"]],
+            "category_ids": [categories_map[c] for c in product["categories"] if c in categories_map],
             "image_urls": image_urls,
         })
