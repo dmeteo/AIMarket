@@ -41,3 +41,15 @@ class ShopUpdateRequest(BaseModel):
 
 class ShopUpdateResponse(BaseModel):
     shop: ShopResponse
+    
+    
+class ShopSummaryResponse(BaseModel):
+    id: int
+    title: str
+    reviews_count: int = Field(ge=0)
+    rating: float = Field(ge=0)
+    is_active: bool
+    
+    
+class ShopsResponse(BaseModel):
+    shops: list[ShopSummaryResponse]
