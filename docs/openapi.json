@@ -331,21 +331,20 @@
         ]
       }
     },
-    "/api/v1/users/me/seller_application": {
+    "/api/v1/users/me/seller_applications": {
       "get": {
         "tags": [
           "users"
         ],
-        "summary": "Get Application To Be Seller",
-        "description": "[Buyer User]",
-        "operationId": "get_application_to_be_seller_api_v1_users_me_seller_application_get",
+        "summary": "Get Applications To Be Seller",
+        "operationId": "get_applications_to_be_seller_api_v1_users_me_seller_applications_get",
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApplicationToBeSellerResponse"
+                  "$ref": "#/components/schemas/ApplicationsToBeSellerResponse"
                 }
               }
             }
@@ -358,13 +357,61 @@
         ]
       }
     },
-    "/api/v1/products/": {
+    "/api/v1/users/me/seller_applications/{application_id}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get Application To Be Seller",
+        "description": "[Buyer User]",
+        "operationId": "get_application_to_be_seller_api_v1_users_me_seller_applications__application_id__get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "application_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Application Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationToBeSellerResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/products": {
       "get": {
         "tags": [
           "products"
         ],
         "summary": "Get Products",
-        "operationId": "get_products_api_v1_products__get",
+        "operationId": "get_products_api_v1_products_get",
         "parameters": [
           {
             "name": "q",
@@ -484,6 +531,16 @@
               "default": 20,
               "title": "Limit"
             }
+          },
+          {
+            "name": "ai",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Ai"
+            }
           }
         ],
         "responses": {
@@ -515,7 +572,7 @@
         ],
         "summary": "Create Product",
         "description": "[Seller/Admin]",
-        "operationId": "create_product_api_v1_products__post",
+        "operationId": "create_product_api_v1_products_post",
         "security": [
           {
             "OAuth2PasswordBearer": []
@@ -919,14 +976,14 @@
         }
       }
     },
-    "/api/v1/shops/": {
+    "/api/v1/shops": {
       "post": {
         "tags": [
           "shops"
         ],
         "summary": "Create Shop",
         "description": "[Seller/Admin]",
-        "operationId": "create_shop_api_v1_shops__post",
+        "operationId": "create_shop_api_v1_shops_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1156,13 +1213,13 @@
         }
       }
     },
-    "/api/v1/brands/": {
+    "/api/v1/brands": {
       "get": {
         "tags": [
           "brands"
         ],
         "summary": "Get Brands",
-        "operationId": "get_brands_api_v1_brands__get",
+        "operationId": "get_brands_api_v1_brands_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -1182,7 +1239,7 @@
         ],
         "summary": "Create Brand",
         "description": "[ADMIN]",
-        "operationId": "create_brand_api_v1_brands__post",
+        "operationId": "create_brand_api_v1_brands_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1489,13 +1546,13 @@
         }
       }
     },
-    "/api/v1/categories/": {
+    "/api/v1/categories": {
       "get": {
         "tags": [
           "categories"
         ],
         "summary": "Get Categories",
-        "operationId": "get_categories_api_v1_categories__get",
+        "operationId": "get_categories_api_v1_categories_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -1515,7 +1572,7 @@
         ],
         "summary": "Create Category",
         "description": "[ADMIN]",
-        "operationId": "create_category_api_v1_categories__post",
+        "operationId": "create_category_api_v1_categories_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1828,14 +1885,14 @@
         }
       }
     },
-    "/api/v1/cart/": {
+    "/api/v1/cart": {
       "get": {
         "tags": [
           "cart"
         ],
         "summary": "Get Cart",
         "description": "[Buyer User]",
-        "operationId": "get_cart_api_v1_cart__get",
+        "operationId": "get_cart_api_v1_cart_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -2103,13 +2160,13 @@
         ]
       }
     },
-    "/api/v1/orders/": {
+    "/api/v1/orders": {
       "get": {
         "tags": [
           "orders"
         ],
         "summary": "Get User Orders",
-        "operationId": "get_user_orders_api_v1_orders__get",
+        "operationId": "get_user_orders_api_v1_orders_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -2133,7 +2190,7 @@
           "orders"
         ],
         "summary": "Create Order",
-        "operationId": "create_order_api_v1_orders__post",
+        "operationId": "create_order_api_v1_orders_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2441,6 +2498,29 @@
         ],
         "title": "ApplicationToBeSellerResponse"
       },
+      "ApplicationToBeSellerSummaryResponse": {
+        "properties": {
+          "application_id": {
+            "type": "integer",
+            "title": "Application Id"
+          },
+          "verdict": {
+            "$ref": "#/components/schemas/VerdictApplicationToBeSeller"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "application_id",
+          "verdict",
+          "created_at"
+        ],
+        "title": "ApplicationToBeSellerSummaryResponse"
+      },
       "ApplicationToSellerList": {
         "properties": {
           "id": {
@@ -2541,6 +2621,22 @@
           "created_at"
         ],
         "title": "ApplicationToSellerResponse"
+      },
+      "ApplicationsToBeSellerResponse": {
+        "properties": {
+          "applications": {
+            "items": {
+              "$ref": "#/components/schemas/ApplicationToBeSellerSummaryResponse"
+            },
+            "type": "array",
+            "title": "Applications"
+          }
+        },
+        "type": "object",
+        "required": [
+          "applications"
+        ],
+        "title": "ApplicationsToBeSellerResponse"
       },
       "ApplicationsToSellerResponse": {
         "properties": {
@@ -3420,7 +3516,16 @@
               "type": "integer"
             },
             "type": "array",
-            "title": "Category Ids"
+            "title": "Category Ids",
+            "default": []
+          },
+          "image_urls": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Image Urls",
+            "default": []
           },
           "discount_percent": {
             "anyOf": [
@@ -3457,7 +3562,6 @@
           "title",
           "description",
           "price",
-          "category_ids",
           "quantity"
         ],
         "title": "ProductCreateRequest"
