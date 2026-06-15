@@ -297,4 +297,8 @@ def delete_review_service(db: Session, user, product_id, review_id):
     db.commit()
 
     return deleted_review.id
+
+
+def ai_search_service(db: Session, query):
+    pass
     
