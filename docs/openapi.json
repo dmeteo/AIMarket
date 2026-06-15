@@ -1023,6 +1023,32 @@
         ]
       }
     },
+    "/api/v1/shops/me": {
+      "get": {
+        "tags": [
+          "shops"
+        ],
+        "summary": "Get My Shops",
+        "operationId": "get_my_shops_api_v1_shops_me_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShopsResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
     "/api/v1/shops/{shop_id}": {
       "patch": {
         "tags": [
@@ -4184,6 +4210,41 @@
         ],
         "title": "ShopResponse"
       },
+      "ShopSummaryResponse": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "reviews_count": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Reviews Count"
+          },
+          "rating": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Rating"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "reviews_count",
+          "rating",
+          "is_active"
+        ],
+        "title": "ShopSummaryResponse"
+      },
       "ShopUpdateRequest": {
         "properties": {
           "logo_url": {
@@ -4237,6 +4298,22 @@
           "shop"
         ],
         "title": "ShopUpdateResponse"
+      },
+      "ShopsResponse": {
+        "properties": {
+          "shops": {
+            "items": {
+              "$ref": "#/components/schemas/ShopSummaryResponse"
+            },
+            "type": "array",
+            "title": "Shops"
+          }
+        },
+        "type": "object",
+        "required": [
+          "shops"
+        ],
+        "title": "ShopsResponse"
       },
       "TokenResponse": {
         "properties": {
