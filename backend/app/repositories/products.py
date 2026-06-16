@@ -33,11 +33,12 @@ def get_products_page(
         condition.append(Product.price <= max_price)
         
     if q:
-        search = f"%{q}%"
-        condition.append(or_(
-            Product.title.ilike(search),
-            Product.description.ilike(search)
-        ))
+        for word in q.split():
+            search = f"%{word}%"
+            condition.append(or_(
+                Product.title.ilike(search),
+                Product.description.ilike(search)
+            ))
     
     stmt = select(Product).where(*condition).where(Product.is_active==True)
     stmt_total = select(func.count(Product.id)).where(*condition).where(Product.is_active==True)
