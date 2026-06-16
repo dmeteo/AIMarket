@@ -51,5 +51,7 @@ services:
     environment:
       POSTGRES_HOST: db
       # S3_URL: http://minio:9000
+    dns:
+      - 8.8.8.8
     ports:
       - "8000:8000"
