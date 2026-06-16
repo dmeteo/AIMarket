@@ -12,6 +12,7 @@ from app.schemas.reviews import ReviewCreateRequest, ReviewResponse, ReviewUpdat
 from app.common.exceptions import access_denied, product_not_found, review_not_found
 from app.models.user import User
 from app.common.enums import Role
+from app.services.embedding import delete_embedding_product_service, embedding_product_service, update_embedding_product_service
 
 
 
@@ -170,6 +171,9 @@ def create_product_service(db: Session, user: User, payload: ProductCreateReques
 
     for i, url in enumerate(payload.image_urls):
         db.add(ProductImage(product_id=product.id, image_url=url, sort_order=i))
+    
+    embedding_product_service(product.id, product.title, product.description)
+        
 
     db.commit()
     db.refresh(product)
@@ -187,6 +191,9 @@ def update_product_service(db: Session, user: User, product_id, payload: Product
     if not product:
         raise product_not_found()
     
+    
+    update_embedding_product_service(db, product.id, product.title, product.description)
+    
     db.commit()
     
     product_page = mapping_product_page(product)
@@ -198,6 +205,8 @@ def delete_product_service(db: Session, user: User, product_id):
     id = delete_product(db, user_shops, product_id)
     if id is None:
         raise product_not_found()
+    
+    delete_embedding_product_service(db, product_id)
     
     db.commit()
     

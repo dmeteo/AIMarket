@@ -42,6 +42,8 @@ class Product(BaseModelMixin):
         back_populates="product",
         cascade="all, delete-orphan"
     )
+    embedding: Mapped["ProductEmbedding"] = relationship(back_populates="product")
+    
     
     @validates("rating")
     def validate_rating(self, key, rating):

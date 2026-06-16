@@ -22,7 +22,7 @@ def me(current_user: Annotated[User, Depends(get_current_user)]) -> CurrentUserR
 def get_user_profile(db: Annotated[Session, Depends(get_db)], user_id: int) -> UserProfileResponse:
     user = get_user_profile_service(db, user_id)
 
-    return user 
+    return user
 
 
 # @router.post("/address")
