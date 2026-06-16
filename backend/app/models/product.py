@@ -18,7 +18,7 @@ class Product(BaseModelMixin):
 
     shop_id: Mapped[int] = mapped_column(ForeignKey("shops.id"), nullable=False)
     brand_id: Mapped[int | None] = mapped_column(ForeignKey("brands.id"), nullable=True)
-    title: Mapped[str] = mapped_column(String(30), nullable=False)
+    title: Mapped[str] = mapped_column(String(60), nullable=False)
     description: Mapped[str] = mapped_column(Text, nullable=False)
     price: Mapped[Decimal] = mapped_column(Numeric(10, 2), nullable=False)
     discount_percent: Mapped[Decimal] = mapped_column(Numeric(5, 2), default=0, nullable=False)

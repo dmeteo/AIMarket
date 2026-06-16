@@ -46,7 +46,7 @@ class ProductCard(BaseModel):
 class ProductCreateRequest(BaseModel):
     shop_id: int
     brand_id: int | None = None
-    title: str = Field(max_length=30)
+    title: str = Field(max_length=60)
     description: str = Field(max_length=300)
     price: Decimal = Field(gt=0, max_digits=10, decimal_places=2, examples=["100.99"])
     category_ids: list[int] = []
