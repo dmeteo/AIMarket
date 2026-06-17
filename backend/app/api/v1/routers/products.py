@@ -6,11 +6,11 @@ from fastapi.params import Query
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
-from app.schemas.products import ProductCreateRequest, ProductCreateResponse, ProductDeleteResponse, ProductPage, ProductUpdateRequest, ProductUpdateResponse, ProductsResponse
+from app.schemas.products import GenerateDescriptionRequest, GenerateDescriptionResponse, ProductCreateRequest, ProductCreateResponse, ProductDeleteResponse, ProductPage, ProductUpdateRequest, ProductUpdateResponse, ProductsResponse
 from app.schemas.reviews import ReviewCreateRequest, ReviewCreateResponse, ReviewDeleteResponse, ReviewResponse, ReviewUpdateRequest, ReviewsResponse
 from app.api.v1.deps import get_current_user, require_seller_or_admin
 from app.models.user import User
-from app.services.products import ai_search_service, create_product_service, create_review_service, delete_product_service, delete_review_service, get_product_reviews_service, get_product_service, get_products_page_service, update_product_service, update_review_service
+from app.services.products import ai_search_service, create_product_service, create_review_service, delete_product_service, delete_review_service, generate_description_service, get_product_reviews_service, get_product_service, get_products_page_service, update_product_service, update_review_service
 
 
 
@@ -55,6 +55,16 @@ def get_product(db: Annotated[Session, Depends(get_db)], product_id: int) -> Pro
     product = get_product_service(db, product_id)
     
     return product
+
+
+@router.post("/generate-description", response_model=GenerateDescriptionResponse)
+def generate_description(
+    current_user: Annotated[User, Depends(require_seller_or_admin)],
+    payload: GenerateDescriptionRequest
+) -> GenerateDescriptionResponse:
+    description = generate_description_service(payload)
+    
+    return description
 
 
 @router.post("", response_model=ProductCreateResponse, description="[Seller/Admin]",)

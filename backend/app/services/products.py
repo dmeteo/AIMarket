@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from app.repositories.products import create_product, create_review, delete_product, delete_review, get_categories_by_ids, get_old_review, get_product, get_product_reviews, get_products_page, get_review_by_user_and_product, update_product, update_review
 from app.models.product import Product, ProductImage
 from app.models.review import Review
-from app.schemas.products import ProductCard, ProductCreateRequest, ProductPage, ProductUpdateRequest
+from app.schemas.products import GenerateDescriptionRequest, GenerateDescriptionResponse, ProductCard, ProductCreateRequest, ProductPage, ProductUpdateRequest
 from app.schemas.categories import Category
 from app.schemas.reviews import ReviewCreateRequest, ReviewResponse, ReviewUpdateRequest, ReviewsResponse
 from app.common.exceptions import access_denied, product_not_found, review_not_found
@@ -16,7 +16,7 @@ from app.common.enums import Role
 from app.services.embedding import delete_embedding_product_service, embedding_product_service, embedding_text, update_embedding_product_service
 from app.repositories.embedding import search_embeddings_products
 from app.core.ai import get_groq_client
-from app.services.ai import groq_parse_query, groq_search_chat
+from app.services.ai import groq_create_product_description, groq_parse_query, groq_search_chat
 
 
 
@@ -345,3 +345,10 @@ def ai_search_service(db: Session, query, page=1, limit=20):
     offset = (page - 1) * limit
 
     return mapping_products_cards(combined[offset:offset + limit]), total, pages
+
+
+def generate_description_service(payload: GenerateDescriptionRequest):
+    groq = get_groq_client()
+    result = groq_create_product_description(groq, payload.title, payload.description)
+    
+    return GenerateDescriptionResponse(description=result["description"])

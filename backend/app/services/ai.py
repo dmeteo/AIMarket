@@ -5,7 +5,7 @@ from groq import Groq
 
 def groq_search_chat(client: Groq, query: str, products: list) -> list[int]:
     products_text = "\n".join(
-        f"id: {p.id}, title: {p.title}, description: {p.description}"
+        f"id: {p.id}, title: {p.title}, description: {p.description}, price: {p.price}, categories: {p.categories}"
         for p in products
     )
 
@@ -47,7 +47,12 @@ def groq_parse_query(client: Groq, query: str):
                 "role": "user",
                 "content": f"""Пользователь ищет: "{query}"
 
-                Извлеки только суть запроса — название категории или тип товара, без лишних слов. Например: 'недорогой телефон для папы' → q: 'телефон'.
+                Оставь тип товара и его значимые характеристики (назначение, сезон, вид). Убери только слова о цене, получателе подарка и прочий мусор Например: 
+                'недорогой телефон для папы' → q: 'телефон'
+                'подарок папе'  → q: 'часы ремень инструменты гаджеты мужские'
+                'подарок маме'  → q: 'украшения сумка парфюм платок женские'
+                'беговые кроссовки Nike подешевле' → q: 'беговые кроссовки Nike'
+                'что подарить на зиму, куртку тёплую' → q: 'тёплая зимняя куртка'
 
                 Если запрос содержит слова о дешевизне - "cheap", о премиальности/дороговизне - "expensive", иначе null
                 
