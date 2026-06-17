@@ -41,7 +41,7 @@ def get_products(
             limit=limit,
         )
     else:
-        products_page, total, pages = ai_search_service(db, q)
+        products_page, total, pages = ai_search_service(db, q, page=page, limit=limit)
 
     return ProductsResponse(products=products_page,
                             total=total, 

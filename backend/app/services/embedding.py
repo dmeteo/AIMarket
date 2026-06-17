@@ -10,8 +10,9 @@ def embedding_text(text):
     return embedded_vecs
 
 
-def embedding_product_service(db, product_id, title, description):
-    text = f"{title}. {description}"
+def embedding_product_service(db, product_id, title, description, price, categories):
+    categories_title= ", ".join(c.title for c in categories)
+    text = f"{title}. {description}. Категории: {categories_title}. Цена {price} руб"
     
     embedded_vecs = embedding_text(text)
     
@@ -19,8 +20,9 @@ def embedding_product_service(db, product_id, title, description):
                                               embedding=embedded_vecs))
     
     
-def update_embedding_product_service(db, product_id, title, description):
-    text = f"{title}. {description}"
+def update_embedding_product_service(db, product_id, title, description, price, categories):
+    categories_title= ", ".join(c.title for c in categories)
+    text = f"{title}. {description}. Категории: {categories_title}. Цена {price} руб"
     
     embedded_vecs = embedding_text(text)
     

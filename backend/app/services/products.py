@@ -1,4 +1,5 @@
 from typing import Sequence
+import math
 
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
@@ -12,7 +13,10 @@ from app.schemas.reviews import ReviewCreateRequest, ReviewResponse, ReviewUpdat
 from app.common.exceptions import access_denied, product_not_found, review_not_found
 from app.models.user import User
 from app.common.enums import Role
-from app.services.embedding import delete_embedding_product_service, embedding_product_service, update_embedding_product_service
+from app.services.embedding import delete_embedding_product_service, embedding_product_service, embedding_text, update_embedding_product_service
+from app.repositories.embedding import search_embeddings_products
+from app.core.ai import get_groq_client
+from app.services.ai import groq_parse_query, groq_search_chat
 
 
 
@@ -172,7 +176,7 @@ def create_product_service(db: Session, user: User, payload: ProductCreateReques
     for i, url in enumerate(payload.image_urls):
         db.add(ProductImage(product_id=product.id, image_url=url, sort_order=i))
     
-    embedding_product_service(product.id, product.title, product.description)
+    embedding_product_service(db, product.id, product.title, product.description, product.price, product.categories)
         
 
     db.commit()
@@ -191,8 +195,7 @@ def update_product_service(db: Session, user: User, product_id, payload: Product
     if not product:
         raise product_not_found()
     
-    
-    update_embedding_product_service(db, product.id, product.title, product.description)
+    update_embedding_product_service(db, product.id, product.title, product.description, product.price, product.categories)
     
     db.commit()
     
@@ -308,6 +311,37 @@ def delete_review_service(db: Session, user, product_id, review_id):
     return deleted_review.id
 
 
-def ai_search_service(db: Session, query):
-    pass
+def ai_search_service(db: Session, query, page=1, limit=20):
+    if not query:
+        raise HTTPException(status_code=400, detail="Query is required for AI search")
+
+    AI_POOL = 50
+
+    groq = get_groq_client()
+    filtered_query = groq_parse_query(groq, query)
+    print(f"[AI] parsed query: {filtered_query}", flush=True)
+
+    query_vector = embedding_text(filtered_query["q"])
+    all_products = search_embeddings_products(db, query_vector, limit=AI_POOL)
     
+    if all_products:
+        prices = sorted(p.price for p in all_products)
+        median = prices[len(prices)//2]
+        if filtered_query["price_intent"] == "cheap":
+            all_products = [p for p in all_products if p.price <= median]
+        elif filtered_query["price_intent"] == "expensive":
+            all_products = [p for p in all_products if p.price >= median]
+
+    best_ids = groq_search_chat(groq, query, all_products[:10])
+
+    products_map = {p.id: p for p in all_products}
+    best = [products_map[pid] for pid in best_ids if pid in products_map]
+    best_set = {p.id for p in best}
+    rest = [p for p in all_products if p.id not in best_set]
+
+    combined = best + rest
+    total = len(combined)
+    pages = math.ceil(total / limit) if total else 1
+    offset = (page - 1) * limit
+
+    return mapping_products_cards(combined[offset:offset + limit]), total, pages

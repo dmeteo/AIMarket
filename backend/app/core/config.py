@@ -31,6 +31,8 @@ class Settings(BaseSettings):
     IMAGEKIT_PRIVATE_KEY: str = ""
     IMAGEKIT_URL_ENDPOINT: str = ""
     
+    GROQ_API_KEY: str = ""
+    
     @property
     def DB_URL(self) -> str:
         if self.DATABASE_URL:
