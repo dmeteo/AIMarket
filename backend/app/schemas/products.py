@@ -46,10 +46,10 @@ class ProductCard(BaseModel):
 class ProductCreateRequest(BaseModel):
     shop_id: int
     brand_id: int | None = None
-    title: str = Field(max_length=30)
-    description: str = Field(max_length=300)
+    title: str = Field(max_length=60)
+    description: str = Field(max_length=1000)
     price: Decimal = Field(gt=0, max_digits=10, decimal_places=2, examples=["100.99"])
-    category_ids: list[int]
+    category_ids: list[int] = []
     image_urls: list[str] = []
     discount_percent: Decimal = Field(default=0, ge=0, le=100, max_digits=5, decimal_places=2, examples=["10.5"])
     quantity: int = Field(ge=0)
@@ -75,7 +75,7 @@ class ProductsResponse(BaseModel):
     
 class ProductUpdateRequest(BaseModel):
     title: str | None = Field(default=None, max_length=30)
-    description: str | None = Field(default=None, max_length=300)
+    description: str | None = Field(default=None, max_length=1000)
     images: list[str] | None = None
     price: Decimal | None = Field(default=None, gt=0, max_digits=10, decimal_places=2, examples=["100.99"])
     category_ids: list[int] | None = None
@@ -86,3 +86,12 @@ class ProductUpdateRequest(BaseModel):
     
 class ProductUpdateResponse(BaseModel):
     product: ProductPage
+    
+    
+class GenerateDescriptionRequest(BaseModel):
+    title: str
+    description: str | None = None
+    
+
+class GenerateDescriptionResponse(BaseModel):
+    description: str

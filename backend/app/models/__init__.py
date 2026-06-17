@@ -7,3 +7,4 @@ from app.models.shop import Shop, FavouritesShop
 from app.models.review import Review
 from app.models.cart import Cart, CartItem 
 from app.models.orders import Order, OrderItem
+from app.models.embedding import ProductEmbedding

@@ -93,7 +93,10 @@ def payment_webhook_service(db: Session, body):
             order = get_order_by_payment_id(db, payment_id)
             print(f"[WEBHOOK] payment_id={payment_id} order={order.id if order else None} status={order.status if order else None}", flush=True)
             order.status = OrderStatus.CONFIRMED.value
-
+            
+            for item in order.items:
+                item.product.quantity -= item.quantity
+                
             delete_cart_items_service(db, order.user_id)
             
             db.commit()

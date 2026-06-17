@@ -63,3 +63,15 @@ class ApplicationToBeSellerResponse(BaseModel):
     verdict: VerdictApplicationToBeSeller
     rejection_reason: str | None
     created_at: datetime
+    
+
+class ApplicationToBeSellerSummaryResponse(BaseModel):
+    application_id: int
+    verdict: VerdictApplicationToBeSeller
+    created_at: datetime
+
+
+class ApplicationsToBeSellerResponse(BaseModel):
+    applications: list[ApplicationToBeSellerSummaryResponse]
+    
+    

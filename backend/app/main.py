@@ -8,6 +8,7 @@ from app.api.v1.api import router as v1_router
 from app.core.storage import create_buckets
 from app.core.init_data import create_admin, init_yookassa
 from app.services.payment import get_ngrok_url
+from app.core.ai import get_embedding_model
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -15,6 +16,7 @@ async def lifespan(app: FastAPI):
     create_admin()
     init_yookassa()
     print(get_ngrok_url(), flush=True)
+    get_embedding_model()
     # register_webhook_service()
     yield
 

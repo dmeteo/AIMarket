@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 
 *.DS_Store
+*seed_data/images/
 
 # C extensions
 *.so

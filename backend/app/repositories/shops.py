@@ -54,3 +54,11 @@ def add_to_favourite_shop(db: Session, favourite):
     db.add(favourite)
     
     return favourite.shop_id
+
+
+def get_shops_by_user_id(db: Session, user_id):
+    stmt = select(Shop).where(Shop.owner_id==user_id)
+    
+    shops = db.scalars(stmt).all()
+    
+    return shops

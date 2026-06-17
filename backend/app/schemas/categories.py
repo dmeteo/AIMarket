@@ -4,7 +4,7 @@ from pydantic import BaseModel, ConfigDict, Field
 class Category(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     id: int
-    title: str = Field(min_length=2, max_length=20)
+    title: str = Field(min_length=2, max_length=50)
     
 
 class CategoriesResponse(BaseModel):
@@ -14,7 +14,7 @@ class CategoriesResponse(BaseModel):
 
 
 class CategoryCreateRequest(BaseModel):
-    title: str = Field(min_length=2, max_length=20)
+    title: str = Field(min_length=2, max_length=50)
     
     
 class CategoryCreateResponse(BaseModel):
@@ -22,7 +22,7 @@ class CategoryCreateResponse(BaseModel):
     
     
 class CategoryUpdateRequest(BaseModel):
-    title: str = Field(min_length=2, max_length=20)
+    title: str = Field(min_length=2, max_length=50)
 
 
 class CategoryUpdateResponse(BaseModel):

@@ -93,7 +93,7 @@ def verdict_for_application_to_seller_service(db: Session, application_id, paylo
         application.verdict = payload.verdict
     elif payload.verdict == VerdictApplicationToBeSeller.REJECT:
         application.verdict = payload.verdict
-        application.description = payload.description
+        application.rejection_reason = payload.description
     
     db.commit()
 

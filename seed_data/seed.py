@@ -18,7 +18,7 @@ from seeders.products import create_products
 ENV_PATH = Path(__file__).resolve().parents[1] / ".env"
 load_dotenv(ENV_PATH)
 
-BASE_URL = "http://127.0.0.1:8000/api/v1"
+BASE_URL = "https://dainty-icky-passage.ngrok-free.dev/api/v1"
 ADMIN_EMAIL = os.getenv("ADMIN_EMAIL")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 

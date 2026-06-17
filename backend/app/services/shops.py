@@ -3,8 +3,8 @@ from sqlalchemy.orm import Session
 
 from app.models.user import User
 from app.models.shop import FavouritesShop, Shop
-from app.schemas.shops import ShopCreateRequest, ShopCreateResponse, ShopDeleteResponse, ShopResponse, ShopUpdateRequest, ShopUpdateResponse
-from app.repositories.shops import add_to_favourite_shop, create_shop, delete_from_favourite_shop, delete_shop, get_shop, get_shop_by_title, update_shop
+from app.schemas.shops import ShopCreateRequest, ShopCreateResponse, ShopDeleteResponse, ShopResponse, ShopSummaryResponse, ShopUpdateRequest, ShopUpdateResponse, ShopsResponse
+from app.repositories.shops import add_to_favourite_shop, create_shop, delete_from_favourite_shop, delete_shop, get_shop, get_shop_by_title, get_shops_by_user_id, update_shop
 from app.services.products import mapping_products_cards
 from app.common.exceptions import access_denied, shop_not_found
 from app.common.enums import Role
@@ -36,7 +36,7 @@ def check_owner_shop_or_admin(db: Session, user: User, shop_id):
 def mapping_shop(shop: Shop):
     shop = {
         "id": shop.id,
-        "logo_url": build_url(shop.logo_url),
+        "logo_url": shop.logo_url,
         "title": shop.title,
         "description": shop.description,
         "favourites_count": shop.favourites_count,
@@ -112,5 +112,20 @@ def update_favourite_status_service(db: Session, user: User, shop_id):
     db.commit()
     
     return shop_id_updated
+
+
+def mapping_shops_summary(shops: list[Shop]):
+    mapped_shops = [ShopSummaryResponse(id=shop.id,
+                                        title=shop.title,
+                                        reviews_count=shop.reviews_count,
+                                        rating=shop.rating,
+                                        is_active=shop.is_active) for shop in shops]
     
+    return mapped_shops
+
+
+def get_my_shops_service(db: Session, user: User):
+    shops = get_shops_by_user_id(db, user.id)
+    
+    return ShopsResponse(shops=mapping_shops_summary(shops))
     
