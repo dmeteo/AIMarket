@@ -24,11 +24,11 @@ def upload_images(client, image_paths: list[str], images_dir: Path) -> list[str]
 
 def create_products(client, products, categories_map, brands_map, shops_map, images_dir: Path):
     for product in products:
-        image_urls = upload_images(client, product.get("images", []), images_dir)
-
         if product["shop"] not in shops_map:
             continue
-        client.post(BASE_URL, json={
+        
+        image_urls = upload_images(client, product.get("images", []), images_dir)
+        response = client.post(BASE_URL, json={
             "title": product["title"],
             "description": product["description"],
             "price": product["price"],
@@ -40,3 +40,7 @@ def create_products(client, products, categories_map, brands_map, shops_map, ima
             "category_ids": [categories_map[c] for c in product["categories"] if c in categories_map],
             "image_urls": image_urls,
         })
+        
+        if response.status_code != 200:
+            print(f"[SKIP] {product['title']}: {response.status_code} {response.text}")
+            continue

@@ -5,8 +5,11 @@ MEDIA_URL = "/media/upload"
 
 
 def upload_logo(client, logo_path: str, images_dir: Path) -> str | None:
+    if not logo_path:
+        return None
+
     full_path = images_dir / logo_path
-    if not full_path.exists():
+    if not full_path.is_file():
         return None
 
     files = [("files", (full_path.name, open(full_path, "rb"), "image/jpeg"))]
