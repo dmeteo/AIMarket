@@ -7,7 +7,7 @@ from app.models.base import BaseModelMixin
 class Category(BaseModelMixin):
     __tablename__ = "categories"
 
-    title: Mapped[str] = mapped_column(String(20), unique=True, nullable=False)
+    title: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
     is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
 
     products: Mapped[list["Product"]] = relationship(
