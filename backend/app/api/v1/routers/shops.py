@@ -1,13 +1,16 @@
-from typing import Annotated
+from datetime import date
+from typing import Annotated, Literal
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 
 from app.models.user import User
 from app.schemas.shops import ShopCreateRequest, ShopCreateResponse, ShopDeleteResponse, ShopResponse, ShopUpdateRequest, ShopUpdateResponse, ShopsResponse
+from app.schemas.analytics import AnalyticsResponse
 from app.core.database import get_db
 from app.api.v1.deps import get_current_user, require_seller_or_admin
 from app.services.shops import create_shop_service, delete_shop_service, get_my_shops_service, get_shop_service, update_favourite_status_service, update_shop_service
+from app.services.analytics import get_shop_analytics_service
 
 
 router = APIRouter(prefix="/shops", tags=["shops"])
@@ -32,6 +35,19 @@ def get_my_shops(
     shops = get_my_shops_service(db, current_user)
     
     return shops
+
+@router.get("/me/analytics", response_model=AnalyticsResponse, description="[Seller/Admin]")
+def get_my_shops_analytics(
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User, Depends(require_seller_or_admin)],
+    period: Literal["week", "month", "quarter", "year"] | None = Query(default=None),
+    date_from: date | None = Query(default=None, alias="from"),
+    date_to: date | None = Query(default=None, alias="to"),
+    shop_ids: str | None = Query(default=None),
+) -> AnalyticsResponse:
+    analytics = get_shop_analytics_service(db, current_user, period, date_from, date_to, shop_ids)
+    
+    return analytics
 
 
 @router.patch("/{shop_id}", response_model=ShopUpdateResponse, description="[Seller/Admin]")
