@@ -10,8 +10,8 @@ sys.path.append(str(Path(__file__).resolve().parents[1]))
 ENV_PATH = Path(__file__).resolve().parents[1] / ".env"
 load_dotenv(ENV_PATH)
 
-PRODUCT_ID = 1
-TEST_EMAIL = "flow_test@gmail.com"
+PRODUCT_ID = 100
+TEST_EMAIL = "flow_test2@gmail.com"
 TEST_PASSWORD = "123123"
 
 
@@ -23,7 +23,6 @@ def test_register(client):
         "password": TEST_PASSWORD
     })
     assert r.status_code in (200, 409), r.text
-
 
 
 def test_login(auth_client):
@@ -42,7 +41,7 @@ def test_get_cart(auth_client):
     assert r.status_code == 200
     cart = r.json()
     assert len(cart["items"]) > 0
-    print(f"\nКорзина: {len(cart['items'])} товара | Сумма без скидки: {cart['total_price']} | Скидка: {cart['total_discount']} | Итого: {cart['final_price']}")
+    print(f"\nКорзина: {cart['items']} товара | Сумма без скидки: {cart['total_price']} | Скидка: {cart['total_discount']} | Итого: {cart['final_price']}")
 
 
 def test_order_preview(auth_client):
@@ -54,7 +53,7 @@ def test_order_preview(auth_client):
     preview = r.json()
     assert int(preview["delivery_cost"]) == 250
     assert preview["predicted_date"] is not None
-    print(f"\nПревью: доставка={preview['delivery_cost']} | итого={preview['final_price']} | дата={preview['predicted_date']}")
+    print(f"\nПревью: доставка={preview} | итого={preview['final_price']} | дата={preview['predicted_date']}")
 
 
 def test_create_order(order_id, auth_client):
@@ -63,6 +62,7 @@ def test_create_order(order_id, auth_client):
     order = r.json()
     assert "order_id" in r.json() or order is not None
     print(f"\nЗаказ создан: id={order_id}")
+    print(f"\nЗаказ: {order}")
 
 
 def test_get_order(auth_client, order_id):
@@ -79,6 +79,7 @@ def test_get_orders_list(auth_client):
     orders = r.json()["orders"]
     assert len(orders) > 0
     print(f"\nВсего заказов: {len(orders)}")
+    print(f"\nЗаказы: {orders}")
 
 
 def test_payment_status(auth_client, order_id):

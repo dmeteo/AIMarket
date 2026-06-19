@@ -1,15 +1,31 @@
-from typing import Annotated
+from datetime import date
+from typing import Annotated, Literal
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 
 from app.services.admin import get_application_to_seller_service, get_applications_to_seller_service, verdict_for_application_to_seller_service
+from app.services.analytics import get_platform_analytics_service
 from app.core.database import get_db
 from app.api.v1.deps import require_admin
 from app.models.user import User
 from app.schemas.admin import ApplicationsToSellerResponse, ApplicationToSellerResponse, VerdictForApplicationToSellerRequest, VerdictForApplicationToSellerResponse
+from app.schemas.analytics import AdminAnalyticsResponse
 
 router = APIRouter(prefix="/admin", tags=["admin [ADMIN only]"])
+
+
+@router.get("/analytics", response_model=AdminAnalyticsResponse)
+def get_platform_analytics(
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User, Depends(require_admin)],
+    period: Literal["week", "month", "quarter", "year"] | None = Query(default=None),
+    date_from: date | None = Query(default=None, alias="from"),
+    date_to: date | None = Query(default=None, alias="to"),
+) -> AdminAnalyticsResponse:
+    analytics = get_platform_analytics_service(db, period, date_from, date_to)
+
+    return analytics
 
 
 @router.get("/applications_to_seller", response_model=ApplicationsToSellerResponse)
