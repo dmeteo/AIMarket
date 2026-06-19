@@ -6,18 +6,18 @@ from fastapi.params import Query
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
-from app.schemas.products import ProductCreateRequest, ProductCreateResponse, ProductDeleteResponse, ProductPage, ProductUpdateRequest, ProductUpdateResponse, ProductsResponse
+from app.schemas.products import GenerateDescriptionRequest, GenerateDescriptionResponse, ProductCreateRequest, ProductCreateResponse, ProductDeleteResponse, ProductPage, ProductUpdateRequest, ProductUpdateResponse, ProductsResponse
 from app.schemas.reviews import ReviewCreateRequest, ReviewCreateResponse, ReviewDeleteResponse, ReviewResponse, ReviewUpdateRequest, ReviewsResponse
 from app.api.v1.deps import get_current_user, require_seller_or_admin
 from app.models.user import User
-from app.services.products import create_product_service, create_review_service, delete_product_service, delete_review_service, get_product_reviews_service, get_product_service, get_products_page_service, update_product_service, update_review_service
+from app.services.products import ai_search_service, create_product_service, create_review_service, delete_product_service, delete_review_service, generate_description_service, get_product_reviews_service, get_product_service, get_products_page_service, update_product_service, update_review_service
 
 
 
 router = APIRouter(prefix="/products", tags=["products"])
 
 
-@router.get("/", response_model=ProductsResponse)
+@router.get("", response_model=ProductsResponse)
 def get_products(
     db: Annotated[Session, Depends(get_db)],
     q: str | None = None,
@@ -27,17 +27,21 @@ def get_products(
     max_price: Decimal | None = Query(default=None, ge=0),
     page: int = Query(default=1, ge=1),
     limit: int = Query(default=20, ge=1, le=100),
+    ai: bool = Query(default=False)
 ) -> ProductsResponse:
-    products_page, total, pages = get_products_page_service(
-        db=db,
-        q=q,
-        category_ids=category_ids, 
-        brand_ids=brand_ids, 
-        min_price=min_price, 
-        max_price=max_price,
-        page=page,
-        limit=limit,
-    )
+    if not ai:
+        products_page, total, pages = get_products_page_service(
+            db=db,
+            q=q,
+            category_ids=category_ids, 
+            brand_ids=brand_ids, 
+            min_price=min_price, 
+            max_price=max_price,
+            page=page,
+            limit=limit,
+        )
+    else:
+        products_page, total, pages = ai_search_service(db, q, page=page, limit=limit)
 
     return ProductsResponse(products=products_page,
                             total=total, 
@@ -53,7 +57,17 @@ def get_product(db: Annotated[Session, Depends(get_db)], product_id: int) -> Pro
     return product
 
 
-@router.post("/", response_model=ProductCreateResponse)
+@router.post("/generate-description", response_model=GenerateDescriptionResponse)
+def generate_description(
+    current_user: Annotated[User, Depends(require_seller_or_admin)],
+    payload: GenerateDescriptionRequest
+) -> GenerateDescriptionResponse:
+    description = generate_description_service(payload)
+    
+    return description
+
+
+@router.post("", response_model=ProductCreateResponse, description="[Seller/Admin]",)
 def create_product(
     db: Annotated[Session, Depends(get_db)], 
     current_user: Annotated[User, Depends(require_seller_or_admin)], 
@@ -64,7 +78,7 @@ def create_product(
     return ProductCreateResponse(product=product_page)
     
     
-@router.patch("/{product_id}", response_model=ProductUpdateResponse)
+@router.patch("/{product_id}", response_model=ProductUpdateResponse, description="[Seller/Admin]")
 def update_product(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_seller_or_admin)],
@@ -76,7 +90,7 @@ def update_product(
     return updated_product
 
 
-@router.delete("/{product_id}", response_model=ProductDeleteResponse)
+@router.delete("/{product_id}", response_model=ProductDeleteResponse, description="[Seller/Admin]")
 def delete_product(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_seller_or_admin)],
@@ -97,7 +111,7 @@ def get_product_reviews(
     return product_reviews
 
 
-@router.post("/{product_id}/reviews", response_model=ReviewCreateResponse)
+@router.post("/{product_id}/reviews", response_model=ReviewCreateResponse, description="[Buyer User]",)
 def create_review(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(get_current_user)],
@@ -109,7 +123,7 @@ def create_review(
     return ReviewCreateResponse(review=review)
 
 
-@router.patch("/{product_id}/reviews/{review_id}", response_model=ReviewResponse)
+@router.patch("/{product_id}/reviews/{review_id}", response_model=ReviewResponse, description="[Buyer User]")
 def update_review(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(get_current_user)],
@@ -122,7 +136,7 @@ def update_review(
     return review
     
 
-@router.delete("/{product_id}/reviews/{review_id}", response_model=ReviewDeleteResponse, status_code=200)
+@router.delete("/{product_id}/reviews/{review_id}", response_model=ReviewDeleteResponse, status_code=200, description="[Buyer User]")
 def delete_review(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(get_current_user)],

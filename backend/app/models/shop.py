@@ -8,8 +8,8 @@ class Shop(BaseModelMixin):
     __tablename__ = "shops"
 
     owner_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
-    title: Mapped[str] = mapped_column(String(30), nullable=False)
-    logo_url: Mapped[str] = mapped_column(String(512), nullable=False)
+    title: Mapped[str] = mapped_column(String(50), nullable=False)
+    logo_url: Mapped[str] = mapped_column(String(512), default=None, nullable=True)
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
     is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
     favourites_count: Mapped[int] = mapped_column(default=0, nullable=False)

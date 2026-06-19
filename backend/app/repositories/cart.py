@@ -40,4 +40,9 @@ def delete_cart_item(db: Session, cart_id, product_id):
     
     return product_id
     
+
+def delete_cart_items(db: Session, cart_id) -> None:
+    stmt = delete(CartItem).where(CartItem.cart_id == cart_id)
+
+    db.execute(stmt)
     

@@ -5,6 +5,134 @@
     "version": "0.1.0"
   },
   "paths": {
+    "/api/v1/admin/applications_to_seller": {
+      "get": {
+        "tags": [
+          "admin [ADMIN only]"
+        ],
+        "summary": "Get Applications To Seller",
+        "operationId": "get_applications_to_seller_api_v1_admin_applications_to_seller_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationsToSellerResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/admin/applications_to_seller/{application_id}": {
+      "get": {
+        "tags": [
+          "admin [ADMIN only]"
+        ],
+        "summary": "Get Application To Seller",
+        "operationId": "get_application_to_seller_api_v1_admin_applications_to_seller__application_id__get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "application_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Application Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationToSellerResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "admin [ADMIN only]"
+        ],
+        "summary": "Verdict For Application To Seller",
+        "operationId": "verdict_for_application_to_seller_api_v1_admin_applications_to_seller__application_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "application_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Application Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerdictForApplicationToSellerRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerdictForApplicationToSellerResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/auth/register": {
       "post": {
         "tags": [
@@ -93,6 +221,7 @@
           "users"
         ],
         "summary": "Me",
+        "description": "[Buyer User]",
         "operationId": "me_api_v1_users_me_get",
         "responses": {
           "200": {
@@ -155,13 +284,134 @@
         }
       }
     },
-    "/api/v1/products/": {
+    "/api/v1/users/seller_application": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Create Application To Be Seller",
+        "description": "[Buyer User]",
+        "operationId": "create_application_to_be_seller_api_v1_users_seller_application_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplicationToBeSellerCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationToBeSellerCreateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/me/seller_applications": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get Applications To Be Seller",
+        "operationId": "get_applications_to_be_seller_api_v1_users_me_seller_applications_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationsToBeSellerResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/me/seller_applications/{application_id}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get Application To Be Seller",
+        "description": "[Buyer User]",
+        "operationId": "get_application_to_be_seller_api_v1_users_me_seller_applications__application_id__get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "application_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Application Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationToBeSellerResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/products": {
       "get": {
         "tags": [
           "products"
         ],
         "summary": "Get Products",
-        "operationId": "get_products_api_v1_products__get",
+        "operationId": "get_products_api_v1_products_get",
         "parameters": [
           {
             "name": "q",
@@ -281,6 +531,16 @@
               "default": 20,
               "title": "Limit"
             }
+          },
+          {
+            "name": "ai",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Ai"
+            }
           }
         ],
         "responses": {
@@ -311,7 +571,8 @@
           "products"
         ],
         "summary": "Create Product",
-        "operationId": "create_product_api_v1_products__post",
+        "description": "[Seller/Admin]",
+        "operationId": "create_product_api_v1_products_post",
         "security": [
           {
             "OAuth2PasswordBearer": []
@@ -397,6 +658,7 @@
           "products"
         ],
         "summary": "Update Product",
+        "description": "[Seller/Admin]",
         "operationId": "update_product_api_v1_products__product_id__patch",
         "security": [
           {
@@ -452,6 +714,7 @@
           "products"
         ],
         "summary": "Delete Product",
+        "description": "[Seller/Admin]",
         "operationId": "delete_product_api_v1_products__product_id__delete",
         "security": [
           {
@@ -539,6 +802,7 @@
           "products"
         ],
         "summary": "Create Review",
+        "description": "[Buyer User]",
         "operationId": "create_review_api_v1_products__product_id__reviews_post",
         "security": [
           {
@@ -596,6 +860,7 @@
           "products"
         ],
         "summary": "Update Review",
+        "description": "[Buyer User]",
         "operationId": "update_review_api_v1_products__product_id__reviews__review_id__patch",
         "security": [
           {
@@ -660,6 +925,7 @@
           "products"
         ],
         "summary": "Delete Review",
+        "description": "[Buyer User]",
         "operationId": "delete_review_api_v1_products__product_id__reviews__review_id__delete",
         "security": [
           {
@@ -710,13 +976,14 @@
         }
       }
     },
-    "/api/v1/shops/": {
+    "/api/v1/shops": {
       "post": {
         "tags": [
           "shops"
         ],
         "summary": "Create Shop",
-        "operationId": "create_shop_api_v1_shops__post",
+        "description": "[Seller/Admin]",
+        "operationId": "create_shop_api_v1_shops_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -756,12 +1023,39 @@
         ]
       }
     },
+    "/api/v1/shops/me": {
+      "get": {
+        "tags": [
+          "shops"
+        ],
+        "summary": "Get My Shops",
+        "operationId": "get_my_shops_api_v1_shops_me_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShopsResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
     "/api/v1/shops/{shop_id}": {
       "patch": {
         "tags": [
           "shops"
         ],
         "summary": "Update Shop",
+        "description": "[Seller/Admin]",
         "operationId": "update_shop_api_v1_shops__shop_id__patch",
         "security": [
           {
@@ -817,6 +1111,7 @@
           "shops"
         ],
         "summary": "Delete Shop",
+        "description": "[Seller/Admin]",
         "operationId": "delete_shop_api_v1_shops__shop_id__delete",
         "security": [
           {
@@ -904,6 +1199,7 @@
           "shops"
         ],
         "summary": "User Change Favourite Status Shop",
+        "description": "[Buyer User]",
         "operationId": "user_change_favourite_status_shop_api_v1_shops__shop_id__favourite_post",
         "security": [
           {
@@ -943,13 +1239,13 @@
         }
       }
     },
-    "/api/v1/brands/": {
+    "/api/v1/brands": {
       "get": {
         "tags": [
           "brands"
         ],
         "summary": "Get Brands",
-        "operationId": "get_brands_api_v1_brands__get",
+        "operationId": "get_brands_api_v1_brands_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -968,7 +1264,8 @@
           "brands"
         ],
         "summary": "Create Brand",
-        "operationId": "create_brand_api_v1_brands__post",
+        "description": "[ADMIN]",
+        "operationId": "create_brand_api_v1_brands_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1177,6 +1474,7 @@
           "brands"
         ],
         "summary": "Update Brand",
+        "description": "[ADMIN]",
         "operationId": "update_brand_api_v1_brands__brand_id__patch",
         "security": [
           {
@@ -1232,6 +1530,7 @@
           "brands"
         ],
         "summary": "Delete Brand",
+        "description": "[ADMIN]",
         "operationId": "delete_brand_api_v1_brands__brand_id__delete",
         "security": [
           {
@@ -1273,13 +1572,13 @@
         }
       }
     },
-    "/api/v1/categories/": {
+    "/api/v1/categories": {
       "get": {
         "tags": [
           "categories"
         ],
         "summary": "Get Categories",
-        "operationId": "get_categories_api_v1_categories__get",
+        "operationId": "get_categories_api_v1_categories_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -1298,7 +1597,8 @@
           "categories"
         ],
         "summary": "Create Category",
-        "operationId": "create_category_api_v1_categories__post",
+        "description": "[ADMIN]",
+        "operationId": "create_category_api_v1_categories_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1344,6 +1644,7 @@
           "categories"
         ],
         "summary": "Get Category",
+        "description": "[ADMIN]",
         "operationId": "get_category_api_v1_categories__category_id__get",
         "security": [
           {
@@ -1389,6 +1690,7 @@
           "categories"
         ],
         "summary": "Update Category",
+        "description": "[ADMIN]",
         "operationId": "update_category_api_v1_categories__category_id__patch",
         "security": [
           {
@@ -1444,6 +1746,7 @@
           "categories"
         ],
         "summary": "Delete Category",
+        "description": "[ADMIN]",
         "operationId": "delete_category_api_v1_categories__category_id__delete",
         "security": [
           {
@@ -1608,13 +1911,14 @@
         }
       }
     },
-    "/api/v1/cart/": {
+    "/api/v1/cart": {
       "get": {
         "tags": [
           "cart"
         ],
         "summary": "Get Cart",
-        "operationId": "get_cart_api_v1_cart__get",
+        "description": "[Buyer User]",
+        "operationId": "get_cart_api_v1_cart_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -1640,6 +1944,7 @@
           "cart"
         ],
         "summary": "Add Product To Cart",
+        "description": "[Buyer User]",
         "operationId": "add_product_to_cart_api_v1_cart_items_post",
         "requestBody": {
           "content": {
@@ -1686,6 +1991,7 @@
           "cart"
         ],
         "summary": "Update Cart Item Quantity",
+        "description": "[Buyer User]",
         "operationId": "update_cart_item_quantity_api_v1_cart_items__product_id__patch",
         "security": [
           {
@@ -1741,6 +2047,7 @@
           "cart"
         ],
         "summary": "Delete Cart Item",
+        "description": "[Buyer User]",
         "operationId": "delete_cart_item_api_v1_cart_items__product_id__delete",
         "security": [
           {
@@ -1782,13 +2089,110 @@
         }
       }
     },
-    "/api/v1/orders/": {
+    "/api/v1/media/upload": {
+      "post": {
+        "tags": [
+          "media"
+        ],
+        "summary": "Upload Media",
+        "operationId": "upload_media_api_v1_media_upload_post",
+        "parameters": [
+          {
+            "name": "entity",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/MediaEntities"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_media_api_v1_media_upload_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadMediaResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orders/preview": {
+      "post": {
+        "tags": [
+          "orders"
+        ],
+        "summary": "Preview Order",
+        "operationId": "preview_order_api_v1_orders_preview_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderPreviewRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderPreviewResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/orders": {
       "get": {
         "tags": [
           "orders"
         ],
         "summary": "Get User Orders",
-        "operationId": "get_user_orders_api_v1_orders__get",
+        "operationId": "get_user_orders_api_v1_orders_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -1800,24 +2204,81 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       },
       "post": {
         "tags": [
           "orders"
         ],
         "summary": "Create Order",
-        "operationId": "create_order_api_v1_orders__post",
+        "operationId": "create_order_api_v1_orders_post",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/OrderRequest"
+                "$ref": "#/components/schemas/OrderCreateRequest"
               }
             }
           },
           "required": true
         },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderCreateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/orders/{order_id}": {
+      "get": {
+        "tags": [
+          "orders"
+        ],
+        "summary": "Get User Order",
+        "operationId": "get_user_order_api_v1_orders__order_id__get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Order Id"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -1842,42 +2303,19 @@
         }
       }
     },
-    "/api/v1/orders/{order_id}": {
-      "get": {
+    "/api/v1/payments/webhook": {
+      "post": {
         "tags": [
-          "orders"
+          "webhook"
         ],
-        "summary": "Get User Order",
-        "operationId": "get_user_order_api_v1_orders__order_id__get",
-        "parameters": [
-          {
-            "name": "order_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "title": "Order Id"
-            }
-          }
-        ],
+        "summary": "Payment Webhook",
+        "operationId": "payment_webhook_api_v1_payments_webhook_post",
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Order"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
+                "schema": {}
               }
             }
           }
@@ -1935,6 +2373,313 @@
         ],
         "title": "AddProductToCartResponse"
       },
+      "ApplicationToBeSellerCreateRequest": {
+        "properties": {
+          "full_name": {
+            "type": "string",
+            "title": "Full Name"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "phone": {
+            "type": "string",
+            "title": "Phone"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "person_type": {
+            "$ref": "#/components/schemas/PersonType"
+          },
+          "inn": {
+            "type": "string",
+            "title": "Inn"
+          },
+          "ogrn": {
+            "type": "string",
+            "title": "Ogrn"
+          },
+          "address": {
+            "type": "string",
+            "title": "Address"
+          },
+          "bic": {
+            "type": "string",
+            "title": "Bic"
+          },
+          "checking_account": {
+            "type": "string",
+            "title": "Checking Account"
+          }
+        },
+        "type": "object",
+        "required": [
+          "full_name",
+          "email",
+          "phone",
+          "description",
+          "person_type",
+          "inn",
+          "ogrn",
+          "address",
+          "bic",
+          "checking_account"
+        ],
+        "title": "ApplicationToBeSellerCreateRequest"
+      },
+      "ApplicationToBeSellerCreateResponse": {
+        "properties": {
+          "application_id": {
+            "type": "integer",
+            "title": "Application Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "application_id"
+        ],
+        "title": "ApplicationToBeSellerCreateResponse"
+      },
+      "ApplicationToBeSellerResponse": {
+        "properties": {
+          "full_name": {
+            "type": "string",
+            "title": "Full Name"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "phone": {
+            "type": "string",
+            "title": "Phone"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "person_type": {
+            "$ref": "#/components/schemas/PersonType"
+          },
+          "inn": {
+            "type": "string",
+            "title": "Inn"
+          },
+          "ogrn": {
+            "type": "string",
+            "title": "Ogrn"
+          },
+          "address": {
+            "type": "string",
+            "title": "Address"
+          },
+          "bic": {
+            "type": "string",
+            "title": "Bic"
+          },
+          "checking_account": {
+            "type": "string",
+            "title": "Checking Account"
+          },
+          "verdict": {
+            "$ref": "#/components/schemas/VerdictApplicationToBeSeller"
+          },
+          "rejection_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rejection Reason"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "full_name",
+          "email",
+          "phone",
+          "description",
+          "person_type",
+          "inn",
+          "ogrn",
+          "address",
+          "bic",
+          "checking_account",
+          "verdict",
+          "rejection_reason",
+          "created_at"
+        ],
+        "title": "ApplicationToBeSellerResponse"
+      },
+      "ApplicationToBeSellerSummaryResponse": {
+        "properties": {
+          "application_id": {
+            "type": "integer",
+            "title": "Application Id"
+          },
+          "verdict": {
+            "$ref": "#/components/schemas/VerdictApplicationToBeSeller"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "application_id",
+          "verdict",
+          "created_at"
+        ],
+        "title": "ApplicationToBeSellerSummaryResponse"
+      },
+      "ApplicationToSellerList": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "full_name": {
+            "type": "string",
+            "title": "Full Name"
+          },
+          "verdict": {
+            "$ref": "#/components/schemas/VerdictApplicationToBeSeller"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "full_name",
+          "verdict",
+          "created_at"
+        ],
+        "title": "ApplicationToSellerList"
+      },
+      "ApplicationToSellerResponse": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "full_name": {
+            "type": "string",
+            "title": "Full Name"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "phone": {
+            "type": "string",
+            "title": "Phone"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "person_type": {
+            "$ref": "#/components/schemas/PersonType"
+          },
+          "inn": {
+            "type": "string",
+            "title": "Inn"
+          },
+          "ogrn": {
+            "type": "string",
+            "title": "Ogrn"
+          },
+          "address": {
+            "type": "string",
+            "title": "Address"
+          },
+          "bic": {
+            "type": "string",
+            "title": "Bic"
+          },
+          "checking_account": {
+            "type": "string",
+            "title": "Checking Account"
+          },
+          "verdict": {
+            "$ref": "#/components/schemas/VerdictApplicationToBeSeller"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "full_name",
+          "email",
+          "phone",
+          "description",
+          "person_type",
+          "inn",
+          "ogrn",
+          "address",
+          "bic",
+          "checking_account",
+          "verdict",
+          "created_at"
+        ],
+        "title": "ApplicationToSellerResponse"
+      },
+      "ApplicationsToBeSellerResponse": {
+        "properties": {
+          "applications": {
+            "items": {
+              "$ref": "#/components/schemas/ApplicationToBeSellerSummaryResponse"
+            },
+            "type": "array",
+            "title": "Applications"
+          }
+        },
+        "type": "object",
+        "required": [
+          "applications"
+        ],
+        "title": "ApplicationsToBeSellerResponse"
+      },
+      "ApplicationsToSellerResponse": {
+        "properties": {
+          "applications": {
+            "items": {
+              "$ref": "#/components/schemas/ApplicationToSellerList"
+            },
+            "type": "array",
+            "title": "Applications"
+          }
+        },
+        "type": "object",
+        "required": [
+          "applications"
+        ],
+        "title": "ApplicationsToSellerResponse"
+      },
       "AuthResponse": {
         "properties": {
           "user": {
@@ -1950,6 +2695,23 @@
           "token"
         ],
         "title": "AuthResponse"
+      },
+      "Body_upload_media_api_v1_media_upload_post": {
+        "properties": {
+          "files": {
+            "items": {
+              "type": "string",
+              "contentMediaType": "application/octet-stream"
+            },
+            "type": "array",
+            "title": "Files"
+          }
+        },
+        "type": "object",
+        "required": [
+          "files"
+        ],
+        "title": "Body_upload_media_api_v1_media_upload_post"
       },
       "BrandCreateRequest": {
         "properties": {
@@ -2369,7 +3131,146 @@
         ],
         "title": "LoginRequest"
       },
-      "Order": {
+      "MediaEntities": {
+        "type": "string",
+        "enum": [
+          "products",
+          "avatars"
+        ],
+        "title": "MediaEntities"
+      },
+      "OrderCreateRequest": {
+        "properties": {
+          "address": {
+            "type": "string",
+            "title": "Address"
+          },
+          "delivery_type": {
+            "$ref": "#/components/schemas/DeliveryType"
+          }
+        },
+        "type": "object",
+        "required": [
+          "address",
+          "delivery_type"
+        ],
+        "title": "OrderCreateRequest"
+      },
+      "OrderCreateResponse": {
+        "properties": {
+          "order_id": {
+            "type": "integer",
+            "title": "Order Id"
+          },
+          "payment_url": {
+            "type": "string",
+            "title": "Payment Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "order_id",
+          "payment_url"
+        ],
+        "title": "OrderCreateResponse"
+      },
+      "OrderItemResponse": {
+        "properties": {
+          "product": {
+            "$ref": "#/components/schemas/ProductCard"
+          },
+          "quantity": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Quantity"
+          },
+          "price_at_purchase": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Price At Purchase"
+          }
+        },
+        "type": "object",
+        "required": [
+          "product",
+          "quantity",
+          "price_at_purchase"
+        ],
+        "title": "OrderItemResponse"
+      },
+      "OrderPreviewRequest": {
+        "properties": {
+          "address": {
+            "type": "string",
+            "title": "Address"
+          },
+          "delivery_type": {
+            "$ref": "#/components/schemas/DeliveryType"
+          }
+        },
+        "type": "object",
+        "required": [
+          "address",
+          "delivery_type"
+        ],
+        "title": "OrderPreviewRequest"
+      },
+      "OrderPreviewResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CartItemResponse"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "address": {
+            "type": "string",
+            "title": "Address"
+          },
+          "delivery_type": {
+            "$ref": "#/components/schemas/DeliveryType"
+          },
+          "delivery_cost": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Delivery Cost"
+          },
+          "predicted_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Predicted Date"
+          },
+          "items_total_price": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Items Total Price"
+          },
+          "items_total_discount": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Items Total Discount"
+          },
+          "final_price": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Final Price"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "address",
+          "delivery_type",
+          "delivery_cost",
+          "predicted_date",
+          "items_total_price",
+          "items_total_discount",
+          "final_price"
+        ],
+        "title": "OrderPreviewResponse"
+      },
+      "OrderResponse": {
         "properties": {
           "id": {
             "type": "integer",
@@ -2381,7 +3282,7 @@
           },
           "items": {
             "items": {
-              "$ref": "#/components/schemas/CartItemResponse"
+              "$ref": "#/components/schemas/OrderItemResponse"
             },
             "type": "array",
             "title": "Items"
@@ -2401,12 +3302,17 @@
             "title": "Predicted Date"
           },
           "status": {
-            "$ref": "#/components/schemas/OrderStatusInfo"
+            "$ref": "#/components/schemas/OrderStatus"
           },
           "items_total_price": {
             "type": "string",
             "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
             "title": "Items Total Price"
+          },
+          "items_total_discount": {
+            "type": "string",
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Items Total Discount"
           },
           "final_price": {
             "type": "string",
@@ -2424,73 +3330,64 @@
           "predicted_date",
           "status",
           "items_total_price",
+          "items_total_discount",
           "final_price"
-        ],
-        "title": "Order"
-      },
-      "OrderRequest": {
-        "properties": {
-          "address": {
-            "type": "string",
-            "title": "Address"
-          },
-          "delivery_type": {
-            "$ref": "#/components/schemas/DeliveryType"
-          }
-        },
-        "type": "object",
-        "required": [
-          "address",
-          "delivery_type"
-        ],
-        "title": "OrderRequest"
-      },
-      "OrderResponse": {
-        "properties": {
-          "order": {
-            "$ref": "#/components/schemas/Order"
-          }
-        },
-        "type": "object",
-        "required": [
-          "order"
         ],
         "title": "OrderResponse"
       },
       "OrderStatus": {
         "type": "string",
         "enum": [
-          "IN_PROCESSING",
+          "AWAITING_PAYMENT",
           "CONFIRMED",
+          "IN_PROCESSING",
           "AWAITING_DELIVERY",
           "DELIVERY",
           "AWAIT_RECEIPT",
-          "RECEIVED"
+          "RECEIVED",
+          "CANCELED"
         ],
         "title": "OrderStatus"
       },
-      "OrderStatusInfo": {
+      "OrderSummaryResponse": {
         "properties": {
-          "code": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "status": {
             "$ref": "#/components/schemas/OrderStatus"
           },
-          "label": {
+          "items_count": {
+            "type": "integer",
+            "title": "Items Count"
+          },
+          "final_price": {
             "type": "string",
-            "title": "Label"
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Final Price"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
           }
         },
         "type": "object",
         "required": [
-          "code",
-          "label"
+          "id",
+          "status",
+          "items_count",
+          "final_price",
+          "created_at"
         ],
-        "title": "OrderStatusInfo"
+        "title": "OrderSummaryResponse"
       },
       "OrdersResponse": {
         "properties": {
           "orders": {
             "items": {
-              "$ref": "#/components/schemas/Order"
+              "$ref": "#/components/schemas/OrderSummaryResponse"
             },
             "type": "array",
             "title": "Orders"
@@ -2501,6 +3398,15 @@
           "orders"
         ],
         "title": "OrdersResponse"
+      },
+      "PersonType": {
+        "type": "string",
+        "enum": [
+          "INDIVIDUAL_EMPLOYER",
+          "SELF_EMPLOYED",
+          "OOO"
+        ],
+        "title": "PersonType"
       },
       "ProductCard": {
         "properties": {
@@ -2636,7 +3542,16 @@
               "type": "integer"
             },
             "type": "array",
-            "title": "Category Ids"
+            "title": "Category Ids",
+            "default": []
+          },
+          "image_urls": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Image Urls",
+            "default": []
           },
           "discount_percent": {
             "anyOf": [
@@ -2673,7 +3588,6 @@
           "title",
           "description",
           "price",
-          "category_ids",
           "quantity"
         ],
         "title": "ProductCreateRequest"
@@ -3176,7 +4090,14 @@
             "title": "Title"
           },
           "logo_url": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Logo Url"
           },
           "description": {
@@ -3194,8 +4115,7 @@
         },
         "type": "object",
         "required": [
-          "title",
-          "logo_url"
+          "title"
         ],
         "title": "ShopCreateRequest"
       },
@@ -3231,7 +4151,14 @@
             "title": "Id"
           },
           "logo_url": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Logo Url"
           },
           "title": {
@@ -3275,7 +4202,6 @@
         "type": "object",
         "required": [
           "id",
-          "logo_url",
           "title",
           "favourites_count",
           "reviews_count",
@@ -3283,6 +4209,41 @@
           "products"
         ],
         "title": "ShopResponse"
+      },
+      "ShopSummaryResponse": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "reviews_count": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Reviews Count"
+          },
+          "rating": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Rating"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "reviews_count",
+          "rating",
+          "is_active"
+        ],
+        "title": "ShopSummaryResponse"
       },
       "ShopUpdateRequest": {
         "properties": {
@@ -3338,6 +4299,22 @@
         ],
         "title": "ShopUpdateResponse"
       },
+      "ShopsResponse": {
+        "properties": {
+          "shops": {
+            "items": {
+              "$ref": "#/components/schemas/ShopSummaryResponse"
+            },
+            "type": "array",
+            "title": "Shops"
+          }
+        },
+        "type": "object",
+        "required": [
+          "shops"
+        ],
+        "title": "ShopsResponse"
+      },
       "TokenResponse": {
         "properties": {
           "access_token": {
@@ -3386,6 +4363,30 @@
           "quantity"
         ],
         "title": "UpdateCartItemResponse"
+      },
+      "UploadMediaResponse": {
+        "properties": {
+          "full_urls": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Full Urls"
+          },
+          "keys": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Keys"
+          }
+        },
+        "type": "object",
+        "required": [
+          "full_urls",
+          "keys"
+        ],
+        "title": "UploadMediaResponse"
       },
       "UserProfileResponse": {
         "properties": {
@@ -3448,6 +4449,51 @@
           "type"
         ],
         "title": "ValidationError"
+      },
+      "VerdictApplicationToBeSeller": {
+        "type": "string",
+        "enum": [
+          "PENDING",
+          "APPROVE",
+          "REJECT"
+        ],
+        "title": "VerdictApplicationToBeSeller"
+      },
+      "VerdictForApplicationToSellerRequest": {
+        "properties": {
+          "verdict": {
+            "$ref": "#/components/schemas/VerdictApplicationToBeSeller"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          }
+        },
+        "type": "object",
+        "required": [
+          "verdict"
+        ],
+        "title": "VerdictForApplicationToSellerRequest"
+      },
+      "VerdictForApplicationToSellerResponse": {
+        "properties": {
+          "application_id": {
+            "type": "integer",
+            "title": "Application Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "application_id"
+        ],
+        "title": "VerdictForApplicationToSellerResponse"
       }
     },
     "securitySchemes": {

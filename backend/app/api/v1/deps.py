@@ -1,10 +1,12 @@
 from typing import Annotated
+import ipaddress
 
 import jwt
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import OAuth2PasswordBearer
 from jwt import InvalidTokenError
 from sqlalchemy.orm import Session
+from yookassa.domain.common import SecurityHelper
 
 from app.core.config import settings
 from app.core.database import get_db
@@ -49,6 +51,17 @@ def require_seller_or_admin(
         status_code=status.HTTP_403_FORBIDDEN,
         detail="Access denied"
     )
+
+
+def require_seller(
+    current_user: Annotated[User, Depends(get_current_user)],          
+):
+    if current_user.role == Role.SELLER.value:
+        return current_user
+    raise HTTPException(
+        status_code=status.HTTP_403_FORBIDDEN,
+        detail="Access denied"
+    )
     
 
 def require_admin(
@@ -60,3 +73,23 @@ def require_admin(
         status_code=status.HTTP_403_FORBIDDEN,
         detail="Access denied"
     )
+
+
+def require_moderator_or_higher(
+    current_user: Annotated[User, Depends(get_current_user)],          
+):
+    if current_user.role == Role.ADMIN.value or current_user.role == Role.MODERATOR.value:
+        return current_user
+    raise HTTPException(
+        status_code=status.HTTP_403_FORBIDDEN,
+        detail="Access denied"
+    )
+    
+    
+def verify_yookassa_ip(request: Request):
+    ip = request.headers.get("X-Forwarded-For", request.client.host).split(",")[0].strip()
+    if not SecurityHelper().is_ip_trusted(ip):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Access denied"
+        )

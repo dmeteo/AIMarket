@@ -1,6 +1,9 @@
-from pydantic import BaseModel, EmailStr
+import re
+from datetime import datetime
 
-from app.common.enums import Role
+from pydantic import BaseModel, EmailStr, field_validator
+
+from app.common.enums import PersonType, Role, VerdictApplicationToBeSeller
 
 
 class UserProfileResponse(BaseModel):
@@ -15,3 +18,60 @@ class CurrentUserResponse(BaseModel):
     email: EmailStr
     role: Role
     is_active: bool
+    
+    
+class ApplicationToBeSellerCreateRequest(BaseModel):
+    full_name: str
+    email: EmailStr
+    phone: str
+    description: str
+    person_type: PersonType
+    inn: str
+    ogrn: str
+    address: str
+    bic: str
+    checking_account: str
+    
+    @field_validator("phone")
+    @classmethod
+    def validate_phone(cls, value):
+        value = re.sub(r'\D', '', value)
+        if len(value) != 11:
+            raise ValueError("Invalid phone number")
+        if value.startswith("7"):
+            return "+" + value
+        else:
+            new_value = "+7" + value[1:]
+            return new_value
+
+
+class ApplicationToBeSellerCreateResponse(BaseModel):
+    application_id: int
+    
+    
+class ApplicationToBeSellerResponse(BaseModel):
+    full_name: str
+    email: EmailStr
+    phone: str
+    description: str
+    person_type: PersonType
+    inn: str
+    ogrn: str
+    address: str
+    bic: str
+    checking_account: str
+    verdict: VerdictApplicationToBeSeller
+    rejection_reason: str | None
+    created_at: datetime
+    
+
+class ApplicationToBeSellerSummaryResponse(BaseModel):
+    application_id: int
+    verdict: VerdictApplicationToBeSeller
+    created_at: datetime
+
+
+class ApplicationsToBeSellerResponse(BaseModel):
+    applications: list[ApplicationToBeSellerSummaryResponse]
+    
+    

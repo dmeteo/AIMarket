@@ -17,7 +17,7 @@ from app.models.user import User
 router = APIRouter(prefix="/brands", tags=["brands"])
 
 
-@router.get("/", response_model=BrandsResponse)
+@router.get("", response_model=BrandsResponse)
 def get_brands(db: Annotated[Session, Depends(get_db)]) -> BrandsResponse:
     brands = get_brands_service(db)
     
@@ -61,9 +61,9 @@ def get_brand(
     return brand
 
 
-@router.post("/", response_model=BrandCreateResponse)
+@router.post("", description="[ADMIN]", response_model=BrandCreateResponse)
 def create_brand(
-    db: Annotated[Session, Depends(get_db)],
+db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_admin)],
     payload: BrandCreateRequest
 ) -> BrandCreateResponse:
@@ -72,7 +72,7 @@ def create_brand(
     return brand
 
 
-@router.patch("/{brand_id}", response_model=BrandUpdateResponse)
+@router.patch("/{brand_id}", response_model=BrandUpdateResponse, description="[ADMIN]",)
 def update_brand(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_admin)],
@@ -84,7 +84,7 @@ def update_brand(
     return brand
 
 
-@router.delete("/{brand_id}", response_model=BrandDeleteResponse)
+@router.delete("/{brand_id}", response_model=BrandDeleteResponse, description="[ADMIN]",)
 def delete_brand(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_admin)],
